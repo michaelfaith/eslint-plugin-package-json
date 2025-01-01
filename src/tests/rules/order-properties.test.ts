@@ -8,7 +8,9 @@ ruleTester.run("order-properties", rule, {
 	"main": "index.js",
 	"homepage": "https://example.com",
 	"version": "1.0.0",
+    "module": "index.mjs",
 	"name": "order-sort-package-json-implicit",
+    "types": "index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/fake/github.git"
@@ -29,7 +31,15 @@ ruleTester.run("order-properties", rule, {
 					messageId: "incorrectOrder",
 				},
 				{
+					data: { property: "module" },
+					messageId: "incorrectOrder",
+				},
+				{
 					data: { property: "name" },
+					messageId: "incorrectOrder",
+				},
+				{
+					data: { property: "types" },
 					messageId: "incorrectOrder",
 				},
 				{
@@ -46,7 +56,9 @@ ruleTester.run("order-properties", rule, {
 		"type": "git",
 		"url": "git+https://github.com/fake/github.git"
 	},
-	"main": "index.js"
+	"main": "index.js",
+	"module": "index.mjs",
+	"types": "index.d.ts"
 }
 `,
 		},
@@ -189,6 +201,7 @@ ruleTester.run("order-properties", rule, {
 	"homepage": "https://example.com",
 	"version": "1.0.0",
 	"name": "order-sort-package-json-explicit",
+    "workspaces": ["packages/*"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/fake/github.git"
@@ -213,6 +226,10 @@ ruleTester.run("order-properties", rule, {
 					messageId: "incorrectOrder",
 				},
 				{
+					data: { property: "workspaces" },
+					messageId: "incorrectOrder",
+				},
+				{
 					data: { property: "repository" },
 					messageId: "incorrectOrder",
 				},
@@ -227,7 +244,10 @@ ruleTester.run("order-properties", rule, {
 		"type": "git",
 		"url": "git+https://github.com/fake/github.git"
 	},
-	"main": "index.js"
+	"main": "index.js",
+	"workspaces": [
+		"packages/*"
+	]
 }
 `,
 		},
@@ -336,7 +356,10 @@ ruleTester.run("order-properties", rule, {
 	"keywords": [
 		"modern",
 		"master"
-	]
+	],
+    "module": "index.mjs",
+    "types": "index.d.mts",
+    "workspaces": ["packages/*"]
 }`,
 		`{
 	"name": "treat-yo-self",
