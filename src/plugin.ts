@@ -2,6 +2,7 @@ import { createRequire } from "node:module";
 
 import type { PackageJsonRuleModule } from "./createRule.js";
 
+import { rule as noRedundantFiles } from "./rules/no-redundant-files.js";
 import { rule as orderProperties } from "./rules/order-properties.js";
 import { rule as preferRepositoryShorthand } from "./rules/repository-shorthand.js";
 import { rule as sortCollections } from "./rules/sort-collections.js";
@@ -20,6 +21,7 @@ const { name, version } = require("../package.json") as {
 };
 
 const rules: Record<string, PackageJsonRuleModule> = {
+	"no-redundant-files": noRedundantFiles,
 	"order-properties": orderProperties,
 	"repository-shorthand": preferRepositoryShorthand,
 	"sort-collections": sortCollections,
