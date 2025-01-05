@@ -122,6 +122,7 @@ The default settings don't conflict, and Prettier plugins can quickly fix up ord
 
 | Name                                                                   | Description                                                                                       | 💼 | 🔧 | 💡 | ❌  |
 | :--------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ | :- | :- | :- | :- |
+| [no-redundant-files](docs/rules/no-redundant-files.md)                 | Prevents adding unnecessary / redundant files.                                                    |    |    | 💡 |    |
 | [order-properties](docs/rules/order-properties.md)                     | Package properties must be declared in standard order                                             | ✅  | 🔧 |    |    |
 | [repository-shorthand](docs/rules/repository-shorthand.md)             | Enforce either object or shorthand declaration for repository.                                    | ✅  | 🔧 |    |    |
 | [sort-collections](docs/rules/sort-collections.md)                     | Dependencies, scripts, and configuration values must be declared in alphabetical order.           | ✅  | 🔧 |    |    |
