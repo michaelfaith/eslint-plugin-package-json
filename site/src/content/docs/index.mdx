@@ -1,40 +1,52 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: ESLint Plugin&colon; Package&nbsp;JSON
+description: Rules for consistent, readable, and valid package.json files. 🗂️
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Congrats on taking control over your package.json!
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/logo/logo.svg
   actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: Get Started
+      link: /getting-started/
+      icon: rocket
+    - text: Visit on GitHub
+      link: https://github.com/michaelfaith/eslint-plugin-package-json
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from "@astrojs/starlight/components";
+import GetStartedAction from "~/components/get-started-action.astro";
 
-## Next steps
+## Benefits
+
+Rules for consistent, readable, and valid package.json files.
 
 <CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
+  <Card title="Enforce Consistency" icon="bars">
+    Keep your `package.json` files consistent across projects and teams with
+    clearly defined rules. Eliminate drift in conventions before it becomes a
+    maintenance headache.
   </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
+  <Card title="Easy to Use" icon="heart">
+    Get started in minutes with sensible defaults and straightforward
+    configuration. Integrates seamlessly into your existing ESLint setup.
   </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  <Card title="Avoid Publishing Bugs" icon="approve-check-circle">
+    Catch common mistakes before they make it to npm, from invalid fields to
+    missing metadata. Avoid broken releases and reduce the risk of costly
+    rollbacks.
   </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
+  <Card title="Configurable and Fixable Rules" icon="setting">
+    Fine-tune rules to match your team's standards and automatically fix issues
+    where possible. Spend less time nitpicking in code reviews and more time
+    shipping.
   </Card>
 </CardGrid>
+
+<GetStartedAction
+  title="Interested in learning more?"
+  action="/getting-started/"
+  actionText="Get Started Now"
+/>

@@ -14,19 +14,25 @@ jobs:
     name: Manage Release PR
     if: github.event.repository.fork != true
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+      - name: Create Token
+        id: create_token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        with:
+          client-id: ${{ vars.FAITHBOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.FAITHBOT_APP_PRIVATE_KEY }}
+
+      - name: Release Please
         id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
           config-file: .github/release-please/release-please-config.${{ github.ref_name }}.json
           manifest-file: .github/release-please/release-please-manifest.json
           target-branch: ${{ github.ref_name }}
+          token: ${{ steps.create_token.outputs.token }}
 
   publish:
     name: Publish Package
