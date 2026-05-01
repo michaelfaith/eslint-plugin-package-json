@@ -1,4 +1,4 @@
-# inimumReleaseAge: 1440
+minimumReleaseAge: 1440
 onlyBuiltDependencies:
   - esbuild
   - oxc-resolver
