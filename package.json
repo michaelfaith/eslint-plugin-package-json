@@ -65,7 +65,7 @@
     "detect-newline": "^4.0.1",
     "eslint-fix-utils": "~0.4.1",
     "jsonc-eslint-parser": "^3.1.0",
-    "package-json-validator": "^1.4.1",
+    "package-json-validator": "^1.5.0",
     "semver": "^7.7.3",
     "sort-object-keys": "^2.0.0",
     "sort-package-json": "^3.4.0",

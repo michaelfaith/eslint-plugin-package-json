@@ -1,6 +1,7 @@
 import {
   validateAuthor,
   validateBin,
+  validateBrowser,
   validateBugs,
   validateBundleDependencies,
   validateConfig,
@@ -45,6 +46,7 @@ interface ValidPropertyOptions {
 const properties = [
   ["author", validateAuthor],
   ["bin", validateBin],
+  ["browser", validateBrowser],
   ["bugs", validateBugs],
   [
     "bundleDependencies",
