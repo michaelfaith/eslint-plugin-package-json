@@ -111,6 +111,8 @@ ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
   ],
   valid: [
     "{}",
+    '{ "peerDependencies": [] }',
+    '{ "peerDependenciesMeta": [] }',
     '{ "peerDependencies": { 123: "^1.0.0" } }',
     '{ "peerDependenciesMeta": { 123: { "optional": true } } }',
     `{
