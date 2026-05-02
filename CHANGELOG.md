@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0-beta.6](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2026-05-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* add `valid-peerDependenciesMeta-relationship` rule ([#1767](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1767))
+* add `valid-peerDependenciesMeta` rule ([#1766](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1766))
+* add `valid-gypfile` rule ([#1765](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1765))
+* add `valid-browser` rule ([#1763](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1763))
+* add `valid-libc` rule ([#1764](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1764))
+
+### 🚀 Features
+
+* add `valid-browser` rule ([#1763](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1763)) ([6cb438b](https://github.com/michaelfaith/eslint-plugin-package-json/commit/6cb438bb5c68af1062a5d7a26131795b7aa9a24b))
+* add `valid-gypfile` rule ([#1765](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1765)) ([c14f624](https://github.com/michaelfaith/eslint-plugin-package-json/commit/c14f624137fa11f42f6b5d97357043a94408edd7))
+* add `valid-libc` rule ([#1764](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1764)) ([4dd5e9c](https://github.com/michaelfaith/eslint-plugin-package-json/commit/4dd5e9c251e2b4e68571080cfe9fbfeb030b1775))
+* add `valid-peerDependenciesMeta-relationship` rule ([#1767](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1767)) ([7fc3f0d](https://github.com/michaelfaith/eslint-plugin-package-json/commit/7fc3f0d17ab9be57b3fc118746a38caf9395db18))
+* add `valid-peerDependenciesMeta` rule ([#1766](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1766)) ([8731609](https://github.com/michaelfaith/eslint-plugin-package-json/commit/873160958c77caa6b479053a2fad2b41dacc18fe))
+
 ## [1.0.0-beta.5](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2026-04-28)
 
 
