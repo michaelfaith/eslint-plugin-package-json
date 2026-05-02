@@ -71,7 +71,7 @@
     "validate-npm-package-name": "^7.0.0"
   },
   "devDependencies": {
-    "@astrojs/starlight": "0.38.3",
+    "@astrojs/starlight": "0.38.4",
     "@catppuccin/starlight": "2.0.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.0",
     "@eslint/js": "10.0.1",
@@ -82,7 +82,7 @@
     "@types/validate-npm-package-name": "4.0.2",
     "@vitest/coverage-v8": "4.1.0",
     "@vitest/eslint-plugin": "1.6.1",
-    "astro": "6.1.8",
+    "astro": "6.2.1",
     "console-fail-test": "0.6.0",
     "eslint": "10.2.0",
     "eslint-doc-generator": "3.3.1",
