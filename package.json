@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-package-json",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "Rules for consistent, readable, and valid package.json files. 🗂️",
   "homepage": "https://github.com/michaelfaith/eslint-plugin-package-json#readme",
   "bugs": {
