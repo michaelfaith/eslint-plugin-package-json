@@ -21,6 +21,7 @@ import { rule as sortCollections } from "./rules/sort-collections.ts";
 import { rule as specifyPeersLocally } from "./rules/specify-peers-locally.ts";
 import { rule as uniqueDependencies } from "./rules/unique-dependencies.ts";
 import { rule as validName } from "./rules/valid-name.ts";
+import { rule as validPeerDependenciesMetaRelationship } from "./rules/valid-peerDependenciesMeta-relationship.ts";
 import { rules as basicValidRules } from "./rules/valid-properties.ts";
 import { rule as validRepositoryDirectory } from "./rules/valid-repository-directory.ts";
 import { rule as validVersion } from "./rules/valid-version.ts";
@@ -46,6 +47,8 @@ const rules: Record<string, PackageJsonRuleModule> = {
   "unique-dependencies": uniqueDependencies,
   ...basicValidRules,
   "valid-name": validName,
+  "valid-peerDependenciesMeta-relationship":
+    validPeerDependenciesMetaRelationship,
   "valid-repository-directory": validRepositoryDirectory,
   "valid-version": validVersion,
 };
