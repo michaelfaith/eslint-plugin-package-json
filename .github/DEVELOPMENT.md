@@ -25,12 +25,12 @@ Add `--watch` to run the builder in a watch mode that continuously cleans and re
 pnpm build --watch
 ```
 
-### Building Docs
+### Generating Docs
 
 Run [`eslint-doc-generator`](https://github.com/bmish/eslint-doc-generator) to generate Markdown files documenting rules.
 
 ```shell
-pnpm build:docs
+pnpm docs:generate
 ```
 
 ## Formatting
@@ -57,7 +57,7 @@ Read the individual documentation for each tool to understand how it can be conf
 For example, ESLint can be run with `--fix` to auto-fix some lint rule complaints:
 
 ```shell
-pnpm run lint --fix
+pnpm lint --fix
 ```
 
 ## Testing
@@ -66,13 +66,13 @@ pnpm run lint --fix
 You can run it locally on the command-line:
 
 ```shell
-pnpm run test
+pnpm test
 ```
 
 Add the `--coverage` flag to compute test coverage and place reports in the `coverage/` directory:
 
 ```shell
-pnpm run test --coverage
+pnpm test --coverage
 ```
 
 Note that [console-fail-test](https://github.com/JoshuaKGoldberg/console-fail-test) is enabled for all test runs.
