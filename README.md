@@ -1,4 +1,12 @@
-<h1 align="center">eslint-plugin-package-json</h1>
+<p align="center">
+<img
+  src="https://raw.githubusercontent.com/michaelfaith/eslint-plugin-package-json/main/site/src/assets/logo/logo.svg"
+  alt="Logo Image"
+  height="240"
+/>
+</>
+
+<h1 align="center">ESLint Plugin: Package JSON</h1>
 
 <p align="center">
 	Rules for consistent, readable, and valid package.json files.
@@ -11,11 +19,9 @@
 	<a href="#contributors" target="_blank"><img alt="👪 All Contributors: 42" src="https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-42-21bb42.svg" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 	<!-- prettier-ignore-end -->
-	<a href="https://github.com/michaelfaith/eslint-plugin-package-json/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank"><img alt="🤝 Code of Conduct: Kept" src="https://img.shields.io/badge/%F0%9F%A4%9D_code_of_conduct-kept-21bb42" /></a>
 	<a href="https://codecov.io/gh/michaelfaith/eslint-plugin-package-json" target="_blank"><img alt="🧪 Coverage" src="https://img.shields.io/codecov/c/github/michaelfaith/eslint-plugin-package-json?label=%F0%9F%A7%AA%20coverage" /></a>
 	<a href="https://github.com/michaelfaith/eslint-plugin-package-json/blob/main/LICENSE.md" target="_blank"><img alt="📝 License: MIT" src="https://img.shields.io/badge/%F0%9F%93%9D_license-MIT-21bb42.svg" /></a>
 	<a href="http://npmjs.com/package/eslint-plugin-package-json" target="_blank"><img alt="📦 npm version" src="https://img.shields.io/npm/v/eslint-plugin-package-json?color=21bb42&label=%F0%9F%93%A6%20npm" /></a>
-	<img alt="💪 TypeScript: Strict" src="https://img.shields.io/badge/%F0%9F%92%AA_typescript-strict-21bb42.svg" />
 </p>
 
 ## Getting Started
@@ -157,10 +163,8 @@ Thanks! 🗂
 
 ## Contributors
 
-<!-- spellchecker: disable -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
 <table>
   <tbody>
     <tr>
@@ -220,12 +224,9 @@ Thanks! 🗂
   </tbody>
 </table>
 
-<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-<!-- spellchecker: enable -->
 
-## Appreciation
+## License
 
-Many thanks to [@zetlen](https://github.com/zetlen) for creating the initial version and core infrastructure of this package! 💖
+See the [LICENSE](./LICENSE.md) file for license rights and limitations (MIT).
