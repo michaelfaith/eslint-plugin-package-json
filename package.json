@@ -99,7 +99,7 @@
     "jiti": "2.6.1",
     "json-schema-to-ts": "3.1.1",
     "jsonc-eslint-parser": "3.1.0",
-    "knip": "6.9.0",
+    "knip": "6.10.0",
     "lint-staged": "16.4.0",
     "prettier": "3.8.0",
     "prettier-plugin-curly": "0.4.0",
