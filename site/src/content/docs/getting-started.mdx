@@ -1,0 +1,167 @@
+---
+title: Getting Started
+description: Install and configure the plugin.
+---
+
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+
+## 💽 Installation
+
+{/* prettier-ignore-start */}
+
+<Tabs>
+  <TabItem value="pnpm" label="pnpm">
+
+    ```shell
+    pnpm add -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+  <TabItem value="npm" label="npm">
+
+    ```shell
+    npm install -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+
+    ```shell
+    yarn add -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+</Tabs>
+{/* prettier-ignore-end */}
+
+<Aside type="note" title="Requirements">
+- ESLint v9 and above
+- Node ^22.13.0 || >=24
+
+</Aside>
+
+## 📖 Configs
+
+### Recommended Config
+
+This plugin's recommended configuration enables its rules on `**/package.json` files, parsing them with [`jsonc-eslint-parser`](https://github.com/ota-meshi/jsonc-eslint-parser).
+
+```ts
+// eslint.config.ts
+import packageJson from "eslint-plugin-package-json";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  // your other ESLint configurations
+  packageJson.configs.recommended,
+]);
+```
+
+If you want to override the recommended rules:
+
+```ts
+// eslint.config.ts
+import packageJson from "eslint-plugin-package-json";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  // your other ESLint configurations
+  {
+    extends: [packageJson.configs.recommended],
+    files: ["package.json"],
+    rules: {
+      "package-json/require-author": "error",
+    },
+  },
+]);
+```
+
+<Aside type="tip">
+  See [ESLint's _Configuration Files_
+  guide](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+  for details on how to customize your rules and other config settings.
+</Aside>
+
+### Recommended Config for Publishable Packages
+
+<Aside type="note">
+  This config was recently made redundant and is now the same as `recommended`.
+  However, we're keeping it as its own config for now, in the event that we add
+  new rules unique to the publishable use case.
+</Aside>
+
+The `recommended-publishable` configuration has everything in it from the standard `recommended` config, with some additional rules added that are geared towards packages that are intended to be published.
+
+```ts
+// eslint.config.ts
+import packageJson from "eslint-plugin-package-json";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  // your other ESLint configurations
+  packageJson.configs["recommended-publishable"],
+]);
+```
+
+### Stylistic Config
+
+The `stylistic` configuration sets up the parser and files similar to the recommended config, but includes rules that are more opinionated about the style of a package.json.
+This can be used in addition to the recommended config, or on its own.
+
+```ts
+// eslint.config.ts
+import packageJson from "eslint-plugin-package-json";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig([
+  // your other ESLint configurations
+  packageJson.configs.recommended, // or packageJson.configs["recommended-publishable"]
+  packageJson.configs.stylistic,
+]);
+```
+
+## ⚙️ Settings
+
+Some rules can be configured in ESLint shared settings.
+You can set them in `settings.packageJson` in an ESLint flat config.
+
+Example:
+
+```ts
+// eslint.config.ts
+import packageJson from "eslint-plugin-package-json";
+import { defineConfig } from "eslint/config";
+
+export default defineConfig({
+  plugins: {
+    "package-json": packageJson,
+  },
+  rules: {
+    // `description` won't be required in package.json with `"private": true`
+    "package-json/require-description": "error",
+  },
+  settings: {
+    packageJson: {
+      enforceForPrivate: false,
+    },
+  },
+});
+```
+
+### `enforceForPrivate`
+
+- **Type:** `boolean`
+- **Default:** [see below]
+
+When a package.json file has a `"private": true` field, it indicates that the package will not be published to npm (or another online registry).
+Some fields that are nice to have in public packages become less relevant when a package is private.
+This option determines whether `require-*` rules, if used, should enforce the presence of the corresponding property in package.json files that have `"private": true`.
+
+By default, this is:
+
+- `false` for [`require-name`](docs/rules/require-name.md) and [`require-version`](docs/rules/require-version.md).
+- `true` for every other `require-*` rule.
+
+By specifying this setting as `true` or `false`, it will override the defaults and apply the setting for ALL rules.
+In that case, either all `require-*` rules will be applied to private packages or no `require-*` rules will be applied to private packages.
+Even then, you can override the setting again at the rule level, by using the rule's `ignorePrivate` option, which will take precedence over this global setting.
