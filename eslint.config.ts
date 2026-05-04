@@ -118,7 +118,9 @@ export default defineConfig(
     files: JS_TS_FILES,
     languageOptions: {
       parserOptions: {
-        projectService: { allowDefaultProject: ["*.config.js"] },
+        projectService: {
+          allowDefaultProject: ["*.config.js", "astro.config.ts"],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
