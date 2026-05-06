@@ -26,7 +26,7 @@
 
 ## Getting Started
 
-See [Getting Started](https://github.com/michaelfaith/eslint-plugin-package-json/blob/main/docs/getting-started.md) for details.
+See [Getting Started](https://eslint-plugin-package-json.dev/getting-started) for details.
 
 ## Supported Rules
 

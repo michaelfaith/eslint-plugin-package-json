@@ -18,8 +18,10 @@ export default defineConfig({
       plugins: [starlightCatppuccin()],
       sidebar: [
         { label: "Getting Started", slug: "getting-started" },
+        { label: "Rule List", slug: "rule-list" },
         {
           autogenerate: { directory: "rules" },
+          collapsed: true,
           label: "Rules",
         },
       ],
