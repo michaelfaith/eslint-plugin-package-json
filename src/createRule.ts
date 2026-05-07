@@ -92,7 +92,7 @@ export function createRule<
       ...rule.meta,
       docs: {
         ...rule.meta.docs,
-        url: `https://github.com/michaelfaith/eslint-plugin-package-json/blob/HEAD/docs/rules/${rule.name}.md`,
+        url: `https://eslint-plugin-package-json.dev/rules/${rule.name}`,
       },
     },
   };

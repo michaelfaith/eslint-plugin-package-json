@@ -1,0 +1,105 @@
+---
+title: require-contributors
+description: Requires the `contributors` property to be present.
+---
+
+{/* end auto-generated rule header */}
+
+import { Aside } from "@astrojs/starlight/components";
+
+This rule checks for the existence of the `"contributors"` property in a package.json, and reports a violation if it doesn't exist.
+
+Example of **incorrect** code for this rule:
+
+```json
+{
+  "name": "thee-silver-mt-zion",
+  "version": "13.0.0"
+}
+```
+
+Example of **correct** code for this rule:
+
+```json
+{
+  "name": "thee-silver-mt-zion",
+  "version": "13.0.0",
+  "contributors": [
+    {
+      "name": "Trent Reznor",
+      "email": "treznor@nin.com",
+      "url": "https://nin.com"
+    }
+  ]
+}
+```
+
+<Aside>
+  For publishable packages, consider using the
+  [`require-attribution`](/rules/require-attribution) rule instead, which
+  requires that _either_ `author` or `contributors` is present.
+</Aside>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name            | Description                                                                                 | Type    | Default |
+| :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
+| `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `false` |
+
+{/* end auto-generated rule options list */}
+
+```json
+{
+  "package-json/require-contributors": [
+    "error",
+    {
+      "ignorePrivate": false
+    }
+  ]
+}
+```
+
+Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true
+}
+```
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true,
+  "contributors": [
+    {
+      "name": "Trent Reznor",
+      "email": "treznor@nin.com",
+      "url": "https://nin.com"
+    }
+  ]
+}
+```
+
+Example of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
+
+```json
+{
+  "private": false
+}
+```
+
+```json
+{}
+```
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": true }` option:
+
+```json
+{
+  "private": true
+}
+```
