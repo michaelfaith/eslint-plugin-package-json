@@ -85,7 +85,7 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "the value for peer dependency metadata `david` should be an object, not `string`",
+                "the peer dependency metadata for `david` should be an object, not `string`",
             },
             line: 3,
             messageId: "validationError",
@@ -94,7 +94,7 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "the value for peer dependency metadata `trent` should be an object, not `number`",
+                "the peer dependency metadata for `trent` should be an object, not `number`",
             },
             line: 4,
             messageId: "validationError",
@@ -103,7 +103,7 @@ ruleTester.run(
             column: 24,
             data: {
               error:
-                "the value for peer dependency metadata `the-fragile` should be an object, not `null`",
+                "the peer dependency metadata for `the-fragile` should be an object, not `null`",
             },
             line: 5,
             messageId: "validationError",
@@ -112,7 +112,7 @@ ruleTester.run(
             column: 23,
             data: {
               error:
-                "the value for peer dependency metadata `pink-floyd` should be an object, not `Array`",
+                "the peer dependency metadata for `pink-floyd` should be an object, not `Array`",
             },
             line: 6,
             messageId: "validationError",
@@ -149,7 +149,7 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "peer dependency metadata for `david` should contain the `optional` property",
+                "the peer dependency metadata for `david` should contain the `optional` property",
             },
             line: 3,
             messageId: "validationError",
@@ -158,7 +158,7 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "peer dependency metadata for `trent` should contain the `optional` property",
+                "the peer dependency metadata for `trent` should contain the `optional` property",
             },
             line: 4,
             messageId: "validationError",
@@ -185,7 +185,7 @@ ruleTester.run(
             column: 23,
             data: {
               error:
-                "peer dependency metadata for `with-teeth` should contain the `optional` property",
+                "the peer dependency metadata for `with-teeth` should contain the `optional` property",
             },
             line: 11,
             messageId: "validationError",

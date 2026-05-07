@@ -1,4 +1,7 @@
-# valid-gypfile
+---
+title: valid-gypfile
+description: Enforce that the `gypfile` property is valid.
+---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
