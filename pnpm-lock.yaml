@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  eslint-doc-generator:
+    hash: 2a456522f497ccaed01256f9fe515c4f60be5f6ef1f91bfc44e82735acf300a3
+    path: patches/eslint-doc-generator.patch
+
 importers:
 
   .:
@@ -83,7 +88,7 @@ importers:
         version: 10.3.0(jiti@2.6.1)
       eslint-doc-generator:
         specifier: 3.3.1
-        version: 3.3.1(eslint@10.3.0(jiti@2.6.1))(prettier@3.8.0)(typescript@6.0.2)
+        version: 3.3.1(patch_hash=2a456522f497ccaed01256f9fe515c4f60be5f6ef1f91bfc44e82735acf300a3)(eslint@10.3.0(jiti@2.6.1))(prettier@3.8.0)(typescript@6.0.2)
       eslint-plugin-eslint-plugin:
         specifier: 7.3.1
         version: 7.3.1(eslint@10.3.0(jiti@2.6.1))
@@ -5712,7 +5717,7 @@ snapshots:
       eslint: 10.3.0(jiti@2.6.1)
       semver: 7.7.4
 
-  eslint-doc-generator@3.3.1(eslint@10.3.0(jiti@2.6.1))(prettier@3.8.0)(typescript@6.0.2):
+  eslint-doc-generator@3.3.1(patch_hash=2a456522f497ccaed01256f9fe515c4f60be5f6ef1f91bfc44e82735acf300a3)(eslint@10.3.0(jiti@2.6.1))(prettier@3.8.0)(typescript@6.0.2):
     dependencies:
       '@typescript-eslint/utils': 8.59.1(eslint@10.3.0(jiti@2.6.1))(typescript@6.0.2)
       ajv: 8.20.0

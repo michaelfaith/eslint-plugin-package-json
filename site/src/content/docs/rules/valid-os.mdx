@@ -1,0 +1,36 @@
+---
+title: valid-os
+description: Enforce that the `os` property is valid.
+---
+
+💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Aside } from "@astrojs/starlight/components";
+
+This rule does the following checks on the value of the `os` property:
+
+- It must be an array
+- All items in the array should be one of the following: "aix", "android", "darwin", "freebsd", "linux", "openbsd", "sunos", and "win32"
+
+<Aside>
+  These values are the list of possible `process.platform` values [documented by
+  Node](https://nodejs.org/api/process.html#processplatform).
+</Aside>
+
+Example of **incorrect** code for this rule:
+
+```json
+{
+  "os": ["x64"]
+}
+```
+
+Example of **correct** code for this rule:
+
+```json
+{
+  "os": ["linux", "win32"]
+}
+```

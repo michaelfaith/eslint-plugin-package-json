@@ -1,0 +1,421 @@
+diff --git a/dist/lib/cli.js b/dist/lib/cli.js
+index 5c04594943bb970b25acf8b9460d19a335fa4cf8..f118a399f901f35aa7a3780de9db53003a7f8e06 100644
+--- a/dist/lib/cli.js
++++ b/dist/lib/cli.js
+@@ -4,7 +4,7 @@ import { OPTION_DEFAULTS } from './options.js';
+ import { cosmiconfig } from 'cosmiconfig';
+ import Ajv from 'ajv';
+ import merge from 'deepmerge';
+-import { AI_PROVIDER, COLUMN_TYPE, NOTICE_TYPE, OPTION_TYPE } from './types.js';
++import { AI_PROVIDER, FRAMEWORK, COLUMN_TYPE, NOTICE_TYPE, OPTION_TYPE } from './types.js';
+ import { getCurrentPackageVersion } from './package-json.js';
+ import { boolean, isBooleanable } from './boolean.js';
+ import { CONFIG_FORMATS } from './config-format.js';
+@@ -77,10 +77,14 @@ async function loadConfigFileOptions() {
+             check: { type: 'boolean' },
+             configEmoji: schemaConfigEmoji,
+             configFormat: { type: 'string' },
++            framework: {
++                type: 'string',
++                enum: Object.values(FRAMEWORK),
++            },
+             ignoreConfig: schemaStringArray,
+             ignoreDeprecatedRules: { type: 'boolean' },
+             initRuleDocs: { type: 'boolean' },
+-            pathRuleDoc: 
++            pathRuleDoc:
+             /* istanbul ignore next -- TODO: haven't tested JavaScript config files yet https://github.com/eslint-community/eslint-doc-generator/issues/366 */
+             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+             typeof explorerResults.config.pathRuleDoc === 'function'
+@@ -98,7 +102,7 @@ async function loadConfigFileOptions() {
+             ruleDocSectionOptions: { type: 'boolean' },
+             ruleDocTitleFormat: { type: 'string' },
+             ruleListColumns: schemaStringArray,
+-            ruleListSplit: 
++            ruleListSplit:
+             /* istanbul ignore next -- TODO: haven't tested JavaScript config files yet https://github.com/eslint-community/eslint-doc-generator/issues/366 */
+             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+             typeof explorerResults.config.ruleListSplit === 'function'
+@@ -108,7 +112,7 @@ async function loadConfigFileOptions() {
+                 : { anyOf: [{ type: 'string' }, schemaStringArray] },
+             suggestEmojis: { type: 'boolean' },
+             urlConfigs: { type: 'string' },
+-            urlRuleDoc: 
++            urlRuleDoc:
+             /* istanbul ignore next -- TODO: haven't tested JavaScript config files yet https://github.com/eslint-community/eslint-doc-generator/issues/366 */
+             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+             typeof explorerResults.config.urlRuleDoc === 'function'
+@@ -167,6 +171,7 @@ export async function run(argv, cb) {
+         .option('--check [boolean]', `(optional) Whether to check for and fail if there is a diff. Any diff will be displayed but no output will be written to files. Typically used during CI. (default: ${String(OPTION_DEFAULTS[OPTION_TYPE.CHECK])})`, parseBoolean)
+         .option('--config-emoji <config-emoji>', '(optional) Custom emoji to use for a config. Format is `config-name,emoji`. Default emojis are provided for common configs. To use a text/image/icon badge instead of an emoji, supply the corresponding markdown as the emoji. Option can be repeated.', collectCSVNested, [])
+         .addOption(new Option('--config-format <config-format>', `(optional) The format to use for the config name. (default: ${OPTION_DEFAULTS[OPTION_TYPE.CONFIG_FORMAT]})`).choices(CONFIG_FORMATS))
++        //.addOption(new Option('--framework <framework>', `(optional) The framework to use for the documentation. (default: ${OPTION_DEFAULTS[OPTION_TYPE.FRAMEWORK]})`).choices(FRAMEWORK))
+         .option('--ignore-config <config>', '(optional) Config to ignore from being displayed (often used for an `all` config) (option can be repeated).', collect, [])
+         .option('--ignore-deprecated-rules [boolean]', `(optional) Whether to ignore deprecated rules from being checked, displayed, or updated. (default: ${String(OPTION_DEFAULTS[OPTION_TYPE.IGNORE_DEPRECATED_RULES])})`, parseBoolean)
+         .option('--init-rule-docs [boolean]', `(optional) Whether to create rule doc files if they don't yet exist. (default: ${String(OPTION_DEFAULTS[OPTION_TYPE.INIT_RULE_DOCS])})`, parseBoolean)
+diff --git a/dist/lib/comment-markers.js b/dist/lib/comment-markers.js
+index 8ccf778e1c0733fec3d7b0e05abf97d4b206e573..a047e92d1fd39e05bcb446f6cfc3aa9952e1f3fb 100644
+--- a/dist/lib/comment-markers.js
++++ b/dist/lib/comment-markers.js
+@@ -1,11 +1,26 @@
+ // Markers so that the rules table list can be automatically updated.
+-export const BEGIN_RULE_LIST_MARKER = '<!-- begin auto-generated rules list -->';
+-export const END_RULE_LIST_MARKER = '<!-- end auto-generated rules list -->';
++export const BEGIN_RULE_LIST_MARKER = 'begin auto-generated rules list';
++export const END_RULE_LIST_MARKER = 'end auto-generated rules list';
+ // Marker so that rule doc header (title/notices) can be automatically updated.
+-export const END_RULE_HEADER_MARKER = '<!-- end auto-generated rule header -->';
++export const END_RULE_HEADER_MARKER = 'end auto-generated rule header';
+ // Markers so that the configs table list can be automatically updated.
+-export const BEGIN_CONFIG_LIST_MARKER = '<!-- begin auto-generated configs list -->';
+-export const END_CONFIG_LIST_MARKER = '<!-- end auto-generated configs list -->';
++export const BEGIN_CONFIG_LIST_MARKER = 'begin auto-generated configs list';
++export const END_CONFIG_LIST_MARKER = 'end auto-generated configs list';
+ // Markers so that the rule options table list can be automatically updated.
+-export const BEGIN_RULE_OPTIONS_LIST_MARKER = '<!-- begin auto-generated rule options list -->';
+-export const END_RULE_OPTIONS_LIST_MARKER = '<!-- end auto-generated rule options list -->';
++export const BEGIN_RULE_OPTIONS_LIST_MARKER = 'begin auto-generated rule options list';
++export const END_RULE_OPTIONS_LIST_MARKER = 'end auto-generated rule options list';
++
++/**
++ * Format a comment string for the appropriate comment syntax based on whether the file is MDX or not.
++ * @param {string} comment - the comment content, without comment syntax
++ * @param {boolean} isMdx - whether the comment is for an MDX file (true) or a plain markdown file (false)
++ * @returns {string} - the formatted comment string
++ */
++export const formatComment = (comment, isMdx) => {
++  if (isMdx) {
++    return `{/* ${comment} */}`;
++  }
++  else {
++    return `<!-- ${comment} -->`;
++  }
++}
+diff --git a/dist/lib/generator.js b/dist/lib/generator.js
+index 7d9c4e9a76f9b7a6b12313c0d2302d7318a8251f..faa3b7a075054d0e555766c0a0e2139d99377c2e 100644
+--- a/dist/lib/generator.js
++++ b/dist/lib/generator.js
+@@ -5,14 +5,16 @@ import { getPluginRoot, getPathWithExactFileNameCasing, } from './package-json.j
+ import { updateRulesList } from './rule-list.js';
+ import { updateConfigsList } from './config-list.js';
+ import { generateRuleHeaderLines } from './rule-doc-notices.js';
+-import { BEGIN_RULE_OPTIONS_LIST_MARKER, END_RULE_HEADER_MARKER, END_RULE_OPTIONS_LIST_MARKER, } from './comment-markers.js';
+-import { replaceOrCreateHeader, expectContentOrFail, expectSectionHeaderOrFail, } from './markdown.js';
++import { formatComment, BEGIN_RULE_OPTIONS_LIST_MARKER, END_RULE_HEADER_MARKER, END_RULE_OPTIONS_LIST_MARKER, } from './comment-markers.js';
++import { extractFrontmatter, replaceOrCreateHeader, expectContentOrFail, expectSectionHeaderOrFail, } from './markdown.js';
+ import { diff } from 'jest-diff';
+ import { replaceRulePlaceholder } from './rule-link.js';
+ import { updateRuleOptionsList } from './rule-options-list.js';
+ import { mkdir, readFile, writeFile } from 'node:fs/promises';
+ import { getContext } from './context.js';
+ import { generateSuggestedEmojis } from './suggest-emojis.js';
++
++
+ // eslint-disable-next-line complexity
+ export async function generate(path, userOptions) {
+     const context = await getContext(path, userOptions);
+@@ -58,9 +60,16 @@ export async function generate(path, userOptions) {
+         const metaDefaultOptions = rule.meta?.defaultOptions;
+         const description = rule.meta?.docs?.description;
+         const pathCurrentPage = replaceRulePlaceholder(pathRuleDoc, name);
+-        const pathToDoc = join(path, pathCurrentPage);
++        let pathToDoc = join(path, pathCurrentPage);
++        let isMdx = false;
+         const ruleHasOptions = hasOptions(schema);
+         if (!existsSync(pathToDoc)) {
++          // Check if an `mdx` file exists with the same name, in case the rule doc was created with an `mdx` extension for starlight compatibility.
++          const pathToDocMdx = pathToDoc.replace(/\.md$/, '.mdx');
++          if (existsSync(pathToDocMdx)) {
++              pathToDoc = pathToDocMdx;
++              isMdx = true;
++          } else {
+             if (!initRuleDocs) {
+                 throw new Error(`Could not find rule doc (run with --init-rule-docs to create): ${relative(getPluginRoot(path), pathToDoc)}`);
+             }
+@@ -74,7 +83,7 @@ export async function generate(path, userOptions) {
+                     : undefined,
+                 /* istanbul ignore next -- both branches tested but coverage has instrumentation issue with ternary in array */
+                 ruleHasOptions
+-                    ? `## Options${endOfLine}${endOfLine}${BEGIN_RULE_OPTIONS_LIST_MARKER}${endOfLine}${END_RULE_OPTIONS_LIST_MARKER}`
++                    ? `## Options${endOfLine}${endOfLine}${formatComment(BEGIN_RULE_OPTIONS_LIST_MARKER, isMdx)}${endOfLine}${formatComment(END_RULE_OPTIONS_LIST_MARKER, isMdx)}`
+                     : undefined,
+             ]
+                 .filter((section) => section !== undefined)
+@@ -86,12 +95,14 @@ export async function generate(path, userOptions) {
+             await mkdir(dirname(pathToDoc), { recursive: true });
+             await writeFile(pathToDoc, newRuleDocContents);
+             initializedRuleDoc = true;
++          }
+         }
+         // Regenerate the header (title/notices) of each rule doc.
+-        const newHeaderLines = generateRuleHeaderLines(context, description, name);
+         const contentsOldBuffer = await readFile(pathToDoc);
+         const contentsOld = contentsOldBuffer.toString();
+-        const contentsNew = await postprocess(updateRuleOptionsList(context, replaceOrCreateHeader(context, contentsOld, newHeaderLines, END_RULE_HEADER_MARKER), rule), resolve(pathToDoc));
++        const frontmatterOld = extractFrontmatter(context, contentsOld);
++        const newHeaderLines = generateRuleHeaderLines(context, description, name, frontmatterOld, isMdx);
++        const contentsNew = await postprocess(updateRuleOptionsList(context, replaceOrCreateHeader(context, contentsOld, newHeaderLines, END_RULE_HEADER_MARKER, isMdx), rule), resolve(pathToDoc), isMdx);
+         if (check) {
+             /* istanbul ignore next -- V8 branch coverage doesn't detect this branch is tested */
+             if (contentsNew !== contentsOld) {
+diff --git a/dist/lib/markdown.js b/dist/lib/markdown.js
+index 2538594eac0de24881da8477f25f0aba1fde44e4..beb8e7cbf2290364e053330fba91a460875bb473 100644
+--- a/dist/lib/markdown.js
++++ b/dist/lib/markdown.js
+@@ -1,27 +1,39 @@
+ // General helpers for dealing with markdown files / content.
++import { formatComment } from './comment-markers.js';
++
++export const extractFrontmatter = (context, markdown) => {
++  const { endOfLine } = context;
++  const lines = markdown.split(endOfLine);
++  const frontMatterStart = lines.indexOf('---');
++  const frontMatterEnd = lines.indexOf('---', frontMatterStart + 1);
++  if (frontMatterStart !== -1 && frontMatterEnd !== -1) {
++    return lines.slice(frontMatterStart, frontMatterEnd + 1).join(endOfLine);
++  }
++  return undefined;
++}
++
+ /**
+  * Replace the header of a doc up to and including the specified marker.
+  * Insert at beginning if header doesn't exist.
+  * @param markdown - doc content
+  * @param newHeader - new header including marker
+  * @param marker - marker to indicate end of header
++ * @param {boolean} isMdx - whether the doc is for an MDX file (true) or a plain markdown file (false)
+  */
+-export function replaceOrCreateHeader(context, markdown, newHeader, marker) {
++export function replaceOrCreateHeader(context, markdown, newHeader, marker, isMdx) {
+     const { endOfLine } = context;
+     const lines = markdown.split(endOfLine);
+     const titleLineIndex = lines.findIndex((line) => line.startsWith('# '));
+-    const markerLineIndex = lines.indexOf(marker);
++    const markerComment = formatComment(marker, isMdx);
++    const markerLineIndex = lines.indexOf(markerComment);
+     const dashesLineIndex1 = lines.indexOf('---');
+     const dashesLineIndex2 = lines.indexOf('---', dashesLineIndex1 + 1);
+-    // Any YAML front matter or anything else above the title should be kept as-is ahead of the new header.
+-    const preHeader = lines
+-        .slice(0, Math.max(titleLineIndex, dashesLineIndex2 + 1))
+-        .join(endOfLine);
++
+     // Anything after the marker comment, title, or YAML front matter should be kept as-is after the new header.
+     const postHeader = lines
+         .slice(Math.max(markerLineIndex + 1, titleLineIndex + 1, dashesLineIndex2 + 1))
+         .join(endOfLine);
+-    return `${preHeader ? `${preHeader}${endOfLine}` : ''}${newHeader}${endOfLine}${postHeader}`;
++    return `${newHeader}${endOfLine}${postHeader}`;
+ }
+ /**
+  * Find the section most likely to be the top-level section for a given string.
+diff --git a/dist/lib/options.js b/dist/lib/options.js
+index 4006d82950f917764c4579dcfdd3aa9528bbdd13..ecef9c8220f7efc8e56b56d1dec2c4886c2348ee 100644
+--- a/dist/lib/options.js
++++ b/dist/lib/options.js
+@@ -1,5 +1,5 @@
+ import { join } from 'node:path';
+-import { COLUMN_TYPE, NOTICE_TYPE, OPTION_TYPE } from './types.js';
++import { COLUMN_TYPE, FRAMEWORK, NOTICE_TYPE, OPTION_TYPE } from './types.js';
+ import { parseConfigEmojiOptions, parseRuleDocNoticesOption, parseRuleListColumnsOption, } from './option-parsers.js';
+ export const COLUMN_TYPE_DEFAULT_PRESENCE_AND_ORDERING = {
+     // Object keys ordered in display order.
+@@ -40,6 +40,7 @@ export const OPTION_DEFAULTS = {
+     [OPTION_TYPE.CHECK]: false,
+     [OPTION_TYPE.CONFIG_EMOJI]: [],
+     [OPTION_TYPE.CONFIG_FORMAT]: DEFAULT_CONFIG_FORMAT,
++    [OPTION_TYPE.FRAMEWORK]: FRAMEWORK.NONE,
+     [OPTION_TYPE.IGNORE_CONFIG]: [],
+     [OPTION_TYPE.IGNORE_DEPRECATED_RULES]: false,
+     [OPTION_TYPE.INIT_RULE_DOCS]: false,
+@@ -73,6 +74,7 @@ export function getResolvedOptions(plugin, userOptions = {}) {
+     const configEmoji = userOptions.configEmoji ?? OPTION_DEFAULTS[OPTION_TYPE.CONFIG_EMOJI];
+     const configEmojis = parseConfigEmojiOptions(plugin, configEmoji);
+     const configFormat = userOptions.configFormat ?? OPTION_DEFAULTS[OPTION_TYPE.CONFIG_FORMAT];
++    const framework = userOptions.framework ?? OPTION_DEFAULTS[OPTION_TYPE.FRAMEWORK];
+     const ignoreConfig = stringOrArrayWithFallback(userOptions.ignoreConfig, OPTION_DEFAULTS[OPTION_TYPE.IGNORE_CONFIG]);
+     const ignoreDeprecatedRules = userOptions.ignoreDeprecatedRules ??
+         OPTION_DEFAULTS[OPTION_TYPE.IGNORE_DEPRECATED_RULES];
+@@ -101,6 +103,7 @@ export function getResolvedOptions(plugin, userOptions = {}) {
+         check,
+         configEmojis,
+         configFormat,
++        framework,
+         ignoreConfig,
+         ignoreDeprecatedRules,
+         initRuleDocs,
+@@ -125,7 +128,7 @@ function stringOrArrayWithFallback(stringOrArray, fallback) {
+         : fallback;
+ }
+ function stringOrArrayToArrayWithFallback(stringOrArray, fallback) {
+-    const asArray = 
++    const asArray =
+     // Using the "Array.isArray" method loses type information about the array.
+     // eslint-disable-next-line unicorn/no-instanceof-builtins
+     stringOrArray instanceof Array
+diff --git a/dist/lib/rule-doc-notices.js b/dist/lib/rule-doc-notices.js
+index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..fd6d47faa948208ddeb5c93d9151536436985b30 100644
+--- a/dist/lib/rule-doc-notices.js
++++ b/dist/lib/rule-doc-notices.js
+@@ -1,5 +1,5 @@
+ import { join } from 'node:path';
+-import { END_RULE_HEADER_MARKER } from './comment-markers.js';
++import { formatComment, END_RULE_HEADER_MARKER } from './comment-markers.js';
+ import { EMOJI_DEPRECATED, EMOJI_DESCRIPTION, EMOJI_FIXABLE, EMOJI_HAS_SUGGESTIONS, EMOJI_REQUIRES_TYPE_CHECKING, EMOJI_CONFIG_FROM_SEVERITY, EMOJI_OPTIONS, } from './emojis.js';
+ import { findConfigEmoji, getConfigsForRule } from './plugin-configs.js';
+ import { getPluginRoot } from './package-json.js';
+@@ -206,7 +206,7 @@ function getNoticesForRule(context, rule, configsError, configsWarn, configsOff)
+         [NOTICE_TYPE.FIXABLE_AND_HAS_SUGGESTIONS]: Boolean(rule.meta?.fixable) || Boolean(rule.meta?.hasSuggestions),
+         [NOTICE_TYPE.HAS_SUGGESTIONS]: Boolean(rule.meta?.hasSuggestions),
+         [NOTICE_TYPE.OPTIONS]: hasOptions(rule.meta?.schema),
+-        [NOTICE_TYPE.REQUIRES_TYPE_CHECKING]: 
++        [NOTICE_TYPE.REQUIRES_TYPE_CHECKING]:
+         // @ts-expect-error -- TODO: requiresTypeChecking type not present
+         rule.meta?.docs?.requiresTypeChecking || false,
+         [NOTICE_TYPE.TYPE]: Boolean(rule.meta?.type),
+@@ -304,27 +304,27 @@ function makeRuleDocTitle(context, name, description) {
+             if (!descriptionFormatted) {
+                 throw new Error('Attempting to display non-existent description in rule doc title.');
+             }
+-            return `# ${descriptionFormatted}`;
++            return `${descriptionFormatted}`;
+         }
+         case 'desc-parens-name': {
+             /* istanbul ignore next -- this shouldn't happen */
+             if (!descriptionFormatted) {
+                 throw new Error('Attempting to display non-existent description in rule doc title.');
+             }
+-            return `# ${descriptionFormatted} (\`${name}\`)`;
++            return `${descriptionFormatted} (\`${name}\`)`;
+         }
+         case 'desc-parens-prefix-name': {
+             /* istanbul ignore next -- this shouldn't happen */
+             if (!descriptionFormatted) {
+                 throw new Error('Attempting to display non-existent description in rule doc title.');
+             }
+-            return `# ${descriptionFormatted} (\`${pluginPrefix}/${name}\`)`;
++            return `${descriptionFormatted} (\`${pluginPrefix}/${name}\`)`;
+         }
+         case 'name': {
+-            return `# ${name}`;
++            return `${name}`;
+         }
+         case 'prefix-name': {
+-            return `# ${pluginPrefix}/${name}`;
++            return `${pluginPrefix}/${name}`;
+         }
+         /* istanbul ignore next -- this shouldn't happen */
+         default: {
+@@ -332,16 +332,43 @@ function makeRuleDocTitle(context, name, description) {
+         }
+     }
+ }
++
++const getFrontmatterLines = (context, title, description, frontmatterOld) => {
++  const { endOfLine, options: { framework } } = context;
++  const oldFrontmatterLines = frontmatterOld ? frontmatterOld.split(endOfLine) : [];
++
++  // If the framework is none, then just bail out and return the old frontmatter.
++  // We don't want to change anything.
++  if (framework === 'none') {
++    return oldFrontmatterLines;
++  }
++
++  const newFrontmatter = [];
++  for (const line of oldFrontmatterLines) {
++    if (line.startsWith('title:')) {
++      newFrontmatter.push(`title: ${title}`);
++    } else if (line.startsWith('description:') && description) {
++      newFrontmatter.push(`description: ${description}`);
++    } else {
++      newFrontmatter.push(line);
++    }
++  }
++  return newFrontmatter;
++}
++
++
+ /**
+  * Generate a rule doc header for a particular rule.
+  * @returns {string} - new header including marker
+  */
+-export function generateRuleHeaderLines(context, description, name) {
+-    const { endOfLine } = context;
++export function generateRuleHeaderLines(context, description, name, frontmatter, isMdx) {
++    const { endOfLine, options: { framework } } = context;
++    const title = makeRuleDocTitle(context, name, description);
+     return [
+-        makeRuleDocTitle(context, name, description),
++        ...getFrontmatterLines(context, title, description, frontmatter),
++        ...(framework === 'starlight' ? [''] : [`# ${title}`]),
+         ...getRuleNoticeLines(context, name),
+         '',
+-        END_RULE_HEADER_MARKER,
++        formatComment(END_RULE_HEADER_MARKER, isMdx),
+     ].join(endOfLine);
+ }
+diff --git a/dist/lib/rule-options-list.js b/dist/lib/rule-options-list.js
+index 796bcb466833d4c66bd7e4bd730fd6a5d2c74e83..9a08dc00fc5834359102a4587f61e483eb35bb90 100644
+--- a/dist/lib/rule-options-list.js
++++ b/dist/lib/rule-options-list.js
+@@ -1,4 +1,4 @@
+-import { BEGIN_RULE_OPTIONS_LIST_MARKER, END_RULE_OPTIONS_LIST_MARKER, } from './comment-markers.js';
++import { formatComment, BEGIN_RULE_OPTIONS_LIST_MARKER, END_RULE_OPTIONS_LIST_MARKER, } from './comment-markers.js';
+ import { markdownTable } from 'markdown-table';
+ import { getAllNamedOptions } from './rule-options.js';
+ import { sanitizeMarkdownTable } from './string.js';
+@@ -93,19 +93,21 @@ function generateRuleOptionsListMarkdown(context, rule) {
+     });
+     return markdownTable(sanitizeMarkdownTable(context, [listHeaderRow, ...rows]), { align: 'l' });
+ }
+-export function updateRuleOptionsList(context, markdown, rule) {
++export function updateRuleOptionsList(context, markdown, rule, isMdx) {
+     const { endOfLine } = context;
+-    const listStartIndex = markdown.indexOf(BEGIN_RULE_OPTIONS_LIST_MARKER);
+-    let listEndIndex = markdown.indexOf(END_RULE_OPTIONS_LIST_MARKER);
++    const beginOptionsListMarkerComment = formatComment(BEGIN_RULE_OPTIONS_LIST_MARKER, isMdx);
++    const endOptionsListMarkerComment = formatComment(END_RULE_OPTIONS_LIST_MARKER, isMdx);
++    const listStartIndex = markdown.indexOf(beginOptionsListMarkerComment);
++    let listEndIndex = markdown.indexOf(endOptionsListMarkerComment);
+     if (listStartIndex === -1 || listEndIndex === -1) {
+         // No rule options list found.
+         return markdown;
+     }
+     // Account for length of pre-existing marker.
+-    listEndIndex += END_RULE_OPTIONS_LIST_MARKER.length;
++    listEndIndex += endOptionsListMarkerComment.length;
+     const preList = markdown.slice(0, Math.max(0, listStartIndex));
+     const postList = markdown.slice(Math.max(0, listEndIndex));
+     // New rule options list.
+     const list = generateRuleOptionsListMarkdown(context, rule);
+-    return `${preList}${BEGIN_RULE_OPTIONS_LIST_MARKER}${endOfLine}${endOfLine}${list}${endOfLine}${endOfLine}${END_RULE_OPTIONS_LIST_MARKER}${postList}`;
++    return `${preList}${beginOptionsListMarkerComment}${endOfLine}${endOfLine}${list}${endOfLine}${endOfLine}${endOptionsListMarkerComment}${postList}`;
+ }
+diff --git a/dist/lib/types.js b/dist/lib/types.js
+index 70907583879870a362955d8e2cdcde8c76f3506d..3495797d8835f1d510990f55a6131fdac88e8f29 100644
+--- a/dist/lib/types.js
++++ b/dist/lib/types.js
+@@ -60,6 +60,15 @@ export const COLUMN_TYPE = {
+     REQUIRES_TYPE_CHECKING: 'requiresTypeChecking',
+     TYPE: 'type',
+ };
++
++/**
++ * Framework options
++*/
++export const FRAMEWORK = {
++    NONE: 'none',
++    STARLIGHT: 'starlight',
++};
++
+ /**
+  * CLI/config file options.
+  */
+@@ -70,6 +79,7 @@ export const OPTION_TYPE = {
+     CHECK: 'check',
+     CONFIG_EMOJI: 'configEmoji',
+     CONFIG_FORMAT: 'configFormat',
++    FRAMEWORK: 'framework',
+     IGNORE_CONFIG: 'ignoreConfig',
+     IGNORE_DEPRECATED_RULES: 'ignoreDeprecatedRules',
+     INIT_RULE_DOCS: 'initRuleDocs',
