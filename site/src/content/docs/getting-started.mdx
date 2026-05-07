@@ -1,18 +1,46 @@
-# Getting Started
+---
+title: Getting Started
+description: Install and configure the plugin.
+---
+
+import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 
 ## 💽 Installation
 
-```shell
-pnpm add -D eslint-plugin-package-json
-```
+{/* prettier-ignore-start */}
 
-> [!NOTE]
-> Requirements
->
-> - ESLint v9 and above
-> - Node ^22.13.0 || >=24
+<Tabs>
+  <TabItem value="pnpm" label="pnpm">
 
-## 📖 Usage
+    ```shell
+    pnpm add -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+  <TabItem value="npm" label="npm">
+
+    ```shell
+    npm install -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+
+    ```shell
+    yarn add -D eslint-plugin-package-json
+    ```
+
+  </TabItem>
+</Tabs>
+{/* prettier-ignore-end */}
+
+<Aside type="note" title="Requirements">
+- ESLint v9 or above
+- Node ^22.13.0 || >=24
+
+</Aside>
+
+## 📖 Configs
 
 ### Recommended Config
 
@@ -48,13 +76,19 @@ export default defineConfig([
 ]);
 ```
 
-See [ESLint's _Configuration Files_ guide](https://eslint.org/docs/latest/use/configure/configuration-files-new) for details on how to customize your rules and other config settings.
+<Aside type="tip">
+  See [ESLint's _Configuration Files_
+  guide](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+  for details on how to customize your rules and other config settings.
+</Aside>
 
 ### Recommended Config for Publishable Packages
 
-> [!NOTE]
-> This config was recently made redundant and is now the same as `recommended`.
-> However, we're keeping it as its own config for now, in the event that we add new rules unique to the publishable use case.
+<Aside type="note">
+  This config was recently made redundant and is now the same as `recommended`.
+  However, we're keeping it as its own config for now, in the event that we add
+  new rules unique to the publishable use case.
+</Aside>
 
 The `recommended-publishable` configuration has everything in it from the standard `recommended` config, with some additional rules added that are geared towards packages that are intended to be published.
 
@@ -86,7 +120,7 @@ export default defineConfig([
 ]);
 ```
 
-### Settings
+## ⚙️ Settings
 
 Some rules can be configured in ESLint shared settings.
 You can set them in `settings.packageJson` in an ESLint flat config.
@@ -114,7 +148,7 @@ export default defineConfig({
 });
 ```
 
-#### `enforceForPrivate`
+### `enforceForPrivate`
 
 - **Type:** `boolean`
 - **Default:** [see below]

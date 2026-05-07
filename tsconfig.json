@@ -11,5 +11,6 @@
     "target": "ES2024",
     "rewriteRelativeImportExtensions": true
   },
-  "include": ["src", "*.config.ts"]
+  "include": ["src", "*.config.ts"],
+  "exclude": ["astro.config.ts"]
 }

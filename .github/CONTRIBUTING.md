@@ -26,14 +26,6 @@ With the exception of very small typos, all changes to this repository generally
 If this is your first time contributing, consider searching for [unassigned issues that also have the `good first issue` label](https://github.com/michaelfaith/eslint-plugin-package-json/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+label%3A%22status%3A+accepting+prs%22+no%3Aassignee+).
 If the issue you'd like to fix isn't found on the issue, see [Reporting Issues](#reporting-issues) for filing your own (please do!).
 
-#### Issue Claiming
-
-We don't use any kind of issue claiming system.
-We've found in the past that they result in accidental ["licked cookie"](https://devblogs.microsoft.com/oldnewthing/20091201-00/?p=15843) situations where contributors claim an issue but run out of time or energy trying before sending a PR.
-
-If an unassigned issue has been marked as `status: accepting prs` and an open PR does not exist, feel free to send a PR.
-Please don't post comments asking for permission or stating you will work on an issue.
-
 ### Sending a Pull Request
 
 Once you've identified an open issue accepting PRs that doesn't yet have a PR sent, you're free to send a pull request.
@@ -48,12 +40,14 @@ Check [previously merged PRs](https://github.com/michaelfaith/eslint-plugin-pack
 
 If you don't think your PR is ready for review, [set it as a draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request#converting-a-pull-request-to-a-draft).
 Draft PRs won't be reviewed.
+Once the PR is ready for us to review, mark it as ready.
 
 #### Granular PRs
 
-Please keep pull requests single-purpose: in other words, don't attempt to solve multiple unrelated problems in one pull request.
-Send one PR per area of concern.
+Please keep pull requests single-purpose.
+In other words, don't attempt to solve multiple unrelated problems in one pull request.
 Multi-purpose pull requests are harder and slower to review, block all changes from being merged until the whole pull request is reviewed, and are difficult to name well with semantic PR titles.
+We also want to ensure each meaningful change has its own entry in our changelog.
 
 #### Pull Request Reviews
 
@@ -65,7 +59,7 @@ PRs should have passing [GitHub status checks](https://docs.github.com/en/pull-r
 
 #### Asking Questions
 
-If you need help and/or have a question, posting a comment in the PR is a great way to do so.
+If you need help and / or have a question, posting a comment in the PR is a great way to do so.
 There's no need to tag anybody individually.
 One of us will drop by and help when we can.
 
@@ -94,4 +88,4 @@ Please do ping the maintainer who merged your PR if that doesn't happen within 2
 
 If you made it all the way to the end, bravo dear user, we love you.
 Please include an emoji in the bottom of your issues and PRs to signal to us that you did in fact read this file and are trying to conform to it as best as possible.
-🗂 is a good starter if you're not sure which to use.
+✨ is a good starter if you're not sure which to use.

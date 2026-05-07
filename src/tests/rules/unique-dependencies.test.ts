@@ -153,7 +153,7 @@ ruleTester.run("unique-dependencies", rule, {
     // ...
     {
       code: `{
-		"overrides": ["abc", "abc"]
+		"overrides": {"abc": "1.2.3", "abc": "1.2.3"}
 	}`,
       errors: [
         {
@@ -163,7 +163,7 @@ ruleTester.run("unique-dependencies", rule, {
             {
               messageId: "remove",
               output: `{
-		"overrides": [ "abc"]
+		"overrides": { "abc": "1.2.3"}
 	}`,
             },
           ],
@@ -326,13 +326,18 @@ ruleTester.run("unique-dependencies", rule, {
 	}
 }`,
     `{
-	"overrides": []
+	"overrides": {}
 }`,
     `{
-	"overrides": ["abc"]
+	"overrides": {
+    "abc": "1.2.3"
+  }
 }`,
     `{
-	"overrides": ["abc", "def"]
+	"overrides": {
+    "abc": "1.2.3",
+    "def": "1.2.3"
+  }
 }`,
     `{
 	"unrelated": ["abc", "abc"]

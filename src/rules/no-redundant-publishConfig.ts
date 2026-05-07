@@ -1,7 +1,7 @@
+import type * as ESTree from "estree";
 import type { AST as JsonAST } from "jsonc-eslint-parser";
 
 import { fixRemoveObjectProperty } from "eslint-fix-utils";
-import * as ESTree from "estree";
 
 import { createRule } from "../createRule.ts";
 import { isJSONStringLiteral } from "../utils/predicates.ts";

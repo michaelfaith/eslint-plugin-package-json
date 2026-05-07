@@ -83,7 +83,7 @@ export const createSimpleValidPropertyRule = (
     meta: {
       docs: {
         category: "Best Practices",
-        description: `Enforce that the \`${propertyName}\`${aliases.length ? ` (also: ${aliases.map((alias) => `\`${alias}\``).join(", ")})` : ""} property is valid.`,
+        description: `Enforce that the \`${propertyName}\`${aliases.length ? ` (also ${aliases.map((alias) => `\`${alias}\``).join(", ")})` : ""} property is valid.`,
         recommended: true,
       },
       messages: {

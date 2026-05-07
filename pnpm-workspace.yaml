@@ -2,4 +2,6 @@ minimumReleaseAge: 1440
 onlyBuiltDependencies:
   - esbuild
   - oxc-resolver
+patchedDependencies:
+  eslint-doc-generator: patches/eslint-doc-generator.patch
 trustPolicy: no-downgrade

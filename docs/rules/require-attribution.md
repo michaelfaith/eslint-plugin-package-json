@@ -193,8 +193,6 @@ This is useful for internal packages that won't be published to npm.
 }
 ```
 
-Default: `false`
-
 ### preferContributorsOnly
 
 When enabled, `preferContributorsOnly` requires that only `contributors` may be defined for attribution, and will report if `author` is also present.
@@ -209,8 +207,6 @@ When enabled, `preferContributorsOnly` requires that only `contributors` may be 
   ]
 }
 ```
-
-Default: `false`
 
 ## When Not to Use It
 
