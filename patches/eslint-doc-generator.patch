@@ -54,7 +54,7 @@ index 5c04594943bb970b25acf8b9460d19a335fa4cf8..f118a399f901f35aa7a3780de9db5300
          .option('--ignore-deprecated-rules [boolean]', `(optional) Whether to ignore deprecated rules from being checked, displayed, or updated. (default: ${String(OPTION_DEFAULTS[OPTION_TYPE.IGNORE_DEPRECATED_RULES])})`, parseBoolean)
          .option('--init-rule-docs [boolean]', `(optional) Whether to create rule doc files if they don't yet exist. (default: ${String(OPTION_DEFAULTS[OPTION_TYPE.INIT_RULE_DOCS])})`, parseBoolean)
 diff --git a/dist/lib/comment-markers.js b/dist/lib/comment-markers.js
-index 8ccf778e1c0733fec3d7b0e05abf97d4b206e573..a047e92d1fd39e05bcb446f6cfc3aa9952e1f3fb 100644
+index 8ccf778e1c0733fec3d7b0e05abf97d4b206e573..ff47ad33e5c436b80bee3def5e3edf4e552ac547 100644
 --- a/dist/lib/comment-markers.js
 +++ b/dist/lib/comment-markers.js
 @@ -1,11 +1,26 @@
@@ -83,7 +83,7 @@ index 8ccf778e1c0733fec3d7b0e05abf97d4b206e573..a047e92d1fd39e05bcb446f6cfc3aa99
 + * @param {boolean} isMdx - whether the comment is for an MDX file (true) or a plain markdown file (false)
 + * @returns {string} - the formatted comment string
 + */
-+export const formatComment = (comment, isMdx) => {
++export const formatComment = (comment, isMdx = false) => {
 +  if (isMdx) {
 +    return `{/* ${comment} */}`;
 +  }
@@ -91,6 +91,42 @@ index 8ccf778e1c0733fec3d7b0e05abf97d4b206e573..a047e92d1fd39e05bcb446f6cfc3aa99
 +    return `<!-- ${comment} -->`;
 +  }
 +}
+diff --git a/dist/lib/config-list.js b/dist/lib/config-list.js
+index dde818c25a34a773f73c7eaadf36c2ec4d1cbf4b..508c5f53d13ea069bdddb4b22f4381de577cf886 100644
+--- a/dist/lib/config-list.js
++++ b/dist/lib/config-list.js
+@@ -1,4 +1,4 @@
+-import { BEGIN_CONFIG_LIST_MARKER, END_CONFIG_LIST_MARKER, } from './comment-markers.js';
++import { formatComment, BEGIN_CONFIG_LIST_MARKER, END_CONFIG_LIST_MARKER, } from './comment-markers.js';
+ import { markdownTable } from 'markdown-table';
+ import { configNameToDisplay } from './config-format.js';
+ import { sanitizeMarkdownTable } from './string.js';
+@@ -52,8 +52,10 @@ function generateConfigListMarkdown(context) {
+ export function updateConfigsList(context, markdown) {
+     const { configsToRules, endOfLine, options } = context;
+     const { ignoreConfig } = options;
+-    const listStartIndex = markdown.indexOf(BEGIN_CONFIG_LIST_MARKER);
+-    let listEndIndex = markdown.indexOf(END_CONFIG_LIST_MARKER);
++    const beginConfigListMarkerComment = formatComment(BEGIN_CONFIG_LIST_MARKER);
++    const endConfigListMarkerComment = formatComment(END_CONFIG_LIST_MARKER);
++    const listStartIndex = markdown.indexOf(beginConfigListMarkerComment);
++    let listEndIndex = markdown.indexOf(endConfigListMarkerComment);
+     if (listStartIndex === -1 || listEndIndex === -1) {
+         // No config list found.
+         return markdown;
+@@ -63,10 +65,10 @@ export function updateConfigsList(context, markdown) {
+         return markdown;
+     }
+     // Account for length of pre-existing marker.
+-    listEndIndex += END_CONFIG_LIST_MARKER.length;
++    listEndIndex += endConfigListMarkerComment.length;
+     const preList = markdown.slice(0, Math.max(0, listStartIndex));
+     const postList = markdown.slice(Math.max(0, listEndIndex));
+     // New config list.
+     const list = generateConfigListMarkdown(context);
+-    return `${preList}${BEGIN_CONFIG_LIST_MARKER}${endOfLine}${endOfLine}${list}${endOfLine}${endOfLine}${END_CONFIG_LIST_MARKER}${postList}`;
++    return `${preList}${beginConfigListMarkerComment}${endOfLine}${endOfLine}${list}${endOfLine}${endOfLine}${endConfigListMarkerComment}${postList}`;
+ }
 diff --git a/dist/lib/generator.js b/dist/lib/generator.js
 index 7d9c4e9a76f9b7a6b12313c0d2302d7318a8251f..faa3b7a075054d0e555766c0a0e2139d99377c2e 100644
 --- a/dist/lib/generator.js
@@ -353,6 +389,49 @@ index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..fd6d47faa948208ddeb5c93d91515364
 -        END_RULE_HEADER_MARKER,
 +        formatComment(END_RULE_HEADER_MARKER, isMdx),
      ].join(endOfLine);
+ }
+diff --git a/dist/lib/rule-list.js b/dist/lib/rule-list.js
+index 872c6f1cd156b88347c7af4f82bcc4835ce2dd4e..d29f531b04f33ed0d77939f6b8b1543d6ec3f50d 100644
+--- a/dist/lib/rule-list.js
++++ b/dist/lib/rule-list.js
+@@ -1,4 +1,4 @@
+-import { BEGIN_RULE_LIST_MARKER, END_RULE_LIST_MARKER, } from './comment-markers.js';
++import { formatComment, BEGIN_RULE_LIST_MARKER, END_RULE_LIST_MARKER, } from './comment-markers.js';
+ import { EMOJI_DEPRECATED, EMOJI_FIXABLE, EMOJI_HAS_SUGGESTIONS, EMOJI_OPTIONS, EMOJI_REQUIRES_TYPE_CHECKING, } from './emojis.js';
+ import { getEmojisForConfigsSettingRuleToSeverity } from './plugin-configs.js';
+ import { getColumns, COLUMN_HEADER } from './rule-list-columns.js';
+@@ -176,8 +176,10 @@ function getRulesAndHeadersForSplit(context, ruleNamesAndRules, ruleListSplit) {
+ export function updateRulesList(context, ruleNamesAndRules, markdown, pathToFile) {
+     const { endOfLine, path, options } = context;
+     const { ruleListSplit } = options;
+-    let listStartIndex = markdown.indexOf(BEGIN_RULE_LIST_MARKER);
+-    let listEndIndex = markdown.indexOf(END_RULE_LIST_MARKER);
++    const beginRuleListMarkerComment = formatComment(BEGIN_RULE_LIST_MARKER);
++    const endRuleListMarkerComment = formatComment(END_RULE_LIST_MARKER);
++    let listStartIndex = markdown.indexOf(beginRuleListMarkerComment);
++    let listEndIndex = markdown.indexOf(endRuleListMarkerComment);
+     // Find the best possible section to insert the rules list into if the markers are missing.
+     const rulesSectionHeader = findSectionHeader(context, markdown, 'rules');
+     const rulesSectionIndex = rulesSectionHeader
+@@ -193,10 +195,10 @@ export function updateRulesList(context, ruleNamesAndRules, markdown, pathToFile
+     }
+     else {
+         // Account for length of pre-existing marker.
+-        listEndIndex += END_RULE_LIST_MARKER.length;
++        listEndIndex += endRuleListMarkerComment.length;
+     }
+     if (listStartIndex === -1 || listEndIndex === -1) {
+-        throw new Error(`${relative(getPluginRoot(path), pathToFile)} is missing rules list markers: ${BEGIN_RULE_LIST_MARKER}${END_RULE_LIST_MARKER}`);
++        throw new Error(`${relative(getPluginRoot(path), pathToFile)} is missing rules list markers: ${beginRuleListMarkerComment}${endRuleListMarkerComment}`);
+     }
+     const preList = markdown.slice(0, Math.max(0, listStartIndex));
+     const postList = markdown.slice(Math.max(0, listEndIndex));
+@@ -265,5 +267,5 @@ export function updateRulesList(context, ruleNamesAndRules, markdown, pathToFile
+     // New rule list.
+     const list = generateRuleListMarkdownForRulesAndHeaders(context, rulesAndHeaders, ruleListSplitHeaderLevel, columns, pathToFile);
+     const newContent = `${legend ? `${legend}${endOfLine}${endOfLine}` : ''}${list}`;
+-    return `${preList}${BEGIN_RULE_LIST_MARKER}${endOfLine}${endOfLine}${newContent}${endOfLine}${endOfLine}${END_RULE_LIST_MARKER}${postList}`;
++    return `${preList}${beginRuleListMarkerComment}${endOfLine}${endOfLine}${newContent}${endOfLine}${endOfLine}${endRuleListMarkerComment}${postList}`;
  }
 diff --git a/dist/lib/rule-options-list.js b/dist/lib/rule-options-list.js
 index 796bcb466833d4c66bd7e4bd730fd6a5d2c74e83..9a08dc00fc5834359102a4587f61e483eb35bb90 100644

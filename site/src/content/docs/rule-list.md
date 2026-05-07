@@ -6,7 +6,7 @@ description: All rules provided by the plugin.
 Here's a list of all rules that this plugin provides.
 
 <!-- prettier-ignore-start -->
-<!-- begin auto-generated rules list
+<!-- begin auto-generated rules list -->
 
 💼 Configurations enabled in.\
 ✔️ Set in the `legacy-recommended` configuration.\
@@ -106,5 +106,5 @@ Here's a list of all rules that this plugin provides.
 | [valid-version](/rules/valid-version)                                 | Enforce that package versions are valid semver specifiers                                                                                                                                    | ✔️ ✅ 📦 |    |    |    |
 | [valid-workspaces](/rules/valid-workspaces)                           | Enforce that the `workspaces` property is valid.                                                                                                                                             | ✔️ ✅ 📦 |    |    |    |
 
-end auto-generated rules list -->
+<!-- end auto-generated rules list -->
 <!-- prettier-ignore-end -->
