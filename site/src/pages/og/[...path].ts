@@ -23,7 +23,6 @@ export const { GET, getStaticPaths } = await OGImageRoute({
         color: [203, 166, 247],
       },
     },
-
     format: "WEBP",
     logo: {
       path: "./site/src/assets/logo/logo-dark.png",
