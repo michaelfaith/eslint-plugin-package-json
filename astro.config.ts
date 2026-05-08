@@ -10,6 +10,9 @@ export default defineConfig({
   },
   integrations: [
     starlight({
+      components: {
+        Head: "./src/components/Head.astro",
+      },
       favicon: "/images/favicon.svg",
       logo: {
         dark: "./src/assets/logo/logo-dark.svg",
