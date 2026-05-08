@@ -290,7 +290,7 @@ index 4006d82950f917764c4579dcfdd3aa9528bbdd13..ecef9c8220f7efc8e56b56d1dec2c488
      // eslint-disable-next-line unicorn/no-instanceof-builtins
      stringOrArray instanceof Array
 diff --git a/dist/lib/rule-doc-notices.js b/dist/lib/rule-doc-notices.js
-index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..fd6d47faa948208ddeb5c93d9151536436985b30 100644
+index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..28f56de5f5d2fed61016045bb663a126f2c49335 100644
 --- a/dist/lib/rule-doc-notices.js
 +++ b/dist/lib/rule-doc-notices.js
 @@ -1,5 +1,5 @@
@@ -342,7 +342,7 @@ index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..fd6d47faa948208ddeb5c93d91515364
          }
          /* istanbul ignore next -- this shouldn't happen */
          default: {
-@@ -332,16 +332,43 @@ function makeRuleDocTitle(context, name, description) {
+@@ -332,16 +332,70 @@ function makeRuleDocTitle(context, name, description) {
          }
      }
  }
@@ -357,15 +357,42 @@ index d0be6f003c1c3bbae5a89c18e6b428dd297ca229..fd6d47faa948208ddeb5c93d91515364
 +    return oldFrontmatterLines;
 +  }
 +
++  // If there is currently no frontmatter, then create a new one with the title and description.
++  if (oldFrontmatterLines.length === 0) {
++    const newFrontmatter = [
++      '---',
++      `title: ${title}`
++    ];
++    if (description) {
++      newFrontmatter.push(`description: ${description}`);
++    }
++    newFrontmatter.push('---');
++    return newFrontmatter;
++  }
++
 +  const newFrontmatter = [];
++  let titleSeen = false;
++  let descriptionSeen = false;
 +  for (const line of oldFrontmatterLines) {
 +    if (line.startsWith('title:')) {
 +      newFrontmatter.push(`title: ${title}`);
++      titleSeen = true;
 +    } else if (line.startsWith('description:') && description) {
 +      newFrontmatter.push(`description: ${description}`);
++      descriptionSeen = true;
 +    } else {
 +      newFrontmatter.push(line);
 +    }
++  }
++
++  // If the old frontmatter didn't have a title, then add it to the beginning of the frontmatter (after the opening ---).
++  if (!titleSeen) {
++    newFrontmatter.splice(1, 0, `title: ${title}`);
++  }
++  // If the old frontmatter didn't have a description but we have one, then add it after the title.
++  if (description && !descriptionSeen) {
++    const titleIndex = newFrontmatter.findIndex(line => line.startsWith('title:'));
++    newFrontmatter.splice(titleIndex + 1, 0, `description: ${description}`);
 +  }
 +  return newFrontmatter;
 +}
