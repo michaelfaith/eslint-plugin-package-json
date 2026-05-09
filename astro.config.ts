@@ -2,7 +2,7 @@ import starlight from "@astrojs/starlight";
 import starlightCatppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
 
-const site = "https://esling-plugin-package-json.dev";
+const site = "https://eslint-plugin-package-json.dev";
 
 export default defineConfig({
   experimental: {
