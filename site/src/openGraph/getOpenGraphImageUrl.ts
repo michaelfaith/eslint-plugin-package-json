@@ -9,6 +9,6 @@ const paths = new Set(routes.map(({ params }) => params.path));
 export function getOpenGraphImageUrl(path: string) {
   const normalizedPath = path.replace(/^\//, "").replace(/\/$/, "");
 
-  const ogPath = `${normalizedPath}.webp`;
-  return paths.has(ogPath) ? `/og/${ogPath}` : "social.webp";
+  const ogPath = `${normalizedPath}.png`;
+  return paths.has(ogPath) ? `/og/${ogPath}` : "images/social.png";
 }
