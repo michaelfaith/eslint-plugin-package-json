@@ -23,8 +23,8 @@ export default defineConfig({
         { label: "Getting Started", slug: "getting-started" },
         { label: "Rule List", slug: "rule-list" },
         {
-          autogenerate: { directory: "rules" },
           collapsed: true,
+          items: [{ autogenerate: { directory: "rules" } }],
           label: "Rules",
         },
       ],
