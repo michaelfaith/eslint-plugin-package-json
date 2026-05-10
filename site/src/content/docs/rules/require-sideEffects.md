@@ -3,7 +3,7 @@ title: require-sideEffects
 description: Requires the `sideEffects` property to be present.
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 <!-- end auto-generated rule header -->
 

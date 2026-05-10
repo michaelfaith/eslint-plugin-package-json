@@ -74,7 +74,7 @@ jobs:
           pnpm build
 
           echo "Publishing to npm with dist-tag '${{ steps.determine_dist_tag.outputs.dist_tag }}'"
-          pnpm publish --tag ${{ steps.determine_dist_tag.outputs.dist_tag }}
+          pnpm publish --publish-branch ${{ github.ref_name }} --tag ${{ steps.determine_dist_tag.outputs.dist_tag }}
 
   post_release:
     name: Post Release Comments

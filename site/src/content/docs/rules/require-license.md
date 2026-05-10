@@ -3,7 +3,7 @@ title: require-license
 description: Requires the `license` property to be present.
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 <!-- end auto-generated rule header -->
 

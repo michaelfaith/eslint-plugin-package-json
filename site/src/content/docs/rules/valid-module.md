@@ -3,7 +3,7 @@ title: valid-module
 description: Enforce that the `module` property is valid.
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 <!-- end auto-generated rule header -->
 

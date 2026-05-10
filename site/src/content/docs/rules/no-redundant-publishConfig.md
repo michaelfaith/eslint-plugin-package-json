@@ -3,7 +3,7 @@ title: no-redundant-publishConfig
 description: Warns when publishConfig.access is used in unscoped packages.
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
 

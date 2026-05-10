@@ -3,7 +3,7 @@ title: sort-collections
 description: Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 

@@ -4,7 +4,6 @@ import prettier from "prettier";
 const config = {
   configEmoji: [
     ["recommended", "✅"],
-    ["legacy-recommended", "✔️"],
     ["recommended-publishable", "📦"],
     ["stylistic", "🎨"],
   ],

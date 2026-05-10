@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-package-json",
-  "version": "0.91.2",
+  "version": "1.0.0-beta.6",
   "description": "Rules for consistent, readable, and valid package.json files. 🗂️",
   "homepage": "https://github.com/michaelfaith/eslint-plugin-package-json#readme",
   "bugs": {
@@ -64,7 +64,8 @@
     "detect-indent": "^7.0.2",
     "detect-newline": "^4.0.1",
     "eslint-fix-utils": "~0.4.1",
-    "package-json-validator": "^1.4.1",
+    "jsonc-eslint-parser": "^3.1.0",
+    "package-json-validator": "^1.5.0",
     "semver": "^7.7.3",
     "sort-object-keys": "^2.0.0",
     "sort-package-json": "^3.4.0",
@@ -100,7 +101,6 @@
     "husky": "9.1.7",
     "jiti": "2.7.0",
     "json-schema-to-ts": "3.1.1",
-    "jsonc-eslint-parser": "3.1.0",
     "knip": "6.12.0",
     "lint-staged": "17.0.2",
     "prettier": "3.8.0",
@@ -115,11 +115,10 @@
     "vitest": "4.1.0"
   },
   "peerDependencies": {
-    "eslint": ">=8.0.0",
-    "jsonc-eslint-parser": ">=2.0.0"
+    "eslint": ">=9.0.0"
   },
   "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "node": "^22.13.0 || >=24"
   }
 }

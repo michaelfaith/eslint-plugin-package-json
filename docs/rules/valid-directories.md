@@ -1,26 +1,4 @@
 # valid-directories
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
-
-<!-- end auto-generated rule header -->
-
-The rule checks that, if present, the `directories` property is an object.
-
-Example of **incorrect** code for this rule:
-
-```json
-{
-  "directories": true
-}
-```
-
-Example of **correct** code for this rule:
-
-```json
-{
-  "directories": {
-    "bin": "dist/bin",
-    "man": "docs"
-  }
-}
-```
+> [!NOTE]
+> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/valid-directories>

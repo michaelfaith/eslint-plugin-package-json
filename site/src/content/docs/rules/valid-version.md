@@ -3,7 +3,7 @@ title: valid-version
 description: Enforce that package versions are valid semver specifiers
 ---
 
-💼 This rule is enabled in the following configs: ✔️ `legacy-recommended`, ✅ `recommended`, 📦 `recommended-publishable`.
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
 <!-- end auto-generated rule header -->
 

@@ -7,53 +7,15 @@ import { sortOrder } from "sort-package-json";
 
 import { createRule } from "../createRule.ts";
 
-const standardOrderLegacy = [
-  "name",
-  "version",
-  "private",
-  "publishConfig",
-  "description",
-  "main",
-  "exports",
-  "browser",
-  "files",
-  "bin",
-  "directories",
-  "man",
-  "scripts",
-  "repository",
-  "keywords",
-  "author",
-  "license",
-  "bugs",
-  "homepage",
-  "config",
-  "dependencies",
-  "devDependencies",
-  "peerDependencies",
-  "optionalDependencies",
-  "bundledDependencies",
-  "engines",
-  "os",
-  "cpu",
-];
-
 export const rule = createRule({
   create(context) {
     return {
       "Program:exit"() {
         const { ast, text } = context.sourceCode;
 
-        const options = { ...context.options[0] };
-        options.order ??= "sort-package-json";
+        const { order = "sort-package-json" } = context.options[0] ?? {};
 
-        const { order } = options;
-        const requiredOrder =
-          order === "legacy"
-            ? standardOrderLegacy
-            : order === "sort-package-json"
-              ? sortOrder
-              : order;
+        const requiredOrder = order === "sort-package-json" ? sortOrder : order;
 
         const json = JSON.parse(text) as Record<string, unknown>;
 
@@ -127,7 +89,7 @@ export const rule = createRule({
           order: {
             anyOf: [
               {
-                enum: ["legacy", "sort-package-json"],
+                enum: ["sort-package-json"],
                 type: ["string"],
               },
               {
