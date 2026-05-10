@@ -108,7 +108,6 @@
     "prettier-plugin-packagejson": "3.0.0",
     "prettier-plugin-sentences-per-line": "0.2.3",
     "prettier-plugin-sh": "0.18.0",
-    "sharp": "0.34.5",
     "tsdown": "0.22.0",
     "typescript": "6.0.2",
     "typescript-eslint": "8.59.0",
@@ -117,7 +116,7 @@
   "peerDependencies": {
     "eslint": ">=9.0.0"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.0.8",
   "engines": {
     "node": "^22.13.0 || >=24"
   }
