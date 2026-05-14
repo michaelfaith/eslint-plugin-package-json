@@ -4,8 +4,12 @@ description: Sets up the repo for a typical CI job
 
 inputs:
   node-version:
-    description: "Node.js version to use"
+    description: Node.js version to use
     default: "lts/*"
+    required: false
+  strict-peers:
+    description: Whether to use strict peer dependency resolution
+    default: false
     required: false
 
 runs:
@@ -15,6 +19,8 @@ runs:
       with:
         cache: pnpm
         node-version: ${{ inputs.node-version }}
+    - run: pnpm config set strictPeerDependencies true
+      if: ${{ inputs.strict-peers == 'true' }}
     - run: pnpm install --frozen-lockfile
       shell: bash
   using: composite
