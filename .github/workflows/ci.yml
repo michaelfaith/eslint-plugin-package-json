@@ -69,7 +69,9 @@ jobs:
           - 9
           - 10
         node-version:
+          - 22.13.0
           - 22
+          - 24.0.0
           - 24
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -85,14 +87,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        eslint-version:
-          - 9
-          - 10
-        node-version:
-          - 22.13.0
-          - 22
-          - 24.0.0
-          - 24
         os:
           - macos-latest
           - ubuntu-latest
