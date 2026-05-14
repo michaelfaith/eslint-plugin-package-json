@@ -1,6 +1,6 @@
 ---
 title: valid-name
-description: Enforce that package names are valid npm package names
+description: Enforce that the `name` property is valid.
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
