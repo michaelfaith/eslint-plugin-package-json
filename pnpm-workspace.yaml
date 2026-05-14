@@ -1,7 +1,6 @@
 allowBuilds:
   esbuild: true
   sharp: true
-engineStrict: true
 minimumReleaseAge: 1440
 patchedDependencies:
   eslint-doc-generator: patches/eslint-doc-generator.patch
