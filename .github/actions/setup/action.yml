@@ -1,6 +1,6 @@
-description: Prepares the repo for a typical CI job
+name: Setup
 
-name: Prepare
+description: Sets up the repo for a typical CI job
 
 inputs:
   node-version:

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm build
       - run: node lib/index.mjs
 
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm dedupe --check --prefer-offline
 
   format_check:
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm format --list-different
 
   lint:
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm site:sync
       - run: pnpm lint
 
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm docs:generate --check
 
   lint_knip:
@@ -56,12 +56,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm lint:knip
 
-  test:
-    name: Test (Node.js ${{ matrix.node-version }}, ESLint ${{ matrix.eslint-version }}, ${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
+  test_node:
+    name: Test (Node.js ${{ matrix.node-version }}, ESLint ${{ matrix.eslint-version }})
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -71,18 +71,38 @@ jobs:
         node-version:
           - 22
           - 24
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: pnpm install -D eslint@${{ matrix.eslint-version }}
+      - run: pnpm test run
+
+  test_os:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        eslint-version:
+          - 9
+          - 10
+        node-version:
+          - 22.13.0
+          - 22
+          - 24.0.0
+          - 24
         os:
+          - macos-latest
           - ubuntu-latest
           - windows-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: pnpm install -D eslint@${{ matrix.eslint-version }}
+      - uses: ./.github/actions/setup
       - run: pnpm run test --coverage
       - uses: codecov/codecov-action@v5
-        if: always()
+        if: success() && (matrix.os == 'ubuntu-latest')
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -97,7 +117,7 @@ jobs:
           - 10
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm install -D eslint@${{ matrix.eslint-version }}
       - run: pnpm typecheck
 
@@ -106,5 +126,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: ./.github/actions/prepare
+      - uses: ./.github/actions/setup
       - run: pnpm site:typecheck
