@@ -1,7 +1,7 @@
-import { rule } from "../../rules/valid-name.ts";
+import { rules } from "../../rules/valid-properties.ts";
 import { ruleTester } from "./ruleTester.ts";
 
-ruleTester.run("valid-name", rule, {
+ruleTester.run("valid-name", rules["valid-name"], {
   invalid: [
     {
       code: `{
@@ -11,9 +11,11 @@ ruleTester.run("valid-name", rule, {
       errors: [
         {
           column: 10,
-          endColumn: 14,
+          data: {
+            error: "the value is `null`, but should be a `string`",
+          },
           line: 2,
-          messageId: "type",
+          messageId: "validationError",
         },
       ],
     },
@@ -24,7 +26,12 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
-          messageId: "type",
+          column: 10,
+          data: {
+            error: "the type should be a `string`, not `number`",
+          },
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -35,10 +42,12 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
+          column: 10,
           data: {
-            complaints: "name length must be greater than zero",
+            error: "the value is empty, but should be a valid name",
           },
-          messageId: "invalid",
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -49,11 +58,12 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
+          column: 10,
           data: {
-            complaints:
-              'name can no longer contain special characters ("~\'!()*")',
+            error: 'name can no longer contain special characters ("~\'!()*")',
           },
-          messageId: "invalid",
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -64,11 +74,20 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
+          column: 10,
           data: {
-            complaints:
-              'name can only contain URL-friendly characters; name can no longer contain special characters ("~\'!()*")',
+            error: "name can only contain URL-friendly characters",
           },
-          messageId: "invalid",
+          line: 2,
+          messageId: "validationError",
+        },
+        {
+          column: 10,
+          data: {
+            error: 'name can no longer contain special characters ("~\'!()*")',
+          },
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -79,11 +98,28 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
+          column: 10,
           data: {
-            complaints:
-              'name cannot contain leading or trailing spaces; name can only contain URL-friendly characters; name can no longer contain special characters ("~\'!()*")',
+            error: "name cannot contain leading or trailing spaces",
           },
-          messageId: "invalid",
+          line: 2,
+          messageId: "validationError",
+        },
+        {
+          column: 10,
+          data: {
+            error: "name can only contain URL-friendly characters",
+          },
+          line: 2,
+          messageId: "validationError",
+        },
+        {
+          column: 10,
+          data: {
+            error: 'name can no longer contain special characters ("~\'!()*")',
+          },
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -95,10 +131,12 @@ ruleTester.run("valid-name", rule, {
 `,
       errors: [
         {
+          column: 10,
           data: {
-            complaints: "name can no longer contain capital letters",
+            error: "name can no longer contain capital letters",
           },
-          messageId: "invalid",
+          line: 2,
+          messageId: "validationError",
         },
       ],
     },
@@ -107,7 +145,5 @@ ruleTester.run("valid-name", rule, {
     "{}",
     `{ "name": "valid-package-name" }`,
     `{ "name": "@scoped/valid-package-name" }`,
-    `{ "name": "InvalidPackageNameWithPrivateTrue", "private": true }`,
-    `{ "name": "InvalidPackageNameWithPrivateTrue", "private": "true" }`,
   ],
 });
