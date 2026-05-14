@@ -27,7 +27,7 @@ jobs:
       - run: pnpm dedupe --check --prefer-offline
 
   engines_check:
-    name: Verify Engines Compatibility
+    name: Engines Compatibility (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
