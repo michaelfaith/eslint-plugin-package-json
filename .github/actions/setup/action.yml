@@ -21,7 +21,7 @@ runs:
     # - run: pnpm config set --location=project strictEngines true
     #   if: ${{ inputs.strict-engines == 'true' }}
     #   shell: bash
-    - run: pnpm install --strict-engines
+    - run: pnpm install --config.strictEngines=true
       if: ${{ inputs.strict-engines == 'true' }}
       shell: bash
     - run: pnpm install --frozen-lockfile
