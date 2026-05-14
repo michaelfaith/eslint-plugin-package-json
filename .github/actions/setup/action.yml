@@ -19,7 +19,7 @@ runs:
       with:
         cache: pnpm
         node-version: ${{ inputs.node-version }}
-    - run: pnpm config set strictPeerDependencies true
+    - run: pnpm config set --location=project strictPeerDependencies true
       if: ${{ inputs.strict-peers == 'true' }}
       shell: bash
     - run: pnpm install --frozen-lockfile
