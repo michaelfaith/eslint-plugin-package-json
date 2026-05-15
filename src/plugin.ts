@@ -24,7 +24,6 @@ import { rule as validName } from "./rules/valid-name.ts";
 import { rule as validPeerDependenciesMetaRelationship } from "./rules/valid-peerDependenciesMeta-relationship.ts";
 import { rules as basicValidRules } from "./rules/valid-properties.ts";
 import { rule as validRepositoryDirectory } from "./rules/valid-repository-directory.ts";
-import { rule as validVersion } from "./rules/valid-version.ts";
 
 const require = createRequire(import.meta.url);
 
@@ -50,7 +49,6 @@ const rules: Record<string, PackageJsonRuleModule> = {
   "valid-peerDependenciesMeta-relationship":
     validPeerDependenciesMetaRelationship,
   "valid-repository-directory": validRepositoryDirectory,
-  "valid-version": validVersion,
 };
 
 const recommendedRules = {

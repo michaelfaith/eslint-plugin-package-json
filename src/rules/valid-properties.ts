@@ -31,6 +31,7 @@ import {
   validateScripts,
   validateSideEffects,
   validateType,
+  validateVersion,
   validateWorkspaces,
 } from "package-json-validator";
 
@@ -89,6 +90,7 @@ const properties = [
   ["scripts", validateScripts],
   ["sideEffects", validateSideEffects],
   ["type", validateType],
+  ["version", validateVersion],
   ["workspaces", validateWorkspaces],
 ] satisfies [string, ValidationFunction | ValidPropertyOptions][];
 
