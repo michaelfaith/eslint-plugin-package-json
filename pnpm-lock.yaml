@@ -148,7 +148,7 @@ importers:
         specifier: 0.18.0
         version: 0.18.0(prettier@3.8.0)
       pretty-quick:
-        specifier: ^4.2.2
+        specifier: 4.2.2
         version: 4.2.2(prettier@3.8.0)
       sharp:
         specifier: 0.34.5
