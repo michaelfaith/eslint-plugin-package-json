@@ -1,6 +1,7 @@
 import starlight from "@astrojs/starlight";
 import starlightCatppuccin from "@catppuccin/starlight";
 import { defineConfig } from "astro/config";
+import starlightAutoSidebar from "starlight-auto-sidebar";
 
 const site = "https://eslint-plugin-package-json.dev";
 
@@ -18,13 +19,13 @@ export default defineConfig({
         dark: "./src/assets/logo/logo-dark.svg",
         light: "./src/assets/logo/logo-light.svg",
       },
-      plugins: [starlightCatppuccin()],
+      plugins: [starlightAutoSidebar(), starlightCatppuccin()],
       sidebar: [
         { label: "Getting Started", slug: "getting-started" },
         { label: "Rule List", slug: "rule-list" },
         {
           collapsed: true,
-          items: [{ autogenerate: { directory: "rules" } }],
+          items: [{ autogenerate: { collapsed: true, directory: "rules" } }],
           label: "Rules",
         },
       ],
