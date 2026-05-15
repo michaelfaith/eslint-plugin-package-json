@@ -1,7 +1,7 @@
-import { rule } from "../../rules/valid-version.ts";
+import { rules } from "../../rules/valid-properties.ts";
 import { ruleTester } from "./ruleTester.ts";
 
-ruleTester.run("valid-version", rule, {
+ruleTester.run("valid-version", rules["valid-version"], {
   invalid: [
     {
       code: `{
@@ -11,35 +11,91 @@ ruleTester.run("valid-version", rule, {
       errors: [
         {
           column: 13,
-          endColumn: 17,
+          data: {
+            error: "the value is `null`, but should be a `string`",
+          },
           line: 2,
-          messageId: "type",
+          messageId: "validationError",
         },
       ],
     },
     {
       code: `{ "version": 123 }`,
-      errors: [{ messageId: "type" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the type should be a `string`, not `number`",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
     {
       code: `{ "version": "" }`,
-      errors: [{ messageId: "invalid" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the value is empty, but should be a valid version",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
     {
       code: `{ "version": "latest" }`,
-      errors: [{ messageId: "invalid" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the value is not a valid semver version",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
     {
       code: `{ "version": "?!" }`,
-      errors: [{ messageId: "invalid" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the value is not a valid semver version",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
     {
       code: `{ "version": "1" }`,
-      errors: [{ messageId: "invalid" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the value is not a valid semver version",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
     {
       code: `{ "version": "1.2" }`,
-      errors: [{ messageId: "invalid" }],
+      errors: [
+        {
+          column: 14,
+          data: {
+            error: "the value is not a valid semver version",
+          },
+          line: 1,
+          messageId: "validationError",
+        },
+      ],
     },
   ],
   valid: [
