@@ -155,7 +155,7 @@ importers:
         version: 0.34.5
       starlight-auto-sidebar:
         specifier: ^0.4.0
-        version: 0.4.0(@astrojs/starlight@0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.2)(yaml@2.8.4))(typescript@6.0.2))
+        version: 0.4.0(@astrojs/starlight@0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.3)(yaml@2.8.4))(typescript@6.0.2))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(oxc-resolver@11.19.1(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0))(typescript@6.0.2)
@@ -7631,9 +7631,9 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  starlight-auto-sidebar@0.4.0(@astrojs/starlight@0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.2)(yaml@2.8.4))(typescript@6.0.2)):
+  starlight-auto-sidebar@0.4.0(@astrojs/starlight@0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.3)(yaml@2.8.4))(typescript@6.0.2)):
     dependencies:
-      '@astrojs/starlight': 0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.2)(yaml@2.8.4))(typescript@6.0.2)
+      '@astrojs/starlight': 0.39.0(astro@6.3.0(@types/node@24.12.0)(jiti@2.7.0)(rollup@4.60.3)(yaml@2.8.4))(typescript@6.0.2)
       github-slugger: 2.0.0
 
   std-env@4.1.0: {}
