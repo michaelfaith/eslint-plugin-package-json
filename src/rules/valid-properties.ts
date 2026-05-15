@@ -22,6 +22,7 @@ import {
   validateLicense,
   validateMain,
   validateMan,
+  validateName,
   validateOs,
   validatePackageManager,
   validatePeerDependenciesMeta,
@@ -78,6 +79,7 @@ const properties = [
   ["main", validateMain],
   ["man", validateMan],
   ["module", validateMain], // Reuse `validateMain` for `module`
+  ["name", validateName],
   ["optionalDependencies", validateDependencies],
   ["os", validateOs],
   ["packageManager", validatePackageManager],
