@@ -55,9 +55,6 @@
     "test": "vitest",
     "typecheck": "tsc"
   },
-  "lint-staged": {
-    "*": "prettier --ignore-unknown --write"
-  },
   "dependencies": {
     "@altano/repository-tools": "^2.0.1",
     "change-case": "^5.4.4",
@@ -106,6 +103,7 @@
     "prettier-plugin-packagejson": "3.0.0",
     "prettier-plugin-sentences-per-line": "0.2.3",
     "prettier-plugin-sh": "0.18.0",
+    "pretty-quick": "^4.2.2",
     "sharp": "0.34.5",
     "tsdown": "0.22.0",
     "typescript": "6.0.2",
