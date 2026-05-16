@@ -23,6 +23,7 @@ export const propertyConfig: [
   ["exports", { ignorePrivateDefault: true, isRecommended: true }],
   ["files", { ignorePrivateDefault: true, isRecommended: true }],
   ["funding"],
+  ["gypfile"],
   ["homepage", { ignorePrivateDefault: true }],
   ["keywords", { ignorePrivateDefault: true }],
   ["libc"],
