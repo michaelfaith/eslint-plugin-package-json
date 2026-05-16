@@ -12,7 +12,6 @@
     "typescriptreact",
     "yaml"
   ],
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
   "typescript.tsdk": "node_modules/typescript/lib",
   "npm.packageManager": "pnpm"
 }
