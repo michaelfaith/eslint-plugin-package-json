@@ -11,6 +11,7 @@ export const propertyConfig: [
   ["bin"],
   ["bugs", { ignorePrivateDefault: true }],
   ["bundleDependencies"],
+  ["config"],
   ["contributors"],
   ["cpu"],
   ["dependencies"],
