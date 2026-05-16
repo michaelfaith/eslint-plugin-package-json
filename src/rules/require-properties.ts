@@ -25,6 +25,7 @@ export const propertyConfig: [
   ["funding"],
   ["homepage", { ignorePrivateDefault: true }],
   ["keywords", { ignorePrivateDefault: true }],
+  ["libc"],
   ["license", { ignorePrivateDefault: true, isRecommended: true }],
   ["main"],
   ["man"],
