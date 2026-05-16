@@ -9,6 +9,7 @@ export const propertyConfig: [
 ][] = [
   ["author"],
   ["bin"],
+  ["browser"],
   ["bugs", { ignorePrivateDefault: true }],
   ["bundleDependencies"],
   ["config"],
