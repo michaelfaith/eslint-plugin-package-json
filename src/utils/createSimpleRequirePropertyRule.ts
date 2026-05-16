@@ -99,6 +99,7 @@ export const createSimpleRequirePropertyRule = (
         category,
         description: `Requires the \`${propertyName}\` property to be present.`,
         recommended: isRecommended,
+        ruleGroup: "require-properties",
       },
       fixable: fixValue === undefined ? undefined : "code",
       messages: {

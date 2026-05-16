@@ -85,6 +85,7 @@ export const createSimpleValidPropertyRule = (
         category: "Best Practices",
         description: `Enforce that the \`${propertyName}\`${aliases.length ? ` (also ${aliases.map((alias) => `\`${alias}\``).join(", ")})` : ""} property is valid.`,
         recommended: true,
+        ruleGroup: "valid-properties",
       },
       messages: {
         validationError: `Invalid ${propertyName}: {{ error }}`,

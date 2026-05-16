@@ -53,6 +53,8 @@ export interface PackageJsonRuleModule<
     defaultOptions?: NoInfer<Options>;
     docs?: Rule.RuleMetaData["docs"] & {
       category?: string;
+      /** An optional route segment to group this rule under */
+      ruleGroup?: string;
     };
     schema?: Schema;
   };
@@ -80,6 +82,7 @@ export function createRule<
 >(
   rule: PackageJsonRuleModule<_OptionsResolved, Schema> & { name: string },
 ): PackageJsonRuleModule<_OptionsResolved, Schema> {
+  const ruleGroup = rule.meta.docs?.ruleGroup;
   return {
     create(context) {
       if (!isPackageJson(context.filename)) {
@@ -92,7 +95,7 @@ export function createRule<
       ...rule.meta,
       docs: {
         ...rule.meta.docs,
-        url: `https://eslint-plugin-package-json.dev/rules/${rule.name}`,
+        url: `https://eslint-plugin-package-json.dev/rules/${ruleGroup ? `${ruleGroup}/` : ""}${rule.name}`,
       },
     },
   };
