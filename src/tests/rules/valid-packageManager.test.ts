@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
+ruleTester.run('valid-packageManager', rules['valid-packageManager'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -45,7 +45,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the value is empty, but should be the name and version of a package manager (e.g. "pnpm@10.3.0")',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -61,7 +61,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the value should be in the form "name@version" (e.g. "pnpm@10.3.0")',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -77,7 +77,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the package manager "invalid" is not supported. Supported package managers are: npm, pnpm, yarn, bun, deno',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -93,7 +93,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the version "invalid" is not valid. It should be a valid semver version (optionally with a hash).',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -109,7 +109,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the version "^10.3.0" is not valid. It should be a valid semver version (optionally with a hash).',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -125,7 +125,7 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the package manager "unsupported" is not supported. Supported package managers are: npm, pnpm, yarn, bun, deno',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
@@ -133,13 +133,13 @@ ruleTester.run("valid-packageManager", rules["valid-packageManager"], {
               'the version "invalid" is not valid. It should be a valid semver version (optionally with a hash).',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "packageManager": "npm@11.1.0" }`,
     `{ "packageManager": "pnpm@10.3.0" }`,
     `{ "packageManager": "yarn@4.2.3" }`,

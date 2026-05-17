@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-exports", rules["valid-exports"], {
+ruleTester.run('valid-exports', rules['valid-exports'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be an `object` or `string`",
+            error: 'the value is `null`, but should be an `object` or `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
       errors: [
         {
           data: {
-            error: "the type should be `object` or `string`, not `number`",
+            error: 'the type should be `object` or `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
       errors: [
         {
           data: {
-            error: "the value is empty, but should be an entry point path",
+            error: 'the value is empty, but should be an entry point path',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -62,7 +62,7 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
               'the value of "./invalid" should be either an entry point path or an object of export conditions',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -80,7 +80,7 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
               'the value of "./invalid" is empty, but should be an entry point path',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -95,10 +95,10 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
         {
           data: {
             error:
-              "property 0 has an empty key, but should be an export condition",
+              'property 0 has an empty key, but should be an export condition',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -114,24 +114,24 @@ ruleTester.run("valid-exports", rules["valid-exports"], {
         {
           data: {
             error:
-              "property 0 has an empty key, but should be an export condition",
+              'property 0 has an empty key, but should be an export condition',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "property 1 has an empty key, but should be an export condition",
+              'property 1 has an empty key, but should be an export condition',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "exports": "./index.js" }`,
     `{ "exports": { ".": "./index.js", "./secondary": "./secondary.js" } }`,
     `{ "exports": { ".": { "types": "./index.d.ts", "default": "./index.js" } } }`,

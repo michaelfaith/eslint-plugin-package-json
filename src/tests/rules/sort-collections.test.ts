@@ -1,11 +1,11 @@
-import { rule } from "../../rules/sort-collections.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/sort-collections.ts';
+import { ruleTester } from './ruleTester.ts';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
-ruleTester.run("sort-collections", rule, {
+ruleTester.run('sort-collections', rule, {
   invalid: [
     {
       code: `{
@@ -16,11 +16,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "build": "webpack",
@@ -39,11 +39,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "prebuild": "echo test",
@@ -62,11 +62,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "build": "echo test",
@@ -83,11 +83,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "prebuild": "echo test",
@@ -104,11 +104,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "postbuild": "echo test",
@@ -125,11 +125,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "scripts" },
-          messageId: "unsortedScripts",
+          data: { key: 'scripts' },
+          messageId: 'unsortedScripts',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"scripts": {
     "preinstall": "echo test",
@@ -150,11 +150,11 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "exports" },
-          messageId: "unsortedKeys",
+          data: { key: 'exports' },
+          messageId: 'unsortedKeys',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
       output: `{
 	"exports": {
     ".": {
@@ -177,12 +177,12 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "pnpm.patchedDependencies" },
-          messageId: "unsortedKeys",
+          data: { key: 'pnpm.patchedDependencies' },
+          messageId: 'unsortedKeys',
         },
       ],
-      filename: "package.json",
-      options: [["pnpm.patchedDependencies"]],
+      filename: 'package.json',
+      options: [['pnpm.patchedDependencies']],
       output: `{
 	"pnpm": {
 		"patchedDependencies": {
@@ -205,12 +205,12 @@ ruleTester.run("sort-collections", rule, {
 }`,
       errors: [
         {
-          data: { key: "pnpm.peerDependencyRules.allowedVersions" },
-          messageId: "unsortedKeys",
+          data: { key: 'pnpm.peerDependencyRules.allowedVersions' },
+          messageId: 'unsortedKeys',
         },
       ],
-      filename: "package.json",
-      options: [["pnpm.peerDependencyRules.allowedVersions"]],
+      filename: 'package.json',
+      options: [['pnpm.peerDependencyRules.allowedVersions']],
       output: `{
 	"pnpm": {
 		"peerDependencyRules": {
@@ -232,7 +232,7 @@ ruleTester.run("sort-collections", rule, {
 		"watch": "webpack-dev-server"
 	}
 }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     // ignore if custom include rule
     {
@@ -242,15 +242,15 @@ ruleTester.run("sort-collections", rule, {
 		"watch": "webpack-dev-server"
 	}
 }`,
-      filename: "package.json",
-      options: [["devDependencies"]],
+      filename: 'package.json',
+      options: [['devDependencies']],
     },
     {
       code: `{
 		"scripts": { "watch": "out of order...", "build": "but okay" }
 }`,
-      filename: "not-a-package.json",
-      options: [["devDependencies"]],
+      filename: 'not-a-package.json',
+      options: [['devDependencies']],
     },
     {
       code: `{
@@ -336,7 +336,7 @@ ruleTester.run("sort-collections", rule, {
 		}
 	}
 }`,
-      options: [["pnpm.peerDependencyRules.allowedVersions"]],
+      options: [['pnpm.peerDependencyRules.allowedVersions']],
     },
 
     {
@@ -350,7 +350,7 @@ ruleTester.run("sort-collections", rule, {
     }
   ]
 }`,
-      options: [["foo.bar"]],
+      options: [['foo.bar']],
     },
     {
       code: `{
@@ -363,7 +363,7 @@ ruleTester.run("sort-collections", rule, {
     }
   ]
 }`,
-      options: [["foo.0.bar"]],
+      options: [['foo.0.bar']],
     },
   ],
 });

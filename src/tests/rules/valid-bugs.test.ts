@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-bugs", rules["valid-bugs"], {
+ruleTester.run('valid-bugs', rules['valid-bugs'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
         {
           data: {
             error:
-              "the value should be either a string URL or an object with `email` and / or `url` properties",
+              'the value should be either a string URL or an object with `email` and / or `url` properties',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -28,10 +28,10 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
         {
           data: {
             error:
-              "the value should be either a string URL or an object with `email` and / or `url` properties",
+              'the value should be either a string URL or an object with `email` and / or `url` properties',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -44,10 +44,10 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
         {
           data: {
             error:
-              "the value should be either a string URL or an object with `email` and / or `url` properties",
+              'the value should be either a string URL or an object with `email` and / or `url` properties',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -59,10 +59,10 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
       errors: [
         {
           data: {
-            error: "the value should be a URL",
+            error: 'the value should be a URL',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -77,10 +77,10 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
         {
           data: {
             error:
-              "the object should have at least one of these properties: email, url",
+              'the object should have at least one of these properties: email, url',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
@@ -88,7 +88,7 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
               'unexpected property "invalid". Only "email" and "url" are allowed',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -103,17 +103,17 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
       errors: [
         {
           data: {
-            error: "the value of `email` should be a string",
+            error: 'the value of `email` should be a string',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "the value of `url` should be a string",
+            error: 'the value of `url` should be a string',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -128,17 +128,17 @@ ruleTester.run("valid-bugs", rules["valid-bugs"], {
       errors: [
         {
           data: {
-            error: "the value of `email` should be a valid email address",
+            error: 'the value of `email` should be a valid email address',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "the value of `url` should be a valid URL",
+            error: 'the value of `url` should be a valid URL',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },

@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-name", rules["valid-name"], {
+ruleTester.run('valid-name', rules['valid-name'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -28,10 +28,10 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -44,10 +44,10 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "the value is empty, but should be a valid name",
+            error: 'the value is empty, but should be a valid name',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -63,7 +63,7 @@ ruleTester.run("valid-name", rules["valid-name"], {
             error: 'name can no longer contain special characters ("~\'!()*")',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -76,10 +76,10 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "name can only contain URL-friendly characters",
+            error: 'name can only contain URL-friendly characters',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           column: 10,
@@ -87,7 +87,7 @@ ruleTester.run("valid-name", rules["valid-name"], {
             error: 'name can no longer contain special characters ("~\'!()*")',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -100,18 +100,18 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "name cannot contain leading or trailing spaces",
+            error: 'name cannot contain leading or trailing spaces',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           column: 10,
           data: {
-            error: "name can only contain URL-friendly characters",
+            error: 'name can only contain URL-friendly characters',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           column: 10,
@@ -119,7 +119,7 @@ ruleTester.run("valid-name", rules["valid-name"], {
             error: 'name can no longer contain special characters ("~\'!()*")',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -133,16 +133,16 @@ ruleTester.run("valid-name", rules["valid-name"], {
         {
           column: 10,
           data: {
-            error: "name can no longer contain capital letters",
+            error: 'name can no longer contain capital letters',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "name": "valid-package-name" }`,
     `{ "name": "@scoped/valid-package-name" }`,
   ],

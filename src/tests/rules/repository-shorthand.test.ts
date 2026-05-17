@@ -1,7 +1,7 @@
-import { rule } from "../../rules/repository-shorthand.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/repository-shorthand.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("repository-shorthand", rule, {
+ruleTester.run('repository-shorthand', rule, {
   invalid: [
     {
       code: `{ "repository": "" }`,
@@ -9,7 +9,7 @@ ruleTester.run("repository-shorthand", rule, {
         {
           column: 17,
           line: 1,
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
     },
@@ -19,7 +19,7 @@ ruleTester.run("repository-shorthand", rule, {
         {
           column: 17,
           line: 1,
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
     },
@@ -29,7 +29,7 @@ ruleTester.run("repository-shorthand", rule, {
         {
           column: 17,
           line: 1,
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
     },
@@ -41,7 +41,7 @@ ruleTester.run("repository-shorthand", rule, {
         {
           column: 19,
           line: 2,
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
       output: `{
@@ -59,7 +59,7 @@ ruleTester.run("repository-shorthand", rule, {
         {
           column: 19,
           line: 2,
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
       output: `{
@@ -75,7 +75,7 @@ ruleTester.run("repository-shorthand", rule, {
 			}`,
       errors: [
         {
-          messageId: "preferObject",
+          messageId: 'preferObject',
         },
       ],
       output: `{
@@ -94,11 +94,11 @@ ruleTester.run("repository-shorthand", rule, {
 			}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "github:michaelfaith/eslint-plugin-package-json"
 			}`,
@@ -112,11 +112,11 @@ ruleTester.run("repository-shorthand", rule, {
 			}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "github:michaelfaith/eslint-plugin-package-json"
 			}`,
@@ -130,11 +130,11 @@ ruleTester.run("repository-shorthand", rule, {
 			}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "github:michaelfaith/eslint-plugin-package-json"
 			}`,
@@ -145,11 +145,11 @@ ruleTester.run("repository-shorthand", rule, {
 			}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "github:eslint/eslint"
 			}`,
@@ -163,11 +163,11 @@ ruleTester.run("repository-shorthand", rule, {
 		}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "gitlab:michaelfaith/eslint-plugin-package-json"
 		}`,
@@ -181,11 +181,11 @@ ruleTester.run("repository-shorthand", rule, {
 		}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "bitbucket:eslint/rewrite"
 		}`,
@@ -199,11 +199,11 @@ ruleTester.run("repository-shorthand", rule, {
 		}`,
       errors: [
         {
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
         },
       ],
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
       output: `{
 				"repository": "gist:1234567890abcdef"
 		}`,
@@ -253,19 +253,19 @@ ruleTester.run("repository-shorthand", rule, {
 					"url": "https://github.com/michaelfaith/eslint-plugin-package-json"
 				}
 			}`,
-      options: [{ form: "object" }],
+      options: [{ form: 'object' }],
     },
     {
       code: `{
 				"repository": null,
 			}`,
-      options: [{ form: "shorthand" }],
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": 123,
 			}`,
-      options: [{ form: "shorthand" }],
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
@@ -275,8 +275,8 @@ ruleTester.run("repository-shorthand", rule, {
 					"directory": "packages/react"
 				}
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
@@ -284,43 +284,43 @@ ruleTester.run("repository-shorthand", rule, {
 					"url": "https://github.com/facebook/react.git",
 				}
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": "browserslist/browserslist"
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": "github:browserslist/browserslist"
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": "gist:1234567890abcdef"
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": "bitbucket:browserslist/browserslist"
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
 				"repository": "gitlab:browserslist/browserslist"
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
@@ -328,8 +328,8 @@ ruleTester.run("repository-shorthand", rule, {
 					"repository": "https://github.com/a/b"
 				}
 			}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
     {
       code: `{
@@ -338,8 +338,8 @@ ruleTester.run("repository-shorthand", rule, {
 					"url": "https://gibberish.org/eslint/rewrite"
 				}
 		}`,
-      filename: "package.json",
-      options: [{ form: "shorthand" }],
+      filename: 'package.json',
+      options: [{ form: 'shorthand' }],
     },
   ],
 });

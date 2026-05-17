@@ -1,7 +1,7 @@
-import { rule } from "../../rules/valid-peerDependenciesMeta-relationship.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/valid-peerDependenciesMeta-relationship.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
+ruleTester.run('valid-peerDependenciesMeta-relationship', rule, {
   invalid: [
     {
       code: `{
@@ -15,12 +15,12 @@ ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
       errors: [
         {
           column: 3,
-          data: { dependencyName: "some-package" },
+          data: { dependencyName: 'some-package' },
           line: 3,
-          messageId: "unnecessaryPeerDependency",
+          messageId: 'unnecessaryPeerDependency',
           suggestions: [
             {
-              messageId: "removePeerDependencyMeta",
+              messageId: 'removePeerDependencyMeta',
               output: `{
 	"peerDependenciesMeta": {
 \t\t
@@ -47,12 +47,12 @@ ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
       errors: [
         {
           column: 3,
-          data: { dependencyName: "some-package" },
+          data: { dependencyName: 'some-package' },
           line: 6,
-          messageId: "unnecessaryPeerDependency",
+          messageId: 'unnecessaryPeerDependency',
           suggestions: [
             {
-              messageId: "removePeerDependencyMeta",
+              messageId: 'removePeerDependencyMeta',
               output: `{
 	"peerDependencies": {
 		"another-package": "^1.0.0"
@@ -85,12 +85,12 @@ ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
       errors: [
         {
           column: 3,
-          data: { dependencyName: "another-package" },
+          data: { dependencyName: 'another-package' },
           line: 6,
-          messageId: "unnecessaryPeerDependency",
+          messageId: 'unnecessaryPeerDependency',
           suggestions: [
             {
-              messageId: "removePeerDependencyMeta",
+              messageId: 'removePeerDependencyMeta',
               output: `{
 	"peerDependencies": {
 		"some-package": "^1.0.0"
@@ -110,7 +110,7 @@ ruleTester.run("valid-peerDependenciesMeta-relationship", rule, {
     },
   ],
   valid: [
-    "{}",
+    '{}',
     '{ "peerDependencies": [] }',
     '{ "peerDependenciesMeta": [] }',
     '{ "peerDependencies": { 123: "^1.0.0" } }',

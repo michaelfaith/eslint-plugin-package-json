@@ -1,18 +1,18 @@
-import { kebabCase } from "change-case";
-import { AST as JsonAST } from "jsonc-eslint-parser";
+import { kebabCase } from 'change-case';
+import { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 // See https://docs.npmjs.com/cli/v11/using-npm/scripts
-const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set(["prepublishOnly"]);
+const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set(['prepublishOnly']);
 
 export const rule = createRule({
   create(context) {
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=scripts]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=scripts]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type === "JSONObjectExpression") {
+        if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
             const keyNode = property.key as JsonAST.JSONStringLiteral;
             const key = keyNode.value;
@@ -21,15 +21,15 @@ export const rule = createRule({
             }
 
             const kebabCaseKey = key
-              .split(":")
+              .split(':')
               .map((segment) => kebabCase(segment))
-              .join(":");
+              .join(':');
             if (kebabCaseKey !== key) {
               context.report({
                 data: {
                   property: key,
                 },
-                messageId: "invalidCase",
+                messageId: 'invalidCase',
                 node: keyNode,
                 suggest: [
                   {
@@ -42,7 +42,7 @@ export const rule = createRule({
                         JSON.stringify(kebabCaseKey),
                       );
                     },
-                    messageId: "convertToKebabCase",
+                    messageId: 'convertToKebabCase',
                   },
                 ],
               });
@@ -54,17 +54,17 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Stylistic",
+      category: 'Stylistic',
       description:
-        "Enforce that names for `scripts` are in kebab case (optionally separated by colons).",
+        'Enforce that names for `scripts` are in kebab case (optionally separated by colons).',
     },
     hasSuggestions: true,
     messages: {
-      convertToKebabCase: "Convert {{ property }} to kebab case.",
-      invalidCase: "Script name {{ property }} should be in kebab case.",
+      convertToKebabCase: 'Convert {{ property }} to kebab case.',
+      invalidCase: 'Script name {{ property }} should be in kebab case.',
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "scripts-name-casing",
+  name: 'scripts-name-casing',
 });

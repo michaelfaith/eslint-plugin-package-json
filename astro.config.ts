@@ -1,9 +1,9 @@
-import starlight from "@astrojs/starlight";
-import starlightCatppuccin from "@catppuccin/starlight";
-import { defineConfig } from "astro/config";
-import starlightAutoSidebar from "starlight-auto-sidebar";
+import starlight from '@astrojs/starlight';
+import starlightCatppuccin from '@catppuccin/starlight';
+import { defineConfig } from 'astro/config';
+import starlightAutoSidebar from 'starlight-auto-sidebar';
 
-const site = "https://eslint-plugin-package-json.dev";
+const site = 'https://eslint-plugin-package-json.dev';
 
 export default defineConfig({
   experimental: {
@@ -12,42 +12,42 @@ export default defineConfig({
   integrations: [
     starlight({
       components: {
-        Head: "./src/components/Head.astro",
+        Head: './src/components/Head.astro',
       },
-      favicon: "/images/favicon.svg",
+      favicon: '/images/favicon.svg',
       logo: {
-        dark: "./src/assets/logo/logo-dark.svg",
-        light: "./src/assets/logo/logo-light.svg",
+        dark: './src/assets/logo/logo-dark.svg',
+        light: './src/assets/logo/logo-light.svg',
       },
       plugins: [starlightAutoSidebar(), starlightCatppuccin()],
       sidebar: [
-        { label: "Getting Started", slug: "getting-started" },
-        { label: "Rule List", slug: "rule-list" },
+        { label: 'Getting Started', slug: 'getting-started' },
+        { label: 'Rule List', slug: 'rule-list' },
         {
           collapsed: true,
-          items: [{ autogenerate: { collapsed: true, directory: "rules" } }],
-          label: "Rules",
+          items: [{ autogenerate: { collapsed: true, directory: 'rules' } }],
+          label: 'Rules',
         },
       ],
       social: [
         {
-          href: "https://github.com/michaelfaith/eslint-plugin-package-json",
-          icon: "github",
-          label: "GitHub",
+          href: 'https://github.com/michaelfaith/eslint-plugin-package-json',
+          icon: 'github',
+          label: 'GitHub',
         },
       ],
-      title: "ESLint Plugin: Package JSON",
+      title: 'ESLint Plugin: Package JSON',
     }),
   ],
-  outDir: "./dist-site",
+  outDir: './dist-site',
   prefetch: {
-    defaultStrategy: "hover",
+    defaultStrategy: 'hover',
   },
-  publicDir: "./site/public",
-  root: "./site",
+  publicDir: './site/public',
+  root: './site',
   server: {
     port: 3000,
   },
   site,
-  srcDir: "./site/src",
+  srcDir: './site/src',
 });

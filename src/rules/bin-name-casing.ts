@@ -1,15 +1,15 @@
-import { kebabCase } from "change-case";
-import { AST as JsonAST } from "jsonc-eslint-parser";
+import { kebabCase } from 'change-case';
+import { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 export const rule = createRule({
   create(context) {
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type === "JSONObjectExpression") {
+        if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
             const key = property.key as JsonAST.JSONStringLiteral;
             const kebabCaseKey = kebabCase(key.value);
@@ -18,7 +18,7 @@ export const rule = createRule({
                 data: {
                   property: key.value,
                 },
-                messageId: "invalidCase",
+                messageId: 'invalidCase',
                 node: key,
                 suggest: [
                   {
@@ -31,7 +31,7 @@ export const rule = createRule({
                         JSON.stringify(kebabCaseKey),
                       );
                     },
-                    messageId: "convertToKebabCase",
+                    messageId: 'convertToKebabCase',
                   },
                 ],
               });
@@ -43,16 +43,16 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Stylistic",
-      description: "Enforce that names for bin properties are in kebab case.",
+      category: 'Stylistic',
+      description: 'Enforce that names for bin properties are in kebab case.',
     },
     hasSuggestions: true,
     messages: {
-      convertToKebabCase: "Convert {{ property }} to kebab case.",
-      invalidCase: "Command name {{ property }} should be in kebab case.",
+      convertToKebabCase: 'Convert {{ property }} to kebab case.',
+      invalidCase: 'Command name {{ property }} should be in kebab case.',
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "bin-name-casing",
+  name: 'bin-name-casing',
 });

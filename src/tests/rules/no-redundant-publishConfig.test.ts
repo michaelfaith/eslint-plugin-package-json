@@ -1,7 +1,7 @@
-import { rule } from "../../rules/no-redundant-publishConfig.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/no-redundant-publishConfig.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("no-redundant-publishConfig", rule, {
+ruleTester.run('no-redundant-publishConfig', rule, {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("no-redundant-publishConfig", rule, {
       errors: [
         {
           line: 3,
-          messageId: "redundantAccess",
+          messageId: 'redundantAccess',
           suggestions: [
             {
-              messageId: "removeAccess",
+              messageId: 'removeAccess',
               output: `{
 	"name": "my-package",
 	"publishConfig": {  }
@@ -32,10 +32,10 @@ ruleTester.run("no-redundant-publishConfig", rule, {
       errors: [
         {
           line: 3,
-          messageId: "redundantAccess",
+          messageId: 'redundantAccess',
           suggestions: [
             {
-              messageId: "removeAccess",
+              messageId: 'removeAccess',
               output: `{
 	"name": "my-package",
 	"publishConfig": {  }
@@ -56,10 +56,10 @@ ruleTester.run("no-redundant-publishConfig", rule, {
       errors: [
         {
           line: 4,
-          messageId: "redundantAccess",
+          messageId: 'redundantAccess',
           suggestions: [
             {
-              messageId: "removeAccess",
+              messageId: 'removeAccess',
               output: `{
 	"name": "my-package",
 	"publishConfig": {
@@ -83,10 +83,10 @@ ruleTester.run("no-redundant-publishConfig", rule, {
       errors: [
         {
           line: 5,
-          messageId: "redundantAccess",
+          messageId: 'redundantAccess',
           suggestions: [
             {
-              messageId: "removeAccess",
+              messageId: 'removeAccess',
               output: `{
 	"name": "test",
 	"version": "1.0.0",

@@ -1,10 +1,10 @@
 name: 🚀 Feature
 description: Request that a new feature be added or an existing feature improved
 
-title: "🚀 Feature: <short description of the feature>"
+title: '🚀 Feature: <short description of the feature>'
 
 labels:
-  - "type: feature"
+  - 'type: feature'
 
 body:
   - attributes:

@@ -1,12 +1,12 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 function isImplicitFormat(
   node: JsonAST.JSONLiteral | JsonAST.JSONObjectExpression,
 ): boolean {
-  if (node.type === "JSONLiteral") {
+  if (node.type === 'JSONLiteral') {
     return true;
   }
 
@@ -14,19 +14,19 @@ function isImplicitFormat(
   // All keys are conditions: import, require, node, default, types, browser
   return node.properties.every(
     (property) =>
-      !isJSONStringLiteral(property.key) || !property.key.value.startsWith("."),
+      !isJSONStringLiteral(property.key) || !property.key.value.startsWith('.'),
   );
 }
 
 export const rule = createRule({
   create(context) {
-    const [{ prefer = "explicit" } = {}] = context.options;
+    const [{ prefer = 'explicit' } = {}] = context.options;
 
     function validateForExplicit(node: JsonAST.JSONProperty) {
       const { value } = node;
       if (
-        (value.type !== "JSONLiteral" &&
-          value.type !== "JSONObjectExpression") ||
+        (value.type !== 'JSONLiteral' &&
+          value.type !== 'JSONObjectExpression') ||
         !isImplicitFormat(value)
       ) {
         return;
@@ -37,20 +37,20 @@ export const rule = createRule({
           const valueText = context.sourceCode.getText(value);
           const fixedValue = JSON.stringify(
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- JSON.parse required for wrapping
-            { ".": JSON.parse(valueText) },
+            { '.': JSON.parse(valueText) },
             null,
             2,
           );
           return fixer.replaceText(value, fixedValue);
         },
-        messageId: "preferExplicit",
+        messageId: 'preferExplicit',
         node: value,
       });
     }
 
     function validateForImplicit(node: JsonAST.JSONProperty) {
       const { value } = node;
-      if (value.type !== "JSONObjectExpression") {
+      if (value.type !== 'JSONObjectExpression') {
         return;
       }
 
@@ -58,7 +58,7 @@ export const rule = createRule({
       if (
         value.properties.length !== 1 ||
         !isJSONStringLiteral(value.properties[0].key) ||
-        value.properties[0].key.value !== "."
+        value.properties[0].key.value !== '.'
       ) {
         return;
       }
@@ -70,7 +70,7 @@ export const rule = createRule({
           const fixedValue = JSON.stringify(JSON.parse(valueText), null, 2);
           return fixer.replaceText(value, fixedValue);
         },
-        messageId: "preferImplicit",
+        messageId: 'preferImplicit',
         node: value,
       });
     }
@@ -78,14 +78,14 @@ export const rule = createRule({
     return {
       JSONProperty(node) {
         if (
-          node.key.type !== "JSONLiteral" ||
-          node.key.value !== "exports" ||
-          node.parent.parent.parent.type !== "Program"
+          node.key.type !== 'JSONLiteral' ||
+          node.key.value !== 'exports' ||
+          node.parent.parent.parent.type !== 'Program'
         ) {
           return;
         }
 
-        if (prefer === "explicit") {
+        if (prefer === 'explicit') {
           validateForExplicit(node);
         } else {
           validateForImplicit(node);
@@ -94,14 +94,14 @@ export const rule = createRule({
     };
   },
   meta: {
-    defaultOptions: [{ prefer: "explicit" }],
+    defaultOptions: [{ prefer: 'explicit' }],
     docs: {
-      category: "Stylistic",
+      category: 'Stylistic',
       description:
-        "Enforce consistent format for the exports field (implicit or explicit subpaths).",
+        'Enforce consistent format for the exports field (implicit or explicit subpaths).',
       recommended: false,
     },
-    fixable: "code",
+    fixable: 'code',
     messages: {
       preferExplicit:
         'Prefer explicit subpaths format with "." key for single root export.',
@@ -113,15 +113,15 @@ export const rule = createRule({
         additionalProperties: false,
         properties: {
           prefer: {
-            description: "Specifies which exports format to enforce.",
-            enum: ["implicit", "explicit"],
-            type: "string",
+            description: 'Specifies which exports format to enforce.',
+            enum: ['implicit', 'explicit'],
+            type: 'string',
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "exports-subpaths-style",
+  name: 'exports-subpaths-style',
 });

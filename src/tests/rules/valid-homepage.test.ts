@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-homepage", rules["valid-homepage"], {
+ruleTester.run('valid-homepage', rules['valid-homepage'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-homepage", rules["valid-homepage"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-homepage", rules["valid-homepage"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-homepage", rules["valid-homepage"], {
       errors: [
         {
           data: {
-            error: "the value is empty, but should be a valid url",
+            error: 'the value is empty, but should be a valid url',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -56,16 +56,16 @@ ruleTester.run("valid-homepage", rules["valid-homepage"], {
       errors: [
         {
           data: {
-            error: "the value is not a valid url",
+            error: 'the value is not a valid url',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "homepage": "https://nin.com" }`,
     `{ "homepage": "http://gybe.com" }`,
   ],

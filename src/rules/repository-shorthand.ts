@@ -1,8 +1,8 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
-import { findPropertyWithKeyValue } from "../utils/findPropertyWithKeyValue.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 const providerRegexes = {
   bitbucket:
@@ -14,10 +14,10 @@ const providerRegexes = {
 type Provider = keyof typeof providerRegexes;
 
 const providerUrls = {
-  bitbucket: "https://bitbucket.org/",
-  gist: "https://gist.github.com/",
-  github: "https://github.com/",
-  gitlab: "https://gitlab.com/",
+  bitbucket: 'https://bitbucket.org/',
+  gist: 'https://gist.github.com/',
+  github: 'https://github.com/',
+  gitlab: 'https://gitlab.com/',
 } satisfies Record<Provider, string>;
 
 const providers = Object.keys(providerRegexes) as Provider[];
@@ -26,7 +26,7 @@ const isProvider = (value: string): value is Provider =>
   value in providerRegexes;
 
 const cleanUrl = (url: string, provider: Provider): string =>
-  url.replace(providerRegexes[provider], "").replace(/\.git$/, "");
+  url.replace(providerRegexes[provider], '').replace(/\.git$/, '');
 
 const getProviderFromUrl = (url: string) => {
   return providers.find((provider) => providerRegexes[provider].test(url));
@@ -39,8 +39,8 @@ const createShorthand = (url: string, provider: Provider): string => {
 
 const createUrl = (shorthand: string): string => {
   // Use the appropriate provider url if one is specified
-  if (shorthand.includes(":")) {
-    const [provider, repo] = shorthand.split(":");
+  if (shorthand.includes(':')) {
+    const [provider, repo] = shorthand.split(':');
     if (isProvider(provider)) {
       return `${providerUrls[provider]}${repo}`;
     }
@@ -52,7 +52,7 @@ const createUrl = (shorthand: string): string => {
 
 export const rule = createRule({
   create(context) {
-    const [{ form = "object" } = {}] = context.options;
+    const [{ form = 'object' } = {}] = context.options;
 
     function validateRepositoryForObject(node: JsonAST.JSONProperty) {
       if (isJSONStringLiteral(node.value)) {
@@ -60,7 +60,7 @@ export const rule = createRule({
           fix(fixer) {
             if (
               !isJSONStringLiteral(node.value) ||
-              node.value.value.split("/").filter(Boolean).length !== 2
+              node.value.value.split('/').filter(Boolean).length !== 2
             ) {
               return null;
             }
@@ -69,7 +69,7 @@ export const rule = createRule({
               node.value,
               JSON.stringify(
                 {
-                  type: "git",
+                  type: 'git',
                   url: createUrl(node.value.value),
                 },
                 null,
@@ -77,7 +77,7 @@ export const rule = createRule({
               ),
             );
           },
-          messageId: "preferObject",
+          messageId: 'preferObject',
           node: node.value,
         });
       }
@@ -95,7 +95,7 @@ export const rule = createRule({
                 JSON.stringify(createShorthand(value, provider)),
               );
             },
-            messageId: "preferShorthand",
+            messageId: 'preferShorthand',
             node: node.value,
           });
         }
@@ -103,29 +103,29 @@ export const rule = createRule({
         return;
       }
 
-      if (node.value.type !== "JSONObjectExpression") {
+      if (node.value.type !== 'JSONObjectExpression') {
         return;
       }
 
       const { properties } = node.value;
 
-      if (findPropertyWithKeyValue(properties, "directory")) {
+      if (findPropertyWithKeyValue(properties, 'directory')) {
         return;
       }
 
-      const typeProperty = findPropertyWithKeyValue(properties, "type");
+      const typeProperty = findPropertyWithKeyValue(properties, 'type');
       if (
-        typeProperty?.value.type !== "JSONLiteral" ||
-        typeProperty.value.value !== "git"
+        typeProperty?.value.type !== 'JSONLiteral' ||
+        typeProperty.value.value !== 'git'
       ) {
         return;
       }
 
-      const urlProperty = findPropertyWithKeyValue(properties, "url");
+      const urlProperty = findPropertyWithKeyValue(properties, 'url');
 
       if (
-        urlProperty?.value.type !== "JSONLiteral" ||
-        typeof urlProperty.value.value !== "string"
+        urlProperty?.value.type !== 'JSONLiteral' ||
+        typeof urlProperty.value.value !== 'string'
       ) {
         return;
       }
@@ -140,7 +140,7 @@ export const rule = createRule({
               JSON.stringify(createShorthand(url, provider)),
             );
           },
-          messageId: "preferShorthand",
+          messageId: 'preferShorthand',
           node: node.value,
         });
       }
@@ -149,14 +149,14 @@ export const rule = createRule({
     return {
       JSONProperty(node) {
         if (
-          node.key.type !== "JSONLiteral" ||
-          node.key.value !== "repository" ||
-          node.parent.parent.parent.type !== "Program"
+          node.key.type !== 'JSONLiteral' ||
+          node.key.value !== 'repository' ||
+          node.parent.parent.parent.type !== 'Program'
         ) {
           return;
         }
 
-        if (form === "shorthand") {
+        if (form === 'shorthand') {
           validateRepositoryForShorthand(node);
         } else {
           validateRepositoryForObject(node);
@@ -165,33 +165,33 @@ export const rule = createRule({
     };
   },
   meta: {
-    defaultOptions: [{ form: "object" }],
+    defaultOptions: [{ form: 'object' }],
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
-        "Enforce either object or shorthand declaration for repository.",
+        'Enforce either object or shorthand declaration for repository.',
       recommended: true,
     },
-    fixable: "code",
+    fixable: 'code',
     messages: {
-      preferObject: "Prefer an object locator for a repository.",
+      preferObject: 'Prefer an object locator for a repository.',
       preferShorthand:
-        "Prefer a shorthand locator for a supported repository provider.",
+        'Prefer a shorthand locator for a supported repository provider.',
     },
     schema: [
       {
         additionalProperties: false,
         properties: {
           form: {
-            description: "Specifies which repository form to enforce.",
-            enum: ["object", "shorthand"],
-            type: ["string"],
+            description: 'Specifies which repository form to enforce.',
+            enum: ['object', 'shorthand'],
+            type: ['string'],
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "repository-shorthand",
+  name: 'repository-shorthand',
 });

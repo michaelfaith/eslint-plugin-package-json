@@ -1,10 +1,10 @@
 name: 🐛 Bug
 description: Report a bug trying to run the code
 
-title: "🐛 Bug: <short description of the bug>"
+title: '🐛 Bug: <short description of the bug>'
 
 labels:
-  - "type: bug"
+  - 'type: bug'
 
 body:
   - type: checkboxes

@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-config", rules["valid-config"], {
+ruleTester.run('valid-config', rules['valid-config'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-config", rules["valid-config"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be an `object`",
+            error: 'the value is `null`, but should be an `object`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-config", rules["valid-config"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `number`",
+            error: 'the type should be `object`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-config", rules["valid-config"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `string`",
+            error: 'the type should be `object`, not `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -56,15 +56,15 @@ ruleTester.run("valid-config", rules["valid-config"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `array`",
+            error: 'the type should be `object`, not `array`',
           },
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "config": { "silver-mt-zion": "node ./silver-mt-zion.js" } }`,
     `{ "config": { "silver-mt-zion": "node ./silver-mt-zion.js", "nin": "node ./nin.js" } }`,
     `{ "config": { "silver-mt-zion": {"leadSinger": "Efrim Manuel Menuck"}, "nin": "node ./nin.js" } }`,

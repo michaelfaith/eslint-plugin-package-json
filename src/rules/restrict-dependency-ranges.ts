@@ -1,18 +1,18 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import semver from "semver";
+import semver from 'semver';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 const DEPENDENCY_TYPES = [
-  "dependencies",
-  "devDependencies",
-  "optionalDependencies",
-  "peerDependencies",
+  'dependencies',
+  'devDependencies',
+  'optionalDependencies',
+  'peerDependencies',
 ];
 
-const RANGE_TYPES = ["caret", "pin", "tilde"] as const;
+const RANGE_TYPES = ['caret', 'pin', 'tilde'] as const;
 type RangeType = (typeof RANGE_TYPES)[number];
 
 const schemaOptions = {
@@ -20,27 +20,27 @@ const schemaOptions = {
   properties: {
     forDependencyTypes: {
       description:
-        "Apply a range type restriction for an entire group of dependencies by which type of dependencies they belong to.",
+        'Apply a range type restriction for an entire group of dependencies by which type of dependencies they belong to.',
       items: {
         enum: DEPENDENCY_TYPES,
       },
-      type: "array",
+      type: 'array',
     },
     forPackages: {
       description:
-        "The exact name of a package, or a regex pattern used to match a group of packages by name.",
+        'The exact name of a package, or a regex pattern used to match a group of packages by name.',
       items: {
-        type: "string",
+        type: 'string',
       },
-      type: "array",
+      type: 'array',
     },
     forVersions: {
-      description: "Apply a restriction to a specific semver range.",
-      type: "string",
+      description: 'Apply a restriction to a specific semver range.',
+      type: 'string',
     },
     rangeType: {
       description:
-        "Identifies which range type or types you want to apply to packages that match any of the other match options (or all dependencies if no other options are provided).",
+        'Identifies which range type or types you want to apply to packages that match any of the other match options (or all dependencies if no other options are provided).',
       oneOf: [
         {
           enum: RANGE_TYPES,
@@ -49,19 +49,19 @@ const schemaOptions = {
           items: {
             enum: RANGE_TYPES,
           },
-          type: "array",
+          type: 'array',
         },
       ],
     },
   },
-  required: ["rangeType"],
-  type: "object",
+  required: ['rangeType'],
+  type: 'object',
 } as const;
 
 const SYMBOLS = {
-  caret: "^",
-  pin: "",
-  tilde: "~",
+  caret: '^',
+  pin: '',
+  tilde: '~',
 } satisfies Record<RangeType, string>;
 
 /**
@@ -72,12 +72,12 @@ const changeVersionRange = (version: string, rangeType: RangeType): string => {
   // slightly differently
   if (/^workspace:[~^*]$/.test(version)) {
     switch (rangeType) {
-      case "caret":
-        return "workspace:^";
-      case "pin":
-        return "workspace:*";
+      case 'caret':
+        return 'workspace:^';
+      case 'pin':
+        return 'workspace:*';
       default:
-        return "workspace:~";
+        return 'workspace:~';
     }
   }
 
@@ -94,7 +94,7 @@ const isVersionSupported = (version: string): boolean => {
   if (/^workspace:[*^~]$/.test(version)) {
     return true;
   }
-  const rawVersion = version.replace(/^workspace:/, "");
+  const rawVersion = version.replace(/^workspace:/, '');
   return !!semver.validRange(rawVersion);
 };
 
@@ -123,7 +123,7 @@ export const rule = createRule({
     }));
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]'(
         node: JsonAST.JSONProperty & {
           key: JsonAST.JSONStringLiteral;
           value: JsonAST.JSONObjectExpression;
@@ -154,13 +154,13 @@ export const rule = createRule({
             continue;
           }
 
-          const isPinned = !!semver.parse(version) || version === "workspace:*";
+          const isPinned = !!semver.parse(version) || version === 'workspace:*';
           const isTildeRange =
-            (!!semver.validRange(version) && version.startsWith("~")) ||
-            version.startsWith("workspace:~");
+            (!!semver.validRange(version) && version.startsWith('~')) ||
+            version.startsWith('workspace:~');
           const isCaretRange =
-            (!!semver.validRange(version) && version.startsWith("^")) ||
-            version.startsWith("workspace:^");
+            (!!semver.validRange(version) && version.startsWith('^')) ||
+            version.startsWith('workspace:^');
 
           // Loop through all options, and evaluate each of them for this dependency
           for (const options of optionsArray) {
@@ -186,9 +186,9 @@ export const rule = createRule({
               // so we'll just skip it.
               (/^workspace:[^~*]?$/.test(version) ||
                 // * matches all
-                (version !== "*" &&
+                (version !== '*' &&
                   !semver.satisfies(
-                    version.replace(/(?:workspace:)?[^~]?/, ""),
+                    version.replace(/(?:workspace:)?[^~]?/, ''),
                     options.forVersions,
                   )))
             ) {
@@ -201,12 +201,12 @@ export const rule = createRule({
 
             // If the version is just '*', then this is definitely in violation,
             // and we can report immediately.
-            if (version === "*") {
+            if (version === '*') {
               context.report({
                 data: {
-                  rangeTypes: rangeTypes.join(", "),
+                  rangeTypes: rangeTypes.join(', '),
                 },
-                messageId: "wrongRangeType",
+                messageId: 'wrongRangeType',
                 node: property.value,
               });
               break;
@@ -214,11 +214,11 @@ export const rule = createRule({
 
             const rangeTypeMatch = rangeTypes.find((rangeType) => {
               switch (rangeType) {
-                case "caret":
+                case 'caret':
                   return isCaretRange;
-                case "pin":
+                case 'pin':
                   return isPinned;
-                case "tilde":
+                case 'tilde':
                   return isTildeRange;
               }
             });
@@ -227,9 +227,9 @@ export const rule = createRule({
             if (!rangeTypeMatch) {
               context.report({
                 data: {
-                  rangeTypes: rangeTypes.join(", "),
+                  rangeTypes: rangeTypes.join(', '),
                 },
-                messageId: "wrongRangeType",
+                messageId: 'wrongRangeType',
                 node: property.value,
                 suggest: rangeTypes.map((rangeType) => ({
                   fix(fixer) {
@@ -256,15 +256,15 @@ export const rule = createRule({
     defaultOptions: [[]],
     docs: {
       description:
-        "Restricts the range of dependencies to allow or disallow specific types of ranges.",
+        'Restricts the range of dependencies to allow or disallow specific types of ranges.',
     },
     hasSuggestions: true,
     messages: {
-      changeToCaret: "Change to use a caret range.",
-      changeToPin: "Pin the version.",
-      changeToTilde: "Change to use a tilde range.",
+      changeToCaret: 'Change to use a caret range.',
+      changeToPin: 'Pin the version.',
+      changeToTilde: 'Change to use a tilde range.',
       wrongRangeType:
-        "This dependency is using the wrong range type.  Acceptable range type(s): {{rangeTypes}}",
+        'This dependency is using the wrong range type.  Acceptable range type(s): {{rangeTypes}}',
     },
     schema: [
       {
@@ -272,14 +272,14 @@ export const rule = createRule({
           schemaOptions,
           {
             description:
-              "Array of configuration options, specifying range requirements.",
+              'Array of configuration options, specifying range requirements.',
             items: schemaOptions,
-            type: "array",
+            type: 'array',
           },
         ],
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "restrict-dependency-ranges",
+  name: 'restrict-dependency-ranges',
 });

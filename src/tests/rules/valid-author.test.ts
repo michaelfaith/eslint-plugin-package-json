@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-const ruleName = "valid-author";
+const ruleName = 'valid-author';
 
 ruleTester.run(ruleName, rules[ruleName], {
   invalid: [
@@ -13,13 +13,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -29,13 +29,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -45,13 +45,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -61,13 +61,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -76,13 +76,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "person should have a name",
+            error: 'person should have a name',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -91,13 +91,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "person should have a name",
+            error: 'person should have a name',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -106,13 +106,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "email is not valid: invalid",
+            error: 'email is not valid: invalid',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -121,13 +121,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "url is not valid: not-url",
+            error: 'url is not valid: not-url',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -136,13 +136,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "person should have a name",
+            error: 'person should have a name',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -152,13 +152,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -170,13 +170,13 @@ ruleTester.run(ruleName, rules[ruleName], {
         {
           data: {
             error:
-              "the type should be a `string` or an `object` with at least a `name` property",
+              'the type should be a `string` or an `object` with at least a `name` property',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -187,13 +187,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "name should not be empty",
+            error: 'name should not be empty',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -204,13 +204,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "name should not be empty",
+            error: 'name should not be empty',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -222,13 +222,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "email is not valid: invalid",
+            error: 'email is not valid: invalid',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -240,13 +240,13 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "url is not valid: invalid",
+            error: 'url is not valid: invalid',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -255,63 +255,63 @@ ruleTester.run(ruleName, rules[ruleName], {
       errors: [
         {
           data: {
-            error: "email is not valid: invalid-email",
+            error: 'email is not valid: invalid-email',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "url is not valid: invalid-url",
+            error: 'url is not valid: invalid-url',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
   ],
 
   valid: [
     {
       code: `{}`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": "John Doe" }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": "John <john@example.com>" }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": "John (https://example.com)" }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": "John <john@example.com> (https://example.com)" }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": { "name": "John" } }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": { "name": "John", "email": "john@example.com" } }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": { "name": "John", "url": "https://example.com" } }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": { "name": "John", "email": "john@example.com", "url": "https://example.com" } }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "author": null }`,
-      filename: "not-a-package.json",
+      filename: 'not-a-package.json',
     },
   ],
 });

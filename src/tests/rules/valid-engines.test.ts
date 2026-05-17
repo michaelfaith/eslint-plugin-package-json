@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-engines", rules["valid-engines"], {
+ruleTester.run('valid-engines', rules['valid-engines'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be an `object`",
+            error: 'the value is `null`, but should be an `object`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `number`",
+            error: 'the type should be `object`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `Array`",
+            error: 'the type should be `object`, not `Array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -56,10 +56,10 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `string`",
+            error: 'the type should be `object`, not `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -76,7 +76,7 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
             error: 'the value of property "npm" should be a string',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -94,7 +94,7 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
               'the value of property "invalid-bin" is empty, but should be a semver range',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -110,18 +110,18 @@ ruleTester.run("valid-engines", rules["valid-engines"], {
         {
           data: {
             error:
-              "property 0 has an empty key, but should be a runtime or package manager",
+              'property 0 has an empty key, but should be a runtime or package manager',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "property 1 has an empty key, but should be a runtime or package manager",
+              'property 1 has an empty key, but should be a runtime or package manager',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },

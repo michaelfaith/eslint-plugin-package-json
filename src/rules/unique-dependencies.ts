@@ -1,22 +1,22 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
 import {
   fixRemoveArrayElement,
   fixRemoveObjectProperty,
-} from "eslint-fix-utils";
+} from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral, isNotNullish } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral, isNotNullish } from '../utils/predicates.ts';
 
 const dependencyPropertyNames = new Set([
-  "bundledDependencies",
-  "bundleDependencies",
-  "dependencies",
-  "devDependencies",
-  "optionalDependencies",
-  "overrides",
-  "peerDependencies",
+  'bundledDependencies',
+  'bundleDependencies',
+  'dependencies',
+  'devDependencies',
+  'optionalDependencies',
+  'overrides',
+  'peerDependencies',
 ]);
 
 export const rule = createRule({
@@ -48,12 +48,12 @@ export const rule = createRule({
       function report(node: JsonAST.JSONNode) {
         const removal = getNodeToRemove(node);
         context.report({
-          messageId: "overridden",
+          messageId: 'overridden',
           node,
           suggest: [
             {
               fix:
-                removal.type === "JSONProperty"
+                removal.type === 'JSONProperty'
                   ? fixRemoveObjectProperty(
                       context,
                       removal as unknown as ESTree.Property,
@@ -63,7 +63,7 @@ export const rule = createRule({
                       removal as unknown as ESTree.Expression,
                       elements as unknown as ESTree.ArrayExpression,
                     ),
-              messageId: "remove",
+              messageId: 'remove',
             },
           ],
         });
@@ -71,7 +71,7 @@ export const rule = createRule({
     }
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral]'(
         node: JsonAST.JSONProperty & {
           key: JsonAST.JSONStringLiteral;
         },
@@ -81,10 +81,10 @@ export const rule = createRule({
         }
 
         const nodeValueType = node.value.type;
-        if (nodeValueType === "JSONArrayExpression") {
+        if (nodeValueType === 'JSONArrayExpression') {
           check(node.value.elements, (element) => element);
         }
-        if (nodeValueType === "JSONObjectExpression") {
+        if (nodeValueType === 'JSONObjectExpression') {
           check(
             node.value.properties.map((property) => property.key),
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -95,7 +95,7 @@ export const rule = createRule({
           }
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         // Check our cached elements from `dependencies`, `devDependencies` and `peerDependencies`
         // If any dependencies listed as dev or peer deps, are also in `dependencies`, then those should be flagged as redundant
         const dependencyNames = new Set(
@@ -108,7 +108,7 @@ export const rule = createRule({
           return;
         }
 
-        for (const dependencyType of ["devDependencies", "peerDependencies"]) {
+        for (const dependencyType of ['devDependencies', 'peerDependencies']) {
           const otherDependencies = dependenciesCache[dependencyType];
           for (const otherDependencyNode of otherDependencies) {
             const otherDependencyKey = otherDependencyNode.key;
@@ -117,7 +117,7 @@ export const rule = createRule({
               dependencyNames.has(otherDependencyKey.value)
             ) {
               context.report({
-                messageId: "crossGroupDuplicate",
+                messageId: 'crossGroupDuplicate',
                 node: otherDependencyNode,
                 suggest: [
                   {
@@ -125,7 +125,7 @@ export const rule = createRule({
                       context,
                       otherDependencyNode as unknown as ESTree.Property,
                     ),
-                    messageId: "remove",
+                    messageId: 'remove',
                   },
                 ],
               });
@@ -137,7 +137,7 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
         "Checks a dependency isn't specified more than once (i.e. in `dependencies` and `devDependencies`)",
       recommended: true,
@@ -146,11 +146,11 @@ export const rule = createRule({
     messages: {
       crossGroupDuplicate:
         'Dependency is also declared in "dependencies" and is redundant',
-      overridden: "Dependency is overridden by a duplicate entry later on",
-      remove: "Remove this redundant dependency",
+      overridden: 'Dependency is overridden by a duplicate entry later on',
+      remove: 'Remove this redundant dependency',
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "unique-dependencies",
+  name: 'unique-dependencies',
 });

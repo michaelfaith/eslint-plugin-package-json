@@ -1,7 +1,7 @@
-import { rule } from "../../rules/unique-dependencies.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/unique-dependencies.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("unique-dependencies", rule, {
+ruleTester.run('unique-dependencies', rule, {
   invalid: [
     {
       code: `{
@@ -10,10 +10,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 2,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 		"bundleDependencies": [ "abc"]
 	}`,
@@ -21,7 +21,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -30,10 +30,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 2,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 		"bundledDependencies": [ "abc"]
 	}`,
@@ -41,7 +41,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     // ...
     {
@@ -54,10 +54,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 3,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 	"dependencies": {
 \t\t
@@ -68,7 +68,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     // ...
     {
@@ -81,10 +81,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 3,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 	"devDependencies": {
 \t\t
@@ -95,7 +95,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -107,10 +107,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 3,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 	"optionalDependencies": {
 \t\t
@@ -121,7 +121,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -133,10 +133,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 3,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 	"peerDependencies": {
 \t\t
@@ -147,7 +147,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     // ...
     // ...
@@ -158,10 +158,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 2,
-          messageId: "overridden",
+          messageId: 'overridden',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 		"overrides": { "abc": "1.2.3"}
 	}`,
@@ -169,7 +169,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -186,10 +186,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 6,
-          messageId: "crossGroupDuplicate",
+          messageId: 'crossGroupDuplicate',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
     "dependencies": {
 		"abc": "1.2.3"
@@ -206,10 +206,10 @@ ruleTester.run("unique-dependencies", rule, {
         },
         {
           line: 9,
-          messageId: "crossGroupDuplicate",
+          messageId: 'crossGroupDuplicate',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
     "dependencies": {
 		"abc": "1.2.3"
@@ -225,9 +225,9 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
-    ...["devDependencies", "peerDependencies"].map((dependencyType) => ({
+    ...['devDependencies', 'peerDependencies'].map((dependencyType) => ({
       code: `{
     "dependencies": {
 		"abc": "1.2.3"
@@ -239,10 +239,10 @@ ruleTester.run("unique-dependencies", rule, {
       errors: [
         {
           line: 6,
-          messageId: "crossGroupDuplicate",
+          messageId: 'crossGroupDuplicate',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
     "dependencies": {
 		"abc": "1.2.3"
@@ -255,7 +255,7 @@ ruleTester.run("unique-dependencies", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     })),
   ],
 

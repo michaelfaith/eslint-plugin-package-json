@@ -1,7 +1,7 @@
-import { rule } from "../../rules/restrict-private-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/restrict-private-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("restrict-private-properties", rule, {
+ruleTester.run('restrict-private-properties', rule, {
   invalid: [
     // Default blocked properties: files (non-empty, with suggestion)
     {
@@ -12,12 +12,12 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "files" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'files' },
+          messageId: 'unnecessaryProperty',
           suggestions: [
             {
-              data: { property: "files" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'files' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"private": true
@@ -39,12 +39,12 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "publishConfig" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'publishConfig' },
+          messageId: 'unnecessaryProperty',
           suggestions: [
             {
-              data: { property: "publishConfig" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'publishConfig' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"private": true
@@ -60,8 +60,8 @@ ruleTester.run("restrict-private-properties", rule, {
       code: `{ "private": true, "files": [] }`,
       errors: [
         {
-          data: { property: "files" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'files' },
+          messageId: 'unnecessaryProperty',
         },
       ],
       output: `{ "private": true  }`,
@@ -75,8 +75,8 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "publishConfig" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'publishConfig' },
+          messageId: 'unnecessaryProperty',
         },
       ],
       output: `{
@@ -95,12 +95,12 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "files" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'files' },
+          messageId: 'unnecessaryProperty',
           suggestions: [
             {
-              data: { property: "files" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'files' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"private": true,
@@ -111,8 +111,8 @@ ruleTester.run("restrict-private-properties", rule, {
           ],
         },
         {
-          data: { property: "publishConfig" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'publishConfig' },
+          messageId: 'unnecessaryProperty',
         },
       ],
       output: `{
@@ -133,12 +133,12 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "dependencies" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'dependencies' },
+          messageId: 'unnecessaryProperty',
           suggestions: [
             {
-              data: { property: "dependencies" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'dependencies' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"private": true
@@ -148,7 +148,7 @@ ruleTester.run("restrict-private-properties", rule, {
           ],
         },
       ],
-      options: [{ blockedProperties: ["dependencies"] }],
+      options: [{ blockedProperties: ['dependencies'] }],
     },
     // Custom blocked properties (empty, auto-fixable)
     {
@@ -159,11 +159,11 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "dependencies" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'dependencies' },
+          messageId: 'unnecessaryProperty',
         },
       ],
-      options: [{ blockedProperties: ["dependencies"] }],
+      options: [{ blockedProperties: ['dependencies'] }],
       output: `{
 				"name": "test",
 				"private": true
@@ -179,12 +179,12 @@ ruleTester.run("restrict-private-properties", rule, {
 			}`,
       errors: [
         {
-          data: { property: "files" },
-          messageId: "unnecessaryProperty",
+          data: { property: 'files' },
+          messageId: 'unnecessaryProperty',
           suggestions: [
             {
-              data: { property: "files" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'files' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"private": true

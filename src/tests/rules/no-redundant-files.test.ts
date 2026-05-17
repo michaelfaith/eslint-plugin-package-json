@@ -1,7 +1,7 @@
-import { rule } from "../../rules/no-redundant-files.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/no-redundant-files.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("no-redundant-files", rule, {
+ruleTester.run('no-redundant-files', rule, {
   invalid: [
     {
       code: `{
@@ -13,12 +13,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "README.md" },
+          data: { file: 'README.md' },
           line: 3,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t
@@ -30,12 +30,12 @@ ruleTester.run("no-redundant-files", rule, {
           ],
         },
         {
-          data: { file: "./package.json" },
+          data: { file: './package.json' },
           line: 4,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t"README.md"
@@ -58,12 +58,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "README.a-b-c.md" },
+          data: { file: 'README.a-b-c.md' },
           line: 3,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t
@@ -75,12 +75,12 @@ ruleTester.run("no-redundant-files", rule, {
           ],
         },
         {
-          data: { file: "./package.json" },
+          data: { file: './package.json' },
           line: 4,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t"README.a-b-c.md"
@@ -104,12 +104,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "CHANGELOG.md" },
+          data: { file: 'CHANGELOG.md' },
           line: 5,
-          messageId: "duplicate",
+          messageId: 'duplicate',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t"CHANGELOG.md",
@@ -134,12 +134,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "./index.js" },
+          data: { file: './index.js' },
           line: 5,
-          messageId: "unnecessaryMain",
+          messageId: 'unnecessaryMain',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
     "main": "./index.js",
 \t"files": [
@@ -164,12 +164,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "index.js" },
+          data: { file: 'index.js' },
           line: 5,
-          messageId: "unnecessaryMain",
+          messageId: 'unnecessaryMain',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
     "main": "./index.js",
 \t"files": [
@@ -194,12 +194,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "./dist/cli.js" },
+          data: { file: './dist/cli.js' },
           line: 5,
-          messageId: "unnecessaryBin",
+          messageId: 'unnecessaryBin',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
   "bin": "./dist/cli.js",
 \t"files": [
@@ -224,12 +224,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "dist/cli.js" },
+          data: { file: 'dist/cli.js' },
           line: 5,
-          messageId: "unnecessaryBin",
+          messageId: 'unnecessaryBin',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
   "bin": "./dist/cli.js",
 \t"files": [
@@ -256,12 +256,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "./dist/cli.js" },
+          data: { file: './dist/cli.js' },
           line: 7,
-          messageId: "unnecessaryBin",
+          messageId: 'unnecessaryBin',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
   "bin": {
     "cli": "./dist/cli.js",
@@ -291,12 +291,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "./dist/cli.js" },
+          data: { file: './dist/cli.js' },
           line: 8,
-          messageId: "unnecessaryBin",
+          messageId: 'unnecessaryBin',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
   "bin": {
     "cli": "./dist/cli.js",
@@ -324,12 +324,12 @@ ruleTester.run("no-redundant-files", rule, {
 `,
       errors: [
         {
-          data: { file: "README.md" },
+          data: { file: 'README.md' },
           line: 3,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t
@@ -342,12 +342,12 @@ ruleTester.run("no-redundant-files", rule, {
           ],
         },
         {
-          data: { file: "./package.json" },
+          data: { file: './package.json' },
           line: 5,
-          messageId: "unnecessaryDefault",
+          messageId: 'unnecessaryDefault',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t"files": [
 \t\t"README.md",
@@ -363,7 +363,7 @@ ruleTester.run("no-redundant-files", rule, {
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "main": "./index.js" }`,
     `{ "bin": "./bin/cli.js" }`,
     `{ "bin": {

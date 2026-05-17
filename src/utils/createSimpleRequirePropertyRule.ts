@@ -1,13 +1,13 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "./predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from './predicates.ts';
 
 export interface CreateRequirePropertyRuleOptions {
   /**
    * The category for this rule.
    */
-  category?: "Publishable" | (string & {});
+  category?: 'Publishable' | (string & {});
 
   /** The value to use when fixing a violation when this property is missing */
   fixValue?: unknown;
@@ -45,12 +45,12 @@ export const createSimpleRequirePropertyRule = (
 
       const ignorePrivate =
         context.options[0]?.ignorePrivate ??
-        (typeof enforceForPrivate === "boolean"
+        (typeof enforceForPrivate === 'boolean'
           ? !enforceForPrivate
           : ignorePrivateDefault);
 
       return {
-        "Program > JSONExpressionStatement > JSONObjectExpression"(
+        'Program > JSONExpressionStatement > JSONObjectExpression'(
           node: JsonAST.JSONObjectExpression,
         ) {
           if (
@@ -58,8 +58,8 @@ export const createSimpleRequirePropertyRule = (
             node.properties.some(
               (property) =>
                 isJSONStringLiteral(property.key) &&
-                property.key.value === "private" &&
-                property.value.type === "JSONLiteral" &&
+                property.key.value === 'private' &&
+                property.value.type === 'JSONLiteral' &&
                 property.value.value === true,
             )
           ) {
@@ -84,11 +84,11 @@ export const createSimpleRequirePropertyRule = (
                         `\n  "${propertyName}": ${JSON.stringify(fixValue)}`,
                       );
                       yield node.properties.length > 0
-                        ? fixer.insertTextAfterRange([0, 1], ",")
-                        : fixer.insertTextAfterRange([0, 1], "\n");
+                        ? fixer.insertTextAfterRange([0, 1], ',')
+                        : fixer.insertTextAfterRange([0, 1], '\n');
                     },
               loc: { column: 0, line: 1 },
-              messageId: "missing",
+              messageId: 'missing',
             });
           }
         },
@@ -99,14 +99,14 @@ export const createSimpleRequirePropertyRule = (
         category,
         description: `Requires the \`${propertyName}\` property to be present.`,
         recommended: isRecommended,
-        ruleGroup: "require-properties",
+        ruleGroup: 'require-properties',
       },
-      fixable: fixValue === undefined ? undefined : "code",
+      fixable: fixValue === undefined ? undefined : 'code',
       messages: {
         missing: "Property '{{property}}' is required.",
       },
       schema:
-        propertyName === "private"
+        propertyName === 'private'
           ? []
           : [
               {
@@ -116,13 +116,13 @@ export const createSimpleRequirePropertyRule = (
                     default: ignorePrivateDefault,
                     description:
                       "Determines if this rule should be enforced when the package's `private` property is `true`.",
-                    type: "boolean",
+                    type: 'boolean',
                   },
                 },
-                type: "object",
+                type: 'object',
               },
             ],
-      type: "suggestion",
+      type: 'suggestion',
     },
     name: ruleName,
   });

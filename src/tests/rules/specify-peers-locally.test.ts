@@ -1,7 +1,7 @@
-import { rule } from "../../rules/specify-peers-locally.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/specify-peers-locally.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("specify-peers-locally", rule, {
+ruleTester.run('specify-peers-locally', rule, {
   invalid: [
     {
       code: `{
@@ -15,13 +15,13 @@ ruleTester.run("specify-peers-locally", rule, {
 }`,
       errors: [
         {
-          data: { name: "abc" },
+          data: { name: 'abc' },
           line: 3,
-          messageId: "devDependencyNotDefined",
+          messageId: 'devDependencyNotDefined',
           suggestions: [
             {
-              data: { name: "abc" },
-              messageId: "addToDevDependencies",
+              data: { name: 'abc' },
+              messageId: 'addToDevDependencies',
               output: `{
   "peerDependencies": {
     "abc": "4.5.6"
@@ -36,7 +36,7 @@ ruleTester.run("specify-peers-locally", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -47,13 +47,13 @@ ruleTester.run("specify-peers-locally", rule, {
 }`,
       errors: [
         {
-          data: { name: "abc" },
+          data: { name: 'abc' },
           line: 3,
-          messageId: "devDependencyNotDefined",
+          messageId: 'devDependencyNotDefined',
           suggestions: [
             {
-              data: { name: "abc" },
-              messageId: "addToDevDependencies",
+              data: { name: 'abc' },
+              messageId: 'addToDevDependencies',
               output: `{
   "peerDependencies": {
     "abc": "1.2.3"
@@ -66,7 +66,7 @@ ruleTester.run("specify-peers-locally", rule, {
           ],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{
@@ -76,13 +76,13 @@ ruleTester.run("specify-peers-locally", rule, {
 }`,
       errors: [
         {
-          data: { name: "abc" },
+          data: { name: 'abc' },
           line: 3,
-          messageId: "devDependencyNotDefined",
+          messageId: 'devDependencyNotDefined',
           suggestions: [],
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
   ],
 

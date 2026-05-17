@@ -1,14 +1,14 @@
-import { rule } from "../../rules/exports-subpaths-style.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/exports-subpaths-style.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("exports-subpaths-style", rule, {
+ruleTester.run('exports-subpaths-style', rule, {
   invalid: [
     // ============================================================
     // Explicit mode (default) - implicit formats → explicit
     // ============================================================
     {
       code: `{ "exports": "./index.js" }`,
-      errors: [{ messageId: "preferExplicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
       output: `{ "exports": {
   ".": "./index.js"
 } }`,
@@ -20,7 +20,7 @@ ruleTester.run("exports-subpaths-style", rule, {
 					"require": "./index.cjs"
 				}
 			}`,
-      errors: [{ messageId: "preferExplicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
       output: `{
 				"exports": {
   ".": {
@@ -32,21 +32,21 @@ ruleTester.run("exports-subpaths-style", rule, {
     },
     {
       code: `{ "exports": 123 }`,
-      errors: [{ messageId: "preferExplicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
       output: `{ "exports": {
   ".": 123
 } }`,
     },
     {
       code: `{ "exports": true }`,
-      errors: [{ messageId: "preferExplicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
       output: `{ "exports": {
   ".": true
 } }`,
     },
     {
       code: `{ "exports": null }`,
-      errors: [{ messageId: "preferExplicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
       output: `{ "exports": {
   ".": null
 } }`,
@@ -54,8 +54,8 @@ ruleTester.run("exports-subpaths-style", rule, {
     // With explicit option
     {
       code: `{ "exports": "./index.js" }`,
-      errors: [{ messageId: "preferExplicit" }],
-      options: [{ prefer: "explicit" }],
+      errors: [{ messageId: 'preferExplicit' }],
+      options: [{ prefer: 'explicit' }],
       output: `{ "exports": {
   ".": "./index.js"
 } }`,
@@ -70,8 +70,8 @@ ruleTester.run("exports-subpaths-style", rule, {
 					".": "./index.js"
 				}
 			}`,
-      errors: [{ messageId: "preferImplicit" }],
-      options: [{ prefer: "implicit" }],
+      errors: [{ messageId: 'preferImplicit' }],
+      options: [{ prefer: 'implicit' }],
       output: `{
 				"exports": "./index.js"
 			}`,
@@ -85,8 +85,8 @@ ruleTester.run("exports-subpaths-style", rule, {
 					}
 				}
 			}`,
-      errors: [{ messageId: "preferImplicit" }],
-      options: [{ prefer: "implicit" }],
+      errors: [{ messageId: 'preferImplicit' }],
+      options: [{ prefer: 'implicit' }],
       output: `{
 				"exports": {
   "import": "./index.mjs",
@@ -100,8 +100,8 @@ ruleTester.run("exports-subpaths-style", rule, {
 					".": ["./index.js"]
 				}
 			}`,
-      errors: [{ messageId: "preferImplicit" }],
-      options: [{ prefer: "implicit" }],
+      errors: [{ messageId: 'preferImplicit' }],
+      options: [{ prefer: 'implicit' }],
       output: `{
 				"exports": [
   "./index.js"
@@ -141,7 +141,7 @@ ruleTester.run("exports-subpaths-style", rule, {
 					".": null
 				}
 			}`,
-      options: [{ prefer: "explicit" }],
+      options: [{ prefer: 'explicit' }],
     },
     // Multiple subpaths (can't be simplified)
     `{
@@ -158,7 +158,7 @@ ruleTester.run("exports-subpaths-style", rule, {
     // ============================================================
     {
       code: `{ "exports": "./index.js" }`,
-      options: [{ prefer: "implicit" }],
+      options: [{ prefer: 'implicit' }],
     },
     {
       code: `{
@@ -167,7 +167,7 @@ ruleTester.run("exports-subpaths-style", rule, {
 					"require": "./index.cjs"
 				}
 			}`,
-      options: [{ prefer: "implicit" }],
+      options: [{ prefer: 'implicit' }],
     },
     // Multiple subpaths (can't be simplified)
     {
@@ -177,7 +177,7 @@ ruleTester.run("exports-subpaths-style", rule, {
 					"./util": "./util.js"
 				}
 			}`,
-      options: [{ prefer: "implicit" }],
+      options: [{ prefer: 'implicit' }],
     },
     // Single non-root subpath (can't be simplified)
     {
@@ -186,12 +186,12 @@ ruleTester.run("exports-subpaths-style", rule, {
 					"./foo": "./foo.js"
 				}
 			}`,
-      options: [{ prefer: "implicit" }],
+      options: [{ prefer: 'implicit' }],
     },
     // Root-level arrays are implicit format
     {
       code: `{ "exports": ["./index.js"] }`,
-      options: [{ prefer: "implicit" }],
+      options: [{ prefer: 'implicit' }],
     },
 
     // ============================================================
@@ -204,7 +204,7 @@ ruleTester.run("exports-subpaths-style", rule, {
 					"exports": "./index.js"
 				}
 			}`,
-      options: [{ prefer: "explicit" }],
+      options: [{ prefer: 'explicit' }],
     },
   ],
 });

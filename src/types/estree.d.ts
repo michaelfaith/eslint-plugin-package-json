@@ -1,6 +1,6 @@
-import { JSONNode } from "jsonc-eslint-parser";
+import { JSONNode } from 'jsonc-eslint-parser';
 
-declare module "estree" {
+declare module 'estree' {
   interface NodeMap {
     JSONNode: JSONNode;
   }

@@ -1,9 +1,9 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { fixRemoveObjectProperty } from "eslint-fix-utils";
+import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 export const rule = createRule({
   create(context) {
@@ -15,12 +15,12 @@ export const rule = createRule({
     let isPrivatePackage = false;
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=author]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=author]'(
         node: JsonAST.JSONProperty,
       ) {
         authorPropertyNode = node;
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=contributors]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=contributors]'(
         node: JsonAST.JSONProperty,
       ) {
         contributorsPropertyNode = node;
@@ -28,23 +28,23 @@ export const rule = createRule({
         // Ensure that there's at least one contributor.
         const contributorsValue = node.value;
         if (
-          contributorsValue.type !== "JSONArrayExpression" ||
+          contributorsValue.type !== 'JSONArrayExpression' ||
           !contributorsValue.elements.some((element) => !!element)
         ) {
           context.report({
-            messageId: "noContributors",
+            messageId: 'noContributors',
             node,
           });
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=private]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=private]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type === "JSONLiteral" && node.value.value === true) {
+        if (node.value.type === 'JSONLiteral' && node.value.value === true) {
           isPrivatePackage = true;
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         if (ignorePrivate && isPrivatePackage) {
           return;
         }
@@ -52,7 +52,7 @@ export const rule = createRule({
         if (preferContributorsOnly) {
           if (authorPropertyNode) {
             context.report({
-              messageId: "contributorsOnly",
+              messageId: 'contributorsOnly',
               node: authorPropertyNode,
               suggest: [
                 {
@@ -60,7 +60,7 @@ export const rule = createRule({
                     context,
                     authorPropertyNode as unknown as ESTree.Property,
                   ),
-                  messageId: "removeAuthor",
+                  messageId: 'removeAuthor',
                 },
               ],
             });
@@ -68,14 +68,14 @@ export const rule = createRule({
           if (!contributorsPropertyNode) {
             context.report({
               loc: { column: 0, line: 1 },
-              messageId: "missingContributor",
+              messageId: 'missingContributor',
             });
           }
         } else {
           if (!authorPropertyNode && !contributorsPropertyNode) {
             context.report({
               loc: { column: 0, line: 1 },
-              messageId: "missing",
+              messageId: 'missing',
             });
           }
         }
@@ -85,21 +85,21 @@ export const rule = createRule({
   meta: {
     defaultOptions: [{ ignorePrivate: true, preferContributorsOnly: false }],
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
-        "Ensures that proper attribution is included, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.",
+        'Ensures that proper attribution is included, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.',
       recommended: true,
     },
     hasSuggestions: true,
     messages: {
       contributorsOnly:
-        "Only `contributors` should be defined for attribution.",
+        'Only `contributors` should be defined for attribution.',
       missing:
-        "Property attribution is required. Either `author` or `contributors` should be defined.",
+        'Property attribution is required. Either `author` or `contributors` should be defined.',
       missingContributor:
-        "Property attribution is required. `contributors` should be defined.",
-      noContributors: "At least one contributor should be defined.",
-      removeAuthor: "Remove `author`.",
+        'Property attribution is required. `contributors` should be defined.',
+      noContributors: 'At least one contributor should be defined.',
+      removeAuthor: 'Remove `author`.',
     },
     schema: [
       {
@@ -108,18 +108,18 @@ export const rule = createRule({
           ignorePrivate: {
             description:
               'Skip attribution requirements for packages with `"private": true`.',
-            type: "boolean",
+            type: 'boolean',
           },
           preferContributorsOnly: {
             description:
-              "Require that only `contributors` is present, and `author` is not defined.",
-            type: "boolean",
+              'Require that only `contributors` is present, and `author` is not defined.',
+            type: 'boolean',
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "require-attribution",
+  name: 'require-attribution',
 });

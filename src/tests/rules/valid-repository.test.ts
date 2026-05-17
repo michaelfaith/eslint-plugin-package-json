@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-repository", rules["valid-repository"], {
+ruleTester.run('valid-repository', rules['valid-repository'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
         {
           data: {
             error:
-              "the value is `null`, but should be an `object` or a `string`",
+              'the value is `null`, but should be an `object` or a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -27,10 +27,10 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
       errors: [
         {
           data: {
-            error: "the type should be `object` or `string`, not `number`",
+            error: 'the type should be `object` or `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -43,10 +43,10 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
         {
           data: {
             error:
-              "the value is empty, but should be repository shorthand string",
+              'the value is empty, but should be repository shorthand string',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -64,7 +64,7 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
             error: 'the value of property "url" should be a string',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -81,14 +81,14 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
             error: `repository is missing property "type", which should be the type of repository this is (e.g. "git")`,
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error: `repository is missing property "url", which should be the url to a repository (e.g. "git+https://github.com/npm/cli.git")`,
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -107,14 +107,14 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
             error: `repository is missing property "type", which should be the type of repository this is (e.g. "git")`,
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error: `repository is missing property "url", which should be the url to a repository (e.g. "git+https://github.com/npm/cli.git")`,
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
@@ -122,7 +122,7 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
               'property 0 is invalid; keys should be "type", "url", and optionally "directory"',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
@@ -130,7 +130,7 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
               'property 1 is invalid; keys should be "type", "url", and optionally "directory"',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
@@ -138,16 +138,16 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
               'property 2 is invalid; keys should be "type", "url", and optionally "directory"',
           },
           line: 5,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
     ...[
-      "svn:npm/example",
-      "eslint-plugin-package-json",
-      "git:npm/example",
-      "github:npm/example/repo",
-      "org/user/repo",
+      'svn:npm/example',
+      'eslint-plugin-package-json',
+      'git:npm/example',
+      'github:npm/example/repo',
+      'org/user/repo',
     ].map((value) => ({
       code: `{
 	"repository": "${value}"
@@ -159,21 +159,21 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
             error: `the value "${value}" is invalid; it should be the shorthand for a repository (e.g. "github:npm/example")`,
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     })),
   ],
   valid: [
-    "{}",
+    '{}',
     ...[
-      "git+https://github.com/michaelfaith/eslint-plugin-package-json.git",
-      "https://github.com/michaelfaith/eslint-plugin-package-json",
-      "https://github.com/michaelfaith/eslint-plugin-package-json.git",
-      "http://github.com/michaelfaith/eslint-plugin-package-json.git",
-      "git://github.com/michaelfaith/eslint-plugin-package-json.git",
-      "git://github.com/michaelfaith/eslint-plugin-package-json",
-      "git@github.com:michaelfaith/eslint-plugin-package-json.git",
+      'git+https://github.com/michaelfaith/eslint-plugin-package-json.git',
+      'https://github.com/michaelfaith/eslint-plugin-package-json',
+      'https://github.com/michaelfaith/eslint-plugin-package-json.git',
+      'http://github.com/michaelfaith/eslint-plugin-package-json.git',
+      'git://github.com/michaelfaith/eslint-plugin-package-json.git',
+      'git://github.com/michaelfaith/eslint-plugin-package-json',
+      'git@github.com:michaelfaith/eslint-plugin-package-json.git',
     ].flatMap((value) => [
       {
         code: `{
@@ -198,18 +198,18 @@ ruleTester.run("valid-repository", rules["valid-repository"], {
       },
     ]),
     ...[
-      "npm/example",
-      "github:npm/example",
-      "gist:11081aaa281",
-      "bitbucket:user/repo",
-      "gitlab:user/repo",
+      'npm/example',
+      'github:npm/example',
+      'gist:11081aaa281',
+      'bitbucket:user/repo',
+      'gitlab:user/repo',
       // Repos with hyphens and dots in names
-      "github:some-user/some-repo",
-      "github:user-name/repo-name",
-      "some-user/some-repo",
-      "user-name/repo.js",
-      "bitbucket:my-org/my-repo",
-      "gitlab:some.user/some.repo",
+      'github:some-user/some-repo',
+      'github:user-name/repo-name',
+      'some-user/some-repo',
+      'user-name/repo.js',
+      'bitbucket:my-org/my-repo',
+      'gitlab:some.user/some.repo',
     ].map((value) => ({
       code: `{
 	"repository": "${value}"

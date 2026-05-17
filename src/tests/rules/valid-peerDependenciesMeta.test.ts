@@ -1,9 +1,9 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run(
-  "valid-peerDependenciesMeta",
-  rules["valid-peerDependenciesMeta"],
+  'valid-peerDependenciesMeta',
+  rules['valid-peerDependenciesMeta'],
   {
     invalid: [
       {
@@ -15,10 +15,10 @@ ruleTester.run(
           {
             data: {
               error:
-                "the value is `null`, but should be an object with peer dependency metadata",
+                'the value is `null`, but should be an object with peer dependency metadata',
             },
             line: 2,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
@@ -30,10 +30,10 @@ ruleTester.run(
         errors: [
           {
             data: {
-              error: "the type should be `object`, not `number`",
+              error: 'the type should be `object`, not `number`',
             },
             line: 2,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
@@ -45,10 +45,10 @@ ruleTester.run(
         errors: [
           {
             data: {
-              error: "the type should be `object`, not `string`",
+              error: 'the type should be `object`, not `string`',
             },
             line: 2,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
@@ -60,10 +60,10 @@ ruleTester.run(
         errors: [
           {
             data: {
-              error: "the type should be `object`, not `Array`",
+              error: 'the type should be `object`, not `Array`',
             },
             line: 2,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
@@ -85,45 +85,45 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "the peer dependency metadata for `david` should be an object, not `string`",
+                'the peer dependency metadata for `david` should be an object, not `string`',
             },
             line: 3,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 18,
             data: {
               error:
-                "the peer dependency metadata for `trent` should be an object, not `number`",
+                'the peer dependency metadata for `trent` should be an object, not `number`',
             },
             line: 4,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 24,
             data: {
               error:
-                "the peer dependency metadata for `the-fragile` should be an object, not `null`",
+                'the peer dependency metadata for `the-fragile` should be an object, not `null`',
             },
             line: 5,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 23,
             data: {
               error:
-                "the peer dependency metadata for `pink-floyd` should be an object, not `Array`",
+                'the peer dependency metadata for `pink-floyd` should be an object, not `Array`',
             },
             line: 6,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 13,
             data: {
-              error: "invalid package name: ``",
+              error: 'invalid package name: ``',
             },
             line: 7,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
@@ -149,61 +149,61 @@ ruleTester.run(
             column: 18,
             data: {
               error:
-                "the peer dependency metadata for `david` should contain the `optional` property",
+                'the peer dependency metadata for `david` should contain the `optional` property',
             },
             line: 3,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 18,
             data: {
               error:
-                "the peer dependency metadata for `trent` should contain the `optional` property",
+                'the peer dependency metadata for `trent` should contain the `optional` property',
             },
             line: 4,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 21,
             data: {
               error:
-                "unexpected property `reznor`; only `optional` is allowed in peer dependency metadata",
+                'unexpected property `reznor`; only `optional` is allowed in peer dependency metadata',
             },
             line: 5,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 21,
             data: {
               error:
-                "unexpected property `things`; only `optional` is allowed in peer dependency metadata",
+                'unexpected property `things`; only `optional` is allowed in peer dependency metadata',
             },
             line: 9,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 23,
             data: {
               error:
-                "the peer dependency metadata for `with-teeth` should contain the `optional` property",
+                'the peer dependency metadata for `with-teeth` should contain the `optional` property',
             },
             line: 11,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
           {
             column: 15,
             data: {
               error:
-                "unexpected property ``; only `optional` is allowed in peer dependency metadata",
+                'unexpected property ``; only `optional` is allowed in peer dependency metadata',
             },
             line: 12,
-            messageId: "validationError",
+            messageId: 'validationError',
           },
         ],
       },
     ],
     valid: [
-      "{}",
+      '{}',
       `{
   "peerDependenciesMeta": {
     "silver-mt-zion": {

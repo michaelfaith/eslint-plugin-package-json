@@ -3,9 +3,9 @@ title: Getting Started
 description: Install and configure the plugin.
 ---
 
-import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-import Requirements from "~/components/Requirements.astro";
+import Requirements from '~/components/Requirements.astro';
 
 ## 💽 Installation
 
@@ -46,8 +46,8 @@ This plugin's recommended configuration enables its rules on `**/package.json` f
 
 ```ts
 // eslint.config.ts
-import packageJson from "eslint-plugin-package-json";
-import { defineConfig } from "eslint/config";
+import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
@@ -59,16 +59,16 @@ If you want to override the recommended rules:
 
 ```ts
 // eslint.config.ts
-import packageJson from "eslint-plugin-package-json";
-import { defineConfig } from "eslint/config";
+import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
   {
     extends: [packageJson.configs.recommended],
-    files: ["package.json"],
+    files: ['package.json'],
     rules: {
-      "package-json/require-author": "error",
+      'package-json/require-author': 'error',
     },
   },
 ]);
@@ -92,12 +92,12 @@ The `recommended-publishable` configuration has everything in it from the standa
 
 ```ts
 // eslint.config.ts
-import packageJson from "eslint-plugin-package-json";
-import { defineConfig } from "eslint/config";
+import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
-  packageJson.configs["recommended-publishable"],
+  packageJson.configs['recommended-publishable'],
 ]);
 ```
 
@@ -108,8 +108,8 @@ This can be used in addition to the recommended config, or on its own.
 
 ```ts
 // eslint.config.ts
-import packageJson from "eslint-plugin-package-json";
-import { defineConfig } from "eslint/config";
+import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
@@ -127,16 +127,16 @@ Example:
 
 ```ts
 // eslint.config.ts
-import packageJson from "eslint-plugin-package-json";
-import { defineConfig } from "eslint/config";
+import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig({
   plugins: {
-    "package-json": packageJson,
+    'package-json': packageJson,
   },
   rules: {
     // `description` won't be required in package.json with `"private": true`
-    "package-json/require-description": "error",
+    'package-json/require-description': 'error',
   },
   settings: {
     packageJson: {

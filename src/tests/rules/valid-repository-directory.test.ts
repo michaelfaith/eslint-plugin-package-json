@@ -1,9 +1,9 @@
-import path from "node:path";
+import path from 'node:path';
 
-import { rule } from "../../rules/valid-repository-directory.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/valid-repository-directory.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-repository-directory (no repository)", rule, {
+ruleTester.run('valid-repository-directory (no repository)', rule, {
   invalid: [
     {
       code: `{
@@ -17,11 +17,11 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
           column: 16,
           endColumn: 29,
           line: 3,
-          messageId: "mismatched",
+          messageId: 'mismatched',
           suggestions: [],
         },
       ],
-      filename: "/Users/face/src/package.json",
+      filename: '/Users/face/src/package.json',
       name: `invalid directory`,
     },
     {
@@ -36,11 +36,11 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
           column: 22,
           endColumn: 28,
           line: 3,
-          messageId: "mismatched",
+          messageId: 'mismatched',
           suggestions: [],
         },
       ],
-      filename: "/Users/face/bookkeeper/package.json",
+      filename: '/Users/face/bookkeeper/package.json',
       name: `don't match on path substring`,
     },
     {
@@ -55,11 +55,11 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
           column: 22,
           endColumn: 27,
           line: 3,
-          messageId: "mismatched",
+          messageId: 'mismatched',
           suggestions: [],
         },
       ],
-      filename: "/Users/face/src/project/package.json",
+      filename: '/Users/face/src/project/package.json',
       name: `path is valid, but not end of path`,
     },
   ],
@@ -83,7 +83,7 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
     }
 }
 `,
-      filename: "/Users/face/src/project/package.json",
+      filename: '/Users/face/src/project/package.json',
     },
     {
       code: `{
@@ -92,7 +92,7 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
 	}
 }
 `,
-      filename: "/Users/face/src/deeply/nested/package.json",
+      filename: '/Users/face/src/deeply/nested/package.json',
     },
     {
       code: `{ "repository": { "directory": "/Users/face/src/project" } }`,
@@ -102,8 +102,8 @@ ruleTester.run("valid-repository-directory (no repository)", rule, {
   ],
 });
 
-const thisRepoDirectory = path.resolve(import.meta.dirname, "..", "..", "..");
-ruleTester.run("valid-repository-directory (this repository)", rule, {
+const thisRepoDirectory = path.resolve(import.meta.dirname, '..', '..', '..');
+ruleTester.run('valid-repository-directory (this repository)', rule, {
   invalid: [
     {
       code: `{
@@ -117,11 +117,11 @@ ruleTester.run("valid-repository-directory (this repository)", rule, {
           column: 16,
           endColumn: 29,
           line: 3,
-          messageId: "mismatched",
+          messageId: 'mismatched',
           suggestions: [
             {
-              data: { expected: "" },
-              messageId: "replace",
+              data: { expected: '' },
+              messageId: 'replace',
               output: `{
 	"repository": {
 		"directory": ""
@@ -132,7 +132,7 @@ ruleTester.run("valid-repository-directory (this repository)", rule, {
           ],
         },
       ],
-      filename: path.resolve(thisRepoDirectory, "./package.json"),
+      filename: path.resolve(thisRepoDirectory, './package.json'),
       name: `root package.json`,
     },
     {
@@ -147,13 +147,13 @@ ruleTester.run("valid-repository-directory (this repository)", rule, {
           column: 16,
           endColumn: 29,
           line: 3,
-          messageId: "mismatched",
+          messageId: 'mismatched',
           suggestions: [
             {
               data: {
-                expected: "src/tests/__fixtures__/valid-local-dependency",
+                expected: 'src/tests/__fixtures__/valid-local-dependency',
               },
-              messageId: "replace",
+              messageId: 'replace',
               output: `{
 	"repository": {
 		"directory": "src/tests/__fixtures__/valid-local-dependency"
@@ -166,7 +166,7 @@ ruleTester.run("valid-repository-directory (this repository)", rule, {
       ],
       filename: path.resolve(
         thisRepoDirectory,
-        "./src/tests/__fixtures__/valid-local-dependency/package.json",
+        './src/tests/__fixtures__/valid-local-dependency/package.json',
       ),
       name: `nested package.json`,
     },
@@ -182,7 +182,7 @@ ruleTester.run("valid-repository-directory (this repository)", rule, {
       code: `{ "repository": { "directory": "src/tests/__fixtures__/valid-local-dependency" } }`,
       filename: path.resolve(
         thisRepoDirectory,
-        "./src/tests/__fixtures__/valid-local-dependency/package.json",
+        './src/tests/__fixtures__/valid-local-dependency/package.json',
       ),
       name: `nested package.json`,
     },

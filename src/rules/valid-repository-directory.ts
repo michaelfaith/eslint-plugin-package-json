@@ -1,11 +1,11 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { findRootSync } from "@altano/repository-tools";
-import path from "node:path";
-import { sep as posixSep } from "node:path/posix";
+import { findRootSync } from '@altano/repository-tools';
+import path from 'node:path';
+import { sep as posixSep } from 'node:path/posix';
 
-import { createRule } from "../createRule.ts";
-import { findPropertyWithKeyValue } from "../utils/findPropertyWithKeyValue.ts";
+import { createRule } from '../createRule.ts';
+import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
 
 /**
  * Checks if the child path appears at the end of the parent path.
@@ -24,7 +24,7 @@ function pathEndsWith(parent: string, child: string): boolean {
   }
 
   // work backwards from the end, adding another path segment to each check
-  let pathToCheck = "";
+  let pathToCheck = '';
   return segments.reverse().some((segment) => {
     pathToCheck = path.join(segment, pathToCheck);
     if (pathToCheck === child) {
@@ -36,18 +36,18 @@ function pathEndsWith(parent: string, child: string): boolean {
 export const rule = createRule({
   create(context) {
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=repository][value.type=JSONObjectExpression]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=repository][value.type=JSONObjectExpression]'(
         node: JsonAST.JSONProperty & {
           value: JsonAST.JSONObjectExpression;
         },
       ) {
         const directoryProperty = findPropertyWithKeyValue(
           node.value.properties,
-          "directory",
+          'directory',
         );
         if (
-          directoryProperty?.value.type !== "JSONLiteral" ||
-          typeof directoryProperty.value.value !== "string"
+          directoryProperty?.value.type !== 'JSONLiteral' ||
+          typeof directoryProperty.value.value !== 'string'
         ) {
           return;
         }
@@ -73,7 +73,7 @@ export const rule = createRule({
           // partially correct.
           if (!pathEndsWith(fileDirectory, path.normalize(directoryValue))) {
             context.report({
-              messageId: "mismatched",
+              messageId: 'mismatched',
               node: directoryProperty.value,
             });
           }
@@ -98,7 +98,7 @@ export const rule = createRule({
             .replaceAll(path.sep, posixSep);
           if (expected !== directoryValue) {
             context.report({
-              messageId: "mismatched",
+              messageId: 'mismatched',
               node: directoryProperty.value,
               suggest: [
                 {
@@ -109,7 +109,7 @@ export const rule = createRule({
                       `"${expected}"`,
                     );
                   },
-                  messageId: "replace",
+                  messageId: 'replace',
                 },
               ],
             });
@@ -120,18 +120,18 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
-        "Enforce that if repository directory is specified, it matches the path to the package.json file",
+        'Enforce that if repository directory is specified, it matches the path to the package.json file',
       recommended: true,
     },
     hasSuggestions: true,
     messages: {
-      mismatched: "Directory does not match package.json directory.",
+      mismatched: 'Directory does not match package.json directory.',
       replace: "Replace with '{{ expected }}'.",
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "valid-repository-directory",
+  name: 'valid-repository-directory',
 });

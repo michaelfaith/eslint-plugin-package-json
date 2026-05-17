@@ -1,88 +1,88 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-description", rules["valid-description"], {
+ruleTester.run('valid-description', rules['valid-description'], {
   invalid: [
     {
       code: `{ "description": null }`,
       errors: [
         {
           message:
-            "Invalid description: the value is `null`, but should be a `string`",
+            'Invalid description: the value is `null`, but should be a `string`',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": 123 }`,
       errors: [
         {
           message:
-            "Invalid description: the type should be a `string`, not `number`",
+            'Invalid description: the type should be a `string`, not `number`',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": true }`,
       errors: [
         {
           message:
-            "Invalid description: the type should be a `string`, not `boolean`",
+            'Invalid description: the type should be a `string`, not `boolean`',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": [] }`,
       errors: [
         {
           message:
-            "Invalid description: the type should be a `string`, not `Array`",
+            'Invalid description: the type should be a `string`, not `Array`',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": "" }`,
       errors: [
         {
           message:
-            "Invalid description: the value is empty, but should be a description",
+            'Invalid description: the value is empty, but should be a description',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": "   " }`,
       errors: [
         {
           message:
-            "Invalid description: the value is empty, but should be a description",
+            'Invalid description: the value is empty, but should be a description',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": {} }`,
       errors: [
         {
           message:
-            "Invalid description: the type should be a `string`, not `object`",
+            'Invalid description: the type should be a `string`, not `object`',
         },
       ],
-      filename: "package.json",
+      filename: 'package.json',
     },
   ],
 
   valid: [
     {
       code: `{}`,
-      filename: "package.json",
+      filename: 'package.json',
     },
     {
       code: `{ "description": "The Fragile" }`,
-      filename: "package.json",
+      filename: 'package.json',
     },
   ],
 });
