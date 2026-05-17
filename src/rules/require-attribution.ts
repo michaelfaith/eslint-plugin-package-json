@@ -44,7 +44,7 @@ export const rule = createRule({
           isPrivatePackage = true;
         }
       },
-      "Program:exit"(node) {
+      "Program:exit"() {
         if (ignorePrivate && isPrivatePackage) {
           return;
         }
@@ -67,15 +67,15 @@ export const rule = createRule({
           }
           if (!contributorsPropertyNode) {
             context.report({
+              loc: { column: 0, line: 1 },
               messageId: "missingContributor",
-              node,
             });
           }
         } else {
           if (!authorPropertyNode && !contributorsPropertyNode) {
             context.report({
+              loc: { column: 0, line: 1 },
               messageId: "missing",
-              node,
             });
           }
         }

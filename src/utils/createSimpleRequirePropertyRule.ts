@@ -87,8 +87,8 @@ export const createSimpleRequirePropertyRule = (
                         ? fixer.insertTextAfterRange([0, 1], ",")
                         : fixer.insertTextAfterRange([0, 1], "\n");
                     },
+              loc: { column: 0, line: 1 },
               messageId: "missing",
-              node: context.sourceCode.ast,
             });
           }
         },
