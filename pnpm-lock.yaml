@@ -148,7 +148,7 @@ importers:
         specifier: 0.34.5
         version: 0.34.5
       simple-git-hooks:
-        specifier: ^2.13.1
+        specifier: 2.13.1
         version: 2.13.1
       starlight-auto-sidebar:
         specifier: 0.4.0
