@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-browser", rules["valid-browser"], {
+ruleTester.run('valid-browser', rules['valid-browser'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-browser", rules["valid-browser"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-browser", rules["valid-browser"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-browser", rules["valid-browser"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `Array`",
+            error: 'the type should be a `string`, not `Array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -57,16 +57,16 @@ ruleTester.run("valid-browser", rules["valid-browser"], {
         {
           data: {
             error:
-              "the value is empty, but should be the path to the module that should be used in the browser",
+              'the value is empty, but should be the path to the module that should be used in the browser',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "browser": "./index.umd.js" }`,
     `{ "browser": "index.umd.js" }`,
   ],

@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-version", rules["valid-version"], {
+ruleTester.run('valid-version', rules['valid-version'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 13,
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -25,10 +25,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -38,10 +38,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the value is empty, but should be a valid version",
+            error: 'the value is empty, but should be a valid version',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -51,10 +51,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the value is not a valid semver version",
+            error: 'the value is not a valid semver version',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -64,10 +64,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the value is not a valid semver version",
+            error: 'the value is not a valid semver version',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -77,10 +77,10 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the value is not a valid semver version",
+            error: 'the value is not a valid semver version',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -90,16 +90,16 @@ ruleTester.run("valid-version", rules["valid-version"], {
         {
           column: 14,
           data: {
-            error: "the value is not a valid semver version",
+            error: 'the value is not a valid semver version',
           },
           line: 1,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "version": "1.2.3" }`,
     `{ "version": "1.2.3-beta" }`,
     `{ "version": "1.2.3-beta.0" }`,

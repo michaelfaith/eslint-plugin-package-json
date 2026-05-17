@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-directories", rules["valid-directories"], {
+ruleTester.run('valid-directories', rules['valid-directories'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-directories", rules["valid-directories"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be an `object`",
+            error: 'the value is `null`, but should be an `object`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-directories", rules["valid-directories"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `number`",
+            error: 'the type should be `object`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-directories", rules["valid-directories"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `string`",
+            error: 'the type should be `object`, not `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -56,13 +56,13 @@ ruleTester.run("valid-directories", rules["valid-directories"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `array`",
+            error: 'the type should be `object`, not `array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
-  valid: ["{}", `{ "directories": { "bin": "dist/bin", "man": "docs" } }`],
+  valid: ['{}', `{ "directories": { "bin": "dist/bin", "man": "docs" } }`],
 });

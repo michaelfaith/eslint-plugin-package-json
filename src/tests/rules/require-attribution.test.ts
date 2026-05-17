@@ -1,31 +1,31 @@
-import { rule } from "../../rules/require-attribution.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/require-attribution.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("require-attribution", rule, {
+ruleTester.run('require-attribution', rule, {
   invalid: [
     {
-      code: "{}",
+      code: '{}',
       errors: [
         {
           column: 1,
           endColumn: undefined,
           line: 1,
-          messageId: "missing",
+          messageId: 'missing',
         },
       ],
-      name: "neither",
+      name: 'neither',
     },
     {
-      code: "{}",
+      code: '{}',
       errors: [
         {
           column: 1,
           endColumn: undefined,
           line: 1,
-          messageId: "missingContributor",
+          messageId: 'missingContributor',
         },
       ],
-      name: "neither (preferContributorsOnly: true)",
+      name: 'neither (preferContributorsOnly: true)',
       options: [{ preferContributorsOnly: true }],
     },
     {
@@ -36,7 +36,7 @@ ruleTester.run("require-attribution", rule, {
       errors: [
         {
           line: 2,
-          messageId: "noContributors",
+          messageId: 'noContributors',
         },
       ],
     },
@@ -49,7 +49,7 @@ ruleTester.run("require-attribution", rule, {
       errors: [
         {
           line: 3,
-          messageId: "noContributors",
+          messageId: 'noContributors',
         },
       ],
     },
@@ -68,10 +68,10 @@ ruleTester.run("require-attribution", rule, {
       errors: [
         {
           line: 2,
-          messageId: "contributorsOnly",
+          messageId: 'contributorsOnly',
           suggestions: [
             {
-              messageId: "removeAuthor",
+              messageId: 'removeAuthor',
               output: `{
 \t\t
 	"contributors": [
@@ -87,7 +87,7 @@ ruleTester.run("require-attribution", rule, {
           ],
         },
       ],
-      name: "author and contributors (preferContributorsOnly: true)",
+      name: 'author and contributors (preferContributorsOnly: true)',
       options: [{ preferContributorsOnly: true }],
     },
     {
@@ -99,10 +99,10 @@ ruleTester.run("require-attribution", rule, {
           column: 1,
           endColumn: undefined,
           line: 1,
-          messageId: "missing",
+          messageId: 'missing',
         },
       ],
-      name: "missing attribution with private: false (ignorePrivate: true)",
+      name: 'missing attribution with private: false (ignorePrivate: true)',
       options: [{ ignorePrivate: true }],
     },
   ],
@@ -142,7 +142,7 @@ ruleTester.run("require-attribution", rule, {
     "name": "package-with-no-attribution",
     "private": true,
 }`,
-      name: "private package without attribution",
+      name: 'private package without attribution',
     },
     {
       code: `{
@@ -159,7 +159,7 @@ ruleTester.run("require-attribution", rule, {
         }
     ]
 }`,
-      name: "contributors only (preferContributorsOnly: true)",
+      name: 'contributors only (preferContributorsOnly: true)',
       options: [{ preferContributorsOnly: true }],
     },
     `{
@@ -169,7 +169,7 @@ ruleTester.run("require-attribution", rule, {
       code: `{
     "private": true
 }`,
-      name: "private package without attribution (ignorePrivate: true)",
+      name: 'private package without attribution (ignorePrivate: true)',
       options: [{ ignorePrivate: true }],
     },
     {
@@ -177,7 +177,7 @@ ruleTester.run("require-attribution", rule, {
     "private": true,
     "author": "Trent Reznor"
 }`,
-      name: "private package with author (ignorePrivate: true)",
+      name: 'private package with author (ignorePrivate: true)',
       options: [{ ignorePrivate: true }],
     },
     {
@@ -185,7 +185,7 @@ ruleTester.run("require-attribution", rule, {
     "private": false,
     "author": "Trent Reznor"
 }`,
-      name: "private package with author (ignorePrivate: false)",
+      name: 'private package with author (ignorePrivate: false)',
       options: [{ ignorePrivate: false }],
     },
   ],

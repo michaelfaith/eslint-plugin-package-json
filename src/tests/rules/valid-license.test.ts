@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-license", rules["valid-license"], {
+ruleTester.run('valid-license', rules['valid-license'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-license", rules["valid-license"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-license", rules["valid-license"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-license", rules["valid-license"], {
       errors: [
         {
           data: {
-            error: "the value is empty, but should be a valid license",
+            error: 'the value is empty, but should be a valid license',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -60,13 +60,13 @@ ruleTester.run("valid-license", rules["valid-license"], {
               'license should be a valid SPDX license expression (without "LicenseRef"), "UNLICENSED", or "SEE LICENSE IN <filename>"',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "license": "MIT" }`,
     `{ "license": "UNLICENSED" }`,
     `{ "license": "SEE LICENSE IN LICENSE.md" }`,

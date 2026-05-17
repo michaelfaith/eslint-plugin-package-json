@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-libc", rules["valid-libc"], {
+ruleTester.run('valid-libc', rules['valid-libc'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-libc", rules["valid-libc"], {
         {
           data: {
             error:
-              "the value is `null`, but should be an `Array` or a `string`",
+              'the value is `null`, but should be an `Array` or a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -27,10 +27,10 @@ ruleTester.run("valid-libc", rules["valid-libc"], {
       errors: [
         {
           data: {
-            error: "the type should be `Array` or `string`, not `number`",
+            error: 'the type should be `Array` or `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -43,10 +43,10 @@ ruleTester.run("valid-libc", rules["valid-libc"], {
         {
           data: {
             error:
-              "the value is empty, but should be the name of a version of libc",
+              'the value is empty, but should be the name of a version of libc',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -60,10 +60,10 @@ ruleTester.run("valid-libc", rules["valid-libc"], {
       errors: [
         {
           data: {
-            error: "the type should be `Array` or `string`, not `object`",
+            error: 'the type should be `Array` or `string`, not `object`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -81,37 +81,37 @@ ruleTester.run("valid-libc", rules["valid-libc"], {
         {
           data: {
             error:
-              "item at index 0 is empty, but should be the name of a version of libc",
+              'item at index 0 is empty, but should be the name of a version of libc',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "item at index 1 should be a string, not `number`",
+            error: 'item at index 1 should be a string, not `number`',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "item at index 2 should be a string, not `null`",
+            error: 'item at index 2 should be a string, not `null`',
           },
           line: 5,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "item at index 3 should be a string, not `object`",
+            error: 'item at index 3 should be a string, not `object`',
           },
           line: 6,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "libc": [] }`,
     `{ "libc": ["glibc", "musl"] }`,
     `{ "libc": "glibc" }`,

@@ -1,7 +1,7 @@
-import { OGImageRoute } from "astro-og-canvas";
-import { getCollection } from "astro:content";
+import { OGImageRoute } from 'astro-og-canvas';
+import { getCollection } from 'astro:content';
 
-const paths = await getCollection("docs");
+const paths = await getCollection('docs');
 const pages = Object.fromEntries(
   paths.map(({ data, id }) => {
     return [id, { data }] as const;
@@ -24,11 +24,11 @@ export const { GET, getStaticPaths } = await OGImageRoute({
       },
     },
     logo: {
-      path: "./site/src/assets/logo/logo-dark.png",
+      path: './site/src/assets/logo/logo-dark.png',
       size: [228],
     },
     title: data.title,
   }),
   pages,
-  param: "path",
+  param: 'path',
 });

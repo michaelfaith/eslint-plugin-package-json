@@ -1,3 +1,3 @@
 export default {
-  "pre-commit": "pnpm pretty-quick --staged",
+  'pre-commit': 'pnpm pretty-quick --staged',
 };

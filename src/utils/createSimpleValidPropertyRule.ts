@@ -1,7 +1,7 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
-import type { Result } from "package-json-validator";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { Result } from 'package-json-validator';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 export type ValidationFunction = (value: unknown) => Result;
 
@@ -33,7 +33,7 @@ export const createSimpleValidPropertyRule = (
               data: {
                 error: issue.message,
               },
-              messageId: "validationError",
+              messageId: 'validationError',
               node,
             });
           }
@@ -43,7 +43,7 @@ export const createSimpleValidPropertyRule = (
           (childResult) => childResult.errorMessages.length,
         );
         // If the value is an object, and has child results with issues, then report those too
-        if (node.type === "JSONObjectExpression" && childrenWithIssues.length) {
+        if (node.type === 'JSONObjectExpression' && childrenWithIssues.length) {
           for (const childResult of childrenWithIssues) {
             const childNode = node.properties[childResult.index];
             reportIssues(childResult, childNode.value);
@@ -51,7 +51,7 @@ export const createSimpleValidPropertyRule = (
         }
         // If the value is an array, and has child results with issues, then report those too
         else if (
-          node.type === "JSONArrayExpression" &&
+          node.type === 'JSONArrayExpression' &&
           childrenWithIssues.length
         ) {
           for (const childResult of childrenWithIssues) {
@@ -82,16 +82,16 @@ export const createSimpleValidPropertyRule = (
     },
     meta: {
       docs: {
-        category: "Best Practices",
-        description: `Enforce that the \`${propertyName}\`${aliases.length ? ` (also ${aliases.map((alias) => `\`${alias}\``).join(", ")})` : ""} property is valid.`,
+        category: 'Best Practices',
+        description: `Enforce that the \`${propertyName}\`${aliases.length ? ` (also ${aliases.map((alias) => `\`${alias}\``).join(', ')})` : ''} property is valid.`,
         recommended: true,
-        ruleGroup: "valid-properties",
+        ruleGroup: 'valid-properties',
       },
       messages: {
         validationError: `Invalid ${propertyName}: {{ error }}`,
       },
       schema: [],
-      type: "problem",
+      type: 'problem',
     },
     name: ruleName,
   });

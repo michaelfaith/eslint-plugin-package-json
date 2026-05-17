@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-module", rules["valid-module"], {
+ruleTester.run('valid-module', rules['valid-module'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-module", rules["valid-module"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-module", rules["valid-module"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-module", rules["valid-module"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `Array`",
+            error: 'the type should be a `string`, not `Array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -60,10 +60,10 @@ ruleTester.run("valid-module", rules["valid-module"], {
               "the value is empty, but should be the path to the package's main module",
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
-  valid: ["{}", `{ "module": "./index.js" }`, `{ "module": "index.js" }`],
+  valid: ['{}', `{ "module": "./index.js" }`, `{ "module": "index.js" }`],
 });

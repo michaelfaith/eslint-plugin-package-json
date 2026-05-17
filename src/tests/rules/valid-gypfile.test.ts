@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
+ruleTester.run('valid-gypfile', rules['valid-gypfile'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `boolean`",
+            error: 'the value is `null`, but should be a `boolean`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
       errors: [
         {
           data: {
-            error: "the value should be a `boolean`, not `number`",
+            error: 'the value should be a `boolean`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,10 +41,10 @@ ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
       errors: [
         {
           data: {
-            error: "the value should be a `boolean`, not `string`",
+            error: 'the value should be a `boolean`, not `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -56,10 +56,10 @@ ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
       errors: [
         {
           data: {
-            error: "the value should be a `boolean`, not `object`",
+            error: 'the value should be a `boolean`, not `object`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -71,13 +71,13 @@ ruleTester.run("valid-gypfile", rules["valid-gypfile"], {
       errors: [
         {
           data: {
-            error: "the value should be a `boolean`, not `Array`",
+            error: 'the value should be a `boolean`, not `Array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
-  valid: ["{}", `{ "gypfile": true }`, `{ "gypfile": false }`],
+  valid: ['{}', `{ "gypfile": true }`, `{ "gypfile": false }`],
 });

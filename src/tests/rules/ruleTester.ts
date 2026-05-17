@@ -1,9 +1,9 @@
-import { ESLint, RuleTester } from "eslint";
-import * as jsoncESLintParser from "jsonc-eslint-parser";
-import semver from "semver";
-import * as vitest from "vitest";
+import { ESLint, RuleTester } from 'eslint';
+import * as jsoncESLintParser from 'jsonc-eslint-parser';
+import semver from 'semver';
+import * as vitest from 'vitest';
 
-import type { PackageJsonRuleModule } from "../../createRule.ts";
+import type { PackageJsonRuleModule } from '../../createRule.ts';
 
 export type JsonRuleTester = RuleTester & {
   run: JsonRuleTesterRun;
@@ -31,7 +31,7 @@ const originalRun = ruleTester.run;
 ruleTester.run = (name, rule, tests) => {
   originalRun.call(ruleTester, name, rule as PackageJsonRuleModule, {
     // Assertion options were added in ESLint v10.
-    ...(semver.gte(ESLint.version, "10.0.0")
+    ...(semver.gte(ESLint.version, '10.0.0')
       ? {
           assertionOptions: {
             requireData: true,
@@ -40,12 +40,12 @@ ruleTester.run = (name, rule, tests) => {
         }
       : {}),
     invalid: tests.invalid?.map((test) => ({
-      filename: "package.json",
+      filename: 'package.json',
       ...test,
     })),
     valid: tests.valid?.map((test) => ({
-      filename: "package.json",
-      ...(typeof test === "string" ? { code: test } : { ...test }),
+      filename: 'package.json',
+      ...(typeof test === 'string' ? { code: test } : { ...test }),
     })),
   });
 };

@@ -34,12 +34,12 @@ import {
   validateType,
   validateVersion,
   validateWorkspaces,
-} from "package-json-validator";
+} from 'package-json-validator';
 
 import {
   createSimpleValidPropertyRule,
   type ValidationFunction,
-} from "../utils/createSimpleValidPropertyRule.js";
+} from '../utils/createSimpleValidPropertyRule.js';
 
 interface ValidPropertyOptions {
   aliases: string[];
@@ -49,51 +49,51 @@ interface ValidPropertyOptions {
 // List of all properties we want to create valid- rules for,
 // in the format [propertyName, validationFunction | validPropertyOptions]
 const properties = [
-  ["author", validateAuthor],
-  ["bin", validateBin],
-  ["browser", validateBrowser],
-  ["bugs", validateBugs],
+  ['author', validateAuthor],
+  ['bin', validateBin],
+  ['browser', validateBrowser],
+  ['bugs', validateBugs],
   [
-    "bundleDependencies",
+    'bundleDependencies',
     {
-      aliases: ["bundledDependencies"],
+      aliases: ['bundledDependencies'],
       validator: validateBundleDependencies,
     },
   ],
-  ["config", validateConfig],
-  ["contributors", validateContributors],
-  ["cpu", validateCpu],
-  ["description", validateDescription],
-  ["dependencies", validateDependencies],
-  ["devDependencies", validateDependencies],
-  ["devEngines", validateDevEngines],
-  ["directories", validateDirectories],
-  ["engines", validateEngines],
-  ["exports", validateExports],
-  ["files", validateFiles],
-  ["funding", validateFunding],
-  ["gypfile", validateGypfile],
-  ["homepage", validateHomepage],
-  ["keywords", validateKeywords],
-  ["libc", validateLibc],
-  ["license", validateLicense],
-  ["main", validateMain],
-  ["man", validateMan],
-  ["module", validateMain], // Reuse `validateMain` for `module`
-  ["name", validateName],
-  ["optionalDependencies", validateDependencies],
-  ["os", validateOs],
-  ["packageManager", validatePackageManager],
-  ["peerDependencies", validateDependencies],
-  ["peerDependenciesMeta", validatePeerDependenciesMeta],
-  ["private", validatePrivate],
-  ["publishConfig", validatePublishConfig],
-  ["repository", validateRepository],
-  ["scripts", validateScripts],
-  ["sideEffects", validateSideEffects],
-  ["type", validateType],
-  ["version", validateVersion],
-  ["workspaces", validateWorkspaces],
+  ['config', validateConfig],
+  ['contributors', validateContributors],
+  ['cpu', validateCpu],
+  ['description', validateDescription],
+  ['dependencies', validateDependencies],
+  ['devDependencies', validateDependencies],
+  ['devEngines', validateDevEngines],
+  ['directories', validateDirectories],
+  ['engines', validateEngines],
+  ['exports', validateExports],
+  ['files', validateFiles],
+  ['funding', validateFunding],
+  ['gypfile', validateGypfile],
+  ['homepage', validateHomepage],
+  ['keywords', validateKeywords],
+  ['libc', validateLibc],
+  ['license', validateLicense],
+  ['main', validateMain],
+  ['man', validateMan],
+  ['module', validateMain], // Reuse `validateMain` for `module`
+  ['name', validateName],
+  ['optionalDependencies', validateDependencies],
+  ['os', validateOs],
+  ['packageManager', validatePackageManager],
+  ['peerDependencies', validateDependencies],
+  ['peerDependenciesMeta', validatePeerDependenciesMeta],
+  ['private', validatePrivate],
+  ['publishConfig', validatePublishConfig],
+  ['repository', validateRepository],
+  ['scripts', validateScripts],
+  ['sideEffects', validateSideEffects],
+  ['type', validateType],
+  ['version', validateVersion],
+  ['workspaces', validateWorkspaces],
 ] satisfies [string, ValidationFunction | ValidPropertyOptions][];
 
 /** All basic valid- flavor rules */
@@ -101,7 +101,7 @@ export const rules = Object.fromEntries(
   properties.map(([propertyName, validationFunctionOrOptions]) => {
     let validationFunction: ValidationFunction;
     let aliases: string[] = [];
-    if (typeof validationFunctionOrOptions === "object") {
+    if (typeof validationFunctionOrOptions === 'object') {
       validationFunction = validationFunctionOrOptions.validator;
       aliases = validationFunctionOrOptions.aliases;
     } else {

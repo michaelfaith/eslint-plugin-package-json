@@ -1,7 +1,7 @@
-import { rule } from "../../rules/scripts-name-casing.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/scripts-name-casing.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("scripts-name-casing", rule, {
+ruleTester.run('scripts-name-casing', rule, {
   invalid: [
     {
       code: `{
@@ -13,16 +13,16 @@ ruleTester.run("scripts-name-casing", rule, {
       errors: [
         {
           data: {
-            property: "silverMtZion",
+            property: 'silverMtZion',
           },
           line: 3,
-          messageId: "invalidCase",
+          messageId: 'invalidCase',
           suggestions: [
             {
               data: {
-                property: "silverMtZion",
+                property: 'silverMtZion',
               },
-              messageId: "convertToKebabCase",
+              messageId: 'convertToKebabCase',
               output: `{
                 "scripts": {
                     "silver-mt-zion": "silver-mt-zion.js",
@@ -34,16 +34,16 @@ ruleTester.run("scripts-name-casing", rule, {
         },
         {
           data: {
-            property: "NIN",
+            property: 'NIN',
           },
           line: 4,
-          messageId: "invalidCase",
+          messageId: 'invalidCase',
           suggestions: [
             {
               data: {
-                property: "NIN",
+                property: 'NIN',
               },
-              messageId: "convertToKebabCase",
+              messageId: 'convertToKebabCase',
               output: `{
                 "scripts": {
                     "silverMtZion": "silver-mt-zion.js",
@@ -57,7 +57,7 @@ ruleTester.run("scripts-name-casing", rule, {
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "scripts": "./silver-mt-zion.js" }`,
     `{ "scripts": "silver-mt-zion.js" }`,
     `{ "scripts": { "silver-mt-zion": "./silver-mt-zion.js" } }`,

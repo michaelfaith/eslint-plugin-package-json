@@ -1,7 +1,7 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 export const rule = createRule({
   create(context) {
@@ -10,7 +10,7 @@ export const rule = createRule({
     const peerDependencyMap: Record<string, JsonAST.JSONProperty> = {};
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=devDependencies]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=devDependencies]'(
         node: JsonAST.JSONProperty & {
           value: JsonAST.JSONObjectExpression;
         },
@@ -23,7 +23,7 @@ export const rule = createRule({
           }
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=peerDependencies]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=peerDependencies]'(
         node: JsonAST.JSONProperty & {
           value: JsonAST.JSONObjectExpression;
         },
@@ -35,7 +35,7 @@ export const rule = createRule({
           }
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         // Check that every peer dependency name is accounted for in the devDependencies
         for (const [peerDependencyName, peerDependencyNode] of Object.entries(
           peerDependencyMap,
@@ -47,7 +47,7 @@ export const rule = createRule({
               data: {
                 name: peerDependencyName,
               },
-              messageId: "devDependencyNotDefined",
+              messageId: 'devDependencyNotDefined',
               node: peerDependencyNode,
               suggest:
                 devDependenciesObjectNode &&
@@ -75,11 +75,11 @@ export const rule = createRule({
                           return fixer.replaceText(
                             devDependenciesObjectNode,
                             JSON.stringify(sortedDevDependencies, null, 2)
-                              .split("\n")
-                              .join("\n  "), // nest indents,
+                              .split('\n')
+                              .join('\n  '), // nest indents,
                           );
                         },
-                        messageId: "addToDevDependencies",
+                        messageId: 'addToDevDependencies',
                       },
                     ]
                   : [],
@@ -92,7 +92,7 @@ export const rule = createRule({
   meta: {
     docs: {
       description:
-        "Requires that all peer dependencies are also declared as dev dependencies",
+        'Requires that all peer dependencies are also declared as dev dependencies',
       recommended: true,
     },
     hasSuggestions: true,
@@ -102,7 +102,7 @@ export const rule = createRule({
         'Peer dependency "{{ name }}" is not also declared in `devDependencies`.',
     },
     schema: [],
-    type: "problem",
+    type: 'problem',
   },
-  name: "specify-peers-locally",
+  name: 'specify-peers-locally',
 });

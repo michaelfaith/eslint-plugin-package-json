@@ -1,10 +1,10 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { fixRemoveArrayElement } from "eslint-fix-utils";
+import { fixRemoveArrayElement } from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral, isNotNullish } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral, isNotNullish } from '../utils/predicates.ts';
 
 const defaultFiles = [
   /* cspell:disable-next-line */
@@ -23,12 +23,12 @@ const getCachedLocalFileRegex = (filename: string) => {
 
   // Strip the leading `./`, if there is one, since we'll be incorporating
   // it into the regex.
-  const baseFilename = filename.replace("./", "");
+  const baseFilename = filename.replace('./', '');
   let regex = cachedRegex.get(baseFilename);
   if (regex) {
     return regex;
   } else {
-    regex = new RegExp(`^(./)?${baseFilename}$`, "i");
+    regex = new RegExp(`^(./)?${baseFilename}$`, 'i');
     cachedRegex.set(baseFilename, regex);
     return regex;
   }
@@ -63,7 +63,7 @@ export const rule = createRule({
                 index,
                 elements as unknown as ESTree.Expression[],
               ),
-              messageId: "remove",
+              messageId: 'remove',
             },
           ],
         });
@@ -71,7 +71,7 @@ export const rule = createRule({
     };
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]'(
         node: JsonAST.JSONProperty,
       ) {
         const binValue = node.value;
@@ -81,7 +81,7 @@ export const rule = createRule({
         // do anything with it.
         if (isJSONStringLiteral(binValue)) {
           entryCache.bin.push(binValue.value);
-        } else if (binValue.type === "JSONObjectExpression") {
+        } else if (binValue.type === 'JSONObjectExpression') {
           for (const prop of binValue.properties) {
             if (isJSONStringLiteral(prop.value)) {
               entryCache.bin.push(prop.value.value);
@@ -89,11 +89,11 @@ export const rule = createRule({
           }
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=files]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=files]'(
         node: JsonAST.JSONProperty,
       ) {
         // "files" should only ever be an array of strings.
-        if (node.value.type === "JSONArrayExpression") {
+        if (node.value.type === 'JSONArrayExpression') {
           // We want to add it to the files cache, but also check for
           // duplicates as we go.
           const seen = new Set<string>();
@@ -105,7 +105,7 @@ export const rule = createRule({
             // the fix correctly we'll act on the full array of elements
             if (isNotNullish(element) && isJSONStringLiteral(element)) {
               if (seen.has(element.value)) {
-                report(elements, index, "duplicate");
+                report(elements, index, 'duplicate');
               } else {
                 seen.add(element.value);
               }
@@ -114,14 +114,14 @@ export const rule = createRule({
               // of the static default files
               for (const defaultFile of defaultFiles) {
                 if (defaultFile.test(element.value)) {
-                  report(elements, index, "unnecessaryDefault");
+                  report(elements, index, 'unnecessaryDefault');
                 }
               }
             }
           }
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=main]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=main]'(
         node: JsonAST.JSONProperty,
       ) {
         // "main" should only ever be a string.
@@ -129,7 +129,7 @@ export const rule = createRule({
           entryCache.main = node.value.value;
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         // Now that we have all of the entries, we can check for unnecessary files.
         const files = entryCache.files;
 
@@ -142,12 +142,12 @@ export const rule = createRule({
           // First check if the "main" entry is included in "files".
           {
             files: entryCache.main ? [entryCache.main] : [],
-            messageId: "unnecessaryMain",
+            messageId: 'unnecessaryMain',
           },
           // Next check if any "bin" entries are included in "files".
           {
             files: entryCache.bin,
-            messageId: "unnecessaryBin",
+            messageId: 'unnecessaryBin',
           },
         ];
         for (const validation of validations) {
@@ -167,20 +167,20 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Best Practices",
-      description: "Prevents adding unnecessary / redundant files.",
+      category: 'Best Practices',
+      description: 'Prevents adding unnecessary / redundant files.',
       recommended: true,
     },
     hasSuggestions: true,
     messages: {
       duplicate: 'Files has more than one entry for "{{file}}".',
-      remove: "Remove this redundant entry.",
+      remove: 'Remove this redundant entry.',
       unnecessaryBin: `Explicitly declaring "{{file}}" in "files" is unnecessary; it's included in "bin".`,
       unnecessaryDefault: `Explicitly declaring "{{file}}" in "files" is unnecessary; it's included by default.`,
       unnecessaryMain: `Explicitly declaring "{{file}}" in "files" is unnecessary; it's the "main" entry.`,
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "no-redundant-files",
+  name: 'no-redundant-files',
 });

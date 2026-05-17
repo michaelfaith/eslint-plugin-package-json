@@ -1,19 +1,19 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import sortPackageJson from "sort-package-json";
+import sortPackageJson from 'sort-package-json';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 const defaultCollections = new Set([
-  "config",
-  "dependencies",
-  "devDependencies",
-  "exports",
-  "optionalDependencies",
-  "overrides",
-  "peerDependencies",
-  "peerDependenciesMeta",
-  "scripts",
+  'config',
+  'dependencies',
+  'devDependencies',
+  'exports',
+  'optionalDependencies',
+  'overrides',
+  'peerDependencies',
+  'peerDependenciesMeta',
+  'scripts',
 ]);
 
 export const rule = createRule({
@@ -23,12 +23,12 @@ export const rule = createRule({
       : defaultCollections;
 
     return {
-      "JSONProperty:exit"(node) {
+      'JSONProperty:exit'(node) {
         const { key: nodeKey, value: collection } = node;
 
         if (
-          nodeKey.type !== "JSONLiteral" ||
-          collection.type !== "JSONObjectExpression"
+          nodeKey.type !== 'JSONLiteral' ||
+          collection.type !== 'JSONObjectExpression'
         ) {
           return;
         }
@@ -41,15 +41,15 @@ export const rule = createRule({
           currNode = currNode.parent
         ) {
           if (
-            currNode.type === "JSONProperty" &&
-            currNode.key.type === "JSONLiteral"
+            currNode.type === 'JSONProperty' &&
+            currNode.key.type === 'JSONLiteral'
           ) {
             keyPartsReversed.push(currNode.key.value);
-          } else if (currNode.type === "JSONArrayExpression") {
+          } else if (currNode.type === 'JSONArrayExpression') {
             return;
           }
         }
-        const key = keyPartsReversed.reverse().join(".");
+        const key = keyPartsReversed.reverse().join('.');
         if (!toSort.has(key)) {
           return;
         }
@@ -57,7 +57,7 @@ export const rule = createRule({
         const currentOrder = collection.properties;
         let desiredOrder: JsonAST.JSONProperty[];
 
-        if (keyPartsReversed.at(-1) === "scripts") {
+        if (keyPartsReversed.at(-1) === 'scripts') {
           // For scripts we'll use `sort-package-json`
           const scriptsSource = context.sourceCode.getText(node);
           const minimalJson = JSON.parse(`{${scriptsSource}}`) as {
@@ -107,15 +107,15 @@ export const rule = createRule({
                   null,
                   2,
                 )
-                  .split("\n")
-                  .join("\n  "), // nest indents
+                  .split('\n')
+                  .join('\n  '), // nest indents
               );
             },
             loc: collection.loc,
             messageId:
-              keyPartsReversed.at(-1) === "scripts"
-                ? "unsortedScripts"
-                : "unsortedKeys",
+              keyPartsReversed.at(-1) === 'scripts'
+                ? 'unsortedScripts'
+                : 'unsortedKeys',
             node,
           });
         }
@@ -125,12 +125,12 @@ export const rule = createRule({
   meta: {
     defaultOptions: [Array.from(defaultCollections)],
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
-        "Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).",
+        'Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).',
       recommended: true,
     },
-    fixable: "code",
+    fixable: 'code',
     messages: {
       unsortedKeys: "Entries in '{{ key }}' are not in lexicographical order",
       unsortedScripts:
@@ -138,14 +138,14 @@ export const rule = createRule({
     },
     schema: [
       {
-        description: "Array of package properties to require sorting.",
+        description: 'Array of package properties to require sorting.',
         items: {
-          type: "string",
+          type: 'string',
         },
-        type: "array",
+        type: 'array',
       },
     ],
-    type: "layout",
+    type: 'layout',
   },
-  name: "sort-collections",
+  name: 'sort-collections',
 });

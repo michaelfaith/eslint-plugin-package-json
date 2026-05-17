@@ -1,13 +1,13 @@
-import type * as ESTree from "estree";
+import type * as ESTree from 'estree';
 import type {
   FromSchema as InferJsonSchemaType,
   JSONSchema,
-} from "json-schema-to-ts";
+} from 'json-schema-to-ts';
 
-import { AST, Rule, SourceCode } from "eslint";
-import { AST as JsonAST, type RuleListener } from "jsonc-eslint-parser";
+import { AST, Rule, SourceCode } from 'eslint';
+import { AST as JsonAST, type RuleListener } from 'jsonc-eslint-parser';
 
-import { isPackageJson } from "./utils/isPackageJson.ts";
+import { isPackageJson } from './utils/isPackageJson.ts';
 
 export type JsonAstBodyExpression = ESTree.Expression & {
   properties: JsonAstBodyProperty[];
@@ -49,9 +49,9 @@ export interface PackageJsonRuleModule<
   Schema extends JSONSchema[] = JSONSchema[],
 > {
   create(context: PackageJsonRuleContext<Options>): RuleListener;
-  meta: Omit<Rule.RuleMetaData, "defaultOptions" | "docs" | "schema"> & {
+  meta: Omit<Rule.RuleMetaData, 'defaultOptions' | 'docs' | 'schema'> & {
     defaultOptions?: NoInfer<Options>;
-    docs?: Rule.RuleMetaData["docs"] & {
+    docs?: Rule.RuleMetaData['docs'] & {
       category?: string;
       /** An optional route segment to group this rule under */
       ruleGroup?: string;
@@ -95,7 +95,7 @@ export function createRule<
       ...rule.meta,
       docs: {
         ...rule.meta.docs,
-        url: `https://eslint-plugin-package-json.dev/rules/${ruleGroup ? `${ruleGroup}/` : ""}${rule.name}`,
+        url: `https://eslint-plugin-package-json.dev/rules/${ruleGroup ? `${ruleGroup}/` : ''}${rule.name}`,
       },
     },
   };

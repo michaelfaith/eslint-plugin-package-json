@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-contributors", rules["valid-contributors"], {
+ruleTester.run('valid-contributors', rules['valid-contributors'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
         {
           data: {
             error:
-              "the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`",
+              'the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -28,10 +28,10 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
         {
           data: {
             error:
-              "the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`",
+              'the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -44,10 +44,10 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
         {
           data: {
             error:
-              "the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`",
+              'the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -60,10 +60,10 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
         {
           data: {
             error:
-              "the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`",
+              'the type should be an `Array` of objects with at least a `name` property, and optionally `email` and `url`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -82,42 +82,42 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
         {
           data: {
             error:
-              "item 0 is invalid; it should be a person object with at least a `name`",
+              'item 0 is invalid; it should be a person object with at least a `name`',
           },
           line: 3,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "item 1 is invalid; it should be a person object with at least a `name`",
+              'item 1 is invalid; it should be a person object with at least a `name`',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "item 2 is invalid; it should be a person object with at least a `name`",
+              'item 2 is invalid; it should be a person object with at least a `name`',
           },
           line: 5,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "item 3 is invalid; it should be a person object with at least a `name`",
+              'item 3 is invalid; it should be a person object with at least a `name`',
           },
           line: 6,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
             error:
-              "item 4 is invalid; it should be a person object with at least a `name`",
+              'item 4 is invalid; it should be a person object with at least a `name`',
           },
           line: 7,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -140,44 +140,44 @@ ruleTester.run("valid-contributors", rules["valid-contributors"], {
       errors: [
         {
           data: {
-            error: "name should not be empty",
+            error: 'name should not be empty',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "email is not valid: barney",
+            error: 'email is not valid: barney',
           },
           line: 5,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "url is not valid: rubble",
+            error: 'url is not valid: rubble',
           },
           line: 6,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "email is not valid: flintstone",
+            error: 'email is not valid: flintstone',
           },
           line: 10,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           data: {
-            error: "url is not valid: .com",
+            error: 'url is not valid: .com',
           },
           line: 11,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{ "contributors": [] }`,
     `{ "contributors": [
            {

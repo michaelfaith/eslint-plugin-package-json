@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-type", rules["valid-type"], {
+ruleTester.run('valid-type', rules['valid-type'], {
   invalid: [
     {
       code: `{
@@ -11,10 +11,10 @@ ruleTester.run("valid-type", rules["valid-type"], {
       errors: [
         {
           data: {
-            error: "the value is `null`, but should be a `string`",
+            error: 'the value is `null`, but should be a `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -26,10 +26,10 @@ ruleTester.run("valid-type", rules["valid-type"], {
       errors: [
         {
           data: {
-            error: "the type should be a `string`, not `number`",
+            error: 'the type should be a `string`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -41,13 +41,13 @@ ruleTester.run("valid-type", rules["valid-type"], {
       errors: [
         {
           data: {
-            error: "the value is empty, but should be one of: commonjs, module",
+            error: 'the value is empty, but should be one of: commonjs, module',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
-  valid: ["{}", `{ "type": "commonjs" }`, `{ "type": "module" }`],
+  valid: ['{}', `{ "type": "commonjs" }`, `{ "type": "module" }`],
 });

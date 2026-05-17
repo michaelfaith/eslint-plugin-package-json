@@ -1,7 +1,7 @@
-import { rule } from "../../rules/restrict-top-level-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/restrict-top-level-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("restrict-top-level-properties", rule, {
+ruleTester.run('restrict-top-level-properties', rule, {
   invalid: [
     {
       code: `{
@@ -10,13 +10,13 @@ ruleTester.run("restrict-top-level-properties", rule, {
 			}`,
       errors: [
         {
-          data: { customMessage: "", property: "prettier" },
+          data: { customMessage: '', property: 'prettier' },
           line: 3,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "prettier" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'prettier' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test"
 \t\t\t\t
@@ -26,8 +26,8 @@ ruleTester.run("restrict-top-level-properties", rule, {
         },
       ],
 
-      name: "simple string ban",
-      options: [{ ban: ["prettier"] }],
+      name: 'simple string ban',
+      options: [{ ban: ['prettier'] }],
     },
     {
       code: `{
@@ -37,15 +37,15 @@ ruleTester.run("restrict-top-level-properties", rule, {
       errors: [
         {
           data: {
-            customMessage: ": Migrate pnpm config to pnpm-workspace.yaml.",
-            property: "pnpm",
+            customMessage: ': Migrate pnpm config to pnpm-workspace.yaml.',
+            property: 'pnpm',
           },
           line: 3,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test"
 \t\t\t\t
@@ -54,13 +54,13 @@ ruleTester.run("restrict-top-level-properties", rule, {
           ],
         },
       ],
-      name: "object ban with custom message",
+      name: 'object ban with custom message',
       options: [
         {
           ban: [
             {
-              message: "Migrate pnpm config to pnpm-workspace.yaml.",
-              property: "pnpm",
+              message: 'Migrate pnpm config to pnpm-workspace.yaml.',
+              property: 'pnpm',
             },
           ],
         },
@@ -70,20 +70,20 @@ ruleTester.run("restrict-top-level-properties", rule, {
       code: `{ "name": "test", "lint-staged": {} }`,
       errors: [
         {
-          data: { customMessage: "", property: "lint-staged" },
+          data: { customMessage: '', property: 'lint-staged' },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "lint-staged" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'lint-staged' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "object ban without custom message",
-      options: [{ ban: [{ property: "lint-staged" }] }],
+      name: 'object ban without custom message',
+      options: [{ ban: [{ property: 'lint-staged' }] }],
     },
     {
       code: `{
@@ -93,13 +93,13 @@ ruleTester.run("restrict-top-level-properties", rule, {
 			}`,
       errors: [
         {
-          data: { customMessage: "", property: "prettier" },
+          data: { customMessage: '', property: 'prettier' },
           line: 3,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "prettier" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'prettier' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 \t\t\t\t
@@ -109,13 +109,13 @@ ruleTester.run("restrict-top-level-properties", rule, {
           ],
         },
         {
-          data: { customMessage: "", property: "eslintConfig" },
+          data: { customMessage: '', property: 'eslintConfig' },
           line: 4,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "eslintConfig" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'eslintConfig' },
+              messageId: 'removePropertySuggestion',
               output: `{
 				"name": "test",
 				"prettier": {}
@@ -125,36 +125,36 @@ ruleTester.run("restrict-top-level-properties", rule, {
           ],
         },
       ],
-      name: "multiple banned properties",
-      options: [{ ban: ["prettier", "eslintConfig"] }],
+      name: 'multiple banned properties',
+      options: [{ ban: ['prettier', 'eslintConfig'] }],
     },
     {
       code: `{ "name": "test", "pnpm": {} }`,
       errors: [
         {
           data: {
-            customMessage: ": Use pnpm-workspace.yaml instead.",
-            property: "pnpm",
+            customMessage: ': Use pnpm-workspace.yaml instead.',
+            property: 'pnpm',
           },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "object with message overrides preceding plain string (last wins)",
+      name: 'object with message overrides preceding plain string (last wins)',
       options: [
         {
           ban: [
-            "pnpm",
+            'pnpm',
             {
-              message: "Use pnpm-workspace.yaml instead.",
-              property: "pnpm",
+              message: 'Use pnpm-workspace.yaml instead.',
+              property: 'pnpm',
             },
           ],
         },
@@ -164,65 +164,65 @@ ruleTester.run("restrict-top-level-properties", rule, {
       code: `{ "name": "test", "pnpm": {} }`,
       errors: [
         {
-          data: { customMessage: "", property: "pnpm" },
+          data: { customMessage: '', property: 'pnpm' },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "duplicate plain strings: still one error, no custom message",
-      options: [{ ban: ["pnpm", "pnpm"] }],
+      name: 'duplicate plain strings: still one error, no custom message',
+      options: [{ ban: ['pnpm', 'pnpm'] }],
     },
     {
       code: `{ "name": "test", "pnpm": {} }`,
       errors: [
         {
-          data: { customMessage: "", property: "pnpm" },
+          data: { customMessage: '', property: 'pnpm' },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "empty string message treated as no custom message",
-      options: [{ ban: [{ message: "", property: "pnpm" }] }],
+      name: 'empty string message treated as no custom message',
+      options: [{ ban: [{ message: '', property: 'pnpm' }] }],
     },
     {
       code: `{ "name": "test", "pnpm": {} }`,
       errors: [
         {
           data: {
-            customMessage: ": Second message.",
-            property: "pnpm",
+            customMessage: ': Second message.',
+            property: 'pnpm',
           },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "duplicate objects: last message wins",
+      name: 'duplicate objects: last message wins',
       options: [
         {
           ban: [
-            { message: "First message.", property: "pnpm" },
-            { message: "Second message.", property: "pnpm" },
+            { message: 'First message.', property: 'pnpm' },
+            { message: 'Second message.', property: 'pnpm' },
           ],
         },
       ],
@@ -231,27 +231,27 @@ ruleTester.run("restrict-top-level-properties", rule, {
       code: `{ "name": "test", "pnpm": {} }`,
       errors: [
         {
-          data: { customMessage: "", property: "pnpm" },
+          data: { customMessage: '', property: 'pnpm' },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "pnpm" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'pnpm' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "plain string after object: overrides to no custom message",
+      name: 'plain string after object: overrides to no custom message',
       options: [
         {
           ban: [
             {
-              message: "Use pnpm-workspace.yaml instead.",
-              property: "pnpm",
+              message: 'Use pnpm-workspace.yaml instead.',
+              property: 'pnpm',
             },
-            "pnpm",
+            'pnpm',
           ],
         },
       ],
@@ -260,47 +260,47 @@ ruleTester.run("restrict-top-level-properties", rule, {
       code: `{ "description": "A package", "name": "test" }`,
       errors: [
         {
-          data: { customMessage: "", property: "description" },
+          data: { customMessage: '', property: 'description' },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "description" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'description' },
+              messageId: 'removePropertySuggestion',
               output: `{  "name": "test" }`,
             },
           ],
         },
       ],
-      name: "standard package.json property can also be banned",
-      options: [{ ban: ["description"] }],
+      name: 'standard package.json property can also be banned',
+      options: [{ ban: ['description'] }],
     },
     {
       code: `{ "name": "test", "constructor": {} }`,
       errors: [
         {
           data: {
-            customMessage: ": This is not a valid package.json property.",
-            property: "constructor",
+            customMessage: ': This is not a valid package.json property.',
+            property: 'constructor',
           },
           line: 1,
-          messageId: "bannedProperty",
+          messageId: 'bannedProperty',
           suggestions: [
             {
-              data: { property: "constructor" },
-              messageId: "removePropertySuggestion",
+              data: { property: 'constructor' },
+              messageId: 'removePropertySuggestion',
               output: `{ "name": "test"  }`,
             },
           ],
         },
       ],
-      name: "inherited Object.prototype property name can be explicitly banned",
+      name: 'inherited Object.prototype property name can be explicitly banned',
       options: [
         {
           ban: [
             {
-              message: "This is not a valid package.json property.",
-              property: "constructor",
+              message: 'This is not a valid package.json property.',
+              property: 'constructor',
             },
           ],
         },
@@ -310,33 +310,33 @@ ruleTester.run("restrict-top-level-properties", rule, {
   valid: [
     {
       code: `{ "name": "test", "prettier": {} }`,
-      name: "empty ban list",
+      name: 'empty ban list',
       options: [{ ban: [] }],
     },
     {
       code: `{ "name": "test", "constructor": {} }`,
-      name: "inherited Object.prototype property name not in ban list should not be flagged",
-      options: [{ ban: ["prettier"] }],
+      name: 'inherited Object.prototype property name not in ban list should not be flagged',
+      options: [{ ban: ['prettier'] }],
     },
     {
       code: `{ "name": "test", "version": "1.0.0" }`,
-      name: "property not in ban list",
-      options: [{ ban: ["prettier"] }],
+      name: 'property not in ban list',
+      options: [{ ban: ['prettier'] }],
     },
     {
       code: `{ "name": "test" }`,
-      name: "banned property not present",
-      options: [{ ban: ["prettier", { property: "pnpm" }] }],
+      name: 'banned property not present',
+      options: [{ ban: ['prettier', { property: 'pnpm' }] }],
     },
     {
       code: `{}`,
-      name: "empty package",
-      options: [{ ban: ["prettier"] }],
+      name: 'empty package',
+      options: [{ ban: ['prettier'] }],
     },
     {
       code: `{ "name": "test", 1: "value" }`,
-      name: "non-string literal key is skipped",
-      options: [{ ban: ["1"] }],
+      name: 'non-string literal key is skipped',
+      options: [{ ban: ['1'] }],
     },
   ],
 });

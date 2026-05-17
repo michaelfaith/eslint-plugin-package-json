@@ -1,21 +1,21 @@
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import detectIndent from "detect-indent";
-import { detectNewlineGraceful } from "detect-newline";
-import sortObjectKeys from "sort-object-keys";
-import { sortOrder } from "sort-package-json";
+import detectIndent from 'detect-indent';
+import { detectNewlineGraceful } from 'detect-newline';
+import sortObjectKeys from 'sort-object-keys';
+import { sortOrder } from 'sort-package-json';
 
-import { createRule } from "../createRule.ts";
+import { createRule } from '../createRule.ts';
 
 export const rule = createRule({
   create(context) {
     return {
-      "Program:exit"() {
+      'Program:exit'() {
         const { ast, text } = context.sourceCode;
 
-        const { order = "sort-package-json" } = context.options[0] ?? {};
+        const { order = 'sort-package-json' } = context.options[0] ?? {};
 
-        const requiredOrder = order === "sort-package-json" ? sortOrder : order;
+        const requiredOrder = order === 'sort-package-json' ? sortOrder : order;
 
         const json = JSON.parse(text) as Record<string, unknown>;
 
@@ -46,22 +46,22 @@ export const rule = createRule({
             },
             fix(fixer) {
               const { indent, type } = detectIndent(text);
-              const endCharacters = text.endsWith("\n") ? "\n" : "";
+              const endCharacters = text.endsWith('\n') ? '\n' : '';
               const newline = detectNewlineGraceful(text);
               let result =
                 JSON.stringify(
                   orderedSource,
                   null,
-                  type === "tab" ? "\t" : indent,
+                  type === 'tab' ? '\t' : indent,
                 ) + endCharacters;
-              if (newline === "\r\n") {
+              if (newline === '\r\n') {
                 result = result.replace(/\n/g, newline);
               }
 
               return fixer.replaceText(context.sourceCode.ast, result);
             },
             loc: properties[i].loc,
-            messageId: "incorrectOrder",
+            messageId: 'incorrectOrder',
           });
         }
       },
@@ -70,14 +70,14 @@ export const rule = createRule({
   meta: {
     defaultOptions: [
       {
-        order: "sort-package-json",
+        order: 'sort-package-json',
       },
     ],
     docs: {
-      category: "Stylistic",
-      description: "Package properties should be declared in standard order",
+      category: 'Stylistic',
+      description: 'Package properties should be declared in standard order',
     },
-    fixable: "code",
+    fixable: 'code',
     messages: {
       incorrectOrder:
         'Top-level property "{{property}}" is not ordered in the standard way.',
@@ -89,23 +89,23 @@ export const rule = createRule({
           order: {
             anyOf: [
               {
-                enum: ["sort-package-json"],
-                type: ["string"],
+                enum: ['sort-package-json'],
+                type: ['string'],
               },
               {
                 items: {
-                  type: ["string"],
+                  type: ['string'],
                 },
-                type: ["array"],
+                type: ['array'],
               },
             ],
-            description: "Specifies the sorting order of top-level properties.",
+            description: 'Specifies the sorting order of top-level properties.',
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "layout",
+    type: 'layout',
   },
-  name: "order-properties",
+  name: 'order-properties',
 });

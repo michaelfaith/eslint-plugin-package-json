@@ -1,10 +1,10 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { fixRemoveObjectProperty } from "eslint-fix-utils";
+import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 export const rule = createRule({
   create(context) {
@@ -12,40 +12,40 @@ export const rule = createRule({
     let publishConfigAccessProperty: JsonAST.JSONProperty | undefined;
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=name]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=name]'(
         node: JsonAST.JSONProperty,
       ) {
         if (isJSONStringLiteral(node.value)) {
           packageName = node.value.value;
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=publishConfig]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=publishConfig]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type !== "JSONObjectExpression") {
+        if (node.value.type !== 'JSONObjectExpression') {
           return;
         }
 
         for (const property of node.value.properties) {
           if (
             isJSONStringLiteral(property.key) &&
-            property.key.value === "access"
+            property.key.value === 'access'
           ) {
             publishConfigAccessProperty = property;
             break;
           }
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         if (!packageName || !publishConfigAccessProperty) {
           return;
         }
 
-        const isScopedPackage = packageName.startsWith("@");
+        const isScopedPackage = packageName.startsWith('@');
 
         if (!isScopedPackage) {
           context.report({
-            messageId: "redundantAccess",
+            messageId: 'redundantAccess',
             node: publishConfigAccessProperty,
             suggest: [
               {
@@ -53,7 +53,7 @@ export const rule = createRule({
                   context,
                   publishConfigAccessProperty as unknown as ESTree.Property,
                 ),
-                messageId: "removeAccess",
+                messageId: 'removeAccess',
               },
             ],
           });
@@ -63,9 +63,9 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
-        "Warns when publishConfig.access is used in unscoped packages.",
+        'Warns when publishConfig.access is used in unscoped packages.',
       recommended: true,
     },
     hasSuggestions: true,
@@ -75,7 +75,7 @@ export const rule = createRule({
       removeAccess: "Remove the redundant 'access' field.",
     },
     schema: [],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "no-redundant-publishConfig",
+  name: 'no-redundant-publishConfig',
 });

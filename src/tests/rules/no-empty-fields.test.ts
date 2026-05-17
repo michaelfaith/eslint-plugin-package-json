@@ -1,7 +1,7 @@
-import { rule } from "../../rules/no-empty-fields.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rule } from '../../rules/no-empty-fields.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("no-empty-fields", rule, {
+ruleTester.run('no-empty-fields', rule, {
   invalid: [
     {
       code: `{
@@ -14,11 +14,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "workspaces" },
-          messageId: "emptyFields",
+          data: { field: 'workspaces' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t
@@ -40,11 +40,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { expressionType: "array" },
-          messageId: "emptyExpression",
+          data: { expressionType: 'array' },
+          messageId: 'emptyExpression',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"config": [  ["test"] ]
@@ -63,11 +63,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { expressionType: "object" },
-          messageId: "emptyExpression",
+          data: { expressionType: 'object' },
+          messageId: 'emptyExpression',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"config": [  ["test"], [] ]
@@ -77,11 +77,11 @@ ruleTester.run("no-empty-fields", rule, {
           ],
         },
         {
-          data: { expressionType: "array" },
-          messageId: "emptyExpression",
+          data: { expressionType: 'array' },
+          messageId: 'emptyExpression',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"config": [ {}, ["test"]  ]
@@ -100,11 +100,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "dependencies" },
-          messageId: "emptyFields",
+          data: { field: 'dependencies' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test"
 \t\t
@@ -126,11 +126,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "peerDependencies" },
-          messageId: "emptyFields",
+          data: { field: 'peerDependencies' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"files": [
@@ -152,11 +152,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "scripts" },
-          messageId: "emptyFields",
+          data: { field: 'scripts' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test"
 \t\t
@@ -175,11 +175,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "devDependencies" },
-          messageId: "emptyFields",
+          data: { field: 'devDependencies' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test"
 \t\t
@@ -203,11 +203,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "nin" },
-          messageId: "emptyFields",
+          data: { field: 'nin' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"peerDependencyMeta": {
@@ -236,11 +236,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "nin" },
-          messageId: "emptyFields",
+          data: { field: 'nin' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"peerDependencyMeta": {
@@ -268,11 +268,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "workspaces" },
-          messageId: "emptyFields",
+          data: { field: 'workspaces' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t
@@ -286,11 +286,11 @@ ruleTester.run("no-empty-fields", rule, {
           ],
         },
         {
-          data: { field: "test" },
-          messageId: "emptyFields",
+          data: { field: 'test' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"workspaces": [],
@@ -316,11 +316,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "workspaces" },
-          messageId: "emptyFields",
+          data: { field: 'workspaces' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t
@@ -333,11 +333,11 @@ ruleTester.run("no-empty-fields", rule, {
           ],
         },
         {
-          data: { field: "files" },
-          messageId: "emptyFields",
+          data: { field: 'files' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"workspaces": [],
@@ -350,11 +350,11 @@ ruleTester.run("no-empty-fields", rule, {
           ],
         },
         {
-          data: { field: "scripts" },
-          messageId: "emptyFields",
+          data: { field: 'scripts' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"workspaces": [],
@@ -369,7 +369,7 @@ ruleTester.run("no-empty-fields", rule, {
       ],
       options: [
         {
-          ignoreProperties: ["browserslist"],
+          ignoreProperties: ['browserslist'],
         },
       ],
     },
@@ -384,11 +384,11 @@ ruleTester.run("no-empty-fields", rule, {
 `,
       errors: [
         {
-          data: { field: "development" },
-          messageId: "emptyFields",
+          data: { field: 'development' },
+          messageId: 'emptyFields',
           suggestions: [
             {
-              messageId: "remove",
+              messageId: 'remove',
               output: `{
 \t\t"name": "test",
 \t\t"browserslist": {
@@ -403,7 +403,7 @@ ruleTester.run("no-empty-fields", rule, {
       ],
       options: [
         {
-          ignoreProperties: ["development"],
+          ignoreProperties: ['development'],
         },
       ],
     },
@@ -424,7 +424,7 @@ ruleTester.run("no-empty-fields", rule, {
       code: `{ "name": "test", "browserslist": [] }`,
       options: [
         {
-          ignoreProperties: ["browserslist"],
+          ignoreProperties: ['browserslist'],
         },
       ],
     },
@@ -432,7 +432,7 @@ ruleTester.run("no-empty-fields", rule, {
       code: `{ "name": "test", "browserslist": { "development": [], "production": [ "last 1 version", "> 1%", "not dead" ] } }`,
       options: [
         {
-          ignoreProperties: ["browserslist"],
+          ignoreProperties: ['browserslist'],
         },
       ],
     },

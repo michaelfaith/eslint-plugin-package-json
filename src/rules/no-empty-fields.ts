@@ -1,12 +1,12 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
 import {
   fixRemoveArrayElement,
   fixRemoveObjectProperty,
-} from "eslint-fix-utils";
+} from 'eslint-fix-utils';
 
-import { createRule, PackageJsonRuleContext } from "../createRule.ts";
+import { createRule, PackageJsonRuleContext } from '../createRule.ts';
 
 const getDataAndMessageId = (
   node:
@@ -15,29 +15,29 @@ const getDataAndMessageId = (
     | JsonAST.JSONProperty,
 ): {
   data: Record<string, string>;
-  messageId: "emptyExpression" | "emptyFields";
+  messageId: 'emptyExpression' | 'emptyFields';
 } => {
   switch (node.type) {
-    case "JSONArrayExpression":
+    case 'JSONArrayExpression':
       return {
         data: {
-          expressionType: "array",
+          expressionType: 'array',
         },
-        messageId: "emptyExpression",
+        messageId: 'emptyExpression',
       };
-    case "JSONObjectExpression":
+    case 'JSONObjectExpression':
       return {
         data: {
-          expressionType: "object",
+          expressionType: 'object',
         },
-        messageId: "emptyExpression",
+        messageId: 'emptyExpression',
       };
-    case "JSONProperty":
+    case 'JSONProperty':
       return {
         data: {
           field: (node.key as JsonAST.JSONStringLiteral).value,
         },
-        messageId: "emptyFields",
+        messageId: 'emptyFields',
       };
   }
 };
@@ -57,7 +57,7 @@ const report = (
     suggest: [
       {
         fix:
-          node.type === "JSONProperty"
+          node.type === 'JSONProperty'
             ? fixRemoveObjectProperty(
                 context,
                 node as unknown as ESTree.Property,
@@ -67,7 +67,7 @@ const report = (
                 node as unknown as ESTree.Expression,
                 node.parent as unknown as ESTree.ArrayExpression,
               ),
-        messageId: "remove",
+        messageId: 'remove',
       },
     ],
   });
@@ -76,7 +76,7 @@ const report = (
 const getNode = (
   node: JsonAST.JSONArrayExpression | JsonAST.JSONObjectExpression,
 ) => {
-  return node.parent.type === "JSONProperty" ? node.parent : node;
+  return node.parent.type === 'JSONProperty' ? node.parent : node;
 };
 
 const getTopLevelProperty = (
@@ -85,17 +85,17 @@ const getTopLevelProperty = (
   let n: JsonAST.JSONNode = node;
   while (
     n.parent.parent?.parent?.type !== undefined &&
-    n.parent.parent.parent.type !== "Program"
+    n.parent.parent.parent.type !== 'Program'
   ) {
     n = n.parent;
   }
-  return n.type === "JSONProperty"
+  return n.type === 'JSONProperty'
     ? (n.key as JsonAST.JSONStringLiteral)
     : undefined;
 };
 
 // `files` can be empty since its contents can be inferred by `npm pack`
-const defaultIgnoreProperties = ["files"];
+const defaultIgnoreProperties = ['files'];
 
 export const rule = createRule({
   create(context) {
@@ -135,33 +135,33 @@ export const rule = createRule({
   meta: {
     defaultOptions: [{ ignoreProperties: defaultIgnoreProperties }],
     docs: {
-      category: "Best Practices",
-      description: "Reports on unnecessary empty arrays and objects.",
+      category: 'Best Practices',
+      description: 'Reports on unnecessary empty arrays and objects.',
       recommended: true,
     },
     hasSuggestions: true,
     messages: {
       emptyExpression:
-        "This {{ expressionType }} does nothing and can be removed.",
+        'This {{ expressionType }} does nothing and can be removed.',
       emptyFields: "The field '{{ field }}' does nothing and can be removed.",
-      remove: "Remove this empty field.",
+      remove: 'Remove this empty field.',
     },
     schema: [
       {
         additionalProperties: false,
         properties: {
           ignoreProperties: {
-            description: "Array of top-level properties to ignore.",
+            description: 'Array of top-level properties to ignore.',
             items: {
-              type: "string",
+              type: 'string',
             },
-            type: "array",
+            type: 'array',
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "no-empty-fields",
+  name: 'no-empty-fields',
 });

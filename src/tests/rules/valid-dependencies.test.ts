@@ -1,7 +1,7 @@
-import { rules } from "../../rules/valid-properties.ts";
-import { ruleTester } from "./ruleTester.ts";
+import { rules } from '../../rules/valid-properties.ts';
+import { ruleTester } from './ruleTester.ts';
 
-ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
+ruleTester.run('valid-dependencies', rules['valid-dependencies'], {
   invalid: [
     {
       code: `{
@@ -12,10 +12,10 @@ ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
         {
           data: {
             error:
-              "the value is `null`, but should be a record of dependencies",
+              'the value is `null`, but should be a record of dependencies',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -27,10 +27,10 @@ ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `number`",
+            error: 'the type should be `object`, not `number`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -42,10 +42,10 @@ ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `string`",
+            error: 'the type should be `object`, not `string`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -57,10 +57,10 @@ ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
       errors: [
         {
           data: {
-            error: "the type should be `object`, not `array`",
+            error: 'the type should be `object`, not `array`',
           },
           line: 2,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
@@ -79,34 +79,34 @@ ruleTester.run("valid-dependencies", rules["valid-dependencies"], {
         {
           column: 18,
           data: {
-            error: "dependency version for `trent` should be a string: 123",
+            error: 'dependency version for `trent` should be a string: 123',
           },
           line: 4,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           column: 24,
           data: {
             error:
-              "dependency version for `the-fragile` should be a string: null",
+              'dependency version for `the-fragile` should be a string: null',
           },
           line: 5,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
         {
           column: 23,
           data: {
             error:
-              "dependency version for `pink-floyd` should be a string: [object Object]",
+              'dependency version for `pink-floyd` should be a string: [object Object]',
           },
           line: 6,
-          messageId: "validationError",
+          messageId: 'validationError',
         },
       ],
     },
   ],
   valid: [
-    "{}",
+    '{}',
     `{
   "dependencies": {
     "silver-mt-zion": "^1.2.3",

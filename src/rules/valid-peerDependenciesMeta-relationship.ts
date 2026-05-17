@@ -1,10 +1,10 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { fixRemoveObjectProperty } from "eslint-fix-utils";
+import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 export const rule = createRule({
   create(context) {
@@ -12,10 +12,10 @@ export const rule = createRule({
     const peerDependenciesMeta = new Map<string, JsonAST.JSONProperty>();
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependencies]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependencies]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type === "JSONObjectExpression") {
+        if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
             if (isJSONStringLiteral(property.key)) {
               peerDependencies.add(property.key.value);
@@ -23,10 +23,10 @@ export const rule = createRule({
           }
         }
       },
-      "Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependenciesMeta]"(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependenciesMeta]'(
         node: JsonAST.JSONProperty,
       ) {
-        if (node.value.type === "JSONObjectExpression") {
+        if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
             if (isJSONStringLiteral(property.key)) {
               peerDependenciesMeta.set(property.key.value, property);
@@ -34,12 +34,12 @@ export const rule = createRule({
           }
         }
       },
-      "Program:exit"() {
+      'Program:exit'() {
         for (const [dependencyName, propertyNode] of peerDependenciesMeta) {
           if (!peerDependencies.has(dependencyName)) {
             context.report({
               data: { dependencyName },
-              messageId: "unnecessaryPeerDependency",
+              messageId: 'unnecessaryPeerDependency',
               node: propertyNode,
               suggest: [
                 {
@@ -47,7 +47,7 @@ export const rule = createRule({
                     context,
                     propertyNode as unknown as ESTree.Property,
                   ),
-                  messageId: "removePeerDependencyMeta",
+                  messageId: 'removePeerDependencyMeta',
                 },
               ],
             });
@@ -58,19 +58,19 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      category: "Best Practices",
+      category: 'Best Practices',
       description:
         "Enforces that any dependencies declared in `peerDependenciesMeta` are also defined in the package's `peerDependencies`.",
       recommended: true,
     },
     hasSuggestions: true,
     messages: {
-      removePeerDependencyMeta: "Remove from `peerDependenciesMeta`.",
+      removePeerDependencyMeta: 'Remove from `peerDependenciesMeta`.',
       unnecessaryPeerDependency:
         "Dependency '{{ dependencyName }}' is declared in `peerDependenciesMeta` but not in `peerDependencies`.",
     },
     schema: [],
-    type: "problem",
+    type: 'problem',
   },
-  name: "valid-peerDependenciesMeta-relationship",
+  name: 'valid-peerDependenciesMeta-relationship',
 });

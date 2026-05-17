@@ -1,12 +1,12 @@
-import type * as ESTree from "estree";
-import type { AST as JsonAST } from "jsonc-eslint-parser";
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
-import { fixRemoveObjectProperty } from "eslint-fix-utils";
+import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 
-import { createRule } from "../createRule.ts";
-import { isJSONStringLiteral } from "../utils/predicates.ts";
+import { createRule } from '../createRule.ts';
+import { isJSONStringLiteral } from '../utils/predicates.ts';
 
-const defaultBlockedProperties = ["files", "publishConfig"];
+const defaultBlockedProperties = ['files', 'publishConfig'];
 
 export const rule = createRule({
   create(context) {
@@ -15,7 +15,7 @@ export const rule = createRule({
       context.options[0]?.blockedProperties ?? defaultBlockedProperties;
 
     return {
-      "Program > JSONExpressionStatement > JSONObjectExpression"(
+      'Program > JSONExpressionStatement > JSONObjectExpression'(
         node: JsonAST.JSONObjectExpression,
       ) {
         // Check if this is a private package
@@ -23,8 +23,8 @@ export const rule = createRule({
           !node.properties.some(
             (property) =>
               isJSONStringLiteral(property.key) &&
-              property.key.value === "private" &&
-              property.value.type === "JSONLiteral" &&
+              property.key.value === 'private' &&
+              property.value.type === 'JSONLiteral' &&
               property.value.value === true,
           )
         ) {
@@ -38,16 +38,16 @@ export const rule = createRule({
             blockedProperties.includes(property.key.value)
           ) {
             const isEmpty =
-              (property.value.type === "JSONArrayExpression" &&
+              (property.value.type === 'JSONArrayExpression' &&
                 property.value.elements.length === 0) ||
-              (property.value.type === "JSONObjectExpression" &&
+              (property.value.type === 'JSONObjectExpression' &&
                 property.value.properties.length === 0);
 
             context.report({
               data: {
                 property: property.key.value,
               },
-              messageId: "unnecessaryProperty",
+              messageId: 'unnecessaryProperty',
               node: property,
               ...(isEmpty
                 ? {
@@ -66,7 +66,7 @@ export const rule = createRule({
                           context,
                           property as unknown as ESTree.Property,
                         ),
-                        messageId: "removePropertySuggestion",
+                        messageId: 'removePropertySuggestion',
                       },
                     ],
                   }),
@@ -79,11 +79,11 @@ export const rule = createRule({
   meta: {
     defaultOptions: [{ blockedProperties: defaultBlockedProperties }],
     docs: {
-      category: "Best Practices",
-      description: "Disallows unnecessary properties in private packages.",
+      category: 'Best Practices',
+      description: 'Disallows unnecessary properties in private packages.',
       recommended: false,
     },
-    fixable: "code",
+    fixable: 'code',
     hasSuggestions: true,
     messages: {
       removePropertySuggestion: "Remove the '{{ property }}' field.",
@@ -96,17 +96,17 @@ export const rule = createRule({
         properties: {
           blockedProperties: {
             description:
-              "Array of property names to disallow in private packages.",
+              'Array of property names to disallow in private packages.',
             items: {
-              type: "string",
+              type: 'string',
             },
-            type: "array",
+            type: 'array',
           },
         },
-        type: "object",
+        type: 'object',
       },
     ],
-    type: "suggestion",
+    type: 'suggestion',
   },
-  name: "restrict-private-properties",
+  name: 'restrict-private-properties',
 });
