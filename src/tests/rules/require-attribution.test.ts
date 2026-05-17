@@ -7,6 +7,8 @@ ruleTester.run("require-attribution", rule, {
       code: "{}",
       errors: [
         {
+          column: 1,
+          endColumn: undefined,
           line: 1,
           messageId: "missing",
         },
@@ -17,6 +19,8 @@ ruleTester.run("require-attribution", rule, {
       code: "{}",
       errors: [
         {
+          column: 1,
+          endColumn: undefined,
           line: 1,
           messageId: "missingContributor",
         },
@@ -92,6 +96,8 @@ ruleTester.run("require-attribution", rule, {
 }`,
       errors: [
         {
+          column: 1,
+          endColumn: undefined,
           line: 1,
           messageId: "missing",
         },

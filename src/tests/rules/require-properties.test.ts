@@ -22,7 +22,9 @@ for (const ruleName of ruleNames) {
         code: "{}",
         errors: [
           {
+            column: 1,
             data: { property: propertyName },
+            endColumn: undefined,
             line: 1,
             messageId: "missing",
           },
@@ -39,7 +41,9 @@ for (const ruleName of ruleNames) {
 }`,
         errors: [
           {
+            column: 1,
             data: { property: propertyName },
+            endColumn: undefined,
             line: 1,
             messageId: "missing",
           },
@@ -61,7 +65,9 @@ for (const ruleName of ruleNames) {
 }`,
         errors: [
           {
+            column: 1,
             data: { property: propertyName },
+            endColumn: undefined,
             line: 1,
             messageId: "missing",
           },
@@ -85,7 +91,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -107,7 +115,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -129,7 +139,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -147,7 +159,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -165,7 +179,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -181,7 +197,9 @@ for (const ruleName of ruleNames) {
               code: `{}`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -198,7 +216,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -221,7 +241,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -242,7 +264,9 @@ for (const ruleName of ruleNames) {
               code: `{}`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -264,7 +288,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -287,7 +313,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
@@ -310,7 +338,9 @@ for (const ruleName of ruleNames) {
 }`,
               errors: [
                 {
+                  column: 1,
                   data: { property: propertyName },
+                  endColumn: undefined,
                   line: 1,
                   messageId: "missing",
                 },
