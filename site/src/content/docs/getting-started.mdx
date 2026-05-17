@@ -5,6 +5,8 @@ description: Install and configure the plugin.
 
 import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 
+import Requirements from "~/components/Requirements.astro";
+
 ## 💽 Installation
 
 {/* prettier-ignore-start */}
@@ -34,11 +36,7 @@ import { Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 </Tabs>
 {/* prettier-ignore-end */}
 
-<Aside type="note" title="Requirements">
-- ESLint v9 or above
-- Node ^22.22.2 || >=24.15.0
-
-</Aside>
+<Requirements />
 
 ## 📖 Configs
 
