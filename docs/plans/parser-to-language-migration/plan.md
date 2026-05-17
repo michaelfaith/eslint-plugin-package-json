@@ -1,4 +1,4 @@
-# Migration Proposal
+# Migration Plan
 
 Following is a proposal for how we execute the migration from the `jsonc-eslint-parser` setup that we have today to the new language provided by `@eslint/json`.
 The original feature request: #655.
@@ -8,7 +8,7 @@ The original feature request: #655.
 This milestone is us dipping our toe in the water and offering an opt-in experimental version of the plugin with configs and rules that can be used with `@eslint/json`.
 
 Since this will be an opt-in feature, we should be able to introduce this in a minor version.
-In order to not make it a breaking change, we'll have to add `@eslint/json` as an option peer dependency.
+In order to not make it a breaking change, we'll have to add `@eslint/json` as an optional peer dependency.
 Otherwise, we'd reduce our supported versions of `eslint` ([reference](./research.md#compatibility)).
 
 **Release Timeframe:** v1.x release cycle
