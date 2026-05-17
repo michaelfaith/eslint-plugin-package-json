@@ -1,0 +1,20 @@
+---
+import { Aside } from "@astrojs/starlight/components";
+
+import packageJson from "../../../package.json" with { type: "json" };
+
+const engines = packageJson.engines;
+const nodeRange = engines.node;
+
+const peerDependencies = packageJson.peerDependencies;
+const eslintRange = peerDependencies.eslint;
+
+---
+
+<Aside type="note" title="Requirements">
+  <ul>
+    <li>ESLint: <code>{eslintRange}</code></li>
+    <li>Node: <code>{nodeRange}</code></li>
+  </ul>
+
+</Aside>
