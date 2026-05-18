@@ -94,7 +94,7 @@
     "eslint-plugin-yml": "3.3.0",
     "jiti": "2.7.0",
     "json-schema-to-ts": "3.1.1",
-    "knip": "6.13.0",
+    "knip": "6.14.0",
     "prettier": "3.8.0",
     "prettier-plugin-curly": "0.4.0",
     "prettier-plugin-packagejson": "3.0.0",
