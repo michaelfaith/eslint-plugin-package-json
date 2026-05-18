@@ -37,6 +37,7 @@ export const propertyConfig: [
   ['os'],
   ['packageManager'],
   ['peerDependencies'],
+  ['peerDependenciesMeta'],
   ['private', { fixValue: false }],
   ['publishConfig', { ignorePrivateDefault: true }],
   ['repository', { ignorePrivateDefault: true, isRecommended: true }],
