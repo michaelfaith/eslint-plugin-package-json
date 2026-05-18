@@ -33,7 +33,7 @@ recommended: {
 + language: 'json/json',
   name: 'package-json/recommended',
   plugins: {
-+   json: jsonPlugin
++   json: jsonPlugin,
     get 'package-json'(): ESLint.Plugin {
       return plugin;
     },
