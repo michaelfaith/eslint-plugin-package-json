@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.0.0...v1.1.0) (2026-05-18)
+
+
+### 🚀 Features
+
+* add `require-peerDependenciesMeta` rule ([#1852](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1852)) ([e66ac55](https://github.com/michaelfaith/eslint-plugin-package-json/commit/e66ac55c64b5be4c829e67884611e335a34db70c))
+
 ## [1.0.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v0.91.2...v1.0.0) (2026-05-17)
 
 
