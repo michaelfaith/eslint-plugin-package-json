@@ -4,7 +4,6 @@
   alt="Logo Image"
   height="240"
 />
-</>
 
 <h1 align="center">ESLint Plugin: Package JSON</h1>
 
