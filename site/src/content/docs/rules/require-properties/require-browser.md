@@ -1,6 +1,6 @@
 ---
-title: require-browser
-description: Requires the `browser` property to be present.
+title: 'require-browser'
+description: 'Requires the `browser` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

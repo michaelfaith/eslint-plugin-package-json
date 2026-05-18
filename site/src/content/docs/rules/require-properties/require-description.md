@@ -1,6 +1,6 @@
 ---
-title: require-description
-description: Requires the `description` property to be present.
+title: 'require-description'
+description: 'Requires the `description` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

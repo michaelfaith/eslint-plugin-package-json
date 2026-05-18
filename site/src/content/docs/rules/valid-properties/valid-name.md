@@ -1,6 +1,6 @@
 ---
-title: valid-name
-description: Enforce that the `name` property is valid.
+title: 'valid-name'
+description: 'Enforce that the `name` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

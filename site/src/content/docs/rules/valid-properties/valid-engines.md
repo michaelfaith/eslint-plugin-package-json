@@ -1,6 +1,6 @@
 ---
-title: valid-engines
-description: Enforce that the `engines` property is valid.
+title: 'valid-engines'
+description: 'Enforce that the `engines` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

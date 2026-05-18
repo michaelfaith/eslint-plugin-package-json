@@ -1,6 +1,6 @@
 ---
-title: require-bundleDependencies
-description: Requires the `bundleDependencies` property to be present.
+title: 'require-bundleDependencies'
+description: 'Requires the `bundleDependencies` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

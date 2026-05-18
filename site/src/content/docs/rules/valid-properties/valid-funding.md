@@ -1,6 +1,6 @@
 ---
-title: valid-funding
-description: Enforce that the `funding` property is valid.
+title: 'valid-funding'
+description: 'Enforce that the `funding` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

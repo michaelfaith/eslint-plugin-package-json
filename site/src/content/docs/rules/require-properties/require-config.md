@@ -1,6 +1,6 @@
 ---
-title: require-config
-description: Requires the `config` property to be present.
+title: 'require-config'
+description: 'Requires the `config` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

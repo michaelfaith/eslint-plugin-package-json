@@ -1,6 +1,6 @@
 ---
-title: require-gypfile
-description: Requires the `gypfile` property to be present.
+title: 'require-gypfile'
+description: 'Requires the `gypfile` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

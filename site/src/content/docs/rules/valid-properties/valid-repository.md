@@ -1,6 +1,6 @@
 ---
-title: valid-repository
-description: Enforce that the `repository` property is valid.
+title: 'valid-repository'
+description: 'Enforce that the `repository` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

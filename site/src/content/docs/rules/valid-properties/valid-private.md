@@ -1,6 +1,6 @@
 ---
-title: valid-private
-description: Enforce that the `private` property is valid.
+title: 'valid-private'
+description: 'Enforce that the `private` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

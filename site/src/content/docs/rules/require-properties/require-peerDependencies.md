@@ -1,6 +1,6 @@
 ---
-title: require-peerDependencies
-description: Requires the `peerDependencies` property to be present.
+title: 'require-peerDependencies'
+description: 'Requires the `peerDependencies` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

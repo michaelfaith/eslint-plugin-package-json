@@ -1,6 +1,6 @@
 ---
-title: require-exports
-description: Requires the `exports` property to be present.
+title: 'require-exports'
+description: 'Requires the `exports` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

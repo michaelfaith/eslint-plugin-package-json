@@ -1,6 +1,6 @@
 ---
-title: valid-version
-description: Enforce that the `version` property is valid.
+title: 'valid-version'
+description: 'Enforce that the `version` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

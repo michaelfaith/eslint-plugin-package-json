@@ -1,6 +1,6 @@
 ---
-title: unique-dependencies
-description: Checks a dependency isn't specified more than once (i.e. in `dependencies` and `devDependencies`)
+title: 'unique-dependencies'
+description: "Checks a dependency isn't specified more than once (i.e. in `dependencies` and `devDependencies`)"
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-cpu
-description: Enforce that the `cpu` property is valid.
+title: 'valid-cpu'
+description: 'Enforce that the `cpu` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

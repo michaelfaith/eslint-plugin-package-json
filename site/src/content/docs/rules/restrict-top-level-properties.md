@@ -1,6 +1,6 @@
 ---
-title: restrict-top-level-properties
-description: Disallows specified top-level properties in package.json.
+title: 'restrict-top-level-properties'
+description: 'Disallows specified top-level properties in package.json.'
 ---
 
 💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).

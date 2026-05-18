@@ -1,6 +1,6 @@
 ---
-title: valid-config
-description: Enforce that the `config` property is valid.
+title: 'valid-config'
+description: 'Enforce that the `config` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

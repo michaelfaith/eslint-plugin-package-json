@@ -1,6 +1,6 @@
 ---
-title: require-engines
-description: Requires the `engines` property to be present.
+title: 'require-engines'
+description: 'Requires the `engines` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

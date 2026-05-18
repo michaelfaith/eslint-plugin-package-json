@@ -1,6 +1,6 @@
 ---
-title: valid-homepage
-description: Enforce that the `homepage` property is valid.
+title: 'valid-homepage'
+description: 'Enforce that the `homepage` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: require-man
-description: Requires the `man` property to be present.
+title: 'require-man'
+description: 'Requires the `man` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

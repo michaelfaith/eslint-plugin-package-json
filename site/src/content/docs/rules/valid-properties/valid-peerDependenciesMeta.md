@@ -1,6 +1,6 @@
 ---
-title: valid-peerDependenciesMeta
-description: Enforce that the `peerDependenciesMeta` property is valid.
+title: 'valid-peerDependenciesMeta'
+description: 'Enforce that the `peerDependenciesMeta` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

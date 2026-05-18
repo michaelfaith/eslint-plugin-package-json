@@ -1,6 +1,6 @@
 ---
-title: valid-packageManager
-description: Enforce that the `packageManager` property is valid.
+title: 'valid-packageManager'
+description: 'Enforce that the `packageManager` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

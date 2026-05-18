@@ -1,6 +1,6 @@
 ---
-title: require-repository
-description: Requires the `repository` property to be present.
+title: 'require-repository'
+description: 'Requires the `repository` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

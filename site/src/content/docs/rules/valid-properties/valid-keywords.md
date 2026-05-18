@@ -1,6 +1,6 @@
 ---
-title: valid-keywords
-description: Enforce that the `keywords` property is valid.
+title: 'valid-keywords'
+description: 'Enforce that the `keywords` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: require-sideEffects
-description: Requires the `sideEffects` property to be present.
+title: 'require-sideEffects'
+description: 'Requires the `sideEffects` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

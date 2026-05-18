@@ -1,6 +1,6 @@
 ---
-title: valid-bin
-description: Enforce that the `bin` property is valid.
+title: 'valid-bin'
+description: 'Enforce that the `bin` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

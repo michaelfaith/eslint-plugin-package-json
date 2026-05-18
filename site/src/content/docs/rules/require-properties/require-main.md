@@ -1,6 +1,6 @@
 ---
-title: require-main
-description: Requires the `main` property to be present.
+title: 'require-main'
+description: 'Requires the `main` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

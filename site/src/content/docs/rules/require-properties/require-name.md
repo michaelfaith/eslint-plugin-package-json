@@ -1,6 +1,6 @@
 ---
-title: require-name
-description: Requires the `name` property to be present.
+title: 'require-name'
+description: 'Requires the `name` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

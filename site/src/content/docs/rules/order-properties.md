@@ -1,6 +1,6 @@
 ---
-title: order-properties
-description: Package properties should be declared in standard order
+title: 'order-properties'
+description: 'Package properties should be declared in standard order'
 ---
 
 💼 This rule is enabled in the 🎨 `stylistic` config.

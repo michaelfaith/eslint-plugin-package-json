@@ -1,6 +1,6 @@
 ---
-title: no-redundant-files
-description: Prevents adding unnecessary / redundant files.
+title: 'no-redundant-files'
+description: 'Prevents adding unnecessary / redundant files.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

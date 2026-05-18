@@ -1,6 +1,6 @@
 ---
-title: require-scripts
-description: Requires the `scripts` property to be present.
+title: 'require-scripts'
+description: 'Requires the `scripts` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

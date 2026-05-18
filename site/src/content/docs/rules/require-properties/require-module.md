@@ -1,6 +1,6 @@
 ---
-title: require-module
-description: Requires the `module` property to be present.
+title: 'require-module'
+description: 'Requires the `module` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

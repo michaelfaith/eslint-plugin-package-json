@@ -1,6 +1,6 @@
 ---
-title: require-packageManager
-description: Requires the `packageManager` property to be present.
+title: 'require-packageManager'
+description: 'Requires the `packageManager` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

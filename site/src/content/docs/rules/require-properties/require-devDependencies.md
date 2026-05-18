@@ -1,6 +1,6 @@
 ---
-title: require-devDependencies
-description: Requires the `devDependencies` property to be present.
+title: 'require-devDependencies'
+description: 'Requires the `devDependencies` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

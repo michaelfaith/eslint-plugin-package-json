@@ -1,6 +1,6 @@
 ---
-title: sort-collections
-description: Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).
+title: 'sort-collections'
+description: 'Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

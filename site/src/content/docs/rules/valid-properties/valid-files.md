@@ -1,6 +1,6 @@
 ---
-title: valid-files
-description: Enforce that the `files` property is valid.
+title: 'valid-files'
+description: 'Enforce that the `files` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

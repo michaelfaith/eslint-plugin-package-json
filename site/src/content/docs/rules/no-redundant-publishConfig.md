@@ -1,6 +1,6 @@
 ---
-title: no-redundant-publishConfig
-description: Warns when publishConfig.access is used in unscoped packages.
+title: 'no-redundant-publishConfig'
+description: 'Warns when publishConfig.access is used in unscoped packages.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

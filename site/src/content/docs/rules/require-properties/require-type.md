@@ -1,6 +1,6 @@
 ---
-title: require-type
-description: Requires the `type` property to be present.
+title: 'require-type'
+description: 'Requires the `type` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: require-libc
-description: Requires the `libc` property to be present.
+title: 'require-libc'
+description: 'Requires the `libc` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

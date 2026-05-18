@@ -1,6 +1,6 @@
 ---
-title: exports-subpaths-style
-description: Enforce consistent format for the exports field (implicit or explicit subpaths).
+title: 'exports-subpaths-style'
+description: 'Enforce consistent format for the exports field (implicit or explicit subpaths).'
 ---
 
 💼 This rule is enabled in the 🎨 `stylistic` config.

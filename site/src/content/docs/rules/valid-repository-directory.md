@@ -1,6 +1,6 @@
 ---
-title: valid-repository-directory
-description: Enforce that if repository directory is specified, it matches the path to the package.json file
+title: 'valid-repository-directory'
+description: 'Enforce that if repository directory is specified, it matches the path to the package.json file'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

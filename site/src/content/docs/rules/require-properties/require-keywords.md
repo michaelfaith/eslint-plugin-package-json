@@ -1,6 +1,6 @@
 ---
-title: require-keywords
-description: Requires the `keywords` property to be present.
+title: 'require-keywords'
+description: 'Requires the `keywords` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

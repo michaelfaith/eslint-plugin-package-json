@@ -1,6 +1,6 @@
 ---
-title: valid-contributors
-description: Enforce that the `contributors` property is valid.
+title: 'valid-contributors'
+description: 'Enforce that the `contributors` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

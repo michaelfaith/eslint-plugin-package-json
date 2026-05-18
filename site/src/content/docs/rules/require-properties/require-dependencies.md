@@ -1,6 +1,6 @@
 ---
-title: require-dependencies
-description: Requires the `dependencies` property to be present.
+title: 'require-dependencies'
+description: 'Requires the `dependencies` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

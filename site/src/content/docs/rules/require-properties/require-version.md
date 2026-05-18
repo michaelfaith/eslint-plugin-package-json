@@ -1,6 +1,6 @@
 ---
-title: require-version
-description: Requires the `version` property to be present.
+title: 'require-version'
+description: 'Requires the `version` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

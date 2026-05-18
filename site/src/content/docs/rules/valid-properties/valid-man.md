@@ -1,6 +1,6 @@
 ---
-title: valid-man
-description: Enforce that the `man` property is valid.
+title: 'valid-man'
+description: 'Enforce that the `man` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
