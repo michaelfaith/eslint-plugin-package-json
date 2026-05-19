@@ -1,6 +1,6 @@
 ---
-title: require-os
-description: Requires the `os` property to be present.
+title: 'require-os'
+description: 'Requires the `os` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

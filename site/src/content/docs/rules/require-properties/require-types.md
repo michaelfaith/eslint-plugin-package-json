@@ -1,6 +1,6 @@
 ---
-title: require-types
-description: Requires the `types` property to be present.
+title: 'require-types'
+description: 'Requires the `types` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

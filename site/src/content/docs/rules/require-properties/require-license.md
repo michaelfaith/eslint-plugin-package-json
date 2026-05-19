@@ -1,6 +1,6 @@
 ---
-title: require-license
-description: Requires the `license` property to be present.
+title: 'require-license'
+description: 'Requires the `license` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

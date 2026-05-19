@@ -1,6 +1,6 @@
 ---
-title: valid-author
-description: Enforce that the `author` property is valid.
+title: 'valid-author'
+description: 'Enforce that the `author` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-workspaces
-description: Enforce that the `workspaces` property is valid.
+title: 'valid-workspaces'
+description: 'Enforce that the `workspaces` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

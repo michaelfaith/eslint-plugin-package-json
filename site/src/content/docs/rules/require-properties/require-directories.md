@@ -1,6 +1,6 @@
 ---
-title: require-directories
-description: Requires the `directories` property to be present.
+title: 'require-directories'
+description: 'Requires the `directories` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

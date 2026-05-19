@@ -1,6 +1,6 @@
 ---
-title: valid-license
-description: Enforce that the `license` property is valid.
+title: 'valid-license'
+description: 'Enforce that the `license` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

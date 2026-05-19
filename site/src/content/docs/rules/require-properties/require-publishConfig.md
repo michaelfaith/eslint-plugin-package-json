@@ -1,6 +1,6 @@
 ---
-title: require-publishConfig
-description: Requires the `publishConfig` property to be present.
+title: 'require-publishConfig'
+description: 'Requires the `publishConfig` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

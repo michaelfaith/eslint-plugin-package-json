@@ -1,6 +1,6 @@
 ---
-title: valid-type
-description: Enforce that the `type` property is valid.
+title: 'valid-type'
+description: 'Enforce that the `type` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-optionalDependencies
-description: Enforce that the `optionalDependencies` property is valid.
+title: 'valid-optionalDependencies'
+description: 'Enforce that the `optionalDependencies` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-peerDependenciesMeta-relationship
-description: Enforces that any dependencies declared in `peerDependenciesMeta` are also defined in the package's `peerDependencies`.
+title: 'valid-peerDependenciesMeta-relationship'
+description: "Enforces that any dependencies declared in `peerDependenciesMeta` are also defined in the package's `peerDependencies`."
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-main
-description: Enforce that the `main` property is valid.
+title: 'valid-main'
+description: 'Enforce that the `main` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

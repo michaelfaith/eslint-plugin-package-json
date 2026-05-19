@@ -1,6 +1,6 @@
 ---
-title: require-private
-description: Requires the `private` property to be present.
+title: 'require-private'
+description: 'Requires the `private` property to be present.'
 ---
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).

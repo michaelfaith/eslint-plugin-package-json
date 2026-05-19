@@ -1,6 +1,6 @@
 ---
-title: valid-scripts
-description: Enforce that the `scripts` property is valid.
+title: 'valid-scripts'
+description: 'Enforce that the `scripts` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

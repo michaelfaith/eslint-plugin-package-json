@@ -1,6 +1,6 @@
 ---
-title: specify-peers-locally
-description: Requires that all peer dependencies are also declared as dev dependencies
+title: 'specify-peers-locally'
+description: 'Requires that all peer dependencies are also declared as dev dependencies'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

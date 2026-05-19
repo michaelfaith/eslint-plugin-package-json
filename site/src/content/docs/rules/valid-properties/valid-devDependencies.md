@@ -1,6 +1,6 @@
 ---
-title: valid-devDependencies
-description: Enforce that the `devDependencies` property is valid.
+title: 'valid-devDependencies'
+description: 'Enforce that the `devDependencies` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

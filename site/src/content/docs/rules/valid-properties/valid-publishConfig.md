@@ -1,6 +1,6 @@
 ---
-title: valid-publishConfig
-description: Enforce that the `publishConfig` property is valid.
+title: 'valid-publishConfig'
+description: 'Enforce that the `publishConfig` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

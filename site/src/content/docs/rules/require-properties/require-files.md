@@ -1,6 +1,6 @@
 ---
-title: require-files
-description: Requires the `files` property to be present.
+title: 'require-files'
+description: 'Requires the `files` property to be present.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

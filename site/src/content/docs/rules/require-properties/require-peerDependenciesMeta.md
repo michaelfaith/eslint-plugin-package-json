@@ -1,6 +1,6 @@
 ---
-title: require-peerDependenciesMeta
-description: Requires the `peerDependenciesMeta` property to be present.
+title: 'require-peerDependenciesMeta'
+description: 'Requires the `peerDependenciesMeta` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

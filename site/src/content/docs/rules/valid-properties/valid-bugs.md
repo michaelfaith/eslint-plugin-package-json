@@ -1,6 +1,6 @@
 ---
-title: valid-bugs
-description: Enforce that the `bugs` property is valid.
+title: 'valid-bugs'
+description: 'Enforce that the `bugs` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

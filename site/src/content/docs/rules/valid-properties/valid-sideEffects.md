@@ -1,6 +1,6 @@
 ---
-title: valid-sideEffects
-description: Enforce that the `sideEffects` property is valid.
+title: 'valid-sideEffects'
+description: 'Enforce that the `sideEffects` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

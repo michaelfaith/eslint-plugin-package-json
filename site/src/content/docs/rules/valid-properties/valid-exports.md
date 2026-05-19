@@ -1,6 +1,6 @@
 ---
-title: valid-exports
-description: Enforce that the `exports` property is valid.
+title: 'valid-exports'
+description: 'Enforce that the `exports` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-browser
-description: Enforce that the `browser` property is valid.
+title: 'valid-browser'
+description: 'Enforce that the `browser` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

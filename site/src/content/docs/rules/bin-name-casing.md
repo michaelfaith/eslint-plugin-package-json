@@ -1,6 +1,6 @@
 ---
-title: bin-name-casing
-description: Enforce that names for bin properties are in kebab case.
+title: 'bin-name-casing'
+description: 'Enforce that names for bin properties are in kebab case.'
 ---
 
 💼 This rule is enabled in the 🎨 `stylistic` config.

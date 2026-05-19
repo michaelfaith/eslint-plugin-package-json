@@ -1,6 +1,6 @@
 ---
-title: require-bugs
-description: Requires the `bugs` property to be present.
+title: 'require-bugs'
+description: 'Requires the `bugs` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

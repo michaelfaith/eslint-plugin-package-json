@@ -1,6 +1,6 @@
 ---
-title: require-funding
-description: Requires the `funding` property to be present.
+title: 'require-funding'
+description: 'Requires the `funding` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

@@ -1,6 +1,6 @@
 ---
-title: restrict-dependency-ranges
-description: Restricts the range of dependencies to allow or disallow specific types of ranges.
+title: 'restrict-dependency-ranges'
+description: 'Restricts the range of dependencies to allow or disallow specific types of ranges.'
 ---
 
 💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).

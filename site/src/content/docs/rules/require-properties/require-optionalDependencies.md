@@ -1,6 +1,6 @@
 ---
-title: require-optionalDependencies
-description: Requires the `optionalDependencies` property to be present.
+title: 'require-optionalDependencies'
+description: 'Requires the `optionalDependencies` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

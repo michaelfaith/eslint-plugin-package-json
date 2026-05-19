@@ -1,6 +1,6 @@
 ---
-title: require-cpu
-description: Requires the `cpu` property to be present.
+title: 'require-cpu'
+description: 'Requires the `cpu` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

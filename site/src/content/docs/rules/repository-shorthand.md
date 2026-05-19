@@ -1,6 +1,6 @@
 ---
-title: repository-shorthand
-description: Enforce either object or shorthand declaration for repository.
+title: 'repository-shorthand'
+description: 'Enforce either object or shorthand declaration for repository.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

@@ -1,6 +1,6 @@
 ---
-title: valid-devEngines
-description: Enforce that the `devEngines` property is valid.
+title: 'valid-devEngines'
+description: 'Enforce that the `devEngines` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

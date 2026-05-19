@@ -1,6 +1,6 @@
 ---
-title: scripts-name-casing
-description: Enforce that names for `scripts` are in kebab case (optionally separated by colons).
+title: 'scripts-name-casing'
+description: 'Enforce that names for `scripts` are in kebab case (optionally separated by colons).'
 ---
 
 💼 This rule is enabled in the 🎨 `stylistic` config.

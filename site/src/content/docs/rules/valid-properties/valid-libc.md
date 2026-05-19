@@ -1,6 +1,6 @@
 ---
-title: valid-libc
-description: Enforce that the `libc` property is valid.
+title: 'valid-libc'
+description: 'Enforce that the `libc` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

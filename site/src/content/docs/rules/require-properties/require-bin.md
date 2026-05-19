@@ -1,6 +1,6 @@
 ---
-title: require-bin
-description: Requires the `bin` property to be present.
+title: 'require-bin'
+description: 'Requires the `bin` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

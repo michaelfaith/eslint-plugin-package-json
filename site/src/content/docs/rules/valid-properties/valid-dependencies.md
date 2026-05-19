@@ -1,6 +1,6 @@
 ---
-title: valid-dependencies
-description: Enforce that the `dependencies` property is valid.
+title: 'valid-dependencies'
+description: 'Enforce that the `dependencies` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

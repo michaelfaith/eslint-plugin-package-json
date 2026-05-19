@@ -1,6 +1,6 @@
 ---
-title: valid-peerDependencies
-description: Enforce that the `peerDependencies` property is valid.
+title: 'valid-peerDependencies'
+description: 'Enforce that the `peerDependencies` property is valid.'
 ---
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.

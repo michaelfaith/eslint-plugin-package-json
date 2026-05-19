@@ -1,6 +1,6 @@
 ---
-title: require-author
-description: Requires the `author` property to be present.
+title: 'require-author'
+description: 'Requires the `author` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->

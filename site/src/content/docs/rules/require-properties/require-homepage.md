@@ -1,6 +1,6 @@
 ---
-title: require-homepage
-description: Requires the `homepage` property to be present.
+title: 'require-homepage'
+description: 'Requires the `homepage` property to be present.'
 ---
 
 <!-- end auto-generated rule header -->
