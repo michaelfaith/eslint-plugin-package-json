@@ -60,8 +60,6 @@ See [Getting Started](https://eslint-plugin-package-json.dev/getting-started) fo
 
 ### Require Properties
 
-A set of rules that allows you to specific that certain top-level `package.json` properties are required.
-
 | Name                                                                                                                         | Description                                                 | 💼    | 🔧  | 💡  |
 | :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- | :---- | :-- | :-- |
 | [require-author](https://eslint-plugin-package-json.dev/rules/require-properties/require-author)                             | Requires the `author` property to be present.               |       |     |     |

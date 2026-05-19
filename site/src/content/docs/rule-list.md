@@ -3,8 +3,6 @@ title: Rule List
 description: All rules provided by the plugin.
 ---
 
-<!-- eslint-disable markdown/no-multiple-h1 -->
-
 Here's a list of all rules that this plugin provides.
 
 <!-- prettier-ignore-start -->
