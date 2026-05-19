@@ -39,6 +39,25 @@ const config = {
     'requiresTypeChecking',
   ],
   ruleDocTitleFormat: 'name',
+  ruleListSplit(rules) {
+    return [
+      {
+        // No header for this list.
+        rules: rules.filter(
+          ([name]) =>
+            !requireRuleNames.includes(name) && !validRuleNames.includes(name),
+        ),
+      },
+      {
+        title: 'Require Properties',
+        rules: rules.filter(([name]) => requireRuleNames.includes(name)),
+      },
+      {
+        title: 'Valid Properties',
+        rules: rules.filter(([name]) => validRuleNames.includes(name)),
+      },
+    ];
+  },
   urlRuleDoc(name, page) {
     // Group the simple require-* and valid-* rules into their own sections.
     let rulePath = `rules/${name}`;
