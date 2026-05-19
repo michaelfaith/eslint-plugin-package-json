@@ -7,7 +7,6 @@ const config = {
   plugins: [
     'prettier-plugin-curly',
     'prettier-plugin-packagejson',
-    'prettier-plugin-sentences-per-line',
     'prettier-plugin-sh',
   ],
   singleQuote: true,
