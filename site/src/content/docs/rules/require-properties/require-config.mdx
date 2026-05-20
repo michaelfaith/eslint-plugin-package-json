@@ -3,11 +3,16 @@ title: 'require-config'
 description: 'Requires the `config` property to be present.'
 ---
 
-<!-- end auto-generated rule header -->
+{/* end auto-generated rule header */}
 
-This rule checks for the existence of the `"config"` property in a package.json, and reports a violation if it doesn't exist.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Example of **incorrect** code for this rule:
+This rule checks for the existence of the `"config"` property in a `package.json`, and reports a violation if it doesn't exist.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
 
 ```json
 {
@@ -16,7 +21,8 @@ Example of **incorrect** code for this rule:
 }
 ```
 
-Example of **correct** code for this rule:
+</TabItem>
+<TabItem label="✅ Correct">
 
 ```json
 {
@@ -26,15 +32,18 @@ Example of **correct** code for this rule:
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ## Options
 
-<!-- begin auto-generated rule options list -->
+{/* begin auto-generated rule options list */}
 
 | Name            | Description                                                                                 | Type    | Default |
 | :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
 | `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `false` |
 
-<!-- end auto-generated rule options list -->
+{/* end auto-generated rule options list */}
 
 ```json
 {
@@ -47,20 +56,16 @@ Example of **correct** code for this rule:
 }
 ```
 
+### Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
 Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }` option:
 
 ```json
 {
   "private": true
-}
-```
-
-Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
-
-```json
-{
-  "private": true,
-  "config": { "port": "8080" }
 }
 ```
 
@@ -72,6 +77,18 @@ Example of **incorrect** code for this rule with the `{ "ignorePrivate": true }`
 }
 ```
 
+</TabItem>
+<TabItem label="✅ Correct">
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true,
+  "config": { "port": "8080" }
+}
+```
+
 Example of **correct** code for this rule with the `{ "ignorePrivate": true }` option:
 
 ```json
@@ -79,3 +96,14 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
   "private": true
 }
 ```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-config`](../../valid-properties/valid-config) - Enforces that the `config` property is valid.
+
+## Further Reading
+
+- [npm: package.json > config](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#config)
