@@ -17,12 +17,12 @@ const config = {
   pathRuleDoc(name) {
     // Group the simple require-* and valid-* rules into their own sections.
     if (requireRuleNames.includes(name)) {
-      return `site/src/content/docs/rules/require-properties/${name}.md`;
+      return `site/src/content/docs/rules/require-properties/${name}.mdx`;
     }
     if (validRuleNames.includes(name)) {
-      return `site/src/content/docs/rules/valid-properties/${name}.md`;
+      return `site/src/content/docs/rules/valid-properties/${name}.mdx`;
     }
-    return `site/src/content/docs/rules/${name}.md`;
+    return `site/src/content/docs/rules/${name}.mdx`;
   },
   pathRuleList: ['README.md', 'site/src/content/docs/rule-list.md'],
   postprocess: async (content, path) => {
