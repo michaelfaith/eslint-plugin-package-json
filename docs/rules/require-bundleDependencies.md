@@ -1,4 +1,4 @@
 # require-bundleDependencies
 
 > [!NOTE]
-> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/require-bundleDependencies>
+> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/require-properties/require-bundleDependencies>
