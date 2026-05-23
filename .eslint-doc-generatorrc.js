@@ -51,10 +51,14 @@ const config = {
       {
         title: 'Require Properties',
         rules: rules.filter(([name]) => requireRuleNames.includes(name)),
+        description:
+          'This group of rules allows you to require that the associated top-level property must be present in the `package.json`.',
       },
       {
         title: 'Valid Properties',
         rules: rules.filter(([name]) => validRuleNames.includes(name)),
+        description:
+          'This group of rules allows you to enforce that the value of the associated top-level property is valid.  All of these rules are include in the `recommended` config.',
       },
     ];
   },
