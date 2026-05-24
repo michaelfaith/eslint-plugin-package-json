@@ -3,11 +3,23 @@ title: 'require-peerDependenciesMeta'
 description: 'Requires the `peerDependenciesMeta` property to be present.'
 ---
 
-<!-- end auto-generated rule header -->
+{/* end auto-generated rule header */}
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
 This rule checks for the existence of the `"peerDependenciesMeta"` property in a package.json, and reports a violation if it doesn't exist.
 
-Example of **incorrect** code for this rule:
+<Aside>
+  If you're using `peerDependenciesMeta`, consider also using the
+  [`valid-peerDependenciesMeta-relationship`](/rules/valid-peerdependenciesmeta-relationship)
+  rule, which requires that every dependency declared inside
+  `peerDependenciesMeta` is also declared in `peerDependencies`.
+</Aside>
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
 
 ```json
 {
@@ -16,7 +28,8 @@ Example of **incorrect** code for this rule:
 }
 ```
 
-Example of **correct** code for this rule:
+</TabItem>
+<TabItem label="✅ Correct">
 
 ```json
 {
@@ -30,15 +43,18 @@ Example of **correct** code for this rule:
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ## Options
 
-<!-- begin auto-generated rule options list -->
+{/* begin auto-generated rule options list */}
 
 | Name            | Description                                                                                 | Type    | Default |
 | :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
 | `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `false` |
 
-<!-- end auto-generated rule options list -->
+{/* end auto-generated rule options list */}
 
 ```json
 {
@@ -51,6 +67,11 @@ Example of **correct** code for this rule:
 }
 ```
 
+### Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
 Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }` option:
 
 ```json
@@ -58,6 +79,21 @@ Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }
   "private": true
 }
 ```
+
+Examples of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
+
+```json
+{
+  "private": false
+}
+```
+
+```json
+{}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
 
 Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
 
@@ -72,14 +108,6 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": false }` 
 }
 ```
 
-Example of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
-
-```json
-{
-  "private": false
-}
-```
-
 Example of **correct** code for this rule with the `{ "ignorePrivate": true }` option:
 
 ```json
@@ -87,3 +115,16 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
   "private": true
 }
 ```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-peerDependenciesMeta`](../../valid-properties/valid-peerdependenciesmeta) - Enforces that the `peerDependenciesMeta` property is valid.
+- [`valid-peerDependenciesMeta-relationship`](../../valid-peerdependenciesmeta-relationship) - Enforces that every dependency declared inside `peerDependenciesMeta` is also declared in `peerDependencies`.
+
+## Further Reading
+
+- [npm: package.json > peerDependenciesMeta](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#peerdependenciesmeta)
+- [pnpm: package.json > peerDependenciesMeta](https://pnpm.io/package_json#peerdependenciesmeta)

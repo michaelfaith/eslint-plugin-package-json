@@ -7,20 +7,26 @@ description: 'Requires the `type` property to be present.'
 
 🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
 
-<!-- end auto-generated rule header -->
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 This rule checks for the existence of the `"type"` property in a package.json, and reports a violation if it doesn't exist.
 
-Example of **incorrect** code for this rule:
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
 
 ```json
 {
-  "name": "Thee Silver Mt. Zion",
+  "name": "thee-silver-mt-zion",
   "version": "13.0.0"
 }
 ```
 
-Example of **correct** code for this rule:
+</TabItem>
+<TabItem label="✅ Correct">
 
 ```json
 {
@@ -30,15 +36,18 @@ Example of **correct** code for this rule:
 }
 ```
 
+</TabItem>
+</Tabs>
+
 ## Options
 
-<!-- begin auto-generated rule options list -->
+{/* begin auto-generated rule options list */}
 
 | Name            | Description                                                                                 | Type    | Default |
 | :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
 | `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `false` |
 
-<!-- end auto-generated rule options list -->
+{/* end auto-generated rule options list */}
 
 ```json
 {
@@ -51,6 +60,11 @@ Example of **correct** code for this rule:
 }
 ```
 
+### Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
 Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }` option:
 
 ```json
@@ -59,16 +73,7 @@ Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }
 }
 ```
 
-Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
-
-```json
-{
-  "private": true,
-  "type": "module"
-}
-```
-
-Example of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
+Examples of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
 
 ```json
 {
@@ -80,6 +85,18 @@ Example of **incorrect** code for this rule with the `{ "ignorePrivate": true }`
 {}
 ```
 
+</TabItem>
+<TabItem label="✅ Correct">
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true,
+  "type": "module"
+}
+```
+
 Example of **correct** code for this rule with the `{ "ignorePrivate": true }` option:
 
 ```json
@@ -87,3 +104,14 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
   "private": true
 }
 ```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-type`](../../valid-properties/valid-type) - Enforces that the `type` property is valid.
+
+## Further Reading
+
+- [Node.js: Packages > type](https://nodejs.org/api/packages.html#type)
