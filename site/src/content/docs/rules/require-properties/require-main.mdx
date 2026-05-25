@@ -7,7 +7,7 @@ description: 'Requires the `main` property to be present.'
 
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `"main"` property in a package.json, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `main` property and reports a violation if it doesn't exist.
 
 <Aside>
   The `main` property is generally not needed anymore, if you're using a modern
@@ -111,7 +111,7 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`valid-main`](../../valid-properties/valid-main) - Enforces that the `main` property is valid.
+- [`valid-main`](/rules/valid-properties/valid-main) - Enforces that the `main` property is valid.
 
 ## Further Reading
 

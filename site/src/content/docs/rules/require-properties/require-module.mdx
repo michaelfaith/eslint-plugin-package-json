@@ -7,7 +7,7 @@ description: 'Requires the `module` property to be present.'
 
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `"module"` property in a package.json, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `module` property and reports a violation if it doesn't exist.
 
 <Aside>
   The `module` property is generally not needed anymore, if you're using a
@@ -113,7 +113,7 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`valid-module`](../../valid-properties/valid-module) - Enforces that the `module` property is valid.
+- [`valid-module`](/rules/valid-properties/valid-module) - Enforces that the `module` property is valid.
 
 ## Further Reading
 

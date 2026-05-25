@@ -9,7 +9,7 @@ description: 'Requires the `files` property to be present.'
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `"files"` property in a package.json, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `files` property and reports a violation if it doesn't exist.
 
 ## Examples
 
@@ -108,7 +108,8 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`valid-files`](../../valid-properties/valid-files) - Enforces that the `files` property is valid.
+- [`valid-files`](/rules/valid-properties/valid-files) - Enforces that the `files` property is valid.
+- [`no-redundant-files`](/rules/no-redundant-files) - Enforces that the `files` property of a `package.json` doesn't contain any redundant or unnecessary file entries.
 
 ## Further Reading
 

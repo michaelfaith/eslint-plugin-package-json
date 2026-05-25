@@ -1,0 +1,177 @@
+---
+title: 'sort-collections'
+description: 'Selected collections must be in a consistent order (lexicographical for most; lifecycle-aware for scripts).'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule enforces that specified collections (e.g. `dependencies`, `scripts`, etc.) are sorted in a consistent order.
+
+## More Details
+
+When npm changes package dependencies through `npm install`, it sorts (lexicographically) all dependencies in the `package.json` file.
+However, developers will manually update `package.json` and unintentionally leave dependencies out of order.
+Doing so leads to "noise" in commits when a later change re-sorts the packages.
+
+For most collections (`dependencies`, `peerDependencies`, etc.) this rule enforces a simple ascending lexicographical ordering (based on raw string keys).
+
+`scripts` is an exception: it uses a lifecycle-aware ordering, which groups `pre<name>` / `<name>` / `post<name>` together (even if the middle one is missing).
+See [Scripts Lifecycle Ordering](#scripts-lifecycle-ordering) for more details and examples.
+
+This rule therefore aims to keep the configured collections sorted deterministically and to colocate lifecycle hook scripts for readability.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest",
+    "start": "node server.js"
+  }
+}
+```
+
+```json
+{
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "lodash.debounce": "4.17.11",
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "prettier": "^1.14.3"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node server.js",
+    "test": "jest"
+  }
+}
+```
+
+```json
+{
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "lodash": "^4.17.11",
+    "lodash.debounce": "4.17.11",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "prettier": "^1.14.3"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Scripts Lifecycle Ordering
+
+Summary:
+
+- Lifecycle scripts form a group: `pre<name>` → `<name>` → `post<name>`.
+- The group is positioned where `<name>` would appear in lexicographical order, even if `<name>` itself is missing.
+- Groups with different base names (`build`, `install`, `test`, ...) are ordered relative to each other by their base name.
+- All other script names (including namespaced ones like `lint:fix`, `watch:dist`) then follow the `sort-package-json` ordering after lifecycle grouping.
+
+This matches the behavior of [`prettier-plugin-packagejson`](https://github.com/matzkoh/prettier-plugin-packagejson).
+
+### Examples
+
+Missing main script (`install`); group still kept together:
+
+```json
+{
+  "scripts": {
+    "preinstall": "echo pre",
+    "postinstall": "echo post",
+    "prepare": "echo prepare"
+  }
+}
+```
+
+Incorrect vs. correct ordering of a complete lifecycle group:
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "scripts": {
+    "build": "echo build",
+    "postbuild": "echo post",
+    "prebuild": "echo pre"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "scripts": {
+    "prebuild": "echo pre",
+    "build": "echo build",
+    "postbuild": "echo post"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+Pass an array of package properties to require sorting on those collections.
+To specify a nested property, use dot notation.
+All of their values must be objects.
+
+Example of only sorting `devDependencies` and `pnpm.patchedDependencies`:
+
+```json
+{
+  "package-json/sort-collections": [
+    "error",
+    ["devDependencies", "pnpm.patchedDependencies"]
+  ]
+}
+```
+
+Default:
+
+```json
+[
+  "config",
+  "dependencies",
+  "devDependencies",
+  "exports",
+  "optionalDependencies",
+  "overrides",
+  "peerDependencies",
+  "peerDependenciesMeta",
+  "scripts"
+]
+```
+
+## Related Rules
+
+- [`order-properties`](/rules/order-properties) - Enforces that top-level properties declared in a standard order.

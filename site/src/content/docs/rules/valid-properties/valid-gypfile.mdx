@@ -1,0 +1,43 @@
+---
+title: 'valid-gypfile'
+description: 'Enforce that the `gypfile` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule checks that the `gypfile` property, if present, is a boolean.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "gypfile": "false"
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "gypfile": false
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-gypfile`](/rules/require-properties/require-gypfile) - Enforces that the `gypfile` property is present.
+
+## Further Reading
+
+- [npm: package.json > gypfile](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#gypfile)

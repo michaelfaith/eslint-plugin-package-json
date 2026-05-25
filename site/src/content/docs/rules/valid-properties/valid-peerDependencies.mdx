@@ -1,0 +1,53 @@
+---
+title: 'valid-peerDependencies'
+description: 'Enforce that the `peerDependencies` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `peerDependencies` property, if present, against the following criteria:
+
+- The value is an object
+- Each property's key is a valid package name
+- Each property's value is a valid version range
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "peerDependencies": {
+    "invalid-version": "catalob:"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "peerDependencies": {
+    "david-bowie": "workspace:^",
+    "nin": "catalog:",
+    "thee-silver-mt-zion": "^1.2.3"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-peerDependencies`](/rules/require-properties/require-peerdependencies) - Enforces that the `peerDependencies` property is present.
+
+## Further Reading
+
+- [npm: package.json > peerDependencies](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#peerdependencies)

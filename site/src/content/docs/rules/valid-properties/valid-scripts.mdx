@@ -1,0 +1,50 @@
+---
+title: 'valid-scripts'
+description: 'Enforce that the `scripts` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `scripts` property, if present, against the following criteria:
+
+- It must be an object
+- The object should only consist of non-empty string values
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "scripts": {
+    "invalid-script": 123
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "scripts": {
+    "lint": "eslint ."
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-scripts`](/rules/require-properties/require-scripts) - Enforces that the `scripts` property is present.
+
+## Further Reading
+
+- [npm: package.json > scripts](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#scripts)

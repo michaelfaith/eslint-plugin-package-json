@@ -1,0 +1,60 @@
+---
+title: 'valid-repository'
+description: 'Enforce that the `repository` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `repository` property, if present, against the following criteria:
+
+- It should be an object or a string
+- If it's an object, it should have `type`, `url`, and optionally `directory` properties
+- `type` and `directory`, if present, should be non-empty strings
+- `url` should be a valid repo URL
+- If it's a string, it should be the shorthand repo string from a supported provider
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "repository": {
+    "url": "git+https://github.com/michaelfaith/eslint-plugin-package-json.git"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "repository": "github:michaelfaith/eslint-plugin-package-json"
+}
+```
+
+```json
+{
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelfaith/eslint-plugin-package-json.git"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-repository`](/rules/require-properties/require-repository) - Enforces that the `repository` property is present.
+
+## Further Reading
+
+- [npm: package.json > repository](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#repository)

@@ -7,7 +7,7 @@ description: 'Requires the `peerDependenciesMeta` property to be present.'
 
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `"peerDependenciesMeta"` property in a package.json, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `peerDependenciesMeta` property and reports a violation if it doesn't exist.
 
 <Aside>
   If you're using `peerDependenciesMeta`, consider also using the
@@ -121,10 +121,11 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`valid-peerDependenciesMeta`](../../valid-properties/valid-peerdependenciesmeta) - Enforces that the `peerDependenciesMeta` property is valid.
-- [`valid-peerDependenciesMeta-relationship`](../../valid-peerdependenciesmeta-relationship) - Enforces that every dependency declared inside `peerDependenciesMeta` is also declared in `peerDependencies`.
+- [`valid-peerDependenciesMeta`](/rules/valid-properties/valid-peerdependenciesmeta) - Enforces that the `peerDependenciesMeta` property is valid.
+- [`valid-peerDependenciesMeta-relationship`](/rules/valid-peerdependenciesmeta-relationship) - Enforces that every dependency declared inside `peerDependenciesMeta` is also declared in `peerDependencies`.
 
 ## Further Reading
 
 - [npm: package.json > peerDependenciesMeta](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#peerdependenciesmeta)
 - [pnpm: package.json > peerDependenciesMeta](https://pnpm.io/package_json#peerdependenciesmeta)
+- [Yarn: Manifest > peerDependenciesMeta](https://yarnpkg.com/configuration/manifest#peerDependenciesMeta)

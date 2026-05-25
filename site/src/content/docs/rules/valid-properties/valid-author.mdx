@@ -1,0 +1,138 @@
+---
+title: 'valid-author'
+description: 'Enforce that the `author` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `author` property in `package.json` files against the npm specification.
+The field can be either a string or an object with `name` and optionally `email` or `url` properties.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "author": ""
+}
+```
+
+```json
+{
+  "author": null
+}
+```
+
+```json
+{
+  "author": "John <invalid>"
+}
+```
+
+```json
+{
+  "author": "John (not-url)"
+}
+```
+
+```json
+{
+  "author": {}
+}
+```
+
+```json
+{
+  "author": { "email": "john@example.com" }
+}
+```
+
+```json
+{
+  "author": { "name": "", "email": "john@example.com" }
+}
+```
+
+```json
+{
+  "author": { "name": "John", "email": "invalid" }
+}
+```
+
+```json
+{
+  "author": { "name": "John", "url": "invalid" }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "author": "John Doe"
+}
+```
+
+```json
+{
+  "author": "John <john@example.com>"
+}
+```
+
+```json
+{
+  "author": "John (https://example.com)"
+}
+```
+
+```json
+{
+  "author": "John <john@example.com> (https://example.com)"
+}
+```
+
+```json
+{
+  "author": { "name": "John" }
+}
+```
+
+```json
+{
+  "author": { "name": "John", "email": "john@example.com" }
+}
+```
+
+```json
+{
+  "author": { "name": "John", "url": "https://example.com" }
+}
+```
+
+```json
+{
+  "author": {
+    "name": "John",
+    "email": "john@example.com",
+    "url": "https://example.com"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-author`](/rules/require-properties/require-author) - Enforces that the `author` property is present.
+
+## Further Reading
+
+- [npm: package.json > people fields: author, contributors](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#people-fields-author-contributors)

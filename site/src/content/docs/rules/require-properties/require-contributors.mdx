@@ -7,7 +7,7 @@ description: 'Requires the `contributors` property to be present.'
 
 import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `"contributors"` property in a package.json, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `contributors` property and reports a violation if it doesn't exist.
 
 <Aside>
   For publishable packages, consider using the
@@ -124,8 +124,8 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`require-attribution`](../../require-attribution) - Ensures that proper attribution is included in a package, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.
-- [`valid-contributors`](../../valid-properties/valid-contributors) - Enforces that the `contributors` property is valid.
+- [`require-attribution`](/rules/require-attribution) - Ensures that proper attribution is included in a package, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.
+- [`valid-contributors`](/rules/valid-properties/valid-contributors) - Enforces that the `contributors` property is valid.
 
 ## Further Reading
 

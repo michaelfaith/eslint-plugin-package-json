@@ -1,0 +1,46 @@
+---
+title: 'valid-config'
+description: 'Enforce that the `config` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The rule checks that, if present, the `config` property is an object.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "config": "config.json"
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "config": {
+    "name": "foo",
+    "port": "8080"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-config`](/rules/require-properties/require-config) - Enforces that the `config` property is present.
+
+## Further Reading
+
+- [npm: package.json > config](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#config)
