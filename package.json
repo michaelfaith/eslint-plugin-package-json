@@ -33,6 +33,10 @@
     ".": {
       "types": "./lib/index.d.mts",
       "default": "./lib/index.mjs"
+    },
+    "./experimental": {
+      "types": "./lib/experimental/index.d.mts",
+      "default": "./lib/experimental/index.mjs"
     }
   },
   "main": "lib/index.mjs",

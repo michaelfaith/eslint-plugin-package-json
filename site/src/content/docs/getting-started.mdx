@@ -51,7 +51,10 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
-  packageJson.configs.recommended,
+  {
+    extends: [packageJson.configs.recommended],
+    files: ['package.json'],
+  },
 ]);
 ```
 
@@ -97,7 +100,10 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
-  packageJson.configs['recommended-publishable'],
+  {
+    extends: [packageJson.configs['recommended-publishable']],
+    files: ['package.json'],
+  },
 ]);
 ```
 
@@ -113,8 +119,10 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations
-  packageJson.configs.recommended, // or packageJson.configs["recommended-publishable"]
-  packageJson.configs.stylistic,
+  {
+    extends: [packageJson.configs.recommended, packageJson.configs.stylistic],
+    files: ['package.json'],
+  },
 ]);
 ```
 
@@ -163,3 +171,28 @@ By default, this is:
 By specifying this setting as `true` or `false`, it will override the defaults and apply the setting for ALL rules.
 In that case, either all `require-*` rules will be applied to private packages or no `require-*` rules will be applied to private packages.
 Even then, you can override the setting again at the rule level, by using the rule's `ignorePrivate` option, which will take precedence over this global setting.
+
+## 🧪 Experimental Plugin
+
+In addition to the plugin provided in the primary entry point, this package also exports an experimental version of the plugin.
+We intend to use the experimental API to provide a version of the plugin that will work with the `json` language from `@eslint/json` (instead of the parser from `jsonc-eslint-parser`).
+For now, the experimental plugin is identical to the main plugin, but this will change as we implement the new version of the plugin.
+
+<Aside type="caution">
+  All exports from the `/experimental` entry point are considered unstable and
+  may change in breaking ways in minor version releases.
+</Aside>
+
+```ts
+// eslint.config.ts
+import packageJson from 'eslint-plugin-package-json/experimental';
+import { defineConfig } from 'eslint/config';
+
+export default defineConfig([
+  // your other ESLint configurations
+  {
+    extends: [packageJson.configs.recommended],
+    files: ['package.json'],
+  },
+]);
+```
