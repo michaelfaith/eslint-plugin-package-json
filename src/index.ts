@@ -5,4 +5,4 @@ export const configs = plugin.configs;
 
 export default plugin;
 
-export type { PackageJsonPluginSettings } from './createRule.js';
+export type { PackageJsonPluginSettings } from './createRule.ts';
