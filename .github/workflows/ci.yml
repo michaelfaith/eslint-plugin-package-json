@@ -36,9 +36,6 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     needs: build
-    defaults:
-      run:
-        working-directory: ./e2e
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Download Build Assets
@@ -47,7 +44,10 @@ jobs:
           name: ci-build-assets
           path: lib/
       - uses: ./.github/actions/setup
+        with:
+          working-directory: ./e2e
       - run: pnpm test
+        working-directory: ./e2e
 
   engines_check:
     name: Engines Check (Node.js ${{ matrix.node-version }})
