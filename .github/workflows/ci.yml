@@ -43,7 +43,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Download Build Assets
         uses: actions/download-artifact@v8
-        working-directory: .
+        working-directory: /
         with:
           name: ci-build-assets
           path: lib/
