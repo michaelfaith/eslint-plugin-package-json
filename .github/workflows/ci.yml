@@ -18,6 +18,11 @@ jobs:
       - run: pnpm build
       - run: node lib/index.mjs
       - run: node lib/experimental/index.mjs
+      - name: Upload Build Assets
+        uses: actions/upload-artifact@v7
+        with:
+          name: ci-build-assets
+          path: lib/
 
   dedupe_check:
     name: Dedupe Check
@@ -26,6 +31,24 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - uses: ./.github/actions/setup
       - run: pnpm dedupe --check --prefer-offline
+
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: build
+    defaults:
+      run:
+        working-directory: ./e2e
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Download Build Assets
+        uses: actions/download-artifact@v8
+        working-directory: .
+        with:
+          name: ci-build-assets
+          path: lib/
+      - uses: ./.github/actions/setup
+      - run: pnpm test
 
   engines_check:
     name: Engines Check (Node.js ${{ matrix.node-version }})

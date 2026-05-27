@@ -1,0 +1,9 @@
+{
+  "name": "e2e",
+  "private": true,
+  "description": "e2e tests for eslint-plugin-package-json",
+  "type": "module",
+  "scripts": {
+    "test": "pnpm -r --parallel --workspace-concurrency=4 lint"
+  }
+}
