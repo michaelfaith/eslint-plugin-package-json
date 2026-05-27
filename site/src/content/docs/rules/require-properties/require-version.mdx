@@ -1,0 +1,113 @@
+---
+title: 'require-version'
+description: 'Requires the `version` property to be present.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule checks for the existence of the `version` property and reports a violation if it doesn't exist.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "name": "thee-silver-mt-zion"
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "name": "thee-silver-mt-zion",
+  "version": "13.0.0"
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name            | Description                                                                                 | Type    | Default |
+| :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
+| `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `true`  |
+
+{/* end auto-generated rule options list */}
+
+```json
+{
+  "package-json/require-version": [
+    "error",
+    {
+      "ignorePrivate": true
+    }
+  ]
+}
+```
+
+### Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+Example of **incorrect** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true
+}
+```
+
+Examples of **incorrect** code for this rule with the `{ "ignorePrivate": true }` option:
+
+```json
+{
+  "private": false
+}
+```
+
+```json
+{}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": false }` option:
+
+```json
+{
+  "private": true,
+  "version": "13.0.0"
+}
+```
+
+Example of **correct** code for this rule with the `{ "ignorePrivate": true }` option:
+
+```json
+{
+  "private": true
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-version`](/rules/valid-properties/valid-version) - Enforces that the `version` property is valid.
+
+## Further Reading
+
+- [npm: package.json > version](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#version)

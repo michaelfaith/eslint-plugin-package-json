@@ -1,19 +1,13 @@
 ---
-title: 'require-contributors'
-description: 'Requires the `contributors` property to be present.'
+title: 'require-devEngines'
+description: 'Requires the `devEngines` property to be present.'
 ---
 
 {/* end auto-generated rule header */}
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `contributors` property and reports a violation if it doesn't exist.
-
-<Aside>
-  For publishable packages, consider using the
-  [`require-attribution`](/rules/require-attribution) rule instead, which
-  requires that _either_ `author` or `contributors` is present.
-</Aside>
+This rule checks for the existence of the `devEngines` property and reports a violation if it doesn't exist.
 
 ## Examples
 
@@ -34,13 +28,18 @@ This rule checks for the existence of the `contributors` property and reports a 
 {
   "name": "thee-silver-mt-zion",
   "version": "13.0.0",
-  "contributors": [
-    {
-      "name": "Trent Reznor",
-      "email": "treznor@nin.com",
-      "url": "https://nin.com"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^20.19.0 || >=22.12.0",
+      "onFail": "download"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^10.0.0",
+      "onFail": "error"
     }
-  ]
+  }
 }
 ```
 
@@ -59,7 +58,7 @@ This rule checks for the existence of the `contributors` property and reports a 
 
 ```json
 {
-  "package-json/require-contributors": [
+  "package-json/require-devEngines": [
     "error",
     {
       "ignorePrivate": false
@@ -101,13 +100,18 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": false }` 
 ```json
 {
   "private": true,
-  "contributors": [
-    {
-      "name": "Trent Reznor",
-      "email": "treznor@nin.com",
-      "url": "https://nin.com"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^20.19.0 || >=22.12.0",
+      "onFail": "download"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^10.0.0",
+      "onFail": "error"
     }
-  ]
+  }
 }
 ```
 
@@ -124,9 +128,9 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`require-attribution`](/rules/require-attribution) - Ensures that proper attribution is included in a package, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.
-- [`valid-contributors`](/rules/valid-properties/valid-contributors) - Enforces that the `contributors` property is valid.
+- [`valid-devEngines`](/rules/valid-properties/valid-devengines) - Enforces that the `devEngines` property is valid.
 
 ## Further Reading
 
-- [npm: package.json > people fields: author, contributors](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#people-fields-author-contributors)
+- [npm: package.json > devEngines](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#devengines)
+- [pnpm: package.json > devEngines.runtime](https://pnpm.io/package_json#devenginesruntime)

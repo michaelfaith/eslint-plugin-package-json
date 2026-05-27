@@ -1,19 +1,13 @@
 ---
-title: 'require-contributors'
-description: 'Requires the `contributors` property to be present.'
+title: 'require-gypfile'
+description: 'Requires the `gypfile` property to be present.'
 ---
 
 {/* end auto-generated rule header */}
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `contributors` property and reports a violation if it doesn't exist.
-
-<Aside>
-  For publishable packages, consider using the
-  [`require-attribution`](/rules/require-attribution) rule instead, which
-  requires that _either_ `author` or `contributors` is present.
-</Aside>
+This rule checks for the existence of the `gypfile` property and reports a violation if it doesn't exist.
 
 ## Examples
 
@@ -34,13 +28,7 @@ This rule checks for the existence of the `contributors` property and reports a 
 {
   "name": "thee-silver-mt-zion",
   "version": "13.0.0",
-  "contributors": [
-    {
-      "name": "Trent Reznor",
-      "email": "treznor@nin.com",
-      "url": "https://nin.com"
-    }
-  ]
+  "gypfile": false
 }
 ```
 
@@ -59,7 +47,7 @@ This rule checks for the existence of the `contributors` property and reports a 
 
 ```json
 {
-  "package-json/require-contributors": [
+  "package-json/require-gypfile": [
     "error",
     {
       "ignorePrivate": false
@@ -101,13 +89,7 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": false }` 
 ```json
 {
   "private": true,
-  "contributors": [
-    {
-      "name": "Trent Reznor",
-      "email": "treznor@nin.com",
-      "url": "https://nin.com"
-    }
-  ]
+  "gypfile": false
 }
 ```
 
@@ -124,9 +106,8 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 ## Related Rules
 
-- [`require-attribution`](/rules/require-attribution) - Ensures that proper attribution is included in a package, requiring that either `author` or `contributors` is defined, and that if `contributors` is present, it should include at least one contributor.
-- [`valid-contributors`](/rules/valid-properties/valid-contributors) - Enforces that the `contributors` property is valid.
+- [`valid-gypfile`](/rules/valid-properties/valid-gypfile) - Enforces that the `gypfile` property is valid.
 
 ## Further Reading
 
-- [npm: package.json > people fields: author, contributors](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#people-fields-author-contributors)
+- [npm: package.json > gypfile](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#gypfile)

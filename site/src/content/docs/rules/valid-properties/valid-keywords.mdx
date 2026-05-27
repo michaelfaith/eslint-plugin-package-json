@@ -1,0 +1,46 @@
+---
+title: 'valid-keywords'
+description: 'Enforce that the `keywords` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `keywords` property, if present, against the following criteria:
+
+- It must be an array
+- The array should only consist of non-empty strings
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "keywords": "music"
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "keywords": ["nin", "A Silver Mt. Zion"]
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-keywords`](/rules/require-properties/require-keywords) - Enforces that the `keywords` property is present.
+
+## Further Reading
+
+- [npm: package.json > keywords](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#keywords)

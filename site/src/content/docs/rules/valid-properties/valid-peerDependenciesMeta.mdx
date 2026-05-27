@@ -1,0 +1,65 @@
+---
+title: 'valid-peerDependenciesMeta'
+description: 'Enforce that the `peerDependenciesMeta` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `peerDependenciesMeta` property, if present, against the following criteria:
+
+- The value is an object
+- Each property's key is a valid package name
+- Each property's value is an object
+- The metadata object for each package should only have the `optional` property
+- The value of the `optional` property should be a boolean
+
+<Aside>
+  If you're using `peerDependenciesMeta`, consider also using the
+  [`valid-peerDependenciesMeta-relationship`](/rules/valid-peerdependenciesmeta-relationship)
+  rule, which requires that every dependency declared inside
+  `peerDependenciesMeta` is also declared in `peerDependencies`.
+</Aside>
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "peerDependenciesMeta": {
+    "typescript": true
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-peerDependenciesMeta`](/rules/require-properties/require-peedependenciesmeta) - Enforces that the `peerDependenciesMeta` property is present.
+- [`valid-peerDependenciesMeta-relationship`](/rules/valid-peerdependenciesmeta-relationship) - Enforces that every dependency declared inside `peerDependenciesMeta` is also declared in `peerDependencies`.
+
+## Further Reading
+
+- [npm: package.json > peerDependenciesMeta](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#peerdependenciesmeta)
+- [pnpm: package.json > peerDependenciesMeta](https://pnpm.io/package_json#peerdependenciesmeta)
+- [Yarn: Manifest > peerDependenciesMeta](https://yarnpkg.com/configuration/manifest#peerDependenciesMeta)

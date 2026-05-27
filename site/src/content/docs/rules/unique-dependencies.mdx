@@ -1,0 +1,65 @@
+---
+title: 'unique-dependencies'
+description: "Checks a dependency isn't specified more than once (i.e. in `dependencies` and `devDependencies`)"
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule checks that every dependency is just added once to a `package.json` key specifying dependencies (e.g. `dependencies`, `devDependencies`, `peerDependencies`, `optionalDependencies`).
+It also checks that any dependencies declared in the `dependencies` group, are not also present in `peerDependencies` or `devDependencies`.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "dependencies": {
+    "foo": "1.0.0",
+    "bar": "2.0.0",
+    "foo": "1.0.0"
+  }
+}
+```
+
+```json
+{
+  "dependencies": {
+    "foo": "1.0.0"
+  },
+  "devDependencies": {
+    "foo": "1.0.0"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "dependencies": {
+    "foo": "1.0.0"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-dependencies`](/rules/valid-properties/valid-dependencies) - Enforces that the `dependencies` property is valid.
+- [`valid-devDependencies`](/rules/valid-properties/valid-devdependencies) - Enforces that the `devDependencies` property is valid.
+- [`valid-peerDependencies`](/rules/valid-properties/valid-peerdependencies) - Enforces that the `peerDependencies` property is valid.
+
+## Further Reading
+
+- [npm: package.json > dependencies](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#dependencies)

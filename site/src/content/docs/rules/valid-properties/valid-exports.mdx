@@ -1,0 +1,75 @@
+---
+title: 'valid-exports'
+description: 'Enforce that the `exports` property is valid.'
+---
+
+💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `exports` property, if present, against the following criteria:
+
+- It should be of type `string` or `object`.
+- If it's a `string`, it should be a path to an entry point.
+- If it's an export condition object, its properties should have values that are either a path to an entry point, or another exports condition object.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "exports": {
+    "import": true
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "exports": "./index.js"
+}
+```
+
+```json
+{
+  "exports": {
+    ".": "./index.js",
+    "./secondary": "./secondary.js"
+  }
+}
+```
+
+```json
+{
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./cjs/index.d.cts",
+        "default": "./cjs/index.cjs"
+      }
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`require-exports`](/rules/require-properties/require-exports) - Enforces that the `exports` property is present.
+
+## Further Reading
+
+- [Node.js: Packages > Package Entry Points](https://nodejs.org/api/packages.html#package-entry-points)

@@ -60,6 +60,8 @@ See [Getting Started](https://eslint-plugin-package-json.dev/getting-started) fo
 
 ### Require Properties
 
+This group of rules allows you to require that the associated top-level property must be present in the `package.json`.
+
 | Name                                                                                                                         | Description                                                 | 💼    | 🔧  | 💡  |
 | :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- | :---- | :-- | :-- |
 | [require-author](https://eslint-plugin-package-json.dev/rules/require-properties/require-author)                             | Requires the `author` property to be present.               |       |     |     |
@@ -103,6 +105,8 @@ See [Getting Started](https://eslint-plugin-package-json.dev/getting-started) fo
 | [require-version](https://eslint-plugin-package-json.dev/rules/require-properties/require-version)                           | Requires the `version` property to be present.              | ✅ 📦 |     |     |
 
 ### Valid Properties
+
+This group of rules allows you to enforce that the value of the associated top-level property is valid. All of these rules are include in the `recommended` config.
 
 | Name                                                                                                                   | Description                                                                           | 💼    | 🔧  | 💡  |
 | :--------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :---- | :-- | :-- |

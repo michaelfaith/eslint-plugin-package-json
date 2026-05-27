@@ -37,6 +37,8 @@ Here's a list of all rules that this plugin provides.
 
 ## Require Properties
 
+This group of rules allows you to require that the associated top-level property must be present in the `package.json`.
+
 | Name                                                                                   | Description                                                 | 💼   | 🔧 | 💡 |
 | :------------------------------------------------------------------------------------- | :---------------------------------------------------------- | :--- | :- | :- |
 | [require-author](/rules/require-properties/require-author)                             | Requires the `author` property to be present.               |      |    |    |
@@ -80,6 +82,8 @@ Here's a list of all rules that this plugin provides.
 | [require-version](/rules/require-properties/require-version)                           | Requires the `version` property to be present.              | ✅ 📦 |    |    |
 
 ## Valid Properties
+
+This group of rules allows you to enforce that the value of the associated top-level property is valid.  All of these rules are include in the `recommended` config.
 
 | Name                                                                             | Description                                                                           | 💼   | 🔧 | 💡 |
 | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :--- | :- | :- |
