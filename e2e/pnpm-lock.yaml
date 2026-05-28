@@ -11,7 +11,7 @@ importers:
   experimental-configs:
     devDependencies:
       '@eslint/json':
-        specifier: ^1.2.0
+        specifier: 1.2.0
         version: 1.2.0
       eslint:
         specifier: 10.4.0
@@ -23,7 +23,7 @@ importers:
   experimental-rules:
     devDependencies:
       '@eslint/json':
-        specifier: ^1.2.0
+        specifier: 1.2.0
         version: 1.2.0
       eslint:
         specifier: 10.4.0
