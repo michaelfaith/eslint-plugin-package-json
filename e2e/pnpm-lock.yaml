@@ -155,6 +155,17 @@ packages:
       '@types/estree':
         optional: true
 
+  eslint-json-compat-utils@0.2.3:
+    resolution: {integrity: sha512-RbBmDFyu7FqnjE8F0ZxPNzx5UaptdeS9Uu50r7A+D7s/+FCX+ybiyViYEgFUaFIFqSWJgZRTpL5d8Kanxxl2lQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@eslint/json': '*'
+      eslint: '*'
+      jsonc-eslint-parser: ^2.4.0 || ^3.0.0
+    peerDependenciesMeta:
+      '@eslint/json':
+        optional: true
+
   eslint-plugin-package-json@file:..:
     resolution: {directory: .., type: directory}
     engines: {node: ^22.22.2 || >=24.15.0}
@@ -294,8 +305,8 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
-  lru-cache@11.5.0:
-    resolution: {integrity: sha512-5YgH9UJd7wVb9hIouI2adWpgqrrICkt070Dnj8EUY1+B4B2P9eRLPAkAAo6NICA7CEhOIeBHl46u9zSNpNu7zA==}
+  lru-cache@11.5.1:
+    resolution: {integrity: sha512-RPimw/7aMdv2oqRrxKwvZXcPfwBrn/JZ2xYcY9Hus/6LaS3VOAKVWKWgNLCFSiOm1ESXinjsDlidVU7JlnCN2A==}
     engines: {node: 20 || >=22}
 
   minimatch@10.2.5:
@@ -517,6 +528,12 @@ snapshots:
     optionalDependencies:
       '@types/estree': 1.0.9
 
+  eslint-json-compat-utils@0.2.3(eslint@10.4.0)(jsonc-eslint-parser@3.1.0):
+    dependencies:
+      eslint: 10.4.0
+      esquery: 1.7.0
+      jsonc-eslint-parser: 3.1.0
+
   eslint-plugin-package-json@file:..(@types/estree@1.0.9)(eslint@10.4.0):
     dependencies:
       '@altano/repository-tools': 2.0.3
@@ -525,12 +542,14 @@ snapshots:
       detect-newline: 4.0.1
       eslint: 10.4.0
       eslint-fix-utils: 0.4.2(@types/estree@1.0.9)(eslint@10.4.0)
+      eslint-json-compat-utils: 0.2.3(eslint@10.4.0)(jsonc-eslint-parser@3.1.0)
       jsonc-eslint-parser: 3.1.0
       package-json-validator: 1.5.1
       semver: 7.8.1
       sort-object-keys: 2.1.0
       sort-package-json: 3.6.1
     transitivePeerDependencies:
+      - '@eslint/json'
       - '@types/estree'
 
   eslint-scope@9.1.2:
@@ -631,7 +650,7 @@ snapshots:
 
   hosted-git-info@9.0.3:
     dependencies:
-      lru-cache: 11.5.0
+      lru-cache: 11.5.1
 
   ignore@5.3.2: {}
 
@@ -672,7 +691,7 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
-  lru-cache@11.5.0: {}
+  lru-cache@11.5.1: {}
 
   minimatch@10.2.5:
     dependencies:

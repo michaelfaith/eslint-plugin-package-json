@@ -1,8 +1,8 @@
 import { plugin } from '../plugin.ts';
 
-export const rules = plugin.rules;
+export type { PackageJsonPluginSettings } from '../createRule.ts';
+
 export const configs = plugin.configs;
+export { rules } from './compat.ts';
 
 export default plugin;
-
-export type { PackageJsonPluginSettings } from '../createRule.ts';
