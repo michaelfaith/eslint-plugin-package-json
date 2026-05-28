@@ -26,6 +26,6 @@
   "devDependencies": {
     "eslint": "10.4.0",
     "eslint-plugin-package-json": "file:../..",
-    "jsonc-eslint-parser": "^3.1.0"
+    "jsonc-eslint-parser": "3.1.0"
   }
 }
