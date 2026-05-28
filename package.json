@@ -108,7 +108,7 @@
     "starlight-auto-sidebar": "0.4.0",
     "tsdown": "0.22.0",
     "typescript": "6.0.2",
-    "typescript-eslint": "8.59.0",
+    "typescript-eslint": "8.60.0",
     "vitest": "4.1.0"
   },
   "peerDependencies": {
