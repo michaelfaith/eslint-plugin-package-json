@@ -11,6 +11,11 @@ const rules = Object.fromEntries(
   ]),
 );
 
+// Add `meta.languages` to enforce use of the json/json language.
+for (const rule of Object.values(rules)) {
+  rule.meta.languages ??= ['json/json'];
+}
+
 export const plugin = {
   configs: {
     recommended: {
