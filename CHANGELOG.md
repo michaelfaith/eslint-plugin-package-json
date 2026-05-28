@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.1.0...v1.2.0) (2026-05-28)
+
+
+### 🚀 Features
+
+* **experimental:** add `meta.languages` to all rules ([#1889](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1889)) ([2b8523f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2b8523f6ca1491db4720e64f02d1056e89369b29))
+* **experimental:** add new `/experimental` entry point ([#1874](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1874)) ([48828e6](https://github.com/michaelfaith/eslint-plugin-package-json/commit/48828e61b8b3736becdc0447657bb3ad214b8924))
+* **experimental:** export plugin and configs compatible with `@eslint/json` ([#1886](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1886)) ([5a9a1e3](https://github.com/michaelfaith/eslint-plugin-package-json/commit/5a9a1e367a40da39ff25ded9993455d99e5c31e9))
+
 ## [1.1.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.0.0...v1.1.0) (2026-05-18)
 
 
