@@ -11,6 +11,12 @@ const rules = Object.fromEntries(
   ]),
 );
 
+// Add `meta.languages` to enforce use of the json/json language.
+for (const rule of Object.values(rules)) {
+  // Manually add the `languages` property in the types, since ESLint v9 types doesn't include it (resulting in a type check error in CI).
+  (rule.meta as { languages?: string[] }).languages ??= ['json/json'];
+}
+
 export const plugin = {
   configs: {
     recommended: {
