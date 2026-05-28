@@ -74,7 +74,7 @@
     "@catppuccin/starlight": "2.0.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.0",
     "@eslint/js": "10.0.1",
-    "@eslint/json": "^1.2.0",
+    "@eslint/json": "1.2.0",
     "@eslint/markdown": "8.0.1",
     "@types/estree": "1.0.8",
     "@types/node": "24.12.0",
