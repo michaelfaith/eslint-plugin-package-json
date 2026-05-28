@@ -23,8 +23,6 @@ In the case of the `rules`, we'll wrap each rule from the primary entry point wi
 For the `configs`, we'll export versions of the existing configs with the `parser` replaced by a `language` from `@eslint/json`.
 
 ```diff
-+ import jsonPlugin from '@eslint/json';
-+
 recommended: {
   files: ['**/package.json'],
 - languageOptions: {
@@ -33,7 +31,6 @@ recommended: {
 + language: 'json/json',
   name: 'package-json/recommended',
   plugins: {
-+   json: jsonPlugin,
     get 'package-json'(): ESLint.Plugin {
       return plugin;
     },
@@ -44,6 +41,10 @@ recommended: {
 
 For the new version of the `plugin`, we could either recombine the above pieces into a new plugin, or wrap the existing one in `toCompatPlugin(plugin)` from `eslint-json-compat-utils`.
 I think either approach is valid.
+
+> [!NOTE]
+> We won't be including the `@eslint/json` plugin declaration in any of our configs, so that it doesn't clash with any existing usage in user-land configs.
+> Users that aren't already using `@eslint/json` will need to install the plugin alongside our plugin, in order for the language to work.
 
 ### Documentation
 
@@ -57,7 +58,7 @@ We'll no longer be exporting the `jsonc-eslint-parser` compatible versions.
 
 We will, however, still be using `jsonc-eslint-parser` under the covers, and wrapping the og versions of the rules with `eslint-json-compat-utils`.
 
-Now that the experimental APIs will be the only experience, we can move `@eslint/json` from an optional peer dependency to be a regular dependency.
+Now that the experimental APIs will be the only experience, we can make `@eslint/json` a required peer dependency.
 Because of this, we can only target a major version for this milestone.
 
 **Release Timeframe:** v2.0.0
@@ -66,6 +67,9 @@ Because of this, we can only target a major version for this milestone.
 
 Once we hit this milestone, we can start migrating the underlying rules to use the `@eslint/json` language, one rule at a time.
 So, during this time, we'll be exporting some set of rules that have already been migrated and are using the new AST, alongside rules that haven't been migrated and are still wrapped by `toCompatRule`.
+
+> [!IMPORTANT]
+> As we migration rules, we should leverage `meta.languages` on the rules to enforce the contract with the `@eslint/json` language.
 
 ## Milestone 3: All Rules Have Been Migrated
 

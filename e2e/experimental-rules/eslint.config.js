@@ -1,19 +1,22 @@
 import packageJson from 'eslint-plugin-package-json/experimental';
 import { defineConfig } from 'eslint/config';
-import * as parserJsonc from 'jsonc-eslint-parser';
+import jsonPlugin from '@eslint/json';
 
-export default defineConfig({
-  files: ['package.json'],
-  languageOptions: {
-    parser: parserJsonc,
+export default defineConfig([
+  {
+    plugins: {
+      json: jsonPlugin,
+      'package-json': packageJson,
+    },
   },
-  plugins: {
-    'package-json': packageJson,
+  {
+    files: ['package.json'],
+    language: 'json/json',
+    rules: {
+      'package-json/require-attribution': [
+        'error',
+        { preferContributorsOnly: true },
+      ],
+    },
   },
-  rules: {
-    'package-json/require-attribution': [
-      'error',
-      { preferContributorsOnly: true },
-    ],
-  },
-});
+]);
