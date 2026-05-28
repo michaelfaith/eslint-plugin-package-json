@@ -124,6 +124,7 @@ export default defineConfig(
             '*.config.js',
             'astro.config.ts',
             '.simple-git-hooks.js',
+            'knip.ts',
           ],
         },
         tsconfigRootDir: import.meta.dirname,
