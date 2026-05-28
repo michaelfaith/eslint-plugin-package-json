@@ -180,8 +180,8 @@ Even then, you can override the setting again at the rule level, by using the ru
 ## 🧪 Experimental API
 
 In addition to the plugin provided in the primary entry point, this package also exports an experimental version of the plugin.
-We intend to use the experimental API to provide a version of the plugin that will work with the `json` language from `@eslint/json` (instead of the parser from `jsonc-eslint-parser`).
-For now, the experimental plugin is identical to the main plugin, but this will change as we implement the new version of the plugin.
+The plugin, rules, and configs exported from this entry point are wrapped in a compatibility layer that allows them to be used with the `@eslint/json` language, instead of the `jsonc-eslint-parser` parser.
+In a future major version, we plan to make this the default and only experience, but for now it's opt-in and exported from the `./experimental` entry point.
 
 <Aside type="caution">
   All exports from the `/experimental` entry point are considered unstable and
@@ -190,11 +190,17 @@ For now, the experimental plugin is identical to the main plugin, but this will 
 
 ```ts
 // eslint.config.ts
-import packageJson from 'eslint-plugin-package-json/experimental';
+import jsonPlugin from '@eslint/json';
 import { defineConfig } from 'eslint/config';
+import packageJson from 'eslint-plugin-package-json/experimental';
 
 export default defineConfig([
   // your other ESLint configurations
+  {
+    plugins: {
+      json: jsonPlugin, // Needed to use the `json/json` language.
+    },
+  },
   {
     extends: [packageJson.configs.recommended],
     files: ['package.json'],
