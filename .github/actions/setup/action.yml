@@ -7,6 +7,10 @@ inputs:
     description: Node.js version to use
     default: 'lts/*'
     required: false
+  working-directory:
+    description: Working directory to run commands in
+    default: '.'
+    required: false
 
 runs:
   steps:
@@ -17,4 +21,5 @@ runs:
         node-version: ${{ inputs.node-version }}
     - run: pnpm install --frozen-lockfile
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
   using: composite

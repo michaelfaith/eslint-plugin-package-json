@@ -1,0 +1,28 @@
+{
+  "name": "experimental-configs",
+  "version": "1.1.0",
+  "description": "e2e tests for eslint-plugin-package-json's experimental configurations.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelfaith/eslint-plugin-package-json.git",
+    "directory": "e2e/experimental-configs"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "michael faith",
+    "url": "https://michael.faith"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "10.4.0",
+    "eslint-plugin-package-json": "file:../.."
+  }
+}

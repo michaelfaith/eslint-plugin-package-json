@@ -137,8 +137,13 @@ Example:
 // eslint.config.ts
 import packageJson from 'eslint-plugin-package-json';
 import { defineConfig } from 'eslint/config';
+import * as parserJsonc from 'jsonc-eslint-parser';
 
 export default defineConfig({
+  files: ['package.json'],
+  languageOptions: {
+    parser: parserJsonc,
+  },
   plugins: {
     'package-json': packageJson,
   },

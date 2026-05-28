@@ -26,6 +26,7 @@ export default defineConfig(
     'site/.astro',
     '.eslint-doc-generatorrc.js',
     'coverage',
+    'e2e',
     'dist-site',
     'docs/rules/*/*.ts',
     'lib',

@@ -23,7 +23,6 @@
     },
     {
       "name": "michael faith",
-      "email": "michaelfaith@users.noreply.github.com",
       "url": "https://michael.faith"
     }
   ],
@@ -41,7 +40,6 @@
   },
   "main": "lib/index.mjs",
   "files": [
-    "CHANGELOG.md",
     "lib/"
   ],
   "scripts": {
