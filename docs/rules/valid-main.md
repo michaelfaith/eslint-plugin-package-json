@@ -1,4 +1,4 @@
 # valid-main
 
 > [!NOTE]
-> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/valid-main>
+> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/valid-properties/valid-main>
