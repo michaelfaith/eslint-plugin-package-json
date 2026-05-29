@@ -1,4 +1,4 @@
 # valid-repository-directory
 
 > [!NOTE]
-> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/valid-properties/valid-repository-directory>
+> You can find the docs for this rule on our website: <https://eslint-plugin-package-json.dev/rules/valid-repository-directory>
