@@ -95,6 +95,10 @@ export const createSimpleRequirePropertyRule = (
       };
     },
     meta: {
+      defaultOptions:
+        propertyName === 'private'
+          ? []
+          : [{ ignorePrivate: ignorePrivateDefault }],
       docs: {
         category,
         description: `Requires the \`${propertyName}\` property to be present.`,
@@ -113,7 +117,6 @@ export const createSimpleRequirePropertyRule = (
                 additionalProperties: false,
                 properties: {
                   ignorePrivate: {
-                    default: ignorePrivateDefault,
                     description:
                       "Determines if this rule should be enforced when the package's `private` property is `true`.",
                     type: 'boolean',
