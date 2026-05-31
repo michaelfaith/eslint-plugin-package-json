@@ -1,6 +1,6 @@
 ---
 title: 'no-local-dependencies'
-description: 'Requires that dependencies do not use local file paths, which will cause errors when installing from a registry.'
+description: 'Requires that dependencies do not use local file paths, which will likely result in errors when installing from a registry.'
 ---
 
 {/* end auto-generated rule header */}
@@ -53,9 +53,9 @@ This includes any paths that start with `file:`, `link:`, `./`, or `../`.
 
 ### `ignorePrivate`
 
-When enabled, `ignorePrivate` skips this check entirely.
-This is useful for internal packages that won't be published to npm.
-Disable if you want to enforce for all packages, regardless of privacy.
+When this option is enabled and the package has `"private": true`, the rule skips its check entirely.
+This can be useful for internal packages that won't be published to a registry.
+Disable it if you want to apply the rule to all packages, regardless of privacy.
 
 ```json
 {

@@ -61,7 +61,7 @@ export const rule = createRule({
     defaultOptions: [{ ignorePrivate: true }],
     docs: {
       description:
-        'Requires that dependencies do not use local file paths, which will cause errors when installing from a registry.',
+        'Requires that dependencies do not use local file paths, which will likely result in errors when installing from a registry.',
     },
     messages: {
       localDependencyFound: 'Local dependency "{{ name }}" is not allowed.',
