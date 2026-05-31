@@ -1,0 +1,78 @@
+---
+title: 'no-local-dependencies'
+description: 'Requires that dependencies do not use local file paths, which will likely result in errors when installing from a registry.'
+---
+
+{/* end auto-generated rule header */}
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This rule enforces that no `dependencies` are declared with local file paths, since this will likely result in errors when installing from a registry.
+This includes any paths that start with `file:`, `link:`, `./`, or `../`.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "dependencies": {
+    "foo": "file:../foo",
+    "bar": "link:../bar",
+    "baz": "../baz"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "dependencies": {
+    "foo": "workspace:^",
+    "bar": "^1.2.3",
+    "baz": "~0.1.2"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name            | Description                                                                                 | Type    | Default |
+| :-------------- | :------------------------------------------------------------------------------------------ | :------ | :------ |
+| `ignorePrivate` | Determines if this rule should be enforced when the package's `private` property is `true`. | Boolean | `true`  |
+
+{/* end auto-generated rule options list */}
+
+### `ignorePrivate`
+
+When this option is enabled and the package has `"private": true`, the rule skips its check entirely.
+This can be useful for internal packages that won't be published to a registry.
+Disable it if you want to apply the rule to all packages, regardless of privacy.
+
+```json
+{
+  "package-json/no-local-dependencies": [
+    "error",
+    {
+      "ignorePrivate": false
+    }
+  ]
+}
+```
+
+## Related Rules
+
+- [`unique-dependencies`](/rules/unique-dependencies) - Checks that a dependency isn't specified more than once.
+- [`valid-dependencies`](/rules/valid-properties/valid-dependencies) - Enforces that the `dependencies` property is valid.
+
+## Further Reading
+
+- [npm: package.json > dependencies > Local Paths](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#local-paths)
