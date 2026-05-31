@@ -1,7 +1,6 @@
+import { fixRemoveArrayElement } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
 import type { AST as JsonAST } from 'jsonc-eslint-parser';
-
-import { fixRemoveArrayElement } from 'eslint-fix-utils';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral, isNotNullish } from '../utils/predicates.ts';

@@ -1,6 +1,5 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
-
 import { fixRemoveObjectProperty, type ObjectProperty } from 'eslint-fix-utils';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';

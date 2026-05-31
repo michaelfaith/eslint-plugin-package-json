@@ -1,6 +1,6 @@
 import {
-  type CreateRequirePropertyRuleOptions,
   createSimpleRequirePropertyRule,
+  type CreateRequirePropertyRuleOptions,
 } from '../utils/createSimpleRequirePropertyRule.js';
 
 export const propertyConfig: [

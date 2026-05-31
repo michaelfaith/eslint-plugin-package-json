@@ -1,5 +1,4 @@
 import type { ESLint } from 'eslint';
-
 import { toCompatRule } from 'eslint-json-compat-utils';
 
 import { plugin as originalPlugin } from '../plugin.ts';

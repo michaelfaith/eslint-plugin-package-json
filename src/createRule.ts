@@ -1,10 +1,9 @@
+import { AST, Rule, SourceCode } from 'eslint';
 import type * as ESTree from 'estree';
 import type {
   FromSchema as InferJsonSchemaType,
   JSONSchema,
 } from 'json-schema-to-ts';
-
-import { AST, Rule, SourceCode } from 'eslint';
 import { AST as JsonAST, type RuleListener } from 'jsonc-eslint-parser';
 
 import { isPackageJson } from './utils/isPackageJson.ts';

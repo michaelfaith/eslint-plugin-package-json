@@ -1,10 +1,9 @@
-import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
-
 import {
   fixRemoveArrayElement,
   fixRemoveObjectProperty,
 } from 'eslint-fix-utils';
+import type * as ESTree from 'estree';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 
 import { createRule, PackageJsonRuleContext } from '../createRule.ts';
 
