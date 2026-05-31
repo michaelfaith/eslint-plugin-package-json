@@ -61,7 +61,7 @@ importers:
         specifier: 8.0.1
         version: 8.0.1
       '@ianvs/prettier-plugin-sort-imports':
-        specifier: ^4.7.1
+        specifier: 4.7.1
         version: 4.7.1(prettier@3.8.0)
       '@types/estree':
         specifier: 1.0.8
