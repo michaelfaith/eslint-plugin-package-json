@@ -66,6 +66,43 @@ ruleTester.run('no-local-dependencies', rule, {
       ],
       filename: 'package.json',
     },
+    {
+      code: `{
+  "private": true,
+  "dependencies": {
+    "abc": "../abc"
+  }
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: '../abc',
+          },
+          line: 4,
+          messageId: 'localDependencyFound',
+        },
+      ],
+      options: [{ ignorePrivate: false }],
+    },
+    {
+      code: `{
+  "private": false,
+  "dependencies": {
+    "abc": "../abc"
+  }
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: '../abc',
+          },
+          line: 4,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
   ],
 
   valid: [
@@ -91,6 +128,12 @@ ruleTester.run('no-local-dependencies', rule, {
     `{
 	"devDependencies": {
 		"abc": "file:../file-dependency"
+	}
+}`,
+    `{
+  "private": true,
+	"dependencies": {
+		"abc": "../abc"
 	}
 }`,
   ],

@@ -18,7 +18,7 @@ export const rule = createRule({
     let dependencyNodes: JsonAST.JSONProperty[] = [];
 
     return {
-      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONKeywordLiteral][key.value=private]'(
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONLiteral][key.value=private]'(
         node: JsonAST.JSONProperty & {
           value: JsonAST.JSONKeywordLiteral;
         },
