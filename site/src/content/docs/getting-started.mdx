@@ -3,7 +3,7 @@ title: Getting Started
 description: Install and configure the plugin.
 ---
 
-import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
 
 import Requirements from '~/components/Requirements.astro';
 
@@ -191,8 +191,8 @@ In a future major version, we plan to make this the default and only experience,
 ```ts
 // eslint.config.ts
 import jsonPlugin from '@eslint/json';
-import { defineConfig } from 'eslint/config';
 import packageJson from 'eslint-plugin-package-json/experimental';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   // your other ESLint configurations

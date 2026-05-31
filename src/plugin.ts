@@ -1,9 +1,9 @@
-import { type ESLint, type Linter } from 'eslint';
-import * as parserJsonc from 'jsonc-eslint-parser';
 import { createRequire } from 'node:module';
 
-import type { PackageJsonRuleModule } from './createRule.ts';
+import { type ESLint, type Linter } from 'eslint';
+import * as parserJsonc from 'jsonc-eslint-parser';
 
+import type { PackageJsonRuleModule } from './createRule.ts';
 import { rule as binNameCasing } from './rules/bin-name-casing.ts';
 import { rule as exportsSubpathsStyle } from './rules/exports-subpaths-style.ts';
 import { rule as noEmptyFields } from './rules/no-empty-fields.ts';

@@ -1,5 +1,4 @@
 import type { PackageJsonPluginSettings } from '../../createRule.ts';
-
 import { propertyConfig, rules } from '../../rules/require-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 

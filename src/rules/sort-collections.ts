@@ -1,5 +1,4 @@
 import type { AST as JsonAST } from 'jsonc-eslint-parser';
-
 import sortPackageJson from 'sort-package-json';
 
 import { createRule } from '../createRule.ts';

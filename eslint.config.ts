@@ -62,6 +62,11 @@ export default defineConfig(
           type: 'natural',
         },
       ],
+
+      // Covered by Prettier
+      'perfectionist/sort-imports': 'off',
+      'perfectionist/sort-named-imports': 'off',
+
       // Stylistic concerns that don't interfere with Prettier
       'logical-assignment-operators': [
         'error',

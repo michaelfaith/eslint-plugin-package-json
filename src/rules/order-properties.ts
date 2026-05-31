@@ -1,7 +1,6 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
-
 import detectIndent from 'detect-indent';
 import { detectNewlineGraceful } from 'detect-newline';
+import type { AST as JsonAST } from 'jsonc-eslint-parser';
 import sortObjectKeys from 'sort-object-keys';
 import { sortOrder } from 'sort-package-json';
 

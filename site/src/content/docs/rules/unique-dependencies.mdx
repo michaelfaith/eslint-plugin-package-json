@@ -9,7 +9,7 @@ description: "Checks a dependency isn't specified more than once (i.e. in `depen
 
 {/* end auto-generated rule header */}
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { TabItem, Tabs } from '@astrojs/starlight/components';
 
 This rule checks that every dependency is just added once to a `package.json` key specifying dependencies (e.g. `dependencies`, `devDependencies`, `peerDependencies`, `optionalDependencies`).
 It also checks that any dependencies declared in the `dependencies` group, are not also present in `peerDependencies` or `devDependencies`.
