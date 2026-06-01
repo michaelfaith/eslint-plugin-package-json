@@ -3,7 +3,7 @@
  * @type {import("prettier").Config}
  */
 const config = {
-  importOrder: ['<BUILTIN_MODULES>', '', '<THIRD_PARTY_MODULES>', '', '^[./]'],
+  importOrder: ['<BUILTIN_MODULES>', '', '<THIRD_PARTY_MODULES>', '', '^[.]'],
   importOrderTypeScriptVersion: '6.0.0',
   overrides: [{ files: '.nvmrc', options: { parser: 'yaml' } }],
   plugins: [
