@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.2.0...v1.3.0) (2026-06-01)
+
+
+### 🚀 Features
+
+* add `no-local-dependencies` rule ([#1896](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1896)) ([ccb6023](https://github.com/michaelfaith/eslint-plugin-package-json/commit/ccb6023dd571b5226e7c16d070a2a1ab62b6f43d))
+
+
+### 🏁 Performance Improvements
+
+* **valid-repository-directory:** cache repo root for improved performance in monorepos ([#1907](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1907)) ([88056c3](https://github.com/michaelfaith/eslint-plugin-package-json/commit/88056c3049d263e57f315812aa07bdd8576a2a05))
+
 ## [1.2.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.1.0...v1.2.0) (2026-05-28)
 
 
