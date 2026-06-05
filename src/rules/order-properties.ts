@@ -74,12 +74,13 @@ export const rule = createRule({
     ],
     docs: {
       category: 'Stylistic',
-      description: 'Package properties should be declared in standard order',
+      description:
+        'Enforces that package properties are declared in a consistent order.',
     },
     fixable: 'code',
     messages: {
       incorrectOrder:
-        'Top-level property "{{property}}" is not ordered in the standard way.',
+        'Top-level property `{{property}}` is not ordered in the standard way.',
     },
     schema: [
       {
