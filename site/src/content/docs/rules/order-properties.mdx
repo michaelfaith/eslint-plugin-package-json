@@ -1,6 +1,6 @@
 ---
 title: 'order-properties'
-description: 'Package properties should be declared in standard order'
+description: 'Enforces that package properties are declared in a consistent order.'
 ---
 
 💼 This rule is enabled in the 🎨 `stylistic` config.
@@ -13,7 +13,8 @@ import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
 
 A conventional order exists for `package.json` top-level properties.
 npm does not enforce this order, but for consistency and readability, this rule can enforce it.
-Any properties not defined in the official package.json schema are placed after the standard fields and sorted lexicographically.
+We use the order specified in [`sort-package-json`](https://github.com/keithamus/sort-package-json) as the default sort order.
+Any properties not defined by this ordering are placed after the standard fields and sorted lexicographically.
 
 <Aside type="tip">
   This rule is especially useful in monorepos with many `package.json` files
@@ -61,7 +62,7 @@ The `order` property specifies the sorting order of package properties.
 Pass in:
 
 - `"sort-package-json"` - to order properties by the default order specified in [sort-package-json](https://github.com/keithamus/sort-package-json).
-- `Array<string>` - to specify an array of top-level package properties to lint sorting on only those properties.
+- `string[]` - to specify an array of top-level package properties to lint sorting on only those properties.
   All properties not in this collection will be sorted by "sort-package-json" specifications.
 - ~`"legacy"`~ (deprecated) - to order properties specified by [npm documentation](https://docs.npmjs.com/cli/v11/configuring-npm/package-json).
 
