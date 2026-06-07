@@ -1,6 +1,7 @@
+import type { Config } from 'prettier';
+
 /**
  * @see https://prettier.io/docs/configuration
- * @type {import("prettier").Config}
  */
 const config = {
   importOrder: ['<BUILTIN_MODULES>', '', '<THIRD_PARTY_MODULES>', '', '^[.]'],
@@ -13,5 +14,5 @@ const config = {
     '@ianvs/prettier-plugin-sort-imports',
   ],
   singleQuote: true,
-};
+} satisfies Config;
 export default config;

@@ -126,7 +126,6 @@ export default defineConfig(
       parserOptions: {
         projectService: {
           allowDefaultProject: [
-            '*.config.js',
             'astro.config.ts',
             '.simple-git-hooks.js',
             'knip.ts',
