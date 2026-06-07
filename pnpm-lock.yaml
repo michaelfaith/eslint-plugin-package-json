@@ -39,8 +39,8 @@ importers:
         specifier: ^2.0.0
         version: 2.1.0
       sort-package-json:
-        specifier: ^3.4.0
-        version: 3.6.1
+        specifier: ^4.0.0
+        version: 4.0.0
     devDependencies:
       '@astrojs/starlight':
         specifier: 0.39.0
@@ -3287,9 +3287,9 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  sort-package-json@3.6.1:
-    resolution: {integrity: sha512-Chgejw1+10p2D0U2tB7au1lHtz6TkFnxmvZktyBCRyV0GgmF6nl1IxXxAsPtJVsUyg/fo+BfCMAVVFUVRkAHrQ==}
-    engines: {node: '>=20'}
+  sort-package-json@4.0.0:
+    resolution: {integrity: sha512-6aYOlYI9AWioZ+rzu+4zKLmoFqJP0/fHDxrd7X04yqEibikY+5YVF0EYlyGn4v6X2PJY7yAUWV7oeP+i5rOm/g==}
+    engines: {node: '>=22'}
     hasBin: true
 
   source-map-js@1.2.1:
@@ -7434,7 +7434,7 @@ snapshots:
       sort-object-keys: 2.1.0
       tinyglobby: 0.2.16
 
-  sort-package-json@3.6.1:
+  sort-package-json@4.0.0:
     dependencies:
       detect-indent: 7.0.2
       detect-newline: 4.0.1
