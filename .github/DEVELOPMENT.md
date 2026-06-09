@@ -8,11 +8,10 @@ cd eslint-plugin-package-json
 pnpm install
 ```
 
-:::tip
-This repository includes a list of suggested VS Code extensions.
-We recommend using [VS Code](https://code.visualstudio.com), [Cursor](https://cursor.com), or another VS Code-compatible IDE and accept its prompt to install them.
-If you're not using VS Code, use the equivalent extensions for your editor.
-:::
+> [!TIP]
+> This repository includes a list of suggested VS Code extensions.
+> We recommend using [VS Code](https://code.visualstudio.com), [Cursor](https://cursor.com), or another VS Code-compatible IDE and accept its prompt to install them.
+> If you're not using VS Code, use the equivalent extensions for your editor.
 
 ## Building
 

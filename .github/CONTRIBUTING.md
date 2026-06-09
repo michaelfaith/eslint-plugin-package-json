@@ -2,6 +2,7 @@
 
 Thanks for your interest in contributing to `eslint-plugin-package-json`! 🗂
 
+> [!TIP]
 > After this page, see [DEVELOPMENT.md](./DEVELOPMENT.md) for local development instructions.
 
 ## Code of Conduct
