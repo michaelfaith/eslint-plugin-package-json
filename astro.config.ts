@@ -28,6 +28,15 @@ export default defineConfig({
           items: [{ autogenerate: { collapsed: true, directory: 'rules' } }],
           label: 'Rules',
         },
+        {
+          collapsed: true,
+          items: [
+            {
+              autogenerate: { collapsed: true, directory: 'getting-involved' },
+            },
+          ],
+          label: 'Getting Involved',
+        },
       ],
       social: [
         {

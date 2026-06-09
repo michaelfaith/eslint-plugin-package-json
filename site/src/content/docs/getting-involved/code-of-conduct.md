@@ -1,4 +1,7 @@
-# Code of Conduct
+---
+title: Code of Conduct
+description: 'Expectations for how we work as a diverse, inclusive, and healthy community.'
+---
 
 ## Our Pledge
 
