@@ -71,6 +71,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
+    "@astrojs/markdown-satteri": "0.3.2",
     "@astrojs/starlight": "0.41.1",
     "@catppuccin/starlight": "2.0.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",

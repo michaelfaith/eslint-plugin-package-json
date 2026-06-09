@@ -1,3 +1,4 @@
+import { satteri } from '@astrojs/markdown-satteri';
 import starlight from '@astrojs/starlight';
 import starlightCatppuccin from '@catppuccin/starlight';
 import { defineConfig } from 'astro/config';
@@ -48,6 +49,11 @@ export default defineConfig({
       title: 'ESLint Plugin: Package JSON',
     }),
   ],
+  markdown: {
+    processor: satteri({
+      features: { directive: true },
+    }),
+  },
   outDir: './dist-site',
   prefetch: {
     defaultStrategy: 'hover',
