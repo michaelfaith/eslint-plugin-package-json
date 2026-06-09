@@ -79,8 +79,8 @@ export default defineConfig([
 
 <Aside type="tip">
   See [ESLint's _Configuration Files_
-  guide](https://eslint.org/docs/latest/use/configure/configuration-files-new)
-  for details on how to customize your rules and other config settings.
+  guide](https://eslint.org/docs/latest/use/configure/configuration-files) for
+  details on how to customize your rules and other config settings.
 </Aside>
 
 ### Recommended Config for Publishable Packages
@@ -212,3 +212,9 @@ export default defineConfig([
   You can learn more about our `@eslint/json` migration plan
   [here](https://github.com/michaelfaith/eslint-plugin-package-json/blob/main/docs/plans/parser-to-language-migration/plan.md).
 </Aside>
+
+### Isolating Configs
+
+In general, but especially when using multiple languages in ESLint, it's important to isolate each config object in your `eslint.config.ts` to apply only to the set of files that you intend it to.
+The ESLint team [recommends](https://github.com/eslint/markdown/issues/517#issuecomment-3381967375) including `files` in _every_ config object for this reason.
+If you have enabled multiple languages, but have some config objects without any `files` defined, then those config settings can "leak" in unexpected ways resulting in runtime errors.
