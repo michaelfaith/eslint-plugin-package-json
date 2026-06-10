@@ -211,7 +211,7 @@ export const rule = createRule({
               break;
             }
 
-            const rangeTypeMatch = rangeTypes.find((rangeType) => {
+            const rangeTypeMatch = rangeTypes.some((rangeType) => {
               switch (rangeType) {
                 case 'caret':
                   return isCaretRange;
