@@ -1,0 +1,23 @@
+name: 'Close Stale Issues and PRs'
+on:
+  schedule:
+    - cron: '13 13 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v10
+        with:
+          exempt-assignees: 'michaelfaith'
+          exempt-all-milestones: true
+          exempt-issue-labels: 'status: blocked, status: accepting prs, type: admin, status: tracking'
+          days-before-close: 13
+          days-before-stale: 42
+          labels-to-remove-when-stale: 'status: in discussion'
+          stale-issue-message: 'Hi there 👋 this issue appears to be stale. Make a comment if you believe this is still relevant.  Otherwise, it will be closed automatically in 13 days. ✨'
+          stale-pr-message: 'Hi there 👋 this PR appears to be stale. Make an update or comment if you believe this is still relevant.  Otherwise, it will be closed automatically in 13 days. ✨'
+          stale-pr-label: 'status: stale'
