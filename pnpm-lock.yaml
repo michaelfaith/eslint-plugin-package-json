@@ -49,14 +49,14 @@ importers:
         specifier: 0.9.9
         version: 0.9.9(prettier@3.8.0)(typescript@6.0.3)
       '@astrojs/markdown-satteri':
-        specifier: 0.3.0
-        version: 0.3.0
+        specifier: 0.2.2
+        version: 0.2.2
       '@astrojs/starlight':
         specifier: 0.40.0
-        version: 0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
+        version: 0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
       '@catppuccin/starlight':
         specifier: 2.0.1
-        version: 2.0.1(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))
+        version: 2.0.1(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: 4.7.0
         version: 4.7.0(eslint@10.4.0(jiti@2.7.0))
@@ -164,7 +164,7 @@ importers:
         version: 2.13.1
       starlight-auto-sidebar:
         specifier: 0.4.0
-        version: 0.4.0(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))
+        version: 0.4.0(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(oxc-resolver@11.20.0)(typescript@6.0.3)
@@ -213,8 +213,8 @@ packages:
   '@astrojs/markdown-remark@7.2.0':
     resolution: {integrity: sha512-+YxmVQu1Bd+MFfSzjq1rOJvD9+nIOJzz5YIIhdIH01RrxRkKbyKoEgyIqP3yv51MhzMDgd79QaPv+kCVPT8vHw==}
 
-  '@astrojs/markdown-satteri@0.3.0':
-    resolution: {integrity: sha512-dJ3boRA7LyPTF13aOFUtZlY8XgnjMNXNL8Hc7FuUsT5IRtMKTl8DKjcV4JvLLKKc0kxHMsVoVnnH99e+aJRkjA==}
+  '@astrojs/markdown-satteri@0.2.2':
+    resolution: {integrity: sha512-F3jxs0QstnLL5Fa/Uq6idPZ2IsT8AKo/S+AvnIOvFX+8rst5j2MJBPllgzD1O5JbFqyiXs6Wx59o8h2O9U41pw==}
 
   '@astrojs/mdx@6.0.3':
     resolution: {integrity: sha512-+4P3ZvwsRAqAbBgY+uZMewFo3ficlIBPZfu/Luk+v4ia/ZOuFhpsw7r+7672uT2Fc1UPdp7yW0eU5egvSq0wbw==}
@@ -4154,14 +4154,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/markdown-satteri@0.3.0':
+  '@astrojs/markdown-satteri@0.2.2':
     dependencies:
       '@astrojs/internal-helpers': 0.10.0
-      '@astrojs/prism': 4.0.2
       github-slugger: 2.0.0
       satteri: 0.8.0
 
-  '@astrojs/mdx@6.0.3(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))':
+  '@astrojs/mdx@6.0.3(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))':
     dependencies:
       '@astrojs/internal-helpers': 0.10.0
       '@astrojs/markdown-remark': 7.2.0
@@ -4179,7 +4178,7 @@ snapshots:
       unist-util-visit: 5.1.0
       vfile: 6.0.3
     optionalDependencies:
-      '@astrojs/markdown-satteri': 0.3.0
+      '@astrojs/markdown-satteri': 0.2.2
     transitivePeerDependencies:
       - supports-color
 
@@ -4193,10 +4192,10 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 4.4.3
 
-  '@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)':
+  '@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)':
     dependencies:
       '@astrojs/markdown-remark': 7.2.0
-      '@astrojs/mdx': 6.0.3(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))
+      '@astrojs/mdx': 6.0.3(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))
       '@astrojs/sitemap': 3.7.3
       '@pagefind/default-ui': 1.5.2
       '@types/hast': 3.0.4
@@ -4225,7 +4224,7 @@ snapshots:
       unist-util-visit: 5.1.0
       vfile: 6.0.3
     optionalDependencies:
-      '@astrojs/markdown-satteri': 0.3.0
+      '@astrojs/markdown-satteri': 0.2.2
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4338,9 +4337,9 @@ snapshots:
     dependencies:
       fontkitten: 1.0.3
 
-  '@catppuccin/starlight@2.0.1(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))':
+  '@catppuccin/starlight@2.0.1(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3))(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))':
     dependencies:
-      '@astrojs/starlight': 0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
+      '@astrojs/starlight': 0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
       astro: 6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0)
 
   '@clack/core@1.4.1':
@@ -7940,9 +7939,9 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  starlight-auto-sidebar@0.4.0(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)):
+  starlight-auto-sidebar@0.4.0(@astrojs/starlight@0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)):
     dependencies:
-      '@astrojs/starlight': 0.40.0(@astrojs/markdown-satteri@0.3.0)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
+      '@astrojs/starlight': 0.40.0(@astrojs/markdown-satteri@0.2.2)(astro@6.4.5(@types/node@24.13.0)(jiti@2.7.0)(rollup@4.61.1)(yaml@2.9.0))(typescript@6.0.3)
       github-slugger: 2.0.0
 
   std-env@4.1.0: {}
