@@ -20,4 +20,5 @@ jobs:
           labels-to-remove-when-stale: 'status: in discussion'
           stale-issue-message: 'Hi there 👋 this issue appears to be stale. Make a comment if you believe this is still relevant.  Otherwise, it will be closed automatically in 13 days. ✨'
           stale-pr-message: 'Hi there 👋 this PR appears to be stale. Make an update or comment if you believe this is still relevant.  Otherwise, it will be closed automatically in 13 days. ✨'
+          stale-issue-label: 'status: stale'
           stale-pr-label: 'status: stale'
