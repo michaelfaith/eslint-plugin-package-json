@@ -70,7 +70,7 @@
     "sort-package-json": "^4.0.0"
   },
   "devDependencies": {
-    "@astrojs/starlight": "0.39.0",
+    "@astrojs/starlight": "0.40.0",
     "@catppuccin/starlight": "2.0.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.0",
     "@eslint/js": "10.0.1",
