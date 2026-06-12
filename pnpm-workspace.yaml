@@ -3,4 +3,6 @@ allowBuilds:
   sharp: true
   simple-git-hooks: true
 minimumReleaseAge: 1440
+overrides:
+  '@astrojs/check@0.9.9>chokidar': 4.0.1 # trust downgrade in 4.0.3 (resolved in 5.0.0)
 trustPolicy: no-downgrade

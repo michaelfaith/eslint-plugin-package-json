@@ -49,10 +49,10 @@
     "lint": "eslint . --max-warnings 0",
     "lint:knip": "knip",
     "site:build": "astro build",
+    "site:check": "astro check --root site",
     "site:dev": "astro dev",
     "site:preview": "astro preview",
     "site:sync": "astro sync",
-    "site:typecheck": "pnpm site:sync && tsc --project site/tsconfig.json",
     "test": "vitest",
     "typecheck": "tsc"
   },
@@ -70,6 +70,7 @@
     "sort-package-json": "^4.0.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/starlight": "0.40.0",
     "@catppuccin/starlight": "2.0.1",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.0",
@@ -109,7 +110,7 @@
     "simple-git-hooks": "2.13.1",
     "starlight-auto-sidebar": "0.4.0",
     "tsdown": "0.22.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "typescript-eslint": "8.61.0",
     "vitest": "4.1.0"
   },

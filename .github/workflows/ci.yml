@@ -159,9 +159,9 @@ jobs:
       - run: pnpm typecheck
 
   type_check_site:
-    name: Type-check Site
+    name: Check Site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - uses: ./.github/actions/setup
-      - run: pnpm site:typecheck
+      - run: pnpm site:check
