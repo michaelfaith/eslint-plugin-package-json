@@ -222,6 +222,54 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
     },
+    // custom order: listed keys follow the specified order
+    {
+      code: `{
+	"nx": {
+		"affected": {},
+		"npmScope": "test"
+	}
+}`,
+      errors: [
+        {
+          data: { key: 'nx' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+      output: `{
+	"nx": {
+    "npmScope": "test",
+    "affected": {}
+  }
+}`,
+    },
+    // custom order: unlisted keys appended in lexicographical order
+    {
+      code: `{
+	"nx": {
+		"workspaceLayout": {},
+		"affected": {},
+		"npmScope": "test"
+	}
+}`,
+      errors: [
+        {
+          data: { key: 'nx' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+      output: `{
+	"nx": {
+    "npmScope": "test",
+    "affected": {},
+    "workspaceLayout": {}
+  }
+}`,
+    },
   ],
 
   valid: [
@@ -364,6 +412,46 @@ ruleTester.run('sort-collections', rule, {
   ]
 }`,
       options: [['foo.0.bar']],
+    },
+    // custom order: already in the specified order
+    {
+      code: `{
+	"nx": {
+		"npmScope": "test",
+		"affected": {}
+	}
+}`,
+      filename: 'package.json',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+    },
+    // custom order: unlisted keys already appended lexicographically
+    {
+      code: `{
+	"nx": {
+		"npmScope": "test",
+		"affected": {},
+		"workspaceLayout": {}
+	}
+}`,
+      filename: 'package.json',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+    },
+    // mixed array: string entries and object entries coexist
+    {
+      code: `{
+	"devDependencies": {
+		"a": "1",
+		"b": "2"
+	},
+	"nx": {
+		"npmScope": "test",
+		"affected": {}
+	}
+}`,
+      filename: 'package.json',
+      options: [
+        ['devDependencies', { key: 'nx', order: ['npmScope', 'affected'] }],
+      ],
     },
   ],
 });

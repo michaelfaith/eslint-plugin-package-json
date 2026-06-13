@@ -17,9 +17,11 @@ const defaultCollections = new Set([
 
 export const rule = createRule({
   create(context) {
-    const toSort = context.options[0]
-      ? new Set(context.options[0])
-      : defaultCollections;
+    const toSort = new Map<string, null | string[]>(
+      (context.options[0] ?? Array.from(defaultCollections)).map((entry) =>
+        typeof entry === 'string' ? [entry, null] : [entry.key, entry.order],
+      ),
+    );
 
     return {
       'JSONProperty:exit'(node) {
@@ -49,14 +51,19 @@ export const rule = createRule({
           }
         }
         const key = keyPartsReversed.reverse().join('.');
-        if (!toSort.has(key)) {
+        // `undefined` means the key isn't configured for sorting; `null` means
+        // sort it the default way; an array is a custom order.
+        const customOrder = toSort.get(key);
+        if (customOrder === undefined) {
           return;
         }
 
         const currentOrder = collection.properties;
         let desiredOrder: JsonAST.JSONProperty[];
 
-        if (keyPartsReversed.at(-1) === 'scripts') {
+        const isScripts = keyPartsReversed.at(-1) === 'scripts';
+
+        if (isScripts && !customOrder) {
           // For scripts we'll use `sort-package-json`
           const scriptsSource = context.sourceCode.getText(node);
           const minimalJson = JSON.parse(`{${scriptsSource}}`) as {
@@ -76,11 +83,22 @@ export const rule = createRule({
             (prop) => propertyNodeMap[prop],
           );
 
-          // If it's any property other than `scripts`, simply sort lexicographically
+          // Otherwise sort by the custom order (if any); keys not listed in it
+          // (or every key, when no custom order is given) are appended in
+          // lexicographical order.
         } else {
+          const orderIndex = new Map((customOrder ?? []).map((k, i) => [k, i]));
+          const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
+
           desiredOrder = currentOrder.toSorted((a, b) => {
             const aKey = (a.key as JsonAST.JSONStringLiteral).value;
             const bKey = (b.key as JsonAST.JSONStringLiteral).value;
+            const ai = rank(aKey);
+            const bi = rank(bKey);
+
+            if (ai !== bi) {
+              return ai - bi;
+            }
 
             return aKey > bKey ? 1 : -1;
           });
@@ -111,8 +129,9 @@ export const rule = createRule({
               );
             },
             loc: collection.loc,
-            messageId:
-              keyPartsReversed.at(-1) === 'scripts'
+            messageId: customOrder
+              ? 'unsortedOrder'
+              : isScripts
                 ? 'unsortedScripts'
                 : 'unsortedKeys',
             node,
@@ -132,14 +151,39 @@ export const rule = createRule({
     fixable: 'code',
     messages: {
       unsortedKeys: "Entries in '{{ key }}' are not in lexicographical order",
+      unsortedOrder: "Entries in '{{ key }}' are not in the specified order",
       unsortedScripts:
         "Entries in 'scripts' are not in lexicographical order and grouped by lifecycles",
     },
     schema: [
       {
-        description: 'Array of package properties to require sorting.',
+        description:
+          'Array of package properties to require sorting. Provide a string to sort that collection lexicographically (lifecycle-aware for `scripts`), or an object to sort it by a specified order.',
         items: {
-          type: 'string',
+          anyOf: [
+            {
+              type: 'string',
+            },
+            {
+              additionalProperties: false,
+              properties: {
+                key: {
+                  description: 'The collection property to sort.',
+                  type: 'string',
+                },
+                order: {
+                  description:
+                    'The order to sort the collection by. Keys not listed are appended in lexicographical order.',
+                  items: {
+                    type: 'string',
+                  },
+                  type: 'array',
+                },
+              },
+              required: ['key', 'order'],
+              type: 'object',
+            },
+          ],
         },
         type: 'array',
       },

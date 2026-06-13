@@ -141,9 +141,23 @@ Incorrect vs. correct ordering of a complete lifecycle group:
 
 ## Options
 
+{/* begin auto-generated rule options list */}
+
+| Name    | Description                                                                                 | Type     | Required |
+| :------ | :------------------------------------------------------------------------------------------ | :------- | :------- |
+| `key`   | The collection property to sort.                                                            | String   | Yes      |
+| `order` | The order to sort the collection by. Keys not listed are appended in lexicographical order. | String[] | Yes      |
+
+{/* end auto-generated rule options list */}
+
 Pass an array of package properties to require sorting on those collections.
 To specify a nested property, use dot notation.
 All of their values must be objects.
+
+Each entry is either:
+
+- A string: the collection to sort the default way (lexicographically, or lifecycle-aware for `scripts`)
+- An object (`{ key: string; order: string[] }`): sort the collection named by `key` using the given `order`; keys not listed in `order` are appended afterwards, sorted lexicographically
 
 Example of only sorting `devDependencies` and `pnpm.patchedDependencies`:
 
@@ -152,6 +166,17 @@ Example of only sorting `devDependencies` and `pnpm.patchedDependencies`:
   "package-json/sort-collections": [
     "error",
     ["devDependencies", "pnpm.patchedDependencies"]
+  ]
+}
+```
+
+Example of enforcing a custom order for `nx` while still sorting `dependencies` the default way:
+
+```json
+{
+  "package-json/sort-collections": [
+    "error",
+    ["dependencies", { "key": "nx", "order": ["npmScope", "affected"] }]
   ]
 }
 ```
