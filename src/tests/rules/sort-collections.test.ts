@@ -237,6 +237,7 @@ ruleTester.run('sort-collections', rule, {
         },
       ],
       filename: 'package.json',
+      name: 'custom order: listed keys follow the specified order',
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
       output: `{
 	"nx": {
@@ -261,6 +262,7 @@ ruleTester.run('sort-collections', rule, {
         },
       ],
       filename: 'package.json',
+      name: 'custom order: unlisted keys appended in lexicographical order',
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
       output: `{
 	"nx": {
@@ -451,6 +453,7 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
       filename: 'package.json',
+      name: 'custom order: already in the specified order',
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
     },
     // custom order: unlisted keys already appended lexicographically
@@ -463,6 +466,7 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
       filename: 'package.json',
+      name: 'custom order: unlisted keys already appended lexicographically',
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
     },
     // mixed array: string entries and object entries coexist
@@ -478,6 +482,7 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
       filename: 'package.json',
+      name: 'mixed array: string entries and object entries coexist',
       options: [
         ['devDependencies', { key: 'nx', order: ['npmScope', 'affected'] }],
       ],
