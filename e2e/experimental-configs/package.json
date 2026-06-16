@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@eslint/json": "2.0.0",
-    "eslint": "10.4.0",
+    "eslint": "10.5.0",
     "eslint-plugin-package-json": "file:../.."
   }
 }
