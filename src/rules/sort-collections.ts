@@ -59,50 +59,45 @@ export const rule = createRule({
         }
 
         const currentOrder = collection.properties;
-        let desiredOrder: JsonAST.JSONProperty[];
 
         const isScripts = keyPartsReversed.at(-1) === 'scripts';
 
-        if (isScripts && !customOrder) {
-          // For scripts we'll use `sort-package-json`
+        // The "natural" order for keys not pinned by a custom order: `scripts`
+        // are lifecycle-aware (via `sort-package-json`), everything else is
+        // lexicographical.
+        let naturalCompare: (a: string, b: string) => number;
+        if (isScripts) {
           const scriptsSource = context.sourceCode.getText(node);
           const minimalJson = JSON.parse(`{${scriptsSource}}`) as {
             scripts: Record<string, unknown>;
           };
           const { scripts: sortedScripts } = sortPackageJson(minimalJson);
-
-          const propertyNodeMap = Object.fromEntries(
-            collection.properties.map((prop) => [
-              (prop.key as JsonAST.JSONStringLiteral).value,
-              prop,
-            ]),
+          const lifecycleIndex = new Map(
+            Object.keys(sortedScripts).map((k, i) => [k, i]),
           );
-
-          // Used the scripts object sorted by `sort-package-json` to create the desiredOrder
-          desiredOrder = Object.keys(sortedScripts).map(
-            (prop) => propertyNodeMap[prop],
-          );
-
-          // Otherwise sort by the custom order (if any); keys not listed in it
-          // (or every key, when no custom order is given) are appended in
-          // lexicographical order.
+          naturalCompare = (a, b) =>
+            (lifecycleIndex.get(a) ?? 0) - (lifecycleIndex.get(b) ?? 0);
         } else {
-          const orderIndex = new Map((customOrder ?? []).map((k, i) => [k, i]));
-          const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
-
-          desiredOrder = currentOrder.toSorted((a, b) => {
-            const aKey = (a.key as JsonAST.JSONStringLiteral).value;
-            const bKey = (b.key as JsonAST.JSONStringLiteral).value;
-            const ai = rank(aKey);
-            const bi = rank(bKey);
-
-            if (ai !== bi) {
-              return ai - bi;
-            }
-
-            return aKey > bKey ? 1 : -1;
-          });
+          naturalCompare = (a, b) => (a > b ? 1 : -1);
         }
+
+        // Custom order (if any) takes precedence; keys not listed in it fall
+        // back to the natural order above (lifecycle-aware for `scripts`).
+        const orderIndex = new Map((customOrder ?? []).map((k, i) => [k, i]));
+        const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
+
+        const desiredOrder = currentOrder.toSorted((a, b) => {
+          const aKey = (a.key as JsonAST.JSONStringLiteral).value;
+          const bKey = (b.key as JsonAST.JSONStringLiteral).value;
+          const ai = rank(aKey);
+          const bi = rank(bKey);
+
+          if (ai !== bi) {
+            return ai - bi;
+          }
+
+          return naturalCompare(aKey, bKey);
+        });
 
         if (currentOrder.some((property, i) => desiredOrder[i] !== property)) {
           context.report({
@@ -178,6 +173,7 @@ export const rule = createRule({
                     type: 'string',
                   },
                   type: 'array',
+                  uniqueItems: true,
                 },
               },
               required: ['key', 'order'],
