@@ -2,7 +2,7 @@ import path from 'node:path';
 import { sep as posixSep } from 'node:path/posix';
 
 import { findRootSync } from '@altano/repository-tools';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
@@ -39,8 +39,8 @@ export const rule = createRule({
   create(context) {
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=repository][value.type=JSONObjectExpression]'(
-        node: JsonAST.JSONProperty & {
-          value: JsonAST.JSONObjectExpression;
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
         },
       ) {
         const directoryProperty = findPropertyWithKeyValue(

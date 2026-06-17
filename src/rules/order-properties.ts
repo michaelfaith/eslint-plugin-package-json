@@ -1,6 +1,6 @@
 import detectIndent from 'detect-indent';
 import { detectNewlineGraceful } from 'detect-newline';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 import sortObjectKeys from 'sort-object-keys';
 import { sortOrder } from 'sort-package-json';
 
@@ -32,7 +32,7 @@ export const rule = createRule({
         const { properties } = ast.body[0].expression;
 
         for (let i = 0; i < properties.length; i += 1) {
-          const property = properties[i].key as JsonAST.JSONStringLiteral;
+          const property = properties[i].key as AST.JSONStringLiteral;
           const { value } = property;
 
           if (value === orderedKeys[i]) {

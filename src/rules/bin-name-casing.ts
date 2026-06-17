@@ -1,5 +1,5 @@
 import { kebabCase } from 'change-case';
-import { AST as JsonAST } from 'jsonc-eslint-parser';
+import { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 
@@ -7,11 +7,11 @@ export const rule = createRule({
   create(context) {
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
-            const key = property.key as JsonAST.JSONStringLiteral;
+            const key = property.key as AST.JSONStringLiteral;
             const kebabCaseKey = kebabCase(key.value);
             if (kebabCaseKey !== key.value) {
               context.report({

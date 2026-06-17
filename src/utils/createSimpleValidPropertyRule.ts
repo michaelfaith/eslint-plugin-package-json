@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 import type { Result } from 'package-json-validator';
 
 import { createRule } from '../createRule.ts';
@@ -21,7 +21,7 @@ export const createSimpleValidPropertyRule = (
   const propertyNames = [propertyName, ...aliases];
   const rule = createRule({
     create(context) {
-      const reportIssues = (result: Result, node: JsonAST.JSONNode) => {
+      const reportIssues = (result: Result, node: AST.JSONNode) => {
         // Early return if there are no errors
         if (result.errorMessages.length === 0) {
           return;
@@ -64,11 +64,11 @@ export const createSimpleValidPropertyRule = (
       };
 
       return propertyNames.reduce<
-        Record<string, (node: JsonAST.JSONProperty) => void>
+        Record<string, (node: AST.JSONProperty) => void>
       >((acc, name) => {
         acc[
           `Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=${name}]`
-        ] = (node: JsonAST.JSONProperty) => {
+        ] = (node: AST.JSONProperty) => {
           const valueNode = node.value;
           const value: unknown = JSON.parse(
             context.sourceCode.getText(valueNode),

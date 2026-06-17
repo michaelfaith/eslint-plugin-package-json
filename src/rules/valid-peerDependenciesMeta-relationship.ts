@@ -1,6 +1,6 @@
 import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
@@ -8,11 +8,11 @@ import { isJSONStringLiteral } from '../utils/predicates.ts';
 export const rule = createRule({
   create(context) {
     const peerDependencies = new Set<string>();
-    const peerDependenciesMeta = new Map<string, JsonAST.JSONProperty>();
+    const peerDependenciesMeta = new Map<string, AST.JSONProperty>();
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependencies]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {
@@ -23,7 +23,7 @@ export const rule = createRule({
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=peerDependenciesMeta]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (node.value.type === 'JSONObjectExpression') {
           for (const property of node.value.properties) {

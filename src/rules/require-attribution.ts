@@ -1,6 +1,6 @@
 import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 
@@ -9,18 +9,18 @@ export const rule = createRule({
     const preferContributorsOnly =
       context.options[0]?.preferContributorsOnly ?? false;
     const ignorePrivate = context.options[0]?.ignorePrivate ?? true;
-    let authorPropertyNode: JsonAST.JSONProperty | undefined;
-    let contributorsPropertyNode: JsonAST.JSONProperty | undefined;
+    let authorPropertyNode: AST.JSONProperty | undefined;
+    let contributorsPropertyNode: AST.JSONProperty | undefined;
     let isPrivatePackage = false;
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=author]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         authorPropertyNode = node;
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=contributors]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         contributorsPropertyNode = node;
 
@@ -37,7 +37,7 @@ export const rule = createRule({
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=private]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (node.value.type === 'JSONLiteral' && node.value.value === true) {
           isPrivatePackage = true;

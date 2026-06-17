@@ -1,4 +1,6 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import detectIndent from 'detect-indent';
+import { detectNewlineGraceful } from 'detect-newline';
+import type { AST } from 'jsonc-eslint-parser';
 import sortPackageJson from 'sort-package-json';
 
 import { createRule } from '../createRule.ts';
@@ -36,7 +38,7 @@ export const rule = createRule({
 
         const keyPartsReversed = [nodeKey.value];
         for (
-          let currNode: JsonAST.JSONNode | null | undefined = node.parent;
+          let currNode: AST.JSONNode | null | undefined = node.parent;
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           currNode;
           currNode = currNode.parent
@@ -87,8 +89,8 @@ export const rule = createRule({
         const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
 
         const desiredOrder = currentOrder.toSorted((a, b) => {
-          const aKey = (a.key as JsonAST.JSONStringLiteral).value;
-          const bKey = (b.key as JsonAST.JSONStringLiteral).value;
+          const aKey = (a.key as AST.JSONStringLiteral).value;
+          const bKey = (b.key as AST.JSONStringLiteral).value;
           const ai = rank(aKey);
           const bi = rank(bKey);
 
@@ -105,23 +107,39 @@ export const rule = createRule({
               key,
             },
             fix(fixer) {
-              return fixer.replaceText(
-                collection,
-                JSON.stringify(
-                  desiredOrder.reduce<Record<string, unknown>>(
-                    (out, property) => {
-                      out[(property.key as JsonAST.JSONStringLiteral).value] =
-                        JSON.parse(context.sourceCode.getText(property.value));
-                      return out;
-                    },
-                    {},
-                  ),
-                  null,
-                  2,
-                )
-                  .split('\n')
-                  .join('\n  '), // nest indents
+              const { text } = context.sourceCode;
+              const { indent, type } = detectIndent(text);
+              const newline = detectNewlineGraceful(text);
+              const indentUnit = type === 'tab' ? '\t' : indent || '  ';
+
+              const replacementJson = JSON.stringify(
+                desiredOrder.reduce<Record<string, unknown>>(
+                  (out, property) => {
+                    out[(property.key as AST.JSONStringLiteral).value] =
+                      JSON.parse(context.sourceCode.getText(property.value));
+                    return out;
+                  },
+                  {},
+                ),
+                null,
+                indentUnit,
               );
+
+              const jsonLines = replacementJson.split('\n');
+
+              const collectionStartLine = collection.loc.start.line;
+              const lineText =
+                context.sourceCode.lines[collectionStartLine - 1];
+              const leadingWhitespaceMatch = /^\s*/.exec(lineText);
+              const leadingWhitespace = leadingWhitespaceMatch
+                ? leadingWhitespaceMatch[0]
+                : '';
+
+              const result = jsonLines
+                .map((l, i) => (i === 0 ? l : leadingWhitespace + l))
+                .join(newline);
+
+              return fixer.replaceText(collection, result);
             },
             loc: collection.loc,
             messageId: customOrder

@@ -1,6 +1,6 @@
 import { fixRemoveArrayElement } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral, isNotNullish } from '../utils/predicates.ts';
@@ -39,12 +39,12 @@ export const rule = createRule({
     // the other values to ensure that files doesn't contain duplicates.
     const entryCache: {
       bin: string[];
-      files: (JsonAST.JSONExpression | null)[];
+      files: (AST.JSONExpression | null)[];
       main?: string;
     } = { bin: [], files: [] };
 
     const report = (
-      elements: (JsonAST.JSONExpression | null)[],
+      elements: (AST.JSONExpression | null)[],
       index: number,
       messageId: string,
     ) => {
@@ -71,7 +71,7 @@ export const rule = createRule({
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         const binValue = node.value;
 
@@ -89,7 +89,7 @@ export const rule = createRule({
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=files]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         // "files" should only ever be an array of strings.
         if (node.value.type === 'JSONArrayExpression') {
@@ -121,7 +121,7 @@ export const rule = createRule({
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=main]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         // "main" should only ever be a string.
         if (isJSONStringLiteral(node.value)) {

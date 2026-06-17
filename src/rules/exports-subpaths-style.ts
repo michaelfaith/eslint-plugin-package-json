@@ -1,10 +1,10 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
 
 function isImplicitFormat(
-  node: JsonAST.JSONLiteral | JsonAST.JSONObjectExpression,
+  node: AST.JSONLiteral | AST.JSONObjectExpression,
 ): boolean {
   if (node.type === 'JSONLiteral') {
     return true;
@@ -22,7 +22,7 @@ export const rule = createRule({
   create(context) {
     const [{ prefer = 'explicit' } = {}] = context.options;
 
-    function validateForExplicit(node: JsonAST.JSONProperty) {
+    function validateForExplicit(node: AST.JSONProperty) {
       const { value } = node;
       if (
         (value.type !== 'JSONLiteral' &&
@@ -48,7 +48,7 @@ export const rule = createRule({
       });
     }
 
-    function validateForImplicit(node: JsonAST.JSONProperty) {
+    function validateForImplicit(node: AST.JSONProperty) {
       const { value } = node;
       if (value.type !== 'JSONObjectExpression') {
         return;
