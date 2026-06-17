@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
@@ -6,13 +6,13 @@ import { isJSONStringLiteral } from '../utils/predicates.ts';
 export const rule = createRule({
   create(context) {
     const devDependencyNames = new Set<string>();
-    let devDependenciesObjectNode: JsonAST.JSONObjectExpression | undefined;
-    const peerDependencyMap: Record<string, JsonAST.JSONProperty> = {};
+    let devDependenciesObjectNode: AST.JSONObjectExpression | undefined;
+    const peerDependencyMap: Record<string, AST.JSONProperty> = {};
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=devDependencies]'(
-        node: JsonAST.JSONProperty & {
-          value: JsonAST.JSONObjectExpression;
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
         },
       ) {
         devDependenciesObjectNode = node.value;
@@ -24,8 +24,8 @@ export const rule = createRule({
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=peerDependencies]'(
-        node: JsonAST.JSONProperty & {
-          value: JsonAST.JSONObjectExpression;
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
         },
       ) {
         for (const peerDependencyPropertyNode of node.value.properties) {

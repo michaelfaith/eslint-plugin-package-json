@@ -3,15 +3,12 @@ import {
   fixRemoveObjectProperty,
 } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule, PackageJsonRuleContext } from '../createRule.ts';
 
 const getDataAndMessageId = (
-  node:
-    | JsonAST.JSONArrayExpression
-    | JsonAST.JSONObjectExpression
-    | JsonAST.JSONProperty,
+  node: AST.JSONArrayExpression | AST.JSONObjectExpression | AST.JSONProperty,
 ): {
   data: Record<string, string>;
   messageId: 'emptyExpression' | 'emptyFields';
@@ -34,7 +31,7 @@ const getDataAndMessageId = (
     case 'JSONProperty':
       return {
         data: {
-          field: (node.key as JsonAST.JSONStringLiteral).value,
+          field: (node.key as AST.JSONStringLiteral).value,
         },
         messageId: 'emptyFields',
       };
@@ -43,10 +40,7 @@ const getDataAndMessageId = (
 
 const report = (
   context: PackageJsonRuleContext,
-  node:
-    | JsonAST.JSONArrayExpression
-    | JsonAST.JSONObjectExpression
-    | JsonAST.JSONProperty,
+  node: AST.JSONArrayExpression | AST.JSONObjectExpression | AST.JSONProperty,
 ) => {
   const { data, messageId } = getDataAndMessageId(node);
   context.report({
@@ -72,16 +66,14 @@ const report = (
   });
 };
 
-const getNode = (
-  node: JsonAST.JSONArrayExpression | JsonAST.JSONObjectExpression,
-) => {
+const getNode = (node: AST.JSONArrayExpression | AST.JSONObjectExpression) => {
   return node.parent.type === 'JSONProperty' ? node.parent : node;
 };
 
 const getTopLevelProperty = (
-  node: JsonAST.JSONArrayExpression | JsonAST.JSONObjectExpression,
-): JsonAST.JSONStringLiteral | undefined => {
-  let n: JsonAST.JSONNode = node;
+  node: AST.JSONArrayExpression | AST.JSONObjectExpression,
+): AST.JSONStringLiteral | undefined => {
+  let n: AST.JSONNode = node;
   while (
     n.parent.parent?.parent?.type !== undefined &&
     n.parent.parent.parent.type !== 'Program'
@@ -89,7 +81,7 @@ const getTopLevelProperty = (
     n = n.parent;
   }
   return n.type === 'JSONProperty'
-    ? (n.key as JsonAST.JSONStringLiteral)
+    ? (n.key as AST.JSONStringLiteral)
     : undefined;
 };
 

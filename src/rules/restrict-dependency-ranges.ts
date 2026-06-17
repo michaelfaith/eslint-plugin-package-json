@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 import semver from 'semver';
 
 import { createRule } from '../createRule.ts';
@@ -123,9 +123,9 @@ export const rule = createRule({
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]'(
-        node: JsonAST.JSONProperty & {
-          key: JsonAST.JSONStringLiteral;
-          value: JsonAST.JSONObjectExpression;
+        node: AST.JSONProperty & {
+          key: AST.JSONStringLiteral;
+          value: AST.JSONObjectExpression;
         },
       ) {
         const dependencyType = node.key.value;

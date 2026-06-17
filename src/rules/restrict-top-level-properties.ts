@@ -1,5 +1,5 @@
 import { fixRemoveObjectProperty, type ObjectProperty } from 'eslint-fix-utils';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
@@ -17,7 +17,7 @@ export const rule = createRule({
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression'(
-        node: JsonAST.JSONObjectExpression,
+        node: AST.JSONObjectExpression,
       ) {
         for (const property of node.properties) {
           if (!isJSONStringLiteral(property.key)) {

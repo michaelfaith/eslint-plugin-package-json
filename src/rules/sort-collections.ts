@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 import sortPackageJson from 'sort-package-json';
 
 import { createRule } from '../createRule.ts';
@@ -36,7 +36,7 @@ export const rule = createRule({
 
         const keyPartsReversed = [nodeKey.value];
         for (
-          let currNode: JsonAST.JSONNode | null | undefined = node.parent;
+          let currNode: AST.JSONNode | null | undefined = node.parent;
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           currNode;
           currNode = currNode.parent
@@ -87,8 +87,8 @@ export const rule = createRule({
         const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
 
         const desiredOrder = currentOrder.toSorted((a, b) => {
-          const aKey = (a.key as JsonAST.JSONStringLiteral).value;
-          const bKey = (b.key as JsonAST.JSONStringLiteral).value;
+          const aKey = (a.key as AST.JSONStringLiteral).value;
+          const bKey = (b.key as AST.JSONStringLiteral).value;
           const ai = rank(aKey);
           const bi = rank(bKey);
 

@@ -1,6 +1,6 @@
 import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
@@ -8,18 +8,18 @@ import { isJSONStringLiteral } from '../utils/predicates.ts';
 export const rule = createRule({
   create(context) {
     let packageName: string | undefined;
-    let publishConfigAccessProperty: JsonAST.JSONProperty | undefined;
+    let publishConfigAccessProperty: AST.JSONProperty | undefined;
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=name]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (isJSONStringLiteral(node.value)) {
           packageName = node.value.value;
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=publishConfig]'(
-        node: JsonAST.JSONProperty,
+        node: AST.JSONProperty,
       ) {
         if (node.value.type !== 'JSONObjectExpression') {
           return;

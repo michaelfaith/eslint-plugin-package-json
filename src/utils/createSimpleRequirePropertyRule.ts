@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from './predicates.ts';
@@ -51,7 +51,7 @@ export const createSimpleRequirePropertyRule = (
 
       return {
         'Program > JSONExpressionStatement > JSONObjectExpression'(
-          node: JsonAST.JSONObjectExpression,
+          node: AST.JSONObjectExpression,
         ) {
           if (
             ignorePrivate &&

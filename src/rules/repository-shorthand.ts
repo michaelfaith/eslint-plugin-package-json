@@ -1,4 +1,4 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
@@ -54,7 +54,7 @@ export const rule = createRule({
   create(context) {
     const [{ form = 'object' } = {}] = context.options;
 
-    function validateRepositoryForObject(node: JsonAST.JSONProperty) {
+    function validateRepositoryForObject(node: AST.JSONProperty) {
       if (isJSONStringLiteral(node.value)) {
         context.report({
           fix(fixer) {
@@ -83,7 +83,7 @@ export const rule = createRule({
       }
     }
 
-    function validateRepositoryForShorthand(node: JsonAST.JSONProperty) {
+    function validateRepositoryForShorthand(node: AST.JSONProperty) {
       if (isJSONStringLiteral(node.value)) {
         const { value } = node.value;
         const provider = getProviderFromUrl(value);

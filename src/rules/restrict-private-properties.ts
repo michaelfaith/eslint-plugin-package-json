@@ -1,6 +1,6 @@
 import { fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates.ts';
@@ -15,7 +15,7 @@ export const rule = createRule({
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression'(
-        node: JsonAST.JSONObjectExpression,
+        node: AST.JSONObjectExpression,
       ) {
         // Check if this is a private package
         if (
@@ -50,10 +50,7 @@ export const rule = createRule({
               node: property,
               ...(isEmpty
                 ? {
-                    fix: fixRemoveObjectProperty(
-                      context,
-                      property as unknown as ESTree.Property,
-                    ),
+                    fix: fixRemoveObjectProperty(context, property),
                   }
                 : {
                     suggest: [
@@ -61,10 +58,7 @@ export const rule = createRule({
                         data: {
                           property: property.key.value,
                         },
-                        fix: fixRemoveObjectProperty(
-                          context,
-                          property as unknown as ESTree.Property,
-                        ),
+                        fix: fixRemoveObjectProperty(context, property),
                         messageId: 'removePropertySuggestion',
                       },
                     ],

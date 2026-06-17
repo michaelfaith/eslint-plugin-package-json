@@ -3,7 +3,7 @@ import {
   fixRemoveObjectProperty,
 } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral, isNotNullish } from '../utils/predicates.ts';
@@ -20,7 +20,7 @@ const dependencyPropertyNames = new Set([
 
 export const rule = createRule({
   create(context) {
-    const dependenciesCache: Record<string, JsonAST.JSONProperty[]> = {
+    const dependenciesCache: Record<string, AST.JSONProperty[]> = {
       dependencies: [],
       devDependencies: [],
       peerDependencies: [],
@@ -28,8 +28,8 @@ export const rule = createRule({
     const trackForCrossGroupUniqueness = Object.keys(dependenciesCache);
 
     function check(
-      elements: (JsonAST.JSONNode | null)[],
-      getNodeToRemove: (element: JsonAST.JSONNode) => JsonAST.JSONNode,
+      elements: (AST.JSONNode | null)[],
+      getNodeToRemove: (element: AST.JSONNode) => AST.JSONNode,
     ) {
       const seen = new Set();
 
@@ -44,7 +44,7 @@ export const rule = createRule({
         }
       }
 
-      function report(node: JsonAST.JSONNode) {
+      function report(node: AST.JSONNode) {
         const removal = getNodeToRemove(node);
         context.report({
           messageId: 'overridden',
@@ -71,8 +71,8 @@ export const rule = createRule({
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral]'(
-        node: JsonAST.JSONProperty & {
-          key: JsonAST.JSONStringLiteral;
+        node: AST.JSONProperty & {
+          key: AST.JSONStringLiteral;
         },
       ) {
         if (!dependencyPropertyNames.has(node.key.value)) {
