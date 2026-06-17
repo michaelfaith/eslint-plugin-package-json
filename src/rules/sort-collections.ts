@@ -110,7 +110,7 @@ export const rule = createRule({
                 JSON.stringify(
                   desiredOrder.reduce<Record<string, unknown>>(
                     (out, property) => {
-                      out[(property.key as JsonAST.JSONStringLiteral).value] =
+                      out[(property.key as AST.JSONStringLiteral).value] =
                         JSON.parse(context.sourceCode.getText(property.value));
                       return out;
                     },
