@@ -9,10 +9,10 @@ ruleTester.run('sort-collections', rule, {
   invalid: [
     {
       code: `{
-	"scripts": {
-		"watch": "webpack-dev-server",
-		"build": "webpack"
-	}
+  "scripts": {
+    "watch": "webpack-dev-server",
+    "build": "webpack"
+  }
 }`,
       errors: [
         {
@@ -22,7 +22,7 @@ ruleTester.run('sort-collections', rule, {
       ],
       filename: 'package.json',
       output: `{
-	"scripts": {
+  "scripts": {
     "build": "webpack",
     "watch": "webpack-dev-server"
   }
@@ -46,11 +46,11 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       output: `{
 	"scripts": {
-    "prebuild": "echo test",
-    "build": "webpack",
-    "watch": "webpack-dev-server",
-    "postwatch": "echo test"
-  }
+		"prebuild": "echo test",
+		"build": "webpack",
+		"watch": "webpack-dev-server",
+		"postwatch": "echo test"
+	}
 }`,
     },
     {
@@ -69,9 +69,9 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       output: `{
 	"scripts": {
-    "build": "echo test",
-    "postbuild": "echo test"
-  }
+		"build": "echo test",
+		"postbuild": "echo test"
+	}
 }`,
     },
     {
@@ -90,9 +90,9 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       output: `{
 	"scripts": {
-    "prebuild": "echo test",
-    "build": "echo test"
-  }
+		"prebuild": "echo test",
+		"build": "echo test"
+	}
 }`,
     },
     {
@@ -111,9 +111,9 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       output: `{
 	"scripts": {
-    "postbuild": "echo test",
-    "prebuild": "echo test"
-  }
+		"postbuild": "echo test",
+		"prebuild": "echo test"
+	}
 }`,
     },
     {
@@ -132,21 +132,21 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       output: `{
 	"scripts": {
-    "preinstall": "echo test",
-    "postinstall": "echo test"
-  }
+		"preinstall": "echo test",
+		"postinstall": "echo test"
+	}
 }`,
     },
     {
       code: `{
-	"exports": {
-		"./package.json": "./package.json",
-		".": {
-			"import": "./index.mjs",
-			"require": "./index.js",
-			"types": "./index.d.ts"
-		}
-	}
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    }
+  }
 }`,
       errors: [
         {
@@ -156,7 +156,7 @@ ruleTester.run('sort-collections', rule, {
       ],
       filename: 'package.json',
       output: `{
-	"exports": {
+  "exports": {
     ".": {
       "import": "./index.mjs",
       "require": "./index.js",
@@ -186,22 +186,22 @@ ruleTester.run('sort-collections', rule, {
       output: `{
 	"pnpm": {
 		"patchedDependencies": {
-    "eslint-plugin-package-json@0.31.0": "patches/eslint-plugin-package-json@0.31.0.patch",
-    "typescript@4.8.4": "patches/typescript@4.8.4.patch"
-  }
+			"eslint-plugin-package-json@0.31.0": "patches/eslint-plugin-package-json@0.31.0.patch",
+			"typescript@4.8.4": "patches/typescript@4.8.4.patch"
+		}
 	}
 }`,
     },
     {
       code: `{
-	"pnpm": {
-		"peerDependencyRules": {
-            "allowedVersions": {
-                "vue": "2",
-                "react": "17"
-            }
-		}
-	}
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "vue": "2",
+        "react": "17"
+      }
+    }
+  }
 }`,
       errors: [
         {
@@ -212,23 +212,22 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       options: [['pnpm.peerDependencyRules.allowedVersions']],
       output: `{
-	"pnpm": {
-		"peerDependencyRules": {
-            "allowedVersions": {
-    "react": "17",
-    "vue": "2"
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "17",
+        "vue": "2"
+      }
+    }
   }
-		}
-	}
 }`,
     },
-    // custom order: listed keys follow the specified order
     {
       code: `{
-	"nx": {
-		"affected": {},
-		"npmScope": "test"
-	}
+  "nx": {
+    "affected": {},
+    "npmScope": "test"
+  }
 }`,
       errors: [
         {
@@ -240,13 +239,12 @@ ruleTester.run('sort-collections', rule, {
       name: 'custom order: listed keys follow the specified order',
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
       output: `{
-	"nx": {
+  "nx": {
     "npmScope": "test",
     "affected": {}
   }
 }`,
     },
-    // custom order: unlisted keys appended in lexicographical order
     {
       code: `{
 	"nx": {
@@ -266,14 +264,12 @@ ruleTester.run('sort-collections', rule, {
       options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
       output: `{
 	"nx": {
-    "npmScope": "test",
-    "affected": {},
-    "workspaceLayout": {}
-  }
+		"npmScope": "test",
+		"affected": {},
+		"workspaceLayout": {}
+	}
 }`,
     },
-    // custom order on `scripts`: listed keys come first, unlisted keys fall
-    // back to lifecycle-aware order (not lexicographical)
     {
       code: `{
 	"scripts": {
@@ -294,11 +290,11 @@ ruleTester.run('sort-collections', rule, {
       options: [[{ key: 'scripts', order: ['watch'] }]],
       output: `{
 	"scripts": {
-    "watch": "echo watch",
-    "prebuild": "echo prebuild",
-    "build": "echo build",
-    "postbuild": "echo postbuild"
-  }
+		"watch": "echo watch",
+		"prebuild": "echo prebuild",
+		"build": "echo build",
+		"postbuild": "echo postbuild"
+	}
 }`,
     },
   ],

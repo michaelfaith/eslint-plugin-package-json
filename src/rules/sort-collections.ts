@@ -1,3 +1,5 @@
+import detectIndent from 'detect-indent';
+import { detectNewlineGraceful } from 'detect-newline';
 import type { AST } from 'jsonc-eslint-parser';
 import sortPackageJson from 'sort-package-json';
 
@@ -105,23 +107,39 @@ export const rule = createRule({
               key,
             },
             fix(fixer) {
-              return fixer.replaceText(
-                collection,
-                JSON.stringify(
-                  desiredOrder.reduce<Record<string, unknown>>(
-                    (out, property) => {
-                      out[(property.key as AST.JSONStringLiteral).value] =
-                        JSON.parse(context.sourceCode.getText(property.value));
-                      return out;
-                    },
-                    {},
-                  ),
-                  null,
-                  2,
-                )
-                  .split('\n')
-                  .join('\n  '), // nest indents
+              const { text } = context.sourceCode;
+              const { indent, type } = detectIndent(text);
+              const newline = detectNewlineGraceful(text);
+              const indentUnit = type === 'tab' ? '\t' : indent || '  ';
+
+              const replacementJson = JSON.stringify(
+                desiredOrder.reduce<Record<string, unknown>>(
+                  (out, property) => {
+                    out[(property.key as AST.JSONStringLiteral).value] =
+                      JSON.parse(context.sourceCode.getText(property.value));
+                    return out;
+                  },
+                  {},
+                ),
+                null,
+                indentUnit,
               );
+
+              const jsonLines = replacementJson.split('\n');
+
+              const collectionStartLine = collection.loc.start.line;
+              const lineText =
+                context.sourceCode.lines[collectionStartLine - 1];
+              const leadingWhitespaceMatch = /^\s*/.exec(lineText);
+              const leadingWhitespace = leadingWhitespaceMatch
+                ? leadingWhitespaceMatch[0]
+                : '';
+
+              const result = jsonLines
+                .map((l, i) => (i === 0 ? l : leadingWhitespace + l))
+                .join(newline);
+
+              return fixer.replaceText(collection, result);
             },
             loc: collection.loc,
             messageId: customOrder
