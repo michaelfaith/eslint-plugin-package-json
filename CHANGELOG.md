@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.3.0...v1.4.0) (2026-06-17)
+
+
+### 🚀 Features
+
+* **sort-collections:** add custom sort order option ([#1936](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1936)) ([fbe0ba4](https://github.com/michaelfaith/eslint-plugin-package-json/commit/fbe0ba41d31a6b8472bd28ac9d032aeddbd2f2dc))
+
+
+### 🩹 Bug Fixes
+
+* **deps:** update dependency sort-package-json to v4 ([#1912](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1912)) ([ae2a9b0](https://github.com/michaelfaith/eslint-plugin-package-json/commit/ae2a9b071acb965643acd92674adcdc16768cdf0))
+* **sort-collections:** improve fixer's indent-matching logic ([#1941](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1941)) ([ffe6c09](https://github.com/michaelfaith/eslint-plugin-package-json/commit/ffe6c09dd6a4e96cafb47c869cd1466a9764712c))
+
 ## [1.3.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.2.0...v1.3.0) (2026-06-01)
 
 
