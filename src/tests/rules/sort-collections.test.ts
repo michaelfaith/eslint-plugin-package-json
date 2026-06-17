@@ -222,6 +222,85 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
     },
+    // custom order: listed keys follow the specified order
+    {
+      code: `{
+	"nx": {
+		"affected": {},
+		"npmScope": "test"
+	}
+}`,
+      errors: [
+        {
+          data: { key: 'nx' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'custom order: listed keys follow the specified order',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+      output: `{
+	"nx": {
+    "npmScope": "test",
+    "affected": {}
+  }
+}`,
+    },
+    // custom order: unlisted keys appended in lexicographical order
+    {
+      code: `{
+	"nx": {
+		"workspaceLayout": {},
+		"affected": {},
+		"npmScope": "test"
+	}
+}`,
+      errors: [
+        {
+          data: { key: 'nx' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'custom order: unlisted keys appended in lexicographical order',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+      output: `{
+	"nx": {
+    "npmScope": "test",
+    "affected": {},
+    "workspaceLayout": {}
+  }
+}`,
+    },
+    // custom order on `scripts`: listed keys come first, unlisted keys fall
+    // back to lifecycle-aware order (not lexicographical)
+    {
+      code: `{
+	"scripts": {
+		"build": "echo build",
+		"prebuild": "echo prebuild",
+		"postbuild": "echo postbuild",
+		"watch": "echo watch"
+	}
+}`,
+      errors: [
+        {
+          data: { key: 'scripts' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'custom order on scripts keeps unlisted keys lifecycle-aware',
+      options: [[{ key: 'scripts', order: ['watch'] }]],
+      output: `{
+	"scripts": {
+    "watch": "echo watch",
+    "prebuild": "echo prebuild",
+    "build": "echo build",
+    "postbuild": "echo postbuild"
+  }
+}`,
+    },
   ],
 
   valid: [
@@ -364,6 +443,64 @@ ruleTester.run('sort-collections', rule, {
   ]
 }`,
       options: [['foo.0.bar']],
+    },
+    // custom order: already in the specified order
+    {
+      code: `{
+	"nx": {
+		"npmScope": "test",
+		"affected": {}
+	}
+}`,
+      filename: 'package.json',
+      name: 'custom order: already in the specified order',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+    },
+    // custom order: unlisted keys already appended lexicographically
+    {
+      code: `{
+	"nx": {
+		"npmScope": "test",
+		"affected": {},
+		"workspaceLayout": {}
+	}
+}`,
+      filename: 'package.json',
+      name: 'custom order: unlisted keys already appended lexicographically',
+      options: [[{ key: 'nx', order: ['npmScope', 'affected'] }]],
+    },
+    // mixed array: string entries and object entries coexist
+    {
+      code: `{
+	"devDependencies": {
+		"a": "1",
+		"b": "2"
+	},
+	"nx": {
+		"npmScope": "test",
+		"affected": {}
+	}
+}`,
+      filename: 'package.json',
+      name: 'mixed array: string entries and object entries coexist',
+      options: [
+        ['devDependencies', { key: 'nx', order: ['npmScope', 'affected'] }],
+      ],
+    },
+    // custom order on `scripts`: listed key first, unlisted keys already in
+    // lifecycle-aware order
+    {
+      code: `{
+	"scripts": {
+		"watch": "echo watch",
+		"prebuild": "echo prebuild",
+		"build": "echo build",
+		"postbuild": "echo postbuild"
+	}
+}`,
+      filename: 'package.json',
+      name: 'custom order on scripts with unlisted keys already lifecycle-sorted',
+      options: [[{ key: 'scripts', order: ['watch'] }]],
     },
   ],
 });

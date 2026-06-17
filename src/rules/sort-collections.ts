@@ -17,9 +17,11 @@ const defaultCollections = new Set([
 
 export const rule = createRule({
   create(context) {
-    const toSort = context.options[0]
-      ? new Set(context.options[0])
-      : defaultCollections;
+    const toSort = new Map<string, null | string[]>(
+      (context.options[0] ?? Array.from(defaultCollections)).map((entry) =>
+        typeof entry === 'string' ? [entry, null] : [entry.key, entry.order],
+      ),
+    );
 
     return {
       'JSONProperty:exit'(node) {
@@ -49,42 +51,53 @@ export const rule = createRule({
           }
         }
         const key = keyPartsReversed.reverse().join('.');
-        if (!toSort.has(key)) {
+        // `undefined` means the key isn't configured for sorting; `null` means
+        // sort it the default way; an array is a custom order.
+        const customOrder = toSort.get(key);
+        if (customOrder === undefined) {
           return;
         }
 
         const currentOrder = collection.properties;
-        let desiredOrder: JsonAST.JSONProperty[];
 
-        if (keyPartsReversed.at(-1) === 'scripts') {
-          // For scripts we'll use `sort-package-json`
+        const isScripts = keyPartsReversed.at(-1) === 'scripts';
+
+        // The "natural" order for keys not pinned by a custom order: `scripts`
+        // are lifecycle-aware (via `sort-package-json`), everything else is
+        // lexicographical.
+        let naturalCompare: (a: string, b: string) => number;
+        if (isScripts) {
           const scriptsSource = context.sourceCode.getText(node);
           const minimalJson = JSON.parse(`{${scriptsSource}}`) as {
             scripts: Record<string, unknown>;
           };
           const { scripts: sortedScripts } = sortPackageJson(minimalJson);
-
-          const propertyNodeMap = Object.fromEntries(
-            collection.properties.map((prop) => [
-              (prop.key as JsonAST.JSONStringLiteral).value,
-              prop,
-            ]),
+          const lifecycleIndex = new Map(
+            Object.keys(sortedScripts).map((k, i) => [k, i]),
           );
-
-          // Used the scripts object sorted by `sort-package-json` to create the desiredOrder
-          desiredOrder = Object.keys(sortedScripts).map(
-            (prop) => propertyNodeMap[prop],
-          );
-
-          // If it's any property other than `scripts`, simply sort lexicographically
+          naturalCompare = (a, b) =>
+            (lifecycleIndex.get(a) ?? 0) - (lifecycleIndex.get(b) ?? 0);
         } else {
-          desiredOrder = currentOrder.toSorted((a, b) => {
-            const aKey = (a.key as JsonAST.JSONStringLiteral).value;
-            const bKey = (b.key as JsonAST.JSONStringLiteral).value;
-
-            return aKey > bKey ? 1 : -1;
-          });
+          naturalCompare = (a, b) => (a > b ? 1 : -1);
         }
+
+        // Custom order (if any) takes precedence; keys not listed in it fall
+        // back to the natural order above (lifecycle-aware for `scripts`).
+        const orderIndex = new Map((customOrder ?? []).map((k, i) => [k, i]));
+        const rank = (k: string) => orderIndex.get(k) ?? orderIndex.size;
+
+        const desiredOrder = currentOrder.toSorted((a, b) => {
+          const aKey = (a.key as JsonAST.JSONStringLiteral).value;
+          const bKey = (b.key as JsonAST.JSONStringLiteral).value;
+          const ai = rank(aKey);
+          const bi = rank(bKey);
+
+          if (ai !== bi) {
+            return ai - bi;
+          }
+
+          return naturalCompare(aKey, bKey);
+        });
 
         if (currentOrder.some((property, i) => desiredOrder[i] !== property)) {
           context.report({
@@ -111,8 +124,9 @@ export const rule = createRule({
               );
             },
             loc: collection.loc,
-            messageId:
-              keyPartsReversed.at(-1) === 'scripts'
+            messageId: customOrder
+              ? 'unsortedOrder'
+              : isScripts
                 ? 'unsortedScripts'
                 : 'unsortedKeys',
             node,
@@ -132,14 +146,40 @@ export const rule = createRule({
     fixable: 'code',
     messages: {
       unsortedKeys: "Entries in '{{ key }}' are not in lexicographical order",
+      unsortedOrder: "Entries in '{{ key }}' are not in the specified order",
       unsortedScripts:
         "Entries in 'scripts' are not in lexicographical order and grouped by lifecycles",
     },
     schema: [
       {
-        description: 'Array of package properties to require sorting.',
+        description:
+          'Array of package properties to require sorting. Provide a string to sort that collection lexicographically (lifecycle-aware for `scripts`), or an object to sort it by a specified order.',
         items: {
-          type: 'string',
+          anyOf: [
+            {
+              type: 'string',
+            },
+            {
+              additionalProperties: false,
+              properties: {
+                key: {
+                  description: 'The collection property to sort.',
+                  type: 'string',
+                },
+                order: {
+                  description:
+                    'The order to sort the collection by. Keys not listed are appended in lexicographical order.',
+                  items: {
+                    type: 'string',
+                  },
+                  type: 'array',
+                  uniqueItems: true,
+                },
+              },
+              required: ['key', 'order'],
+              type: 'object',
+            },
+          ],
         },
         type: 'array',
       },
