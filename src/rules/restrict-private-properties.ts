@@ -19,12 +19,14 @@ export const rule = createRule({
       ) {
         // Check if this is a private package
         if (
-          !node.properties.some(
+          node.properties.every(
             (property) =>
-              isJSONStringLiteral(property.key) &&
-              property.key.value === 'private' &&
-              property.value.type === 'JSONLiteral' &&
-              property.value.value === true,
+              !(
+                isJSONStringLiteral(property.key) &&
+                property.key.value === 'private' &&
+                property.value.type === 'JSONLiteral' &&
+                property.value.value === true
+              ),
           )
         ) {
           return;

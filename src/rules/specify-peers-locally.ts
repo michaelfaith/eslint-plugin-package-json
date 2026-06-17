@@ -69,6 +69,7 @@ export const rule = createRule({
                           };
                           const sortedDevDependencies = Object.fromEntries(
                             Object.entries(updatedDevDependencies).sort(
+                              // eslint-disable-next-line unicorn/prefer-simple-sort-comparator
                               (a, b) => (a[0] > b[0] ? 1 : -1),
                             ),
                           );

@@ -92,29 +92,31 @@ export const rule = createRule({
         node: AST.JSONProperty,
       ) {
         // "files" should only ever be an array of strings.
-        if (node.value.type === 'JSONArrayExpression') {
-          // We want to add it to the files cache, but also check for
-          // duplicates as we go.
-          const seen = new Set<string>();
-          const elements = node.value.elements;
-          entryCache.files = elements;
-          for (const [index, element] of elements.entries()) {
-            // We only care about JSONStringLiteral values
-            // That _should_ be all that's here, be in order to process
-            // the fix correctly we'll act on the full array of elements
-            if (isNotNullish(element) && isJSONStringLiteral(element)) {
-              if (seen.has(element.value)) {
-                report(elements, index, 'duplicate');
-              } else {
-                seen.add(element.value);
-              }
+        if (node.value.type !== 'JSONArrayExpression') {
+          return;
+        }
 
-              // We can also go ahead and check if this matches one
-              // of the static default files
-              for (const defaultFile of defaultFiles) {
-                if (defaultFile.test(element.value)) {
-                  report(elements, index, 'unnecessaryDefault');
-                }
+        // We want to add it to the files cache, but also check for
+        // duplicates as we go.
+        const seen = new Set<string>();
+        const elements = node.value.elements;
+        entryCache.files = elements;
+        for (const [index, element] of elements.entries()) {
+          // We only care about JSONStringLiteral values
+          // That _should_ be all that's here, be in order to process
+          // the fix correctly we'll act on the full array of elements
+          if (isNotNullish(element) && isJSONStringLiteral(element)) {
+            if (seen.has(element.value)) {
+              report(elements, index, 'duplicate');
+            } else {
+              seen.add(element.value);
+            }
+
+            // We can also go ahead and check if this matches one
+            // of the static default files
+            for (const defaultFile of defaultFiles) {
+              if (defaultFile.test(element.value)) {
+                report(elements, index, 'unnecessaryDefault');
               }
             }
           }

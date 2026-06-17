@@ -67,10 +67,12 @@ export const createSimpleRequirePropertyRule = (
           }
 
           if (
-            !node.properties.some(
+            node.properties.every(
               (property) =>
-                isJSONStringLiteral(property.key) &&
-                property.key.value === propertyName,
+                !(
+                  isJSONStringLiteral(property.key) &&
+                  property.key.value === propertyName
+                ),
             )
           ) {
             context.report({

@@ -31,14 +31,12 @@ const originalRun = ruleTester.run;
 ruleTester.run = (name, rule, tests) => {
   originalRun.call(ruleTester, name, rule as PackageJsonRuleModule, {
     // Assertion options were added in ESLint v10.
-    ...(semver.gte(ESLint.version, '10.0.0')
-      ? {
-          assertionOptions: {
-            requireData: true,
-            requireMessage: true,
-          },
-        }
-      : {}),
+    ...(semver.gte(ESLint.version, '10.0.0') && {
+      assertionOptions: {
+        requireData: true,
+        requireMessage: true,
+      },
+    }),
     invalid: tests.invalid?.map((test) => ({
       filename: 'package.json',
       ...test,

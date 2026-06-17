@@ -15,13 +15,13 @@ import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
  * @example '/a/b/c', 'd' => false
  */
 const pathEndsWith = (parent: string, child: string): boolean => {
-  const segments = parent.split(path.sep);
-
   if (parent === child) {
     // the directory specified was the full, absolute path to the
     // package.json
     return true;
   }
+
+  const segments = parent.split(path.sep);
 
   // work backwards from the end, adding another path segment to each check
   let pathToCheck = '';
