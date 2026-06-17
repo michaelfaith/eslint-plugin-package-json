@@ -28,7 +28,7 @@ export const rule = createRule({
         const contributorsValue = node.value;
         if (
           contributorsValue.type !== 'JSONArrayExpression' ||
-          !contributorsValue.elements.some((element) => !!element)
+          contributorsValue.elements.every((element) => !element)
         ) {
           context.report({
             messageId: 'noContributors',

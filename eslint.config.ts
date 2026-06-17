@@ -76,10 +76,12 @@ export default defineConfig(
       'no-useless-rename': 'error',
       'object-shorthand': 'error',
       'operator-assignment': 'error',
-      'unicorn/no-array-reverse': 'off', // Overly strict
-      'unicorn/no-array-sort': 'off', // Overly strict
+      // Overly strict
+      'unicorn/no-array-reverse': 'off',
+      'unicorn/no-array-sort': 'off',
       'unicorn/prefer-string-raw': 'off',
       'unicorn/prefer-string-replace-all': 'off',
+      'unicorn/require-array-sort-compare': 'off',
     },
     settings: {
       perfectionist: { partitionByComment: true, type: 'natural' },
