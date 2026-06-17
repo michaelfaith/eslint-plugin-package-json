@@ -50,7 +50,10 @@ export const rule = createRule({
               node: property,
               ...(isEmpty
                 ? {
-                    fix: fixRemoveObjectProperty(context, property),
+                    fix: fixRemoveObjectProperty(
+                      context,
+                      property as unknown as ESTree.Property,
+                    ),
                   }
                 : {
                     suggest: [
@@ -58,7 +61,10 @@ export const rule = createRule({
                         data: {
                           property: property.key.value,
                         },
-                        fix: fixRemoveObjectProperty(context, property),
+                        fix: fixRemoveObjectProperty(
+                          context,
+                          property as unknown as ESTree.Property,
+                        ),
                         messageId: 'removePropertySuggestion',
                       },
                     ],
