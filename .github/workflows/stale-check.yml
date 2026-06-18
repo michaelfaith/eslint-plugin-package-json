@@ -15,6 +15,7 @@ jobs:
           exempt-assignees: 'michaelfaith'
           exempt-all-milestones: true
           exempt-issue-labels: 'status: blocked, status: accepting prs, type: admin, status: tracking'
+          exempt-pr-labels: 'autorelease: pending'
           days-before-close: 13
           days-before-stale: 42
           labels-to-remove-when-stale: 'status: in discussion'
