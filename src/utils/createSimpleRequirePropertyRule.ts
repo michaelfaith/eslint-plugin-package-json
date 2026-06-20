@@ -75,15 +75,18 @@ export const createSimpleRequirePropertyRule = (
                 ),
             )
           ) {
+            const resolvedValue: unknown =
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+              typeof fixValue === 'function' ? fixValue() : fixValue;
             context.report({
               data: { property: propertyName },
               fix:
-                fixValue === undefined
+                resolvedValue === undefined
                   ? undefined
                   : function* (fixer) {
                       yield fixer.insertTextAfterRange(
                         [0, 1],
-                        `\n  "${propertyName}": ${JSON.stringify(fixValue)}`,
+                        `\n  "${propertyName}": ${JSON.stringify(resolvedValue)}`,
                       );
                       yield node.properties.length > 0
                         ? fixer.insertTextAfterRange([0, 1], ',')

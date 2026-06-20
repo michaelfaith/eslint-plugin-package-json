@@ -3,6 +3,8 @@ title: 'require-author'
 description: 'Requires the `author` property to be present.'
 ---
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 {/* end auto-generated rule header */}
 
 import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
@@ -109,6 +111,13 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 
 </TabItem>
 </Tabs>
+
+## Fixing
+
+This rule is automatically fixable and will create a new `author` property, when it's missing.
+The `author` will have `name` and `email`, populated by data from `git config`.
+If the calls to `git config` fail, the fixer won't make the change.
+In order to be more performant in monorepos, the `author` values retrieved from `git config` will be cached at the module level and will be reused across multiple runs.
 
 ## Related Rules
 

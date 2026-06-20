@@ -2,12 +2,18 @@ import {
   createSimpleRequirePropertyRule,
   type CreateRequirePropertyRuleOptions,
 } from '../utils/createSimpleRequirePropertyRule.js';
+import { getGitAuthor } from '../utils/git/getGitAuthor.ts';
 
 export const propertyConfig: [
   name: string,
   options?: CreateRequirePropertyRuleOptions,
 ][] = [
-  ['author'],
+  [
+    'author',
+    {
+      fixValue: getGitAuthor,
+    },
+  ],
   ['bin'],
   ['browser'],
   ['bugs', { ignorePrivateDefault: true }],

@@ -65,7 +65,7 @@ This group of rules allows you to require that the associated top-level property
 
 | Name                                                                                                                         | Description                                                 | 💼    | 🔧  | 💡  |
 | :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- | :---- | :-- | :-- |
-| [require-author](https://eslint-plugin-package-json.dev/rules/require-properties/require-author)                             | Requires the `author` property to be present.               |       |     |     |
+| [require-author](https://eslint-plugin-package-json.dev/rules/require-properties/require-author)                             | Requires the `author` property to be present.               |       | 🔧  |     |
 | [require-bin](https://eslint-plugin-package-json.dev/rules/require-properties/require-bin)                                   | Requires the `bin` property to be present.                  |       |     |     |
 | [require-browser](https://eslint-plugin-package-json.dev/rules/require-properties/require-browser)                           | Requires the `browser` property to be present.              |       |     |     |
 | [require-bugs](https://eslint-plugin-package-json.dev/rules/require-properties/require-bugs)                                 | Requires the `bugs` property to be present.                 |       |     |     |
