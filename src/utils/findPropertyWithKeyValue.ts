@@ -1,13 +1,13 @@
-import type { AST as JsonAST } from 'jsonc-eslint-parser';
+import type { AST } from 'jsonc-eslint-parser';
 
 export type JSONPropertyWithKeyAndValue<Value extends string> =
-  JsonAST.JSONProperty & {
-    key: JsonAST.JSONStringLiteral;
+  AST.JSONProperty & {
+    key: AST.JSONStringLiteral;
     value: Value;
   };
 
 export function findPropertyWithKeyValue<Value extends string>(
-  properties: JsonAST.JSONProperty[],
+  properties: AST.JSONProperty[],
   value: Value,
 ) {
   return properties.find(

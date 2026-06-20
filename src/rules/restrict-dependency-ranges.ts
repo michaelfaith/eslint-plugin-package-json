@@ -2,7 +2,7 @@ import type { AST } from 'jsonc-eslint-parser';
 import semver from 'semver';
 
 import { createRule } from '../createRule.ts';
-import { isJSONStringLiteral } from '../utils/predicates.ts';
+import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 const DEPENDENCY_TYPES = [
   'dependencies',
