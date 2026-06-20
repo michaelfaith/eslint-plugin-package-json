@@ -107,7 +107,6 @@ export default defineConfig(
     },
     rules: {
       'node-dependencies/no-deprecated': ['error', { devDependencies: true }],
-      'package-json/require-author': 'error',
     },
   },
   {

@@ -11,10 +11,6 @@
     "url": "git+https://github.com/michaelfaith/eslint-plugin-package-json.git"
   },
   "license": "MIT",
-  "author": {
-    "name": "michael faith",
-    "email": "michaelfaith@users.noreply.github.com"
-  },
   "contributors": [
     {
       "name": "James Zetlen",
