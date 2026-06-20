@@ -117,7 +117,7 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 This rule is automatically fixable and will create a new `author` property, when it's missing.
 The `author` will have `name` and `email`, populated by data from `git config`.
 If the calls to `git config` fail, the fixer won't make the change.
-In order to be more performant in mono-repos, the author values retrieved from `git config` will be cached at the module level will be reused across multiple runs.
+In order to be more performant in monorepos, the `author` values retrieved from `git config` will be cached at the module level and will be reused across multiple runs.
 
 ## Related Rules
 
