@@ -75,10 +75,9 @@ export const createSimpleRequirePropertyRule = (
                 ),
             )
           ) {
-            let resolvedValue = fixValue;
-            if (typeof fixValue === 'function') {
-              resolvedValue = fixValue();
-            }
+            const resolvedValue: unknown =
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+              typeof fixValue === 'function' ? fixValue() : fixValue;
             context.report({
               data: { property: propertyName },
               fix:
