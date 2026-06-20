@@ -1,27 +1,27 @@
-import { AST, Rule, SourceCode } from 'eslint';
+import { AST as ESLintAST, Rule, SourceCode } from 'eslint';
 import type * as ESTree from 'estree';
 import type {
   FromSchema as InferJsonSchemaType,
   JSONSchema,
 } from 'json-schema-to-ts';
-import { AST as JsonAST, type RuleListener } from 'jsonc-eslint-parser';
+import { AST, type RuleListener } from 'jsonc-eslint-parser';
 
 import { isPackageJson } from './utils/predicates/index.ts';
 
-export type JsonAstBodyExpression = ESTree.Expression & {
-  properties: JsonAstBodyProperty[];
+export type ASTBodyExpression = ESTree.Expression & {
+  properties: ASTBodyProperty[];
 };
 
-export type JsonAstBodyProperty = JsonAST.JSONProperty & {
+export type ASTBodyProperty = AST.JSONProperty & {
   value: string;
 };
 
-export interface JsonAstBodyStatement extends ESTree.ExpressionStatement {
-  expression: JsonAstBodyExpression;
+export interface ASTBodyStatement extends ESTree.ExpressionStatement {
+  expression: ASTBodyExpression;
 }
 
-export interface PackageJsonAst extends AST.Program {
-  body: [JsonAstBodyStatement];
+export interface PackageAST extends ESLintAST.Program {
+  body: [ASTBodyStatement];
 }
 
 export interface PackageJsonPluginSettings {
@@ -60,7 +60,7 @@ export interface PackageJsonRuleModule<
 }
 
 export interface PackageJsonSourceCode extends SourceCode {
-  ast: PackageJsonAst;
+  ast: PackageAST;
 }
 
 type InferJsonSchemasTupleType<T extends JSONSchema[]> = {
