@@ -100,13 +100,14 @@ export default defineConfig(
     files: ['**/*.json', '**/*.jsonc'],
   },
   {
-    extends: [packageJson.configs['recommended-publishable']],
+    extends: [packageJson.configs.recommended, packageJson.configs.stylistic],
     files: ['package.json'],
     plugins: {
       'node-dependencies': nodeDependencies,
     },
     rules: {
       'node-dependencies/no-deprecated': ['error', { devDependencies: true }],
+      'package-json/require-author': 'error',
     },
   },
   {

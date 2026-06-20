@@ -108,6 +108,10 @@ Example of **correct** code for this rule with the `{ "ignorePrivate": true }` o
 </TabItem>
 </Tabs>
 
+## Fixing
+
+This is automatically fixable and will add a `type` property, if one is missing, with the value `"commonjs"`, which is how Node was treating the package, when no property was present.
+
 ## Related Rules
 
 - [`valid-type`](/rules/valid-properties/valid-type) - Enforces that the `type` property is valid.

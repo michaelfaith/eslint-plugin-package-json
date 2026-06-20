@@ -37,6 +37,10 @@ This rule checks for the existence of the `private` property and reports a viola
 </TabItem>
 </Tabs>
 
+## Fixing
+
+This is automatically fixable and will add a `private` property, if one is missing, with the value `false`, which is how your package manager was treating the package when no property was present.
+
 ## Related Rules
 
 - [`valid-private`](/rules/valid-properties/valid-private) - Enforces that the `private` property is valid.

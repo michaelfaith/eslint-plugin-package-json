@@ -10,10 +10,16 @@ for (const ruleName of ruleNames) {
   const propertyOptions = propertyConfig.find(
     ([name]) => name === propertyName,
   )?.[1];
-  const fixValue = propertyOptions?.fixValue;
+  const rawFixValue = propertyOptions?.fixValue;
+
+  const fixValue =
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    typeof rawFixValue === 'function' ? rawFixValue() : rawFixValue;
 
   const emitOutputIfFixable = (expectedOutput: string) =>
-    fixValue === undefined ? {} : { output: expectedOutput };
+    fixValue === undefined || fixValue === null
+      ? {}
+      : { output: expectedOutput };
 
   ruleTester.run(ruleName, rules[ruleName], {
     invalid: [
