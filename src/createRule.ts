@@ -6,7 +6,7 @@ import type {
 } from 'json-schema-to-ts';
 import { AST as JsonAST, type RuleListener } from 'jsonc-eslint-parser';
 
-import { isPackageJson } from './utils/isPackageJson.ts';
+import { isPackageJson } from './utils/predicates/index.ts';
 
 export type JsonAstBodyExpression = ESTree.Expression & {
   properties: JsonAstBodyProperty[];

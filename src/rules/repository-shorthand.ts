@@ -2,7 +2,7 @@ import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
-import { isJSONStringLiteral } from '../utils/predicates.ts';
+import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 const providerRegexes = {
   bitbucket:

@@ -1,7 +1,7 @@
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import { isJSONStringLiteral } from '../utils/predicates.ts';
+import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 function isImplicitFormat(
   node: AST.JSONLiteral | AST.JSONObjectExpression,
