@@ -75,16 +75,16 @@ export const createSimpleRequirePropertyRule = (
                 ),
             )
           ) {
+            let resolvedValue = fixValue;
+            if (typeof fixValue === 'function') {
+              resolvedValue = fixValue();
+            }
             context.report({
               data: { property: propertyName },
               fix:
-                fixValue === undefined
+                resolvedValue === undefined
                   ? undefined
                   : function* (fixer) {
-                      let resolvedValue = fixValue;
-                      if (typeof fixValue === 'function') {
-                        resolvedValue = fixValue();
-                      }
                       yield fixer.insertTextAfterRange(
                         [0, 1],
                         `\n  "${propertyName}": ${JSON.stringify(resolvedValue)}`,
