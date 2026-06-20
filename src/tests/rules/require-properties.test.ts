@@ -17,9 +17,7 @@ for (const ruleName of ruleNames) {
     typeof rawFixValue === 'function' ? rawFixValue() : rawFixValue;
 
   const emitOutputIfFixable = (expectedOutput: string) =>
-    fixValue === undefined || fixValue === null
-      ? {}
-      : { output: expectedOutput };
+    fixValue === undefined ? {} : { output: expectedOutput };
 
   ruleTester.run(ruleName, rules[ruleName], {
     invalid: [
