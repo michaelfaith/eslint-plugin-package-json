@@ -134,10 +134,10 @@ The field can be either a string or an object with `name` and optionally `email`
 ## Fixing
 
 This rule is automatically fixable.
-It will replace an empty `author` string, or `author` values that are of the wrong type, with a value that has `name and `email`, populated by data from `git config`.
-Furthermore, if `author`*is* the correct type, but is missing`name`or the`name`or`email`are empty, the fixer will populate those values with data from`git config`as well.
-If the calls to`git config`fail, the fixer won't make the change.
-In order to be more performant in monorepos, the`author`values retrieved from`git config` will be cached at the module level and will be reused across multiple runs.
+It will replace an empty `author` string, or `author` values that are of the wrong type, with a value that has `name` and `email`, populated by data from `git config`.
+Furthermore, if `author` _is_ the correct type, but is missing `name` or the `name` or `email` are empty, the fixer will populate those values with data from `git config`as well.
+If the calls to `git config` fail, the fixer won't make the change.
+In order to be more performant in monorepos, the `author` values retrieved from `git config` will be cached at the module level and will be reused across multiple runs.
 
 ## Related Rules
 
