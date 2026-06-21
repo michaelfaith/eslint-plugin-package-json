@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.4.0...v1.5.0) (2026-06-21)
+
+
+### 🚀 Features
+
+* **require-author:** add fixer to fill in `author` with git data ([#1951](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1951)) ([80f35fc](https://github.com/michaelfaith/eslint-plugin-package-json/commit/80f35fc74c9c882ce23a160737d830ed598ae248))
+* **valid-author:** add fixer for replacing empty or invalid author ([#1954](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1954)) ([5bf14b9](https://github.com/michaelfaith/eslint-plugin-package-json/commit/5bf14b97a80f57128cfa4bc6dee6f4ed15111aca))
+
 ## [1.4.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.3.0...v1.4.0) (2026-06-17)
 
 
