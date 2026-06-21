@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 
 interface Author {
-  email: string;
+  email?: string;
   name: string;
 }
 
@@ -25,8 +25,7 @@ export const getGitAuthor = (): Author | undefined => {
 
     cachedAuthor = {
       name,
-      // eslint-disable-next-line perfectionist/sort-objects
-      email,
+      ...(email && { email }),
     };
   } catch {
     cachedAuthor = null;

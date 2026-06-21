@@ -88,7 +88,7 @@ This group of rules allows you to enforce that the value of the associated top-l
 
 | Name                                                                             | Description                                                                           | 💼   | 🔧 | 💡 |
 | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :--- | :- | :- |
-| [valid-author](/rules/valid-properties/valid-author)                             | Enforce that the `author` property is valid.                                          | ✅ 📦 |    |    |
+| [valid-author](/rules/valid-properties/valid-author)                             | Enforce that the `author` property is valid.                                          | ✅ 📦 | 🔧 |    |
 | [valid-bin](/rules/valid-properties/valid-bin)                                   | Enforce that the `bin` property is valid.                                             | ✅ 📦 |    |    |
 | [valid-browser](/rules/valid-properties/valid-browser)                           | Enforce that the `browser` property is valid.                                         | ✅ 📦 |    |    |
 | [valid-bugs](/rules/valid-properties/valid-bugs)                                 | Enforce that the `bugs` property is valid.                                            | ✅ 📦 |    |    |

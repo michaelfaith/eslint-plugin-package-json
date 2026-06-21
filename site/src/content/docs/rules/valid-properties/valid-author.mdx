@@ -5,6 +5,8 @@ description: 'Enforce that the `author` property is valid.'
 
 💼 This rule is enabled in the following configs: ✅ `recommended`, 📦 `recommended-publishable`.
 
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 {/* end auto-generated rule header */}
 
 import { TabItem, Tabs } from '@astrojs/starlight/components';
@@ -128,6 +130,14 @@ The field can be either a string or an object with `name` and optionally `email`
 
 </TabItem>
 </Tabs>
+
+## Fixing
+
+This rule is automatically fixable.
+It will replace an empty `author` string, or `author` values that are of the wrong type, with a value that has `name` and `email`, populated by data from `git config`.
+Furthermore, if `author` _is_ the correct type, but is missing `name` or the `name` or `email` are empty, the fixer will populate those values with data from `git config` as well.
+If the calls to `git config` fail, the fixer won't make the change.
+In order to be more performant in monorepos, the `author` values retrieved from `git config` will be cached at the module level and will be reused across multiple runs.
 
 ## Related Rules
 

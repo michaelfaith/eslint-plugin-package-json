@@ -3,6 +3,7 @@ import type { Result } from 'package-json-validator';
 
 import { createRule } from '../createRule.ts';
 
+// TODO: move this type upstream to `package-json-validator`
 export type ValidationFunction = (value: unknown) => Result;
 
 /**
