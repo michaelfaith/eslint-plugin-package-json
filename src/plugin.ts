@@ -21,6 +21,7 @@ import { rule as scriptsNameCasing } from './rules/scripts-name-casing.ts';
 import { rule as sortCollections } from './rules/sort-collections.ts';
 import { rule as specifyPeersLocally } from './rules/specify-peers-locally.ts';
 import { rule as uniqueDependencies } from './rules/unique-dependencies.ts';
+import { rule as validAuthor } from './rules/valid-author.ts';
 import { rule as validPeerDependenciesMetaRelationship } from './rules/valid-peerDependenciesMeta-relationship.ts';
 import { rules as basicValidRules } from './rules/valid-properties.ts';
 import { rule as validRepositoryDirectory } from './rules/valid-repository-directory.ts';
@@ -45,6 +46,7 @@ const rules: Record<string, PackageJsonRuleModule> = {
   'sort-collections': sortCollections,
   'specify-peers-locally': specifyPeersLocally,
   'unique-dependencies': uniqueDependencies,
+  'valid-author': validAuthor,
   ...basicValidRules,
   'valid-peerDependenciesMeta-relationship':
     validPeerDependenciesMetaRelationship,

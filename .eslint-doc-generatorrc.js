@@ -1,7 +1,18 @@
 import prettier from 'prettier';
 
-import { rules as requireRules } from './lib/rules/require-properties.mjs';
-import { rules as validRules } from './lib/rules/valid-properties.mjs';
+import { rules } from './lib/index.mjs';
+
+const ruleEntries = Object.entries(rules);
+const requireRules = Object.fromEntries(
+  ruleEntries.filter(
+    ([, rule]) => rule.meta.docs.ruleGroup === 'require-properties',
+  ),
+);
+const validRules = Object.fromEntries(
+  ruleEntries.filter(
+    ([, rule]) => rule.meta.docs.ruleGroup === 'valid-properties',
+  ),
+);
 
 const requireRuleNames = Object.keys(requireRules);
 const validRuleNames = Object.keys(validRules);
