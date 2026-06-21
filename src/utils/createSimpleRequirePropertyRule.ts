@@ -86,7 +86,7 @@ export const createSimpleRequirePropertyRule = (
                   : function* (fixer) {
                       yield fixer.insertTextAfterRange(
                         [0, 1],
-                        `\n  "${propertyName}": ${JSON.stringify(resolvedValue)}`,
+                        `\n  "${propertyName}": ${JSON.stringify(resolvedValue, null, 2).split('\n').join('\n  ')}`,
                       );
                       yield node.properties.length > 0
                         ? fixer.insertTextAfterRange([0, 1], ',')

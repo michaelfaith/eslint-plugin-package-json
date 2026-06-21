@@ -1,9 +1,19 @@
-import { rules } from '../../rules/valid-properties.ts';
+import { vi } from 'vitest';
+
+import { rule } from '../../rules/valid-author.ts';
 import { ruleTester } from './ruleTester.ts';
 
-const ruleName = 'valid-author';
+const mockAuthor = {
+  name: 'michael faith',
+  // eslint-disable-next-line perfectionist/sort-objects
+  email: 'mfaith@github.com',
+};
 
-ruleTester.run(ruleName, rules[ruleName], {
+vi.mock('../../utils/git/index.ts', () => ({
+  getGitAuthor: () => mockAuthor,
+}));
+
+ruleTester.run('valid-author', rule, {
   invalid: [
     {
       code: `{
@@ -20,6 +30,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -36,6 +52,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -52,6 +74,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -68,6 +96,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -83,6 +117,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -98,6 +138,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -113,6 +159,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -128,6 +180,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -143,6 +201,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -159,6 +223,11 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith"
+  }
+}`,
     },
     {
       code: `{
@@ -177,6 +246,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "john@example.com"
+  }
+}`,
     },
     {
       code: `{
@@ -194,6 +269,11 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith"
+  }
+}`,
     },
     {
       code: `{
@@ -211,6 +291,11 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith"
+  }
+}`,
     },
     {
       code: `{
@@ -229,6 +314,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "John",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
     {
       code: `{
@@ -269,6 +360,12 @@ ruleTester.run(ruleName, rules[ruleName], {
         },
       ],
       filename: 'package.json',
+      output: `{
+  "author": {
+    "name": "michael faith",
+    "email": "mfaith@github.com"
+  }
+}`,
     },
   ],
 

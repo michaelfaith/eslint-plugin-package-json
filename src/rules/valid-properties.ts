@@ -1,5 +1,4 @@
 import {
-  validateAuthor,
   validateBin,
   validateBrowser,
   validateBugs,
@@ -49,7 +48,6 @@ interface ValidPropertyOptions {
 // List of all properties we want to create valid- rules for,
 // in the format [propertyName, validationFunction | validPropertyOptions]
 const properties = [
-  ['author', validateAuthor],
   ['bin', validateBin],
   ['browser', validateBrowser],
   ['bugs', validateBugs],
