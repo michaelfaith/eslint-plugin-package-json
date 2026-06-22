@@ -96,7 +96,7 @@
     "eslint-plugin-node-dependencies": "2.2.0",
     "eslint-plugin-perfectionist": "5.9.0",
     "eslint-plugin-regexp": "3.1.0",
-    "eslint-plugin-unicorn": "67.0.0",
+    "eslint-plugin-unicorn": "68.0.0",
     "eslint-plugin-yml": "3.4.0",
     "jiti": "2.7.0",
     "json-schema-to-ts": "3.1.1",
