@@ -48,7 +48,6 @@ export default defineConfig({
       title: 'ESLint Plugin: Package JSON',
     }),
   ],
-  markdown: { gfm: true },
   outDir: './dist-site',
   prefetch: {
     defaultStrategy: 'hover',
