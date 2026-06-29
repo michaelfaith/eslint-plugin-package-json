@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { ESLint, Linter } from 'eslint';
+import { ESLint, type Linter } from 'eslint';
 import { describe, expect, it } from 'vitest';
 
 import plugin from '../index.ts';

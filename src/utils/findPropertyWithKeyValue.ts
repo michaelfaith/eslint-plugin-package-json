@@ -9,7 +9,7 @@ export type JSONPropertyWithKeyAndValue<Value extends string> =
 export function findPropertyWithKeyValue<Value extends string>(
   properties: AST.JSONProperty[],
   value: Value,
-) {
+): JSONPropertyWithKeyAndValue<Value> | undefined {
   return properties.find(
     (property): property is JSONPropertyWithKeyAndValue<Value> =>
       property.key.type === 'JSONLiteral' && property.key.value === value,

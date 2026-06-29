@@ -6,7 +6,7 @@ const routes = await getStaticPaths({} as GetStaticPathsOptions);
 
 const paths = new Set(routes.map(({ params }) => params.path));
 
-export function getOpenGraphImageUrl(path: string) {
+export function getOpenGraphImageUrl(path: string): string {
   const normalizedPath = path.replace(/^\//, '').replace(/\/$/, '');
 
   const ogPath = `${normalizedPath}.png`;

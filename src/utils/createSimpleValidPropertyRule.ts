@@ -1,7 +1,7 @@
 import type { AST } from 'jsonc-eslint-parser';
 import type { Result } from 'package-json-validator';
 
-import { createRule } from '../createRule.ts';
+import { createRule, type PackageJsonRuleModule } from '../createRule.ts';
 
 // TODO: move this type upstream to `package-json-validator`
 export type ValidationFunction = (value: unknown) => Result;
@@ -16,7 +16,10 @@ export const createSimpleValidPropertyRule = (
   propertyName: string,
   validationFunction: ValidationFunction,
   aliases: string[] = [],
-) => {
+): {
+  rule: PackageJsonRuleModule;
+  ruleName: string;
+} => {
   const ruleName = `valid-${propertyName}`;
 
   const propertyNames = [propertyName, ...aliases];
