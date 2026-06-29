@@ -1,6 +1,6 @@
 import type { AST } from 'jsonc-eslint-parser';
 
-import { createRule } from '../createRule.ts';
+import { createRule, type PackageJsonRuleModule } from '../createRule.ts';
 import { isJSONStringLiteral } from './predicates/index.ts';
 
 export interface CreateRequirePropertyRuleOptions {
@@ -37,7 +37,10 @@ export const createSimpleRequirePropertyRule = (
     ignorePrivateDefault = false,
     isRecommended,
   }: CreateRequirePropertyRuleOptions = {},
-) => {
+): {
+  rule: PackageJsonRuleModule;
+  ruleName: string;
+} => {
   const ruleName = `require-${propertyName}`;
   const rule = createRule({
     create(context) {

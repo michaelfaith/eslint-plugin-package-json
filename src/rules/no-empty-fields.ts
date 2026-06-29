@@ -5,7 +5,7 @@ import {
 import type * as ESTree from 'estree';
 import type { AST } from 'jsonc-eslint-parser';
 
-import { createRule, PackageJsonRuleContext } from '../createRule.ts';
+import { createRule, type PackageJsonRuleContext } from '../createRule.ts';
 
 const getDataAndMessageId = (
   node: AST.JSONArrayExpression | AST.JSONObjectExpression | AST.JSONProperty,
