@@ -79,9 +79,7 @@ h/t @ota-meshi
 import { toCompatRule } from 'eslint-json-compat-utils';
 
 export default toCompatRule({
-  meta: {
-    /* ... */
-  },
+  meta: {/* ... */},
   create(context) {
     return {
       JSONArrayExpression: check,
