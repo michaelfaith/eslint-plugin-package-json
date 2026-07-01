@@ -30,5 +30,4 @@ export const { GET, getStaticPaths } = await OGImageRoute({
     title: data.title,
   }),
   pages,
-  param: 'path',
 });
