@@ -13,7 +13,6 @@ describe('valid-author', () => {
     beforeEach(() => {
       vi.mocked(getGitAuthor).mockReturnValue({
         name: 'michael faith',
-        // eslint-disable-next-line perfectionist/sort-objects
         email: 'mfaith@github.com',
       });
     });
