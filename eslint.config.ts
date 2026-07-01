@@ -41,31 +41,14 @@ export default defineConfig(
       comments.recommended,
       eslintPlugin.configs.recommended,
       n.configs['flat/recommended'],
-      perfectionist.configs['recommended-natural'],
       regexp.configs['flat/recommended'],
       unicorn.configs.unopinionated,
     ],
     files: JS_TS_FILES,
+    plugins: {
+      perfectionist,
+    },
     rules: {
-      // We prefer seeing :exit after all other AST selectors in rules
-      'perfectionist/sort-objects': [
-        'error',
-        {
-          customGroups: [
-            {
-              elementNamePattern: 'Program:exit',
-              groupName: 'programExit',
-            },
-          ],
-          groups: ['unknown', 'programExit'],
-          type: 'natural',
-        },
-      ],
-
-      // Covered by Prettier
-      'perfectionist/sort-imports': 'off',
-      'perfectionist/sort-named-imports': 'off',
-
       // Stylistic concerns that don't interfere with Prettier
       'logical-assignment-operators': [
         'error',
@@ -75,6 +58,10 @@ export default defineConfig(
       'no-useless-rename': 'error',
       'object-shorthand': 'error',
       'operator-assignment': 'error',
+
+      'perfectionist/sort-exports': 'error',
+      'perfectionist/sort-union-types': 'error',
+
       // Overly strict
       'unicorn/no-array-reverse': 'off',
       'unicorn/no-array-sort': 'off',
