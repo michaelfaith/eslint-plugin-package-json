@@ -175,10 +175,12 @@ Once the RFC period is over, if the removal is still moving forward, the API(s) 
 Once an API has been marked as deprecated, it will remain intact for at least 6 months.
 After 6 months from the date of deprecation, the API is subject to removal.
 
-## Development
+## Getting Involved
 
-See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
-Thanks! 🗂
+See [Contributing](https://eslint-plugin-package-json.dev/getting-involved/contributing/), then [Development](https://eslint-plugin-package-json.dev/getting-involved/development/).
+If you're planning to contribute with AI tooling, please also read our [AI Contribution Policy](https://eslint-plugin-package-json.dev/getting-involved/contributing-with-ai/).
+
+Thanks! 🍻
 
 ## Contributors
 
