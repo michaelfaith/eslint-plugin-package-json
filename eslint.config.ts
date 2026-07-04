@@ -42,13 +42,33 @@ export default defineConfig(
       eslintPlugin.configs.recommended,
       n.configs['flat/recommended'],
       regexp.configs['flat/recommended'],
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
       unicorn.configs.unopinionated,
     ],
     files: JS_TS_FILES,
+    languageOptions: {
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: [
+            'astro.config.ts',
+            '.simple-git-hooks.js',
+            'knip.ts',
+          ],
+        },
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
     plugins: {
       perfectionist,
     },
     rules: {
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/explicit-module-boundary-types': 'error',
+      '@typescript-eslint/no-shadow': 'error',
+      'n/no-missing-import': 'off',
+
       // Stylistic concerns that don't interfere with Prettier
       'logical-assignment-operators': [
         'error',
@@ -60,7 +80,6 @@ export default defineConfig(
       'operator-assignment': 'error',
 
       'perfectionist/sort-exports': 'error',
-      'perfectionist/sort-union-types': 'error',
 
       // Overly strict
       'unicorn/no-array-reverse': 'off',
@@ -71,6 +90,7 @@ export default defineConfig(
     },
     settings: {
       perfectionist: { partitionByComment: true, type: 'natural' },
+      vitest: { typecheck: true },
     },
   },
   {
@@ -104,36 +124,7 @@ export default defineConfig(
       'markdown/no-missing-label-refs': 'off',
     },
   },
-  {
-    extends: [
-      tseslint.configs.strictTypeChecked,
-      tseslint.configs.stylisticTypeChecked,
-    ],
-    files: JS_TS_FILES,
-    languageOptions: {
-      parserOptions: {
-        projectService: {
-          allowDefaultProject: [
-            'astro.config.ts',
-            '.simple-git-hooks.js',
-            'knip.ts',
-          ],
-        },
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    rules: {
-      '@typescript-eslint/consistent-type-exports': 'error',
-      '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/explicit-module-boundary-types': 'error',
-      '@typescript-eslint/no-shadow': 'error',
-
-      'n/no-missing-import': 'off',
-    },
-    settings: {
-      vitest: { typecheck: true },
-    },
-  },
+  // Test-only rules
   {
     extends: [vitest.configs.recommended],
     files: ['**/*.test.*'],
