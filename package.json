@@ -44,7 +44,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "docs:generate": "pnpm build --no-dts && eslint-doc-generator",
+    "docs:generate": "pnpm build --no-dts && eslint-doc-generator --ignore-config recommended-publishable",
     "format": "prettier .",
     "lint": "eslint . --max-warnings 0",
     "lint:knip": "knip",
