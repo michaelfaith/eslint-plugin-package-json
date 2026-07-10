@@ -1,4 +1,5 @@
 # build output
+dist/
 lib/
 dist-site/
 
