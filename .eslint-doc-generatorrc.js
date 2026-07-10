@@ -1,6 +1,6 @@
 import prettier from 'prettier';
 
-import { rules } from './lib/index.mjs';
+import { rules } from './dist/index.mjs';
 
 const ruleEntries = Object.entries(rules);
 const requireRules = Object.fromEntries(

@@ -30,17 +30,17 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./lib/index.d.mts",
-      "default": "./lib/index.mjs"
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     },
     "./experimental": {
-      "types": "./lib/experimental/index.d.mts",
-      "default": "./lib/experimental/index.mjs"
+      "types": "./dist/experimental/index.d.mts",
+      "default": "./dist/experimental/index.mjs"
     }
   },
-  "main": "lib/index.mjs",
+  "main": "dist/index.mjs",
   "files": [
-    "lib/"
+    "dist/"
   ],
   "scripts": {
     "build": "tsdown",
