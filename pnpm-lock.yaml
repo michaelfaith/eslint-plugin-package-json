@@ -82,7 +82,7 @@ importers:
         specifier: 7.7.1
         version: 7.7.1
       '@typescript/native':
-        specifier: npm:typescript@^7.0.2
+        specifier: npm:typescript@7.0.2
         version: typescript@7.0.2
       '@vitest/coverage-v8':
         specifier: 4.1.8

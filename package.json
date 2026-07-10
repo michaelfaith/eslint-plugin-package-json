@@ -82,7 +82,7 @@
     "@types/estree": "1.0.8",
     "@types/node": "24.13.0",
     "@types/semver": "7.7.1",
-    "@typescript/native": "npm:typescript@^7.0.2",
+    "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "4.1.8",
     "@vitest/eslint-plugin": "1.6.20",
     "astro": "7.0.6",
