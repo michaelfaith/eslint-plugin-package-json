@@ -50,11 +50,7 @@ export default defineConfig(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: [
-            'astro.config.ts',
-            '.simple-git-hooks.js',
-            'knip.ts',
-          ],
+          allowDefaultProject: ['astro.config.ts', '.simple-git-hooks.js'],
         },
         tsconfigRootDir: import.meta.dirname,
       },
