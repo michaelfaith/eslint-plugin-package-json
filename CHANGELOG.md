@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.5.0...v1.6.0) (2026-07-13)
+
+
+### 🚀 Features
+
+* deprecate `recommended-publishable` config ([#2001](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2001)) ([a67a8de](https://github.com/michaelfaith/eslint-plugin-package-json/commit/a67a8de2ef6f1337393cf6bc25aa41c36b056045))
+
+
+### 🩹 Bug Fixes
+
+* start bundling entry points ([#2008](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2008)) ([e9766b1](https://github.com/michaelfaith/eslint-plugin-package-json/commit/e9766b17a0eafb7f6f85b1fd94fd5f89f9c8a5e0))
+
 ## [1.5.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.4.0...v1.5.0) (2026-06-21)
 
 
