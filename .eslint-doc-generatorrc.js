@@ -21,7 +21,6 @@ const validRuleNames = Object.keys(validRules);
 const config = {
   configEmoji: [
     ['recommended', '✅'],
-    ['recommended-publishable', '📦'],
     ['stylistic', '🎨'],
   ],
   framework: 'starlight',

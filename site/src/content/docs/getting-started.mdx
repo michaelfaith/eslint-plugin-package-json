@@ -83,30 +83,6 @@ export default defineConfig([
   details on how to customize your rules and other config settings.
 </Aside>
 
-### Recommended Config for Publishable Packages
-
-<Aside type="note">
-  This config was recently made redundant and is now the same as `recommended`.
-  However, we're keeping it as its own config for now, in the event that we add
-  new rules unique to the publishable use case.
-</Aside>
-
-The `recommended-publishable` configuration has everything in it from the standard `recommended` config, with some additional rules added that are geared towards packages that are intended to be published.
-
-```ts
-// eslint.config.ts
-import packageJson from 'eslint-plugin-package-json';
-import { defineConfig } from 'eslint/config';
-
-export default defineConfig([
-  // your other ESLint configurations
-  {
-    extends: [packageJson.configs['recommended-publishable']],
-    files: ['package.json'],
-  },
-]);
-```
-
 ### Stylistic Config
 
 The `stylistic` configuration sets up the parser and files similar to the recommended config, but includes rules that are more opinionated about the style of a package.json.

@@ -30,6 +30,7 @@ describe('configs', () => {
 
   it('recommended publishable config works properly', async () => {
     const eslint = new ESLint({
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       baseConfig: plugin.configs['recommended-publishable'] as Linter.Config,
       fix: true,
       overrideConfigFile: true,

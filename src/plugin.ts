@@ -98,6 +98,7 @@ export const plugin = {
       },
       rules: recommendedRules,
     },
+    /** @deprecated use the recommended config instead. this config will be removed in a future major release */
     'recommended-publishable': {
       files: ['**/package.json'],
       languageOptions: {
