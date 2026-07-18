@@ -40,7 +40,7 @@ const createShorthand = (url: string, provider: Provider): string => {
 const createUrl = (shorthand: string): string => {
   // Use the appropriate provider url if one is specified
   if (shorthand.includes(':')) {
-    const [provider, repo] = shorthand.split(':');
+    const [provider, repo] = shorthand.split(':', 2);
     if (isProvider(provider)) {
       return `${providerUrls[provider]}${repo}`;
     }
