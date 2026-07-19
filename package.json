@@ -85,7 +85,7 @@
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "4.1.8",
     "@vitest/eslint-plugin": "1.6.20",
-    "astro": "7.0.6",
+    "astro": "7.1.0",
     "astro-og-canvas": "0.13.0",
     "canvaskit-wasm": "0.41.1",
     "console-fail-test": "0.6.0",
