@@ -26,6 +26,7 @@ export const ruleTester = new RuleTester({
   languageOptions: { parser: jsoncESLintParser },
 }) as JsonRuleTester;
 
+// eslint-disable-next-line @typescript-eslint/unbound-method -- ruleTester.run is overridden below, so we need to keep a reference to the original method
 const originalRun = ruleTester.run;
 
 ruleTester.run = (name, rule, tests) => {
