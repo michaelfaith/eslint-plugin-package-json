@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.0...v1.6.1) (2026-07-24)
+
+
+### 🩹 Bug Fixes
+
+* don't bundle estree types ([#2035](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2035)) ([36adeb2](https://github.com/michaelfaith/eslint-plugin-package-json/commit/36adeb29a3869708f493a1a197162844059adfd5))
+
 ## [1.6.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.5.0...v1.6.0) (2026-07-13)
 
 
