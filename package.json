@@ -118,10 +118,14 @@
   },
   "peerDependencies": {
     "@eslint/json": ">=1.0.0",
+    "@types/estree": ">=1.0.0",
     "eslint": ">=9.0.0"
   },
   "peerDependenciesMeta": {
     "@eslint/json": {
+      "optional": true
+    },
+    "@types/estree": {
       "optional": true
     }
   },
