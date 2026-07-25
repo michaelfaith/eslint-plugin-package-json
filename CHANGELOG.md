@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.2](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.1...v1.6.2) (2026-07-25)
+
+
+### 🩹 Bug Fixes
+
+* make `@types/estree` regular dependency ([#2038](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2038)) ([da110cd](https://github.com/michaelfaith/eslint-plugin-package-json/commit/da110cd629400c9fa4bc7bdfdcd01c33f8930e41))
+
 ## [1.6.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.0...v1.6.1) (2026-07-24)
 
 
