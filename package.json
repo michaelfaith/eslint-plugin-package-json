@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@altano/repository-tools": "^2.0.1",
+    "@types/estree": "^1.0.0",
     "change-case": "^5.4.4",
     "detect-indent": "^7.0.2",
     "detect-newline": "^4.0.1",
@@ -79,7 +80,6 @@
     "@eslint/json": "2.0.0",
     "@eslint/markdown": "8.0.1",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
-    "@types/estree": "1.0.8",
     "@types/node": "24.13.0",
     "@types/semver": "7.7.1",
     "@typescript/native": "npm:typescript@7.0.2",
@@ -118,14 +118,10 @@
   },
   "peerDependencies": {
     "@eslint/json": ">=1.0.0",
-    "@types/estree": ">=1.0.0",
     "eslint": ">=9.0.0"
   },
   "peerDependenciesMeta": {
     "@eslint/json": {
-      "optional": true
-    },
-    "@types/estree": {
       "optional": true
     }
   },
