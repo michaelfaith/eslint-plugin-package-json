@@ -140,8 +140,9 @@ jobs:
       - run: pnpm run test --coverage
       - uses: codecov/codecov-action@v5
         if: success() && (matrix.os == 'ubuntu-latest')
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
 
   type_check:
     name: Type-check (ESLint ${{ matrix.eslint-version }})
