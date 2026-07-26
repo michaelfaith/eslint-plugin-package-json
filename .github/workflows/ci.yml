@@ -127,6 +127,8 @@ jobs:
   test_os:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    permissions:
+      id-token: write
     strategy:
       fail-fast: false
       matrix:
@@ -141,8 +143,8 @@ jobs:
       - uses: codecov/codecov-action@v5
         if: success() && (matrix.os == 'ubuntu-latest')
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
+          use_oidc: true
 
   type_check:
     name: Type-check (ESLint ${{ matrix.eslint-version }})
