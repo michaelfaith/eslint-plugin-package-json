@@ -1,7 +1,10 @@
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import { isJSONStringLiteral } from '../utils/predicates/index.ts';
+import {
+  isJSONStringLiteral,
+  isNotNullish,
+} from '../utils/predicates/index.ts';
 
 const isLocalDependency = (value: string) =>
   value.startsWith('file:') ||
@@ -17,10 +20,10 @@ const getBundledDependencyNames = (
   const names = new Set<string>();
 
   if (value?.type === 'JSONArrayExpression') {
-    for (const element of value.elements) {
-      if (element && isJSONStringLiteral(element)) {
-        names.add(element.value);
-      }
+    for (const element of value.elements
+      .filter(isNotNullish)
+      .filter(isJSONStringLiteral)) {
+      names.add(element.value);
     }
   }
 
