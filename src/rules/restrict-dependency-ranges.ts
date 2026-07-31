@@ -11,8 +11,24 @@ const DEPENDENCY_TYPES = [
   'peerDependencies',
 ];
 
-const RANGE_TYPES = ['caret', 'pin', 'tilde'] as const;
+const RANGE_TYPES = [
+  { symbol: '^', alias: 'caret' },
+  { alias: 'pin', workspaceSymbol: '*' },
+  { symbol: '~', alias: 'tilde' },
+  { symbol: '<', alias: 'lt' },
+  { symbol: '<=', alias: 'le' },
+  { symbol: '>', alias: 'gt' },
+  { symbol: '>=', alias: 'ge' },
+] as const;
 type RangeType = (typeof RANGE_TYPES)[number];
+
+const SYMBOLS = RANGE_TYPES.filter((rangeType) => 'symbol' in rangeType).map(
+  (rangeType) => rangeType.symbol,
+);
+type RangeSymbol = (typeof SYMBOLS)[number];
+
+const RANGE_NAMES = RANGE_TYPES.map((rangeType) => rangeType.alias);
+type RangeName = (typeof RANGE_NAMES)[number];
 
 const schemaOptions = {
   additionalProperties: false,
@@ -42,11 +58,20 @@ const schemaOptions = {
         'Identifies which range type or types you want to apply to packages that match any of the other match options (or all dependencies if no other options are provided).',
       oneOf: [
         {
-          enum: RANGE_TYPES,
+          enum: SYMBOLS,
         },
         {
           items: {
-            enum: RANGE_TYPES,
+            enum: SYMBOLS,
+          },
+          type: 'array',
+        },
+        {
+          enum: RANGE_NAMES,
+        },
+        {
+          items: {
+            enum: RANGE_NAMES,
           },
           type: 'array',
         },
@@ -57,11 +82,30 @@ const schemaOptions = {
   type: 'object',
 } as const;
 
-const SYMBOLS = {
-  caret: '^',
-  pin: '',
-  tilde: '~',
-} satisfies Record<RangeType, string>;
+const normalizeRangeType = (
+  rangeTypeOrSymbol: RangeName | RangeSymbol,
+): RangeType => {
+  const result = RANGE_TYPES.find(
+    (rangeType) =>
+      ('symbol' in rangeType && rangeType.symbol === rangeTypeOrSymbol) ||
+      rangeType.alias === rangeTypeOrSymbol,
+  );
+  if (result === undefined) {
+    throw new Error(`invalid range type: ${rangeTypeOrSymbol}`);
+  }
+  return result;
+};
+
+const workspaceVersionStartsWith = (rangeType: RangeType) => {
+  if ('workspaceSymbol' in rangeType) {
+    return `workspace:${rangeType.workspaceSymbol}`;
+  }
+  return `workspace:${rangeType.symbol}`;
+};
+
+/** For displaying a range type in a user-facing way (ie. an error message). */
+const displayRangeType = (rangeType: RangeType) =>
+  'symbol' in rangeType ? rangeType.symbol : rangeType.alias;
 
 /**
  * Given the original version, update it to use the correct range type.
@@ -70,20 +114,11 @@ const changeVersionRange = (version: string, rangeType: RangeType): string => {
   // We need to handle workspace versions with only the range indicator,
   // slightly differently
   if (/^workspace:[~^*]$/.test(version)) {
-    switch (rangeType) {
-      case 'caret':
-        return 'workspace:^';
-      case 'pin':
-        return 'workspace:*';
-      default:
-        return 'workspace:~';
-    }
+    return workspaceVersionStartsWith(rangeType);
   }
 
-  return version.replace(
-    /^(workspace:)?(\^|~|<=?|>=?)?/,
-    `$1${SYMBOLS[rangeType]}`,
-  );
+  const replaceWith = 'symbol' in rangeType ? rangeType.symbol : '';
+  return version.replace(/^(workspace:)?(\^|~|<=?|>=?)?/, `$1${replaceWith}`);
 };
 
 /**
@@ -95,10 +130,6 @@ const isVersionSupported = (version: string): boolean => {
   }
   const rawVersion = version.replace(/^workspace:/, '');
   return !!semver.validRange(rawVersion);
-};
-
-const capitalize = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 export const rule = createRule({
@@ -153,13 +184,17 @@ export const rule = createRule({
             continue;
           }
 
-          const isPinned = !!semver.parse(version) || version === 'workspace:*';
-          const isTildeRange =
-            (!!semver.validRange(version) && version.startsWith('~')) ||
-            version.startsWith('workspace:~');
-          const isCaretRange =
-            (!!semver.validRange(version) && version.startsWith('^')) ||
-            version.startsWith('workspace:^');
+          const doesRangeTypeMatch = (rangeType: RangeType) => {
+            if ('symbol' in rangeType) {
+              if (semver.validRange(version)) {
+                return version.startsWith(rangeType.symbol);
+              }
+            } else {
+              // when rangeType is pin
+              return !!semver.parse(version) || version === 'workspace:*';
+            }
+            return version.startsWith(workspaceVersionStartsWith(rangeType));
+          };
 
           // Loop through all options, and evaluate each of them for this dependency
           for (const options of optionsArray) {
@@ -196,14 +231,16 @@ export const rule = createRule({
 
             // We've matched this set of options, so we should check
             // the range type.
-            const rangeTypes = options.rangeTypes;
+            const rangeTypes = options.rangeTypes.map(normalizeRangeType);
+
+            const validRangeTypes = rangeTypes.map(displayRangeType).join(', ');
 
             // If the version is just '*', then this is definitely in violation,
             // and we can report immediately.
             if (version === '*') {
               context.report({
                 data: {
-                  rangeTypes: rangeTypes.join(', '),
+                  rangeTypes: validRangeTypes,
                 },
                 messageId: 'wrongRangeType',
                 node: property.value,
@@ -211,22 +248,13 @@ export const rule = createRule({
               break;
             }
 
-            const rangeTypeMatch = rangeTypes.some((rangeType) => {
-              switch (rangeType) {
-                case 'caret':
-                  return isCaretRange;
-                case 'pin':
-                  return isPinned;
-                case 'tilde':
-                  return isTildeRange;
-              }
-            });
+            const isRangeTypeValid = rangeTypes.some(doesRangeTypeMatch);
 
             // If we didn't match what's in the options, we need to report an error.
-            if (!rangeTypeMatch) {
+            if (!isRangeTypeValid) {
               context.report({
                 data: {
-                  rangeTypes: rangeTypes.join(', '),
+                  rangeTypes: validRangeTypes,
                 },
                 messageId: 'wrongRangeType',
                 node: property.value,
@@ -237,7 +265,14 @@ export const rule = createRule({
                       `"${changeVersionRange(version, rangeType)}"`,
                     );
                   },
-                  messageId: `changeTo${capitalize(rangeType)}`,
+                  messageId:
+                    rangeType.alias === 'pin' ? 'changeToPin' : 'changeTo',
+                  data:
+                    rangeType.alias === 'pin'
+                      ? undefined
+                      : {
+                          rangeType: displayRangeType(rangeType),
+                        },
                 })),
               });
             }
@@ -259,9 +294,8 @@ export const rule = createRule({
     },
     hasSuggestions: true,
     messages: {
-      changeToCaret: 'Change to use a caret range.',
       changeToPin: 'Pin the version.',
-      changeToTilde: 'Change to use a tilde range.',
+      changeTo: 'Change to use a {{rangeType}} range',
       wrongRangeType:
         'This dependency is using the wrong range type.  Acceptable range type(s): {{rangeTypes}}',
     },
