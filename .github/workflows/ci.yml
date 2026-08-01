@@ -13,8 +13,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm build
       - run: node dist/index.mjs
       - run: node dist/experimental/index.mjs
@@ -28,8 +27,7 @@ jobs:
     name: Dedupe Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm dedupe --check --prefer-offline
 
   e2e:
@@ -43,8 +41,9 @@ jobs:
         with:
           name: ci-build-assets
           path: dist/
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
         with:
+          skip-checkout: true
           working-directory: ./e2e
       - run: pnpm test
         working-directory: ./e2e
@@ -61,28 +60,23 @@ jobs:
           - 24.15.0
           - 24
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: $/.github/actions/setup
         with:
-          cache: pnpm
+          install-flags: --prod --engine-strict --ignore-scripts
           node-version: ${{ matrix.node-version }}
-      - run: pnpm install --prod --engine-strict --ignore-scripts
 
   format_check:
     name: Format Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm format --list-different
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm site:sync
       - run: pnpm lint
 
@@ -90,16 +84,14 @@ jobs:
     name: Lint Docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm docs:generate --check
 
   lint_knip:
     name: Lint Knip
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm lint:knip
 
   test_node:
@@ -117,8 +109,7 @@ jobs:
           - 24.15.0
           - 24
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
       - run: pnpm install -D eslint@${{ matrix.eslint-version }}
@@ -137,8 +128,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm run test --coverage
       - uses: codecov/codecov-action@v5
         if: success() && (matrix.os == 'ubuntu-latest')
@@ -156,8 +146,7 @@ jobs:
           - 9
           - 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm install -D eslint@${{ matrix.eslint-version }}
       - run: pnpm typecheck
 
@@ -165,6 +154,5 @@ jobs:
     name: Check Site
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: ./.github/actions/setup
+      - uses: $/.github/actions/setup
       - run: pnpm site:check
