@@ -11,6 +11,10 @@ inputs:
     description: Node.js version to use
     default: 'lts/*'
     required: false
+  skip-checkout:
+    description: Skip the checkout step if the repo is already checked out
+    default: false
+    required: false
   working-directory:
     description: Working directory to run commands in
     default: '.'
@@ -19,6 +23,7 @@ inputs:
 runs:
   steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      if: ${{ inputs.skip-checkout == 'false' }}
     - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
     - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
       with:

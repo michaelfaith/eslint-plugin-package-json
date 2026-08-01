@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Download Build Assets
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
@@ -42,6 +43,7 @@ jobs:
           path: dist/
       - uses: $/.github/actions/setup
         with:
+          skip-checkout: true
           working-directory: ./e2e
       - run: pnpm test
         working-directory: ./e2e
