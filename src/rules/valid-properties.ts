@@ -34,6 +34,8 @@ import {
   validateVersion,
   validateWorkspaces,
 } from 'package-json-validator';
+import { detect } from 'package-manager-detector';
+import semver from 'semver';
 
 import {
   createSimpleValidPropertyRule,
@@ -44,6 +46,21 @@ interface ValidPropertyOptions {
   aliases: string[];
   validator: ValidationFunction;
 }
+
+const packageManagerInfo = await detect();
+
+const packageManagerAwareValidateDependencies: ValidationFunction = (value) => {
+  // Allow for named registries if the user is using pnpm >= 11.1.0
+  // https://github.com/michaelfaith/eslint-plugin-package-json/issues/2057
+  if (
+    packageManagerInfo?.name === 'pnpm' &&
+    (!packageManagerInfo.version ||
+      semver.gte(packageManagerInfo.version, '11.1.0'))
+  ) {
+    return validateDependencies(value, { allowNamedRegistries: true });
+  }
+  return validateDependencies(value);
+};
 
 // List of all properties we want to create valid- rules for,
 // in the format [propertyName, validationFunction | validPropertyOptions]
@@ -62,8 +79,8 @@ const properties = [
   ['contributors', validateContributors],
   ['cpu', validateCpu],
   ['description', validateDescription],
-  ['dependencies', validateDependencies],
-  ['devDependencies', validateDependencies],
+  ['dependencies', packageManagerAwareValidateDependencies],
+  ['devDependencies', packageManagerAwareValidateDependencies],
   ['devEngines', validateDevEngines],
   ['directories', validateDirectories],
   ['engines', validateEngines],
