@@ -84,17 +84,13 @@ const schemaOptions = {
 
 const normalizeRangeType = (
   rangeTypeOrSymbol: RangeName | RangeSymbol,
-): RangeType => {
-  const result = RANGE_TYPES.find(
+): RangeType =>
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- validated by JSON schema
+  RANGE_TYPES.find(
     (rangeType) =>
       ('symbol' in rangeType && rangeType.symbol === rangeTypeOrSymbol) ||
       rangeType.alias === rangeTypeOrSymbol,
-  );
-  if (result === undefined) {
-    throw new Error(`invalid range type: ${rangeTypeOrSymbol}`);
-  }
-  return result;
-};
+  )!;
 
 const workspaceVersionStartsWith = (rangeType: RangeType) => {
   if ('workspaceSymbol' in rangeType) {
