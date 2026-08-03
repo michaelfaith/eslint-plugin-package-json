@@ -1,37 +1,32 @@
 import type { RuleTester } from 'eslint';
-import { describe, vi } from 'vitest';
+import { afterAll, describe } from 'vitest';
 
+import { rules } from '../../rules/valid-properties.ts';
 import { ruleTester } from './ruleTester.ts';
-
-const mockDetect = vi.fn();
-vi.mock('package-manager-detector', () => ({
-  detect: mockDetect,
-}));
 
 interface TestEnvironment {
   description: string;
-  beforeAll: (() => void) | (() => Promise<void>);
-  additionalValidTests?: (RuleTester.ValidTestCase | string)[];
+  before: () => void;
+  additionalValidTests?: RuleTester.ValidTestCase[];
   additionalInvalidTests?: RuleTester.InvalidTestCase[];
 }
 
 const testEnvironments: TestEnvironment[] = [
   {
     description: 'with pnpm 11.1.0',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'pnpm',
-        agent: 'pnpm',
-        version: '11.1.0',
-      });
+    before: () => {
+      process.env.npm_config_user_agent =
+        'pnpm/11.1.0 npm/? node/v24.11.0 linux x64';
     },
     additionalValidTests: [
-      `{
+      {
+        code: `{
   "dependencies": {
     "cst-records": "record-label:foo@^1.2.3"
   }
 }
 `,
+      },
     ],
     additionalInvalidTests: [
       {
@@ -67,70 +62,106 @@ const testEnvironments: TestEnvironment[] = [
   },
   {
     description: 'with pnpm 11.0.0',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'pnpm',
-        agent: 'pnpm',
-        version: '11.0.0',
-      });
+    before: () => {
+      process.env.npm_config_user_agent =
+        'pnpm/11.0.0 npm/? node/v24.11.0 linux x64';
     },
   },
   {
     description: 'with pnpm 10.0.0',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'pnpm',
-        agent: 'pnpm',
-        version: '10.0.0',
-      });
+    before: () => {
+      process.env.npm_config_user_agent =
+        'pnpm/10.0.0 npm/? node/v24.11.0 linux x64';
     },
   },
   {
     description: 'with pnpm, but no version',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'pnpm',
-        agent: 'pnpm',
-      });
+    before: () => {
+      process.env.npm_config_user_agent = 'pnpm/ node/v24.11.0 linux x64';
     },
+    additionalValidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "cst-records": "record-label:foo@^1.2.3"
+  }
+}
+`,
+      },
+    ],
+    additionalInvalidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "empty-custom-protocol": "work:",
+    "bad-custom-protocol": "work:git+foo://github.com/npm/cli.git"
+  }
+}
+`,
+        errors: [
+          {
+            column: 30,
+            data: {
+              error:
+                'invalid version spec for dependency `empty-custom-protocol`: Unsupported URL Type "work:": work:',
+            },
+            line: 3,
+            messageId: 'validationError',
+          },
+          {
+            column: 28,
+            data: {
+              error:
+                'invalid custom protocol arg for dependency `bad-custom-protocol`: Unsupported URL Type "git+foo:": git+foo://github.com/npm/cli.git',
+            },
+            line: 4,
+            messageId: 'validationError',
+          },
+        ],
+      },
+    ],
   },
   {
     description: 'with npm',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'npm',
-        agent: 'npm',
-        version: '11.12.0',
-      });
+    before: () => {
+      process.env.npm_config_user_agent = 'npm/11.12.0 node/v24.11.0 linux x64';
     },
   },
   {
     description: 'with yarn',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue({
-        name: 'yarn',
-        agent: 'yarn',
-        version: '4.18.0',
-      });
+    before: () => {
+      process.env.npm_config_user_agent =
+        'yarn/4.18.0 npm/? node/v24.11.0 linux x64';
+    },
+  },
+  {
+    description: 'with no unknown package manager',
+    before: () => {
+      process.env.npm_config_user_agent =
+        'unknown/1.0.0 npm/? node/v24.11.0 linux x64';
     },
   },
   {
     description: 'with no package manager detected',
-    beforeAll: () => {
-      mockDetect.mockResolvedValue(null);
+    before: () => {
+      process.env.npm_config_user_agent = undefined;
     },
   },
 ];
 
+const previousUserAgent = process.env.npm_config_user_agent;
+
+afterAll(() => {
+  process.env.npm_config_user_agent = previousUserAgent;
+});
+
 describe.each(testEnvironments)(
   '$description',
-  async ({ beforeAll, additionalValidTests, additionalInvalidTests }) => {
-    await beforeAll();
-
-    const { rules } = await import('../../rules/valid-properties.ts');
+  ({ before, additionalValidTests, additionalInvalidTests }) => {
     ruleTester.run('valid-dependencies', rules['valid-dependencies'], {
       invalid: [
         {
+          before,
           code: `{
 	"dependencies": null
 }
@@ -147,6 +178,7 @@ describe.each(testEnvironments)(
           ],
         },
         {
+          before,
           code: `{
 	"dependencies": 123
 }
@@ -162,6 +194,7 @@ describe.each(testEnvironments)(
           ],
         },
         {
+          before,
           code: `{
 	"dependencies": "./script.js"
 }
@@ -177,6 +210,7 @@ describe.each(testEnvironments)(
           ],
         },
         {
+          before,
           code: `{
 	"dependencies": []
 }
@@ -192,6 +226,7 @@ describe.each(testEnvironments)(
           ],
         },
         {
+          before,
           code: `{
 	"dependencies": {
     "david": "bowie",
@@ -231,11 +266,16 @@ describe.each(testEnvironments)(
             },
           ],
         },
-        ...(additionalInvalidTests ?? []),
+        ...(additionalInvalidTests?.map((test) => ({ before, ...test })) ?? []),
       ],
       valid: [
-        '{}',
-        `{
+        {
+          before,
+          code: '{}',
+        },
+        {
+          before,
+          code: `{
   "dependencies": {
     "silver-mt-zion": "^1.2.3",
     "nin": "file:./nin",
@@ -250,11 +290,13 @@ describe.each(testEnvironments)(
     "jessica-moss": "beta"
   }
 }`,
-        `{ "dependencies": {} }`,
-        ...(additionalValidTests ?? []),
+        },
+        {
+          before,
+          code: `{ "dependencies": {} }`,
+        },
+        ...(additionalValidTests?.map((test) => ({ before, ...test })) ?? []),
       ],
     });
-
-    vi.resetModules();
   },
 );
