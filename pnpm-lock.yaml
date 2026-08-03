@@ -142,8 +142,8 @@ importers:
         specifier: 3.1.1
         version: 3.1.1
       knip:
-        specifier: 6.30.0
-        version: 6.30.0
+        specifier: 6.31.0
+        version: 6.31.0
       prettier:
         specifier: 3.9.0
         version: 3.9.0
@@ -2956,8 +2956,8 @@ packages:
     resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
     engines: {node: '>= 8'}
 
-  knip@6.30.0:
-    resolution: {integrity: sha512-C5MsWT17QqMLtrvXIH4N9czRpt/T1GzwfkR/10qW3pdCHFUCoGF+Eeyq8FCKIkv56Gm5zSDv8fq3fs4whktehA==}
+  knip@6.31.0:
+    resolution: {integrity: sha512-NbeIEmUS2VUMjAkbiSNOKPJeV9wpCsr0660sUyKyMQbk4Iom0++nTLInVp4MJ+LfR4kORnw67bDi5tvO7YLnzA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -7211,7 +7211,7 @@ snapshots:
 
   klona@2.0.6: {}
 
-  knip@6.30.0:
+  knip@6.31.0:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.5)
       formatly: 0.3.0
