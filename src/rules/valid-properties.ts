@@ -53,7 +53,6 @@ const packageManagerAwareValidateDependencies: ValidationFunction = (value) => {
     process.env.npm_config_user_agent?.match(userAgentRegex);
 
   // Allow for named registries if the user is using pnpm >= 11.1.0.
-  // The detector returns the current package manager name from the npm user agent.
   // https://github.com/michaelfaith/eslint-plugin-package-json/issues/2057
   if (userAgentMatch?.[1] === 'pnpm') {
     const version = userAgentMatch[2];
