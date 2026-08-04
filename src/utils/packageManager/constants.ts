@@ -1,3 +1,14 @@
+export const AGENTS = [
+  'npm',
+  'yarn',
+  'pnpm',
+  'bun',
+  'deno',
+  'nub',
+  'aube',
+] as const;
+export type AgentName = (typeof AGENTS)[number];
+
 export interface DetectResult {
   /**
    * Agent name without the specifier.
@@ -11,17 +22,6 @@ export interface DetectResult {
    */
   version?: string;
 }
-
-export const AGENTS = [
-  'npm',
-  'yarn',
-  'pnpm',
-  'bun',
-  'deno',
-  'nub',
-  'aube',
-] as const;
-export type AgentName = (typeof AGENTS)[number];
 
 // the order here matters, more specific one comes first
 export const LOCK_FILES: Record<string, AgentName> = {
