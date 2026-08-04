@@ -4,7 +4,10 @@ import type { AST } from 'jsonc-eslint-parser';
 import { createRule } from '../createRule.ts';
 
 // See https://docs.npmjs.com/cli/v11/using-npm/scripts
-const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set(['prepublishOnly']);
+const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set([
+  'prepublishOnly',
+  'pnpm:devPreinstall',
+]);
 
 export const rule = createRule({
   create(context) {
@@ -20,11 +23,12 @@ export const rule = createRule({
               continue;
             }
 
-            const kebabCaseKey = key
+            // Don't include a leading '.'
+            const kebabCaseKey = (key.startsWith('.') ? key.slice(1) : key)
               .split(':')
               .map((segment) => kebabCase(segment))
               .join(':');
-            if (kebabCaseKey !== key) {
+            if (kebabCaseKey !== (key.startsWith('.') ? key.slice(1) : key)) {
               context.report({
                 data: {
                   property: key,
@@ -39,7 +43,11 @@ export const rule = createRule({
                     fix: (fixer) => {
                       return fixer.replaceText(
                         keyNode,
-                        JSON.stringify(kebabCaseKey),
+                        JSON.stringify(
+                          key.startsWith('.')
+                            ? `.${kebabCaseKey}`
+                            : kebabCaseKey,
+                        ),
                       );
                     },
                     messageId: 'convertToKebabCase',
