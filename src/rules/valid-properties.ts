@@ -40,22 +40,20 @@ import {
   createSimpleValidPropertyRule,
   type ValidationFunction,
 } from '../utils/createSimpleValidPropertyRule.js';
+import { detectPackageManager } from '../utils/packageManager/detectPackageManager.ts';
 
 interface ValidPropertyOptions {
   aliases: string[];
   validator: ValidationFunction;
 }
 
-const userAgentRegex = /^(.+?)\/(\S+)?/;
-
 const packageManagerAwareValidateDependencies: ValidationFunction = (value) => {
-  const userAgentMatch =
-    process.env.npm_config_user_agent?.match(userAgentRegex);
+  const result = detectPackageManager();
 
   // Allow for named registries if the user is using pnpm >= 11.1.0.
   // https://github.com/michaelfaith/eslint-plugin-package-json/issues/2057
-  if (userAgentMatch?.[1] === 'pnpm') {
-    const version = userAgentMatch[2];
+  if (result?.name === 'pnpm') {
+    const version = result.version;
 
     if (!version || semver.gte(version, '11.1.0')) {
       return validateDependencies(value, { allowNamedRegistries: true });
