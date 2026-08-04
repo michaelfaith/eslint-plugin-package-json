@@ -57,7 +57,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@altano/repository-tools": "^2.0.1",
+    "@altano/repository-tools": "^2.0.5",
     "@types/estree": "^1.0.0",
     "change-case": "^5.4.4",
     "detect-indent": "^7.0.2",
