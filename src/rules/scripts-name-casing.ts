@@ -3,14 +3,22 @@ import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 
-// See https://docs.npmjs.com/cli/v11/using-npm/scripts
 const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set([
+  // See https://docs.npmjs.com/cli/v11/using-npm/scripts
   'prepublishOnly',
+  // https://pnpm.io/scripts#pnpmdevpreinstall
   'pnpm:devPreinstall',
 ]);
 
 export const rule = createRule({
   create(context) {
+    const { ignoreNames = [], ignorePatterns = [] } = context.options[0] ?? {};
+    const ignoreRegexes = ignorePatterns.map((pattern) => new RegExp(pattern));
+
+    const isIgnored = (name: string) =>
+      ignoreNames.includes(name) ||
+      ignoreRegexes.some((regex) => regex.test(name));
+
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=scripts]'(
         node: AST.JSONProperty,
@@ -19,7 +27,7 @@ export const rule = createRule({
           for (const property of node.value.properties) {
             const keyNode = property.key as AST.JSONStringLiteral;
             const key = keyNode.value;
-            if (BUILT_IN_SCRIPTS_IN_CAMEL_CASE.has(key)) {
+            if (BUILT_IN_SCRIPTS_IN_CAMEL_CASE.has(key) || isIgnored(key)) {
               continue;
             }
 
@@ -61,6 +69,7 @@ export const rule = createRule({
     };
   },
   meta: {
+    defaultOptions: [{}],
     docs: {
       category: 'Stylistic',
       description:
@@ -71,7 +80,28 @@ export const rule = createRule({
       convertToKebabCase: 'Convert {{ property }} to kebab case.',
       invalidCase: 'Script name {{ property }} should be in kebab case.',
     },
-    schema: [],
+    schema: [
+      {
+        additionalProperties: false,
+        properties: {
+          ignoreNames: {
+            items: {
+              type: ['string'],
+            },
+            type: ['array'],
+            description: 'Specific script names to ignore.',
+          },
+          ignorePatterns: {
+            items: {
+              type: ['string'],
+            },
+            type: ['array'],
+            description: 'Regex patterns for script names to ignore.',
+          },
+        },
+        type: 'object',
+      },
+    ],
     type: 'suggestion',
   },
   name: 'scripts-name-casing',
