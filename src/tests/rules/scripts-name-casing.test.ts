@@ -122,5 +122,21 @@ ruleTester.run('scripts-name-casing', rule, {
     `{ "scripts": { "prepublishOnly": "npm run build" } }`,
     `{ "scripts": { "pnpm:devPreinstall": "node preinstall.mjs" } }`,
     `{ "scripts": { ".silver-mt-zion": "silver-mt-zion.js", "nin": "./nin.js" } }`,
+    {
+      code: `{ "scripts": { "SilverMtZion": "silver-mt-zion.js", "nin": "./nin.js" } }`,
+      options: [
+        {
+          ignoreNames: ['SilverMtZion'],
+        },
+      ],
+    },
+    {
+      code: `{ "scripts": { "~silver-mt-zion": "silver-mt-zion.js", "nin": "./nin.js" } }`,
+      options: [
+        {
+          ignorePatterns: ['^~.*'],
+        },
+      ],
+    },
   ],
 });

@@ -43,6 +43,47 @@ It also permits kebab case segments separated by colons (e.g. `"test:my-script"`
 </TabItem>
 </Tabs>
 
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name             | Description                                | Type  |
+| :--------------- | :----------------------------------------- | :---- |
+| `ignoreNames`    | Specific script names to ignore.           | Array |
+| `ignorePatterns` | Regex patterns for script names to ignore. | Array |
+
+{/* end auto-generated rule options list */}
+
+### `ignoreNames`
+
+Define an array of specific script names that should be ignored by this rule.
+
+```json
+{
+  "scripts-name-casing": [
+    "error",
+    {
+      "ignoreNames": ["myCustomScript", "anotherScript"]
+    }
+  ]
+}
+```
+
+### `ignorePatterns`
+
+Define an array of regex patterns that should be ignored by this rule.
+
+```json
+{
+  "scripts-name-casing": [
+    "error",
+    {
+      "ignorePatterns": ["^myCustom.*", ".*Script$"]
+    }
+  ]
+}
+```
+
 ## Related Rules
 
 - [`require-scripts`](/rules/require-properties/require-scripts) - Enforces that the `scripts` property is present.
