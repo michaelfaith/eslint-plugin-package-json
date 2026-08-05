@@ -12,9 +12,9 @@ const DEPENDENCY_TYPES = [
 ];
 
 const RANGE_TYPES = [
-  { symbol: '^', alias: 'caret' },
+  { symbol: '^', alias: 'caret', workspaceSymbol: '^' },
   { alias: 'pin', workspaceSymbol: '*' },
-  { symbol: '~', alias: 'tilde' },
+  { symbol: '~', alias: 'tilde', workspaceSymbol: '~' },
   { symbol: '<', alias: 'lt' },
   { symbol: '<=', alias: 'le' },
   { symbol: '>', alias: 'gt' },
@@ -85,16 +85,22 @@ const normalizeRangeType = (
       rangeType.alias === rangeTypeOrSymbol,
   )!;
 
-const workspaceVersionStartsWith = (rangeType: RangeType) => {
+/** @returns `undefined` if workspace versions are not supported for the specified {@link rangeType} */
+const getWorkspaceVersionForRange = (rangeType: RangeType) => {
   if ('workspaceSymbol' in rangeType) {
     return `workspace:${rangeType.workspaceSymbol}`;
   }
-  return `workspace:${rangeType.symbol}`;
 };
 
 /** For displaying a range type in a user-facing way (ie. an error message). */
 const displayRangeType = (rangeType: RangeType) =>
   'symbol' in rangeType ? rangeType.symbol : rangeType.alias;
+
+const isRollingWorkspaceSpec = (version: string) =>
+  /^workspace:[~^*]$/.test(version);
+
+const isWorkspaceSymbolWithVersion = (version: string) =>
+  /^workspace:[~^*]/.test(version);
 
 /**
  * Given the original version, update it to use the correct range type.
@@ -102,8 +108,11 @@ const displayRangeType = (rangeType: RangeType) =>
 const changeVersionRange = (version: string, rangeType: RangeType): string => {
   // We need to handle workspace versions with only the range indicator,
   // slightly differently
-  if (/^workspace:[~^*]$/.test(version)) {
-    return workspaceVersionStartsWith(rangeType);
+  if (isRollingWorkspaceSpec(version)) {
+    const result = getWorkspaceVersionForRange(rangeType);
+    if (result !== undefined) {
+      return result;
+    }
   }
 
   const replaceWith = 'symbol' in rangeType ? rangeType.symbol : '';
@@ -114,7 +123,7 @@ const changeVersionRange = (version: string, rangeType: RangeType): string => {
  * Check if the version is in a form that this rule supports.
  */
 const isVersionSupported = (version: string): boolean => {
-  if (/^workspace:[*^~]$/.test(version)) {
+  if (isRollingWorkspaceSpec(version)) {
     return true;
   }
   const rawVersion = version.replace(/^workspace:/, '');
@@ -174,15 +183,23 @@ export const rule = createRule({
           }
 
           const doesRangeTypeMatch = (rangeType: RangeType) => {
-            if ('symbol' in rangeType) {
-              if (semver.validRange(version)) {
-                return version.startsWith(rangeType.symbol);
-              }
-            } else {
-              // when rangeType is pin
-              return !!semver.parse(version) || version === 'workspace:*';
+            if ('symbol' in rangeType && semver.validRange(version)) {
+              return version.startsWith(rangeType.symbol);
             }
-            return version.startsWith(workspaceVersionStartsWith(rangeType));
+            if (
+              rangeType.alias === 'pin' &&
+              (!!semver.parse(version) || version === 'workspace:*')
+            ) {
+              return true;
+            }
+            if (isWorkspaceSymbolWithVersion(version)) {
+              // if workspace versions are unsupported for this range type, we treat it as matching
+              const workspaceVersion = getWorkspaceVersionForRange(rangeType);
+              return (
+                workspaceVersion === undefined ||
+                version.startsWith(workspaceVersion)
+              );
+            }
           };
 
           // Loop through all options, and evaluate each of them for this dependency
@@ -207,7 +224,7 @@ export const rule = createRule({
               options.forVersions &&
               // We can't determine whether any workspace version without a numeric version to accompany it, matches this range
               // so we'll just skip it.
-              (/^workspace:[^~*]?$/.test(version) ||
+              (isRollingWorkspaceSpec(version) ||
                 // * matches all
                 (version !== '*' &&
                   !semver.satisfies(
