@@ -30,6 +30,8 @@ type RangeSymbol = (typeof SYMBOLS)[number];
 const RANGE_NAMES = RANGE_TYPES.map((rangeType) => rangeType.alias);
 type RangeName = (typeof RANGE_NAMES)[number];
 
+const SYMBOLS_AND_RANGE_NAMES = [...SYMBOLS, ...RANGE_NAMES];
+
 const schemaOptions = {
   additionalProperties: false,
   properties: {
@@ -58,20 +60,11 @@ const schemaOptions = {
         'Identifies which range type or types you want to apply to packages that match any of the other match options (or all dependencies if no other options are provided).',
       oneOf: [
         {
-          enum: SYMBOLS,
+          enum: SYMBOLS_AND_RANGE_NAMES,
         },
         {
           items: {
-            enum: SYMBOLS,
-          },
-          type: 'array',
-        },
-        {
-          enum: RANGE_NAMES,
-        },
-        {
-          items: {
-            enum: RANGE_NAMES,
+            enum: SYMBOLS_AND_RANGE_NAMES,
           },
           type: 'array',
         },

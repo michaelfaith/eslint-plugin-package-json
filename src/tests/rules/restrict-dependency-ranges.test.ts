@@ -894,6 +894,26 @@ ruleTester.run('restrict-dependency-ranges', rule, {
       options: [[{ rangeType: ['pin', 'tilde'] }]],
     })),
 
+    // rangeType: '^' and 'tilde'
+    ...[
+      'dependencies',
+      'devDependencies',
+      'peerDependencies',
+      'optionalDependencies',
+    ].map((dependencyType) => ({
+      code: `{
+	"${dependencyType}": {
+		"abc": "~1.2.3",
+        "def": "workspace:~1.2.3",
+        "ghi": "workspace:~",
+        "jkl": "^1.2.3",
+        "mno": "workspace:^"
+	}
+}`,
+      name: `rangeType: ['^', 'tilde']; dependencyType: '${dependencyType}'`,
+      options: [[{ rangeType: ['^', 'tilde'] }]],
+    })),
+
     // forDependencyTypes: devDependencies
     {
       code: `{
