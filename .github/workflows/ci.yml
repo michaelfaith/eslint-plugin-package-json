@@ -23,6 +23,13 @@ jobs:
           name: ci-build-assets
           path: dist/
 
+  build_site:
+    name: Build Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - run: pnpm site:build
+
   dedupe_check:
     name: Dedupe Check
     runs-on: ubuntu-latest
