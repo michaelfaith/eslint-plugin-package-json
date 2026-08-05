@@ -1,8 +1,13 @@
 import type { RuleTester } from 'eslint';
-import { afterAll, describe } from 'vitest';
+import { describe, vi } from 'vitest';
 
 import { rules } from '../../rules/valid-properties.ts';
+import { detectPackageManager } from '../../utils/packageManager/detectPackageManager.ts';
 import { ruleTester } from './ruleTester.ts';
+
+vi.mock('../../utils/packageManager/detectPackageManager.ts', () => ({
+  detectPackageManager: vi.fn(),
+}));
 
 interface TestEnvironment {
   description: string;
@@ -15,8 +20,10 @@ const testEnvironments: TestEnvironment[] = [
   {
     description: 'with pnpm 11.1.0',
     before: () => {
-      process.env.npm_config_user_agent =
-        'pnpm/11.1.0 npm/? node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+        version: '11.1.0',
+      });
     },
     additionalValidTests: [
       {
@@ -63,21 +70,27 @@ const testEnvironments: TestEnvironment[] = [
   {
     description: 'with pnpm 11.0.0',
     before: () => {
-      process.env.npm_config_user_agent =
-        'pnpm/11.0.0 npm/? node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+        version: '11.0.0',
+      });
     },
   },
   {
     description: 'with pnpm 10.0.0',
     before: () => {
-      process.env.npm_config_user_agent =
-        'pnpm/10.0.0 npm/? node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+        version: '10.0.0',
+      });
     },
   },
   {
     description: 'with pnpm, but no version',
     before: () => {
-      process.env.npm_config_user_agent = 'pnpm/ node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+      });
     },
     additionalValidTests: [
       {
@@ -124,36 +137,28 @@ const testEnvironments: TestEnvironment[] = [
   {
     description: 'with npm',
     before: () => {
-      process.env.npm_config_user_agent = 'npm/11.12.0 node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'npm',
+        version: '11.12.0',
+      });
     },
   },
   {
     description: 'with yarn',
     before: () => {
-      process.env.npm_config_user_agent =
-        'yarn/4.18.0 npm/? node/v24.11.0 linux x64';
-    },
-  },
-  {
-    description: 'with no unknown package manager',
-    before: () => {
-      process.env.npm_config_user_agent =
-        'unknown/1.0.0 npm/? node/v24.11.0 linux x64';
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'yarn',
+        version: '4.18.0',
+      });
     },
   },
   {
     description: 'with no package manager detected',
     before: () => {
-      process.env.npm_config_user_agent = undefined;
+      vi.mocked(detectPackageManager).mockReturnValue(null);
     },
   },
 ];
-
-const previousUserAgent = process.env.npm_config_user_agent;
-
-afterAll(() => {
-  process.env.npm_config_user_agent = previousUserAgent;
-});
 
 describe.each(testEnvironments)(
   '$description',
