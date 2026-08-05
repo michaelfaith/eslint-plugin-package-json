@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.3](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.2...v1.6.3) (2026-08-05)
+
+
+### 🩹 Bug Fixes
+
+* **scripts-name-casing:** support "hidden" scripts and `pnpm:devPreinstall` ([#2066](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2066)) ([c6173e4](https://github.com/michaelfaith/eslint-plugin-package-json/commit/c6173e45a3bd22178a8cfe2bbd8eae683c77466d))
+* **valid-dependencies:** improve package manager detection ([#2070](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2070)) ([7b486a8](https://github.com/michaelfaith/eslint-plugin-package-json/commit/7b486a8ac60a4a117cb6b307f053e239163cdb50))
+* **valid-dependencies:** support pnpm's named registries ([#2060](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2060)) ([f85e0f6](https://github.com/michaelfaith/eslint-plugin-package-json/commit/f85e0f685384fb2ff7ecd782773ff6b7887c1aff))
+
 ## [1.6.2](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.1...v1.6.2) (2026-07-25)
 
 
