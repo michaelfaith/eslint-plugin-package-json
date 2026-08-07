@@ -1,7 +1,7 @@
 import {
   createSimpleRequirePropertyRule,
   type CreateRequirePropertyRuleOptions,
-} from '../utils/createSimpleRequirePropertyRule.js';
+} from '../utils/createSimpleRequirePropertyRule.ts';
 import { getGitAuthor } from '../utils/git/getGitAuthor.ts';
 
 export const propertyConfig: [
