@@ -18,8 +18,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*",
-        "vwx": ">1.2.3"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
       errors: [
@@ -43,8 +44,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*",
-        "vwx": ">1.2.3"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -70,8 +72,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*",
-        "vwx": ">1.2.3"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -97,8 +100,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:^",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*",
-        "vwx": ">1.2.3"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -124,8 +128,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:^",
-        "stu": "*",
-        "vwx": ">1.2.3"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -136,13 +141,6 @@ ruleTester.run('restrict-dependency-ranges', rule, {
             rangeTypes: '^',
           },
           line: 9,
-          messageId: 'wrongRangeType',
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 10,
           messageId: 'wrongRangeType',
           suggestions: [
             {
@@ -158,8 +156,44 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*",
-        "vwx": "^1.2.3"
+        "stu": "workspace:^1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
+    }
+}`,
+            },
+          ],
+        },
+        {
+          data: {
+            rangeTypes: '^',
+          },
+          line: 10,
+          messageId: 'wrongRangeType',
+        },
+        {
+          data: {
+            rangeTypes: '^',
+          },
+          line: 11,
+          messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": "1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": "^1.2.3"
     }
 }`,
             },
