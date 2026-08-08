@@ -39,7 +39,7 @@ import semver from 'semver';
 import {
   createSimpleValidPropertyRule,
   type ValidationFunction,
-} from '../utils/createSimpleValidPropertyRule.js';
+} from '../utils/createSimpleValidPropertyRule.ts';
 import { detectPackageManager } from '../utils/packageManager/detectPackageManager.ts';
 
 interface ValidPropertyOptions {
