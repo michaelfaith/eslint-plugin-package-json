@@ -13,7 +13,7 @@ This includes any paths that start with `file:`, `link:`, `./`, or `../`.
 Dependencies listed in [`bundleDependencies`](https://docs.npmjs.com/cli/v12/configuring-npm/package-json#bundledependencies) (or its `bundledDependencies` alias) are exempt, since their contents are published within the package's own tarball and so remain resolvable when installed from a registry.
 Setting `bundleDependencies` to `true` bundles every dependency, and likewise exempts them all.
 
-If both spellings are present, only `bundleDependencies` is honored, matching how npm resolves the alias.
+The `bundledDependencies` alias is only consulted when `bundleDependencies` is absent or falsy, matching how npm resolves the two.
 
 ## Examples
 
