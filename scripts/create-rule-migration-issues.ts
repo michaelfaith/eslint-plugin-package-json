@@ -6,12 +6,12 @@ const owner = 'michaelfaith';
 const repository = 'eslint-plugin-package-json';
 const parentIssueNumber = 655;
 const issueTitlePrefix = '🏗️ Refactor:';
-const markerPrefix = '<!-- rule-migration:';
+const markerPrefix = 'rule-migration:';
 
 interface ExistingIssue {
   number: number;
   state: string;
-  title: string;
+  body: string;
 }
 
 function runGh(args: string[]): string {
@@ -33,21 +33,25 @@ function getExistingIssues(): ExistingIssue[] {
       '--limit',
       '1000',
       '--json',
-      'number,state,title',
+      'number,state,body',
     ]),
   ) as ExistingIssue[];
 }
 
-function getTitle(name: string): string {
+function createMarker(name: string): string {
+  return `<!-- ${markerPrefix}${name} -->`;
+}
+
+function createTitle(name: string): string {
   return `${issueTitlePrefix} Migrate \`${name}\` to \`@eslint/json\` API`;
 }
 
-function getBody(name: string): string {
+function createBody(name: string): string {
   const rule = plugin.rules[name];
   const documentationUrl = rule.meta.docs?.url;
 
   return [
-    `${markerPrefix}${name} -->`,
+    createMarker(name),
     '',
     `Migrate the \`${name}\` rule from the \`jsonc-eslint-parser\` API to the \`@eslint/json\` language API.`,
     '',
@@ -68,9 +72,9 @@ function createIssue(name: string): number {
     '--repo',
     `${owner}/${repository}`,
     '--title',
-    getTitle(name),
+    createTitle(name),
     '--body',
-    getBody(name),
+    createBody(name),
     '--label',
     'status: accepting prs',
     '--label',
@@ -100,10 +104,11 @@ function addAsSubIssue(issueNumber: number): void {
 
 const main = () => {
   const shouldCreate = process.argv.includes('--create');
-  const existingTitles = new Set(getExistingIssues().map(({ title }) => title));
+  const existingIssues = getExistingIssues();
+  const existingIssueBodies = existingIssues.map(({ body }) => body);
   const ruleNames = Object.keys(plugin.rules).sort();
-  const pendingRules = ruleNames.filter(
-    (name) => !existingTitles.has(getTitle(name)),
+  const pendingRules = ruleNames.filter((name) =>
+    existingIssueBodies.every((body) => !body.includes(createMarker(name))),
   );
 
   console.log(
@@ -111,7 +116,7 @@ const main = () => {
   );
 
   for (const name of pendingRules) {
-    const title = getTitle(name);
+    const title = createTitle(name);
 
     if (!shouldCreate) {
       console.log(`- ${title}`);
