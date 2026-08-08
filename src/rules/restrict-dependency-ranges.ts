@@ -90,6 +90,7 @@ const getWorkspaceVersionForRange = (rangeType: RangeType) => {
   if ('workspaceSymbol' in rangeType) {
     return `workspace:${rangeType.workspaceSymbol}`;
   }
+  return undefined;
 };
 
 /** For displaying a range type in a user-facing way (ie. an error message). */
@@ -197,6 +198,7 @@ export const rule = createRule({
                 version.startsWith(workspaceVersion)
               );
             }
+            return false;
           };
 
           // Loop through all options, and evaluate each of them for this dependency

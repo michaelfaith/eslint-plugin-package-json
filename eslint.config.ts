@@ -77,6 +77,9 @@ export default defineConfig(
 
       'perfectionist/sort-exports': 'error',
 
+      // conflicts with typescript's noImplicitReturns
+      'unicorn/no-useless-undefined': 'off',
+
       // Overly strict
       'unicorn/no-array-reverse': 'off',
       'unicorn/no-array-sort': 'off',

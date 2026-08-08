@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2024",
-    "rewriteRelativeImportExtensions": true
+    "rewriteRelativeImportExtensions": true,
+    "noImplicitReturns": true
   },
   "include": ["src", "*.config.ts"],
   "exclude": ["astro.config.ts"]
