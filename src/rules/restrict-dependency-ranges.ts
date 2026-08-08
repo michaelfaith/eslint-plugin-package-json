@@ -99,9 +99,6 @@ const displayRangeType = (rangeType: RangeType) =>
 const isRollingWorkspaceSpec = (version: string) =>
   /^workspace:[~^*]$/.test(version);
 
-const isWorkspaceSymbolWithVersion = (version: string) =>
-  /^workspace:[~^*]/.test(version);
-
 /**
  * Given the original version, update it to use the correct range type.
  */
@@ -192,7 +189,7 @@ export const rule = createRule({
             ) {
               return true;
             }
-            if (isWorkspaceSymbolWithVersion(version)) {
+            if (version.startsWith('workspace:')) {
               // if workspace versions are unsupported for this range type, we treat it as matching
               const workspaceVersion = getWorkspaceVersionForRange(rangeType);
               return (
