@@ -103,6 +103,100 @@ ruleTester.run('no-local-dependencies', rule, {
         },
       ],
     },
+    {
+      code: `{
+  "dependencies": {
+    "abc": "file:abc.tgz",
+    "def": "file:def.tgz"
+  },
+  "bundleDependencies": ["abc"]
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:def.tgz',
+          },
+          line: 4,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
+    {
+      code: `{
+  "dependencies": {
+    "abc": "file:abc.tgz"
+  },
+  "bundleDependencies": false
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:abc.tgz',
+          },
+          line: 3,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
+    {
+      code: `{
+  "dependencies": {
+    "abc": "file:abc.tgz"
+  },
+  "bundleDependencies": 123,
+  "bundledDependencies": ["abc"]
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:abc.tgz',
+          },
+          line: 3,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
+    {
+      code: `{
+  "dependencies": {
+    "abc": "file:abc.tgz",
+    "def": "file:def.tgz"
+  },
+  "bundleDependencies": ["abc"],
+  "bundledDependencies": ["def"]
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:def.tgz',
+          },
+          line: 4,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
+    {
+      code: `{
+  "dependencies": {
+    "abc": "file:abc.tgz"
+  },
+  "bundleDependencies": []
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:abc.tgz',
+          },
+          line: 3,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
   ],
 
   valid: [
@@ -135,6 +229,42 @@ ruleTester.run('no-local-dependencies', rule, {
 	"dependencies": {
 		"abc": "../abc"
 	}
+}`,
+    `{
+	"dependencies": {
+		"abc": "file:abc.tgz"
+	},
+	"bundleDependencies": ["abc"]
+}`,
+    `{
+	"dependencies": {
+		"abc": "file:abc.tgz"
+	},
+	"bundledDependencies": ["abc"]
+}`,
+    `{
+	"dependencies": {
+		"abc": "file:abc.tgz"
+	},
+	"bundleDependencies": false,
+	"bundledDependencies": ["abc"]
+}`,
+    `{
+	"dependencies": {
+		"abc": "file:abc.tgz"
+	},
+	"bundleDependencies": true
+}`,
+    `{
+	"dependencies": {
+		"abc": "file:../file-dependency",
+		"def": "./relative-file-dependency",
+		"ghi": ".\\\\relative-windows-file-dependency",
+		"jkl": "..\\\\relative-parent-windows-file-dependency",
+		"mno": "../relative-parent-file-dependency",
+		"pqr": "link:../linked-file-dependency"
+	},
+	"bundleDependencies": ["abc", "def", "ghi", "jkl", "mno", "pqr"]
 }`,
   ],
 });
