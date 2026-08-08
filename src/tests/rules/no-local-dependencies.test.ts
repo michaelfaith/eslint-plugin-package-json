@@ -143,6 +143,25 @@ ruleTester.run('no-local-dependencies', rule, {
     {
       code: `{
   "dependencies": {
+    "abc": "file:abc.tgz"
+  },
+  "bundleDependencies": 123,
+  "bundledDependencies": ["abc"]
+}`,
+      errors: [
+        {
+          column: 12,
+          data: {
+            name: 'file:abc.tgz',
+          },
+          line: 3,
+          messageId: 'localDependencyFound',
+        },
+      ],
+    },
+    {
+      code: `{
+  "dependencies": {
     "abc": "file:abc.tgz",
     "def": "file:def.tgz"
   },
