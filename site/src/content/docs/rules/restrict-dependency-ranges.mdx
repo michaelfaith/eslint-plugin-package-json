@@ -33,7 +33,7 @@ This allows you to define more general rules that apply to all dependencies (or 
 ## Options
 
 `type DependencyType = 'dependencies' | 'devDependencies' | 'optionalDependencies' | 'peerDependencies';`\
-`type RangeType = 'caret' | 'pin' | 'tilde';`
+`type RangeType = 'caret' | '^' | 'pin' | 'tilde' | '~' | 'lt' | '<' | 'le' | '<=' | 'gt' | '>' | 'ge' | '>=';`
 
 | Name                 | Type                     | Required |
 | :------------------- | :----------------------- | :------- |
@@ -43,6 +43,8 @@ This allows you to define more general rules that apply to all dependencies (or 
 | `rangeType`          | RangeType \| RangeType[] | Yes      |
 
 You can provide a single options object consisting of the above, or an array of such objects.
+
+`rangeType` can be specified using either symbols (eg. `^`, `~`) or names (eg. `"caret", `"tilde"`), with the exception of `"pin"` which does not have an associated symbol.
 
 ### `forDependencyTypes`
 

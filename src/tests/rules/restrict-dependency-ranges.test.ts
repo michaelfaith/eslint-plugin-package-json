@@ -18,19 +18,24 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
       errors: [
         {
           data: {
-            rangeTypes: 'caret',
+            rangeTypes: '^',
           },
           line: 4,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToCaret',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -39,7 +44,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -47,13 +54,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'caret',
+            rangeTypes: '^',
           },
           line: 5,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToCaret',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -62,7 +72,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -70,13 +82,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'caret',
+            rangeTypes: '^',
           },
           line: 6,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToCaret',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -85,7 +100,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:^",
         "mno": "workspace:^",
         "pqr": "workspace:~",
-        "stu": "*"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -93,13 +110,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'caret',
+            rangeTypes: '^',
           },
           line: 8,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToCaret',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -108,7 +128,9 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "jkl": "workspace:*",
         "mno": "workspace:^",
         "pqr": "workspace:^",
-        "stu": "*"
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
     }
 }`,
             },
@@ -116,10 +138,66 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'caret',
+            rangeTypes: '^',
           },
           line: 9,
           messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": "1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "workspace:^1.2.3",
+        "vwx": "*",
+        "yza": ">1.2.3"
+    }
+}`,
+            },
+          ],
+        },
+        {
+          data: {
+            rangeTypes: '^',
+          },
+          line: 10,
+          messageId: 'wrongRangeType',
+        },
+        {
+          data: {
+            rangeTypes: '^',
+          },
+          line: 11,
+          messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '^',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": "1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "workspace:>=1.2.3",
+        "vwx": "*",
+        "yza": "^1.2.3"
+    }
+}`,
+            },
+          ],
         },
       ],
       filename: 'package.json',
@@ -272,13 +350,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
       errors: [
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 3,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "~1.2.3",
@@ -295,13 +376,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 4,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -318,13 +402,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 6,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -341,13 +428,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 7,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
@@ -364,7 +454,7 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 9,
           messageId: 'wrongRangeType',
@@ -373,6 +463,116 @@ ruleTester.run('restrict-dependency-ranges', rule, {
       filename: 'package.json',
       name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'`,
       options: [{ rangeType: 'tilde' }],
+    })),
+
+    // rangeType: '>='
+    ...[
+      'dependencies',
+      'devDependencies',
+      'peerDependencies',
+      'optionalDependencies',
+    ].map((dependencyType) => ({
+      code: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": "1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "*"
+    }
+}`,
+      errors: [
+        {
+          data: {
+            rangeTypes: '>=',
+          },
+          line: 3,
+          messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '>=',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": ">=1.2.3",
+        "def": "1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "*"
+    }
+}`,
+            },
+          ],
+        },
+        {
+          data: {
+            rangeTypes: '>=',
+          },
+          line: 4,
+          messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '>=',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": ">=1.2.3",
+        "ghi": "~1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "*"
+    }
+}`,
+            },
+          ],
+        },
+        {
+          data: {
+            rangeTypes: '>=',
+          },
+          line: 5,
+          messageId: 'wrongRangeType',
+          suggestions: [
+            {
+              messageId: 'changeTo',
+              data: {
+                rangeType: '>=',
+              },
+              output: `{
+    "${dependencyType}": {
+        "abc": "^1.2.3",
+        "def": "1.2.3",
+        "ghi": ">=1.2.3",
+        "jkl": "workspace:*",
+        "mno": "workspace:^",
+        "pqr": "workspace:~",
+        "stu": "*"
+    }
+}`,
+            },
+          ],
+        },
+        {
+          data: {
+            rangeTypes: '>=',
+          },
+          line: 9,
+          messageId: 'wrongRangeType',
+        },
+      ],
+      filename: 'package.json',
+      name: `rangeType: '>='; dependencyType: '${dependencyType}'`,
+      options: [{ rangeType: '>=' }],
     })),
 
     // multiple options (last wins)
@@ -388,13 +588,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
       errors: [
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 5,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
 	"dependencies": {
 		"abc": "~1.2.3",
@@ -408,13 +611,16 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         },
         {
           data: {
-            rangeTypes: 'tilde',
+            rangeTypes: '~',
           },
           line: 6,
           messageId: 'wrongRangeType',
           suggestions: [
             {
-              messageId: 'changeToTilde',
+              messageId: 'changeTo',
+              data: {
+                rangeType: '~',
+              },
               output: `{
 	"dependencies": {
 		"abc": "~1.2.3",
@@ -642,6 +848,26 @@ ruleTester.run('restrict-dependency-ranges', rule, {
 }`,
       name: `rangeType: ['pin', 'tilde']; dependencyType: '${dependencyType}'`,
       options: [[{ rangeType: ['pin', 'tilde'] }]],
+    })),
+
+    // rangeType: '^' and 'tilde'
+    ...[
+      'dependencies',
+      'devDependencies',
+      'peerDependencies',
+      'optionalDependencies',
+    ].map((dependencyType) => ({
+      code: `{
+	"${dependencyType}": {
+		"abc": "~1.2.3",
+        "def": "workspace:~1.2.3",
+        "ghi": "workspace:~",
+        "jkl": "^1.2.3",
+        "mno": "workspace:^"
+	}
+}`,
+      name: `rangeType: ['^', 'tilde']; dependencyType: '${dependencyType}'`,
+      options: [[{ rangeType: ['^', 'tilde'] }]],
     })),
 
     // forDependencyTypes: devDependencies
