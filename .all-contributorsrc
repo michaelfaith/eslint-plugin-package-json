@@ -439,6 +439,15 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "DetachHead",
+      "name": "DetachHead",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57028336?v=4",
+      "profile": "https://github.com/DetachHead",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsSortAlphabetically": true,
