@@ -97,8 +97,12 @@ const getWorkspaceVersionForRange = (rangeType: RangeType) => {
 const displayRangeType = (rangeType: RangeType) =>
   'symbol' in rangeType ? rangeType.symbol : rangeType.alias;
 
+const ROLLING_WORKSPACE_REGEX = /^workspace:[~^*]$/;
+
 const isRollingWorkspaceSpec = (version: string) =>
-  /^workspace:[~^*]$/.test(version);
+  ROLLING_WORKSPACE_REGEX.test(version);
+
+const CHANGE_VERSION_RANGE_REGEX = /^(workspace:)?(\^|~|<=?|>=?)?/;
 
 /**
  * Given the original version, update it to use the correct range type.
@@ -114,8 +118,10 @@ const changeVersionRange = (version: string, rangeType: RangeType): string => {
   }
 
   const replaceWith = 'symbol' in rangeType ? rangeType.symbol : '';
-  return version.replace(/^(workspace:)?(\^|~|<=?|>=?)?/, `$1${replaceWith}`);
+  return version.replace(CHANGE_VERSION_RANGE_REGEX, `$1${replaceWith}`);
 };
+
+const IS_VERSION_SUPPORTED_REGEX = /^workspace:/;
 
 /**
  * Check if the version is in a form that this rule supports.
@@ -124,9 +130,11 @@ const isVersionSupported = (version: string): boolean => {
   if (isRollingWorkspaceSpec(version)) {
     return true;
   }
-  const rawVersion = version.replace(/^workspace:/, '');
+  const rawVersion = version.replace(IS_VERSION_SUPPORTED_REGEX, '');
   return !!semver.validRange(rawVersion);
 };
+
+const POSSIBLE_WORKSPACE_SPEC_REGEX = /(?:workspace:)?[^~]?/;
 
 export const rule = createRule({
   create(context) {
@@ -227,7 +235,7 @@ export const rule = createRule({
                 // * matches all
                 (version !== '*' &&
                   !semver.satisfies(
-                    version.replace(/(?:workspace:)?[^~]?/, ''),
+                    version.replace(POSSIBLE_WORKSPACE_SPEC_REGEX, ''),
                     options.forVersions,
                   )))
             ) {
