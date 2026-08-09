@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.3...v1.7.0) (2026-08-09)
+
+
+### 🚀 Features
+
+* **restrict-dependency-ranges:** add `<`, `<=`, `>`, `>=` as possible `rangeTypes` ([#2054](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2054)) ([558f31e](https://github.com/michaelfaith/eslint-plugin-package-json/commit/558f31e0c179145dd7467bc25e4cda50c17866af))
+* **scripts-name-casing:** add options for ignoring scripts ([#2073](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2073)) ([5ec1ee7](https://github.com/michaelfaith/eslint-plugin-package-json/commit/5ec1ee752c7dd2c9a3f2f0b8afdff9290b1d1745))
+
+
+### 🩹 Bug Fixes
+
+* **no-local-dependencies:** exempt `bundle(d)Dependencies` from check ([#2051](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2051)) ([8b91beb](https://github.com/michaelfaith/eslint-plugin-package-json/commit/8b91beb397ce340f3d31488af65b93afa6774fba))
+
 ## [1.6.3](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.2...v1.6.3) (2026-08-05)
 
 
