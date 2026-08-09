@@ -194,7 +194,9 @@ export const rule = createRule({
             }
             if (
               rangeType.alias === 'pin' &&
-              (!!semver.parse(version) || version === 'workspace:*')
+              (!!semver.parse(version) ||
+                version === 'workspace:*' ||
+                version === 'workspace:')
             ) {
               return true;
             }
