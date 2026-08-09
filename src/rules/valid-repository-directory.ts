@@ -27,9 +27,7 @@ const pathEndsWith = (parent: string, child: string): boolean => {
   let pathToCheck = '';
   return segments.reverse().some((segment) => {
     pathToCheck = path.join(segment, pathToCheck);
-    if (pathToCheck === child) {
-      return true;
-    }
+    return pathToCheck === child;
   });
 };
 
