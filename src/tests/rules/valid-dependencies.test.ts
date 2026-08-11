@@ -68,6 +68,106 @@ const testEnvironments: TestEnvironment[] = [
     ],
   },
   {
+    description: 'with pnpm 11.x',
+    before: () => {
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+        version: '11.x',
+      });
+    },
+    additionalValidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "cst-records": "record-label:foo@^1.2.3"
+  }
+}
+`,
+      },
+    ],
+    additionalInvalidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "empty-custom-protocol": "work:",
+    "bad-custom-protocol": "work:git+foo://github.com/npm/cli.git"
+  }
+}
+`,
+        errors: [
+          {
+            column: 30,
+            data: {
+              error:
+                'invalid version spec for dependency `empty-custom-protocol`: Unsupported URL Type "work:": work:',
+            },
+            line: 3,
+            messageId: 'validationError',
+          },
+          {
+            column: 28,
+            data: {
+              error:
+                'invalid custom protocol arg for dependency `bad-custom-protocol`: Unsupported URL Type "git+foo:": git+foo://github.com/npm/cli.git',
+            },
+            line: 4,
+            messageId: 'validationError',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    description: 'with pnpm 11',
+    before: () => {
+      vi.mocked(detectPackageManager).mockReturnValue({
+        name: 'pnpm',
+        version: '11',
+      });
+    },
+    additionalValidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "cst-records": "record-label:foo@^1.2.3"
+  }
+}
+`,
+      },
+    ],
+    additionalInvalidTests: [
+      {
+        code: `{
+  "dependencies": {
+    "empty-custom-protocol": "work:",
+    "bad-custom-protocol": "work:git+foo://github.com/npm/cli.git"
+  }
+}
+`,
+        errors: [
+          {
+            column: 30,
+            data: {
+              error:
+                'invalid version spec for dependency `empty-custom-protocol`: Unsupported URL Type "work:": work:',
+            },
+            line: 3,
+            messageId: 'validationError',
+          },
+          {
+            column: 28,
+            data: {
+              error:
+                'invalid custom protocol arg for dependency `bad-custom-protocol`: Unsupported URL Type "git+foo:": git+foo://github.com/npm/cli.git',
+            },
+            line: 4,
+            messageId: 'validationError',
+          },
+        ],
+      },
+    ],
+  },
+  {
     description: 'with pnpm 11.0.0',
     before: () => {
       vi.mocked(detectPackageManager).mockReturnValue({
