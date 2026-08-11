@@ -5,7 +5,7 @@
 
 ### 🩹 Bug Fixes
 
-* **valid-dependencies:** package manager detection should support ranges ([#2092](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2092)) ([424e4eb](https://github.com/michaelfaith/eslint-plugin-package-json/commit/424e4eb24281b61aa59c67498082f96906604a43))
+* **valid-dependencies:** package manager detection should support version ranges for pnpm ([#2092](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2092)) ([424e4eb](https://github.com/michaelfaith/eslint-plugin-package-json/commit/424e4eb24281b61aa59c67498082f96906604a43))
 
 ## [1.7.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.6.3...v1.7.0) (2026-08-09)
 
