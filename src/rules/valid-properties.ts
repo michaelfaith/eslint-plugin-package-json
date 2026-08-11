@@ -55,7 +55,14 @@ const packageManagerAwareValidateDependencies: ValidationFunction = (value) => {
   if (result?.name === 'pnpm') {
     const version = result.version;
 
-    if (!version || semver.gte(version, '11.1.0')) {
+    const isValidSemver = !!semver.valid(version);
+    const isValidRange = !!semver.validRange(version);
+
+    if (
+      !version ||
+      (isValidSemver && semver.gte(version, '11.1.0')) ||
+      (isValidRange && semver.satisfies('11.1.0', version))
+    ) {
       return validateDependencies(value, { allowNamedRegistries: true });
     }
   }
