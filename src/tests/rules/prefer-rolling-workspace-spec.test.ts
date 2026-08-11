@@ -269,6 +269,12 @@ ruleTester.run('prefer-rolling-workspace-spec', rule, {
     })),
     ...['dependencies', 'devDependencies'].map((dependencyType) => ({
       code: `{
+	"${dependencyType}": []
+}`,
+      name: `${dependencyType}; invalid type`,
+    })),
+    ...['dependencies', 'devDependencies'].map((dependencyType) => ({
+      code: `{
 	"${dependencyType}": {
     "abc": "1.2.3",
     "def": "^1.2.3",
