@@ -3,13 +3,17 @@ name: Setup
 description: Sets up the repo for a typical CI job
 
 inputs:
+  cache:
+    description: Cache the pnpm store
+    default: true
+    required: false
   install-flags:
     description: Flags to pass to `pnpm install`
-    default: --frozen-lockfile
     required: false
+    type: string
   node-version:
     description: Node.js version to use
-    default: 'lts/*'
+    default: '24'
     required: false
   skip-checkout:
     description: Skip the checkout step if the repo is already checked out
@@ -24,12 +28,15 @@ runs:
   steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       if: ${{ inputs.skip-checkout == 'false' }}
-    - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
-    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+
+    - uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
       with:
-        cache: pnpm
-        node-version: ${{ inputs.node-version }}
+        cache: ${{ inputs.cache }}
+        install: ${{ inputs.install-flags == '' && inputs.working-directory == '.' }}
+        runtime: node@${{ inputs.node-version }}
+
     - run: pnpm install ${{ inputs.install-flags }}
+      if: ${{ inputs.install-flags != '' || inputs.working-directory != '.' }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
   using: composite
