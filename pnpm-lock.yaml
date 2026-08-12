@@ -145,7 +145,7 @@ importers:
         specifier: 6.32.0
         version: 6.32.0
       pkg-pr-new:
-        specifier: ^0.0.87
+        specifier: 0.0.87
         version: 0.0.87
       prettier:
         specifier: 3.9.0
