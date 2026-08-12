@@ -1,10 +1,6 @@
 import { rule } from '../../rules/sort-collections.ts';
 import { ruleTester } from './ruleTester.ts';
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
 ruleTester.run('sort-collections', rule, {
   invalid: [
     {

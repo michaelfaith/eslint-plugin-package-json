@@ -1,0 +1,137 @@
+---
+title: 'prefer-rolling-workspace-spec'
+description: 'Require that dependencies declared with workspace protocol use a rolling workspace spec instead of a specific semver range.'
+---
+
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+{/* end auto-generated rule header */}
+
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+
+This rule requires that dependencies declared with workspace protocol use a rolling workspace spec instead of a specific semver range.
+
+Using `workspace:` protocol, you can either specify a "rolling" notation to use whatever the target workspace version happens to be at publish time, or you can use a specific semver range.
+For example, if you have packages `foo`, `bar`, `qar`, `zoo` in the workspace and they all are at version `1.5.0`, the following:
+
+```json
+{
+  "dependencies": {
+    "foo": "workspace:*",
+    "bar": "workspace:~",
+    "qar": "workspace:^",
+    "zoo": "workspace:^1.5.0"
+  }
+}
+```
+
+Will be transformed into the following at `pack`/`publish` time.
+
+```json
+{
+  "dependencies": {
+    "foo": "1.5.0",
+    "bar": "~1.5.0",
+    "qar": "^1.5.0",
+    "zoo": "^1.5.0"
+  }
+}
+```
+
+In this example, the first three are using "rolling" notation, while `zoo` is using a specific semver range.
+This rule enforces that all use of `workspace:` protocol should use "rolling" notation, instead of locking it to a specific semver range.
+
+There are valid cases for both, and so this isn't a recommendation one way or the other.
+But in case your project standards are to have all packages published together, with each referencing the latest version of the others, this rule could be used to enforce that.
+
+<Aside type="note">
+  The rule applies to both `dependencies` and `devDependencies`.
+</Aside>
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "dependencies": {
+    "abc": "workspace:1.2.3",
+    "ghi": "workspace:^1.2.3",
+    "ghi": "workspace:~1.2.3",
+    "jkl": "workspace:>=1.2.3",
+    "mno": "workspace:>1.2.3",
+    "pqr": "workspace:<=1.2.3",
+    "stu": "workspace:<1.2.3"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "dependencies": {
+    "abc": "workspace:*", // or "workspace:"
+    "ghi": "workspace:^",
+    "ghi": "workspace:~"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name                 | Description                                    | Type  |
+| :------------------- | :--------------------------------------------- | :---- |
+| `ignoreDependencies` | Specific dependencies to ignore.               | Array |
+| `ignorePatterns`     | Regex patterns for dependency names to ignore. | Array |
+
+{/* end auto-generated rule options list */}
+
+### `ignoreDependencies`
+
+Define an array of specific script names that should be ignored by this rule.
+
+```json
+{
+  "prefer-rolling-workspace-spec": [
+    "error",
+    {
+      "ignoreDependencies": [
+        "@typescript-eslint/types",
+        "@typescript-eslint/utils"
+      ]
+    }
+  ]
+}
+```
+
+### `ignorePatterns`
+
+Define an array of regex patterns that should be ignored by this rule.
+
+```json
+{
+  "prefer-rolling-workspace-spec": [
+    "error",
+    {
+      "ignorePatterns": ["@typescript-eslint/.*"]
+    }
+  ]
+}
+```
+
+## Related Rules
+
+- [`valid-dependencies`](/rules/valid-properties/valid-dependencies) - Enforces that the `dependencies` property is valid.
+- [`valid-devDependencies`](/rules/valid-properties/valid-devDependencies) - Enforces that the `devDependencies` property is valid.
+
+## Further Reading
+
+- [pnpm: Workspace > Workspace protocol](https://pnpm.io/workspaces#workspace-protocol-workspace)
