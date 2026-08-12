@@ -1,0 +1,18 @@
+name: Publish Preview
+
+on:
+  pull_request: ~
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  publish:
+    name: Publish Preview Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - run: pnpm build
+      - run: pnpm pkg-pr-new publish --pnpm --packageManager=pnpm --commentWithDev --commentWithSha
