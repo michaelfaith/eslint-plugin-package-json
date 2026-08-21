@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.7.1...v1.8.0) (2026-08-21)
+
+
+### 🚀 Features
+
+* add `prefer-rolling-workspace-spec` rule ([#2095](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2095)) ([160b4d3](https://github.com/michaelfaith/eslint-plugin-package-json/commit/160b4d3f880444da732f23803119d65d531f5c5b))
+
 ## [1.7.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.7.0...v1.7.1) (2026-08-11)
 
 
