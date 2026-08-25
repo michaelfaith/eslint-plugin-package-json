@@ -64,11 +64,16 @@
     "detect-newline": "^4.0.1",
     "eslint-fix-utils": "~0.4.3",
     "eslint-json-compat-utils": "^0.2.3",
+    "find-up-simple": "^1.0.1",
     "jsonc-eslint-parser": "^3.1.0",
+    "npm-package-arg": "^13.0.2",
+    "package-json": "^10.0.1",
     "package-json-validator": "^1.6.0",
     "semver": "^7.7.3",
     "sort-object-keys": "^2.0.0",
-    "sort-package-json": "^4.0.0"
+    "sort-package-json": "^4.0.0",
+    "synckit": "^0.11.13",
+    "undici": "^8.10.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
@@ -81,6 +86,7 @@
     "@eslint/markdown": "8.0.1",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@types/node": "24.13.0",
+    "@types/npm-package-arg": "^6.1.4",
     "@types/semver": "7.8.0",
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "4.1.8",

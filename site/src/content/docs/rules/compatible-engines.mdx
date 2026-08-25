@@ -1,0 +1,70 @@
+---
+title: 'compatible-engines'
+description: "Ensures that the engines for all dependencies and peerDependencies are compatible with the package's engines."
+---
+
+{/* end auto-generated rule header */}
+
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+
+This rule enforces that there are no `dependencies` or `peerDependencies` in the package that have `engines` defined that conflict with this package's `engines`.
+
+If a package has declared `engines` as its public contract for consumers, then it should not depend on packages that have `engines` that have a more restrictive set of ranges.
+Doing so would violate that contract, supporting less than it actually purports to.
+
+## Examples
+
+<Aside type="note">
+`npm-package-arg` v14 defines `engines` with `node@^22.22.2 || ^24.15.0 || >=26.0.0`.
+v13 defines `engines` with `node@^20.17.0 || >=22.9.0`.
+</Aside>
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "dependencies": {
+    "npm-package-arg": "^14.0.0"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "dependencies": {
+    "npm-package-arg": "^13.0.0"
+  }
+}
+```
+
+```json
+{
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "dependencies": {
+    "npm-package-arg": "^14.0.0"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Related Rules
+
+- [`valid-engines`](/rules/valid-properties/valid-engines) - Enforces that the `engines` property is valid.
+
+## Further Reading
+
+- [npm: package.json > engines](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#engines)

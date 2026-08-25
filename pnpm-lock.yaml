@@ -32,9 +32,18 @@ importers:
       eslint-json-compat-utils:
         specifier: ^0.2.3
         version: 0.2.3(@eslint/json@2.0.0)(eslint@10.9.0(jiti@2.7.0)(supports-color@7.2.0))(jsonc-eslint-parser@3.3.0)
+      find-up-simple:
+        specifier: ^1.0.1
+        version: 1.0.1
       jsonc-eslint-parser:
         specifier: ^3.1.0
         version: 3.3.0
+      npm-package-arg:
+        specifier: ^13.0.2
+        version: 13.0.2
+      package-json:
+        specifier: ^10.0.1
+        version: 10.0.1
       package-json-validator:
         specifier: ^1.6.0
         version: 1.6.1
@@ -47,6 +56,12 @@ importers:
       sort-package-json:
         specifier: ^4.0.0
         version: 4.0.0
+      synckit:
+        specifier: ^0.11.13
+        version: 0.11.13
+      undici:
+        specifier: ^8.10.0
+        version: 8.10.0
     devDependencies:
       '@astrojs/check':
         specifier: 0.9.9
@@ -78,6 +93,9 @@ importers:
       '@types/node':
         specifier: 24.13.0
         version: 24.13.0
+      '@types/npm-package-arg':
+        specifier: ^6.1.4
+        version: 6.1.4
       '@types/semver':
         specifier: 7.8.0
         version: 7.8.0
@@ -1602,6 +1620,9 @@ packages:
 
   '@types/node@24.13.0':
     resolution: {integrity: sha512-5vtOqGQr4NJKeEzV441FcOi2MeG9UTWq9LqVLGneDdu4vlX17H8kQ2PA2UmNwCUGPVDj4oBjNhS7ReVEIWJJrg==}
+
+  '@types/npm-package-arg@6.1.4':
+    resolution: {integrity: sha512-vDgdbMy2QXHnAruzlv68pUtXCjmqUk3WrBAsRboRovsOmxbfn/WiYCjmecyKjGztnMps5dWp4Uq2prp+Ilo17Q==}
 
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
@@ -5671,6 +5692,8 @@ snapshots:
   '@types/node@24.13.0':
     dependencies:
       undici-types: 7.18.2
+
+  '@types/npm-package-arg@6.1.4': {}
 
   '@types/sax@1.2.7':
     dependencies:

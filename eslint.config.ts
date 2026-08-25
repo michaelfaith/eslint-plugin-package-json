@@ -127,7 +127,10 @@ export default defineConfig(
   {
     extends: [vitest.configs.recommended],
     files: ['**/*.test.*'],
-    rules: { '@typescript-eslint/no-unsafe-assignment': 'off' },
+    rules: {
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      'vitest/prefer-describe-function-title': 'error',
+    },
   },
   {
     extends: [yml.configs.recommended, yml.configs.prettier],

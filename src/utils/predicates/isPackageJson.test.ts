@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { isPackageJson } from './isPackageJson.ts';
 
-describe('isPackageJson', () => {
+describe(isPackageJson, () => {
   test.each([
     ['', false],
     ['-', false],

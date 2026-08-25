@@ -1,5 +1,10 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
-  entry: ['src/index.ts', 'src/experimental/index.ts'],
+  entry: {
+    index: 'src/index.ts',
+    worker: 'src/utils/packageMeta/worker.ts',
+    'experimental/index': 'src/experimental/index.ts',
+    'experimental/worker': 'src/utils/packageMeta/worker.ts',
+  },
 });

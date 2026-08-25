@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { formatErrors } from './formatErrors.ts';
 
-describe('formatErrors', () => {
+describe(formatErrors, () => {
   it('should return the single error string as-is when only one error is present', () => {
     expect(formatErrors(['Only one error'])).toBe('Only one error');
   });
