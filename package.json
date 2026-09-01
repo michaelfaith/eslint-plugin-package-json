@@ -77,7 +77,7 @@
     "@catppuccin/starlight": "2.1.0",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
     "@eslint/js": "10.0.1",
-    "@eslint/json": "2.0.0",
+    "@eslint/json": "2.0.1",
     "@eslint/markdown": "8.0.1",
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@types/node": "24.13.0",
