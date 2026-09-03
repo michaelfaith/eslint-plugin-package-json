@@ -112,8 +112,8 @@ importers:
         specifier: 7.6.2
         version: 7.6.2(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))
       eslint-plugin-jsdoc:
-        specifier: 64.2.0
-        version: 64.2.0(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
+        specifier: 64.3.2
+        version: 64.3.2(@typescript/typescript6@6.0.2)(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
       eslint-plugin-jsonc:
         specifier: 3.4.2
         version: 3.4.2(@eslint/json@2.0.1)(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))
@@ -524,8 +524,8 @@ packages:
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==}
 
-  '@es-joy/jsdoccomment@0.95.0':
-    resolution: {integrity: sha512-jbzwtRPuw1Nzld0lacvr1vwzPU/6zEHFGK5YOTstl2MQYMZBuKmSW3HMuEwsq1v4meK5Do4lizxyd/hi25rCZg==}
+  '@es-joy/jsdoccomment@0.95.1':
+    resolution: {integrity: sha512-LO/RI08Fo9bhXwB7Od9G+1j3eSNq63+ZS5CQO8YLXHbDg6kx6S/DhTeY0+Fc9uZrjK1zZSyTx8Sg5gv5DIoCnA==}
     engines: {node: ^22.22.2 || >=24.15.0}
 
   '@es-joy/resolve.exports@1.2.0':
@@ -2474,8 +2474,8 @@ packages:
     peerDependencies:
       eslint: '>=9.0.0'
 
-  eslint-plugin-jsdoc@64.2.0:
-    resolution: {integrity: sha512-z3zGmJoPhOdKnxzQ3R+8MZeJjW8vrRW8r7sYp/ErBp8K9+05RIa6vWXtbEGr7D1obBHk64LdKyLHoMLSzHFINA==}
+  eslint-plugin-jsdoc@64.3.2:
+    resolution: {integrity: sha512-9/j8KKTdLt5Gy7FbayPASLKabm9wcntcwkOJ+kidikNudqglqxjbsZBddkPwK9/6AeOyCwlwwAtuzHQzwTQP7A==}
     engines: {node: ^22.22.2 || >=24.15.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
@@ -2953,8 +2953,8 @@ packages:
     resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
-  jsdoc-type-pratt-parser@9.1.1:
-    resolution: {integrity: sha512-kojSbQb9iQM2bk2PmHiKa3reG0U4v2gN9U8D8+eCQq+4KM5ZXBUyBVeF8KmR0RiwqyrW4+uVWYWTOLnpsavnkw==}
+  jsdoc-type-pratt-parser@9.1.2:
+    resolution: {integrity: sha512-9EXymowgk1mb9RY1VxuwKc+AhaxfBk2CV0dWxgGM+l5RURTtiUoAx7MlKwcsiVcEXK5HEPa7FeH/tsRpqjEPRg==}
     engines: {node: ^22.22.2 || >=24.15.0}
 
   jsesc@3.1.0:
@@ -4945,13 +4945,13 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@es-joy/jsdoccomment@0.95.0':
+  '@es-joy/jsdoccomment@0.95.1':
     dependencies:
       '@types/estree': 1.0.9
       '@typescript-eslint/types': 8.68.0
       comment-parser: 1.4.8
       esquery: 1.7.0
-      jsdoc-type-pratt-parser: 9.1.1
+      jsdoc-type-pratt-parser: 9.1.2
 
   '@es-joy/resolve.exports@1.2.0': {}
 
@@ -6594,10 +6594,11 @@ snapshots:
       eslint: 10.9.1(jiti@2.7.0)(supports-color@7.2.0)
       estraverse: 5.3.0
 
-  eslint-plugin-jsdoc@64.2.0(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0):
+  eslint-plugin-jsdoc@64.3.2(@typescript/typescript6@6.0.2)(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:
-      '@es-joy/jsdoccomment': 0.95.0
+      '@es-joy/jsdoccomment': 0.95.1
       '@es-joy/resolve.exports': 1.2.0
+      '@typescript-eslint/utils': 8.68.0(@typescript/typescript6@6.0.2)(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0))(supports-color@7.2.0)
       are-docs-informative: 0.1.1
       comment-parser: 1.4.8
       debug: 4.4.3(supports-color@7.2.0)
@@ -6613,6 +6614,7 @@ snapshots:
       to-valid-identifier: 1.0.0
     transitivePeerDependencies:
       - supports-color
+      - typescript
 
   eslint-plugin-jsonc@3.4.2(@eslint/json@2.0.1)(eslint@10.9.1(jiti@2.7.0)(supports-color@7.2.0)):
     dependencies:
@@ -6671,7 +6673,7 @@ snapshots:
       '@eslint-community/regexpp': 4.12.2
       comment-parser: 1.4.8
       eslint: 10.9.1(jiti@2.7.0)(supports-color@7.2.0)
-      jsdoc-type-pratt-parser: 9.1.1
+      jsdoc-type-pratt-parser: 9.1.2
       refa: 0.12.1
       regexp-ast-analysis: 0.7.1
       scslre: 0.3.0
@@ -7245,7 +7247,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdoc-type-pratt-parser@9.1.1:
+  jsdoc-type-pratt-parser@9.1.2:
     dependencies:
       '@types/estree': 1.0.9
 
