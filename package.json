@@ -92,7 +92,7 @@
     "eslint": "10.9.1",
     "eslint-doc-generator": "3.7.1",
     "eslint-plugin-eslint-plugin": "7.6.2",
-    "eslint-plugin-jsdoc": "64.3.2",
+    "eslint-plugin-jsdoc": "64.3.3",
     "eslint-plugin-jsonc": "3.4.2",
     "eslint-plugin-n": "18.3.0",
     "eslint-plugin-node-dependencies": "2.2.0",
