@@ -22,7 +22,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@eslint/json": "2.0.1",
+    "@eslint/json": "2.1.0",
     "eslint": "10.9.1",
     "eslint-plugin-package-json": "file:../.."
   }
