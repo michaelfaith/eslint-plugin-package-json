@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-generated-empty-object-type
 export function isNotNullish<T extends NonNullable<unknown>>(
   value: null | T | undefined,
 ): value is T {
