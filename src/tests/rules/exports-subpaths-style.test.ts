@@ -44,13 +44,6 @@ ruleTester.run('exports-subpaths-style', rule, {
   ".": true
 } }`,
     },
-    {
-      code: `{ "exports": null }`,
-      errors: [{ messageId: 'preferExplicit' }],
-      output: `{ "exports": {
-  ".": null
-} }`,
-    },
     // With explicit option
     {
       code: `{ "exports": "./index.js" }`,
@@ -205,6 +198,26 @@ ruleTester.run('exports-subpaths-style', rule, {
 				}
 			}`,
       options: [{ prefer: 'explicit' }],
+    },
+
+    // ============================================================
+    // Null targets have distinct Node.js semantics and must be
+    // left alone. A top-level null disables the exports field
+    // (legacy resolution); { ".": null } encapsulates the package
+    // and makes every import fail with ERR_PACKAGE_PATH_NOT_EXPORTED.
+    // ============================================================
+    `{ "exports": null }`,
+    {
+      code: `{ "exports": null }`,
+      options: [{ prefer: 'explicit' }],
+    },
+    {
+      code: `{
+				"exports": {
+					".": null
+				}
+			}`,
+      options: [{ prefer: 'implicit' }],
     },
   ],
 });
