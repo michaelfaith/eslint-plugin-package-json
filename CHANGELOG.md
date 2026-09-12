@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.8.0...v1.8.1) (2026-09-12)
+
+
+### 🩹 Bug Fixes
+
+* do not rewrite null exports in `exports-subpaths-style` ([#2178](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2178)) ([fad7f58](https://github.com/michaelfaith/eslint-plugin-package-json/commit/fad7f58123e82e9ccecad0ccb8db3466defa9aff))
+
 ## [1.8.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.7.1...v1.8.0) (2026-08-27)
 
 
