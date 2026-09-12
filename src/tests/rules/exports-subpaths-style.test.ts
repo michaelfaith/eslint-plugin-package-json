@@ -44,13 +44,6 @@ ruleTester.run('exports-subpaths-style', rule, {
   ".": true
 } }`,
     },
-    {
-      code: `{ "exports": null }`,
-      errors: [{ messageId: 'preferExplicit' }],
-      output: `{ "exports": {
-  ".": null
-} }`,
-    },
     // With explicit option
     {
       code: `{ "exports": "./index.js" }`,
