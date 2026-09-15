@@ -25,8 +25,8 @@ And other dist-tags are reported.
 
 | Name         | Type                                                                                      | Default                     |
 | ------------ | ----------------------------------------------------------------------------------------- | --------------------------- |
-| `allowed`    | `('latest' \| 'dev' \| 'next' \| 'alpha' \| 'beta' \| 'canary' \| 'rc')[]`                | Common npm dist-tags        |
-| `allowedFor` | `('dependencies' \| 'devDependencies' \| 'optionalDependencies' \| 'peerDependencies')[]` | All dependency types (`[]`) |
+| `allowed`    | `string[]`                                                                                | Common npm dist-tags        |
+| `allowedFor` | `('dependencies' \| 'devDependencies' \| 'optionalDependencies' \| 'peerDependencies')[]` | `[]` (all dependency types) |
 
 ### `allowed`
 
@@ -49,7 +49,8 @@ With this configuration, only `rc` is allowed (for all dependency types).
 
 ### `allowedFor`
 
-Limit the allowed dist-tags to specific dependency types.
+Limit the allowed dist-tags to specific dependency types. When omitted or set to
+an empty array, allowed dist-tags apply to all dependency types.
 
 ```js
 export default [
@@ -81,7 +82,9 @@ export default [
 ];
 ```
 
-When both `allowed` and `allowedFor` are defined, the rule will only allow the specified dist-tags for the specified dependency types.
+When `allowedFor` contains dependency types, the rule only allows the specified
+dist-tags for those types. When `allowedFor` is omitted or empty, the specified
+dist-tags are allowed for every dependency type.
 
 ## Examples
 

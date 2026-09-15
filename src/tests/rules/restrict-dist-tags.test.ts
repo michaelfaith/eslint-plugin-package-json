@@ -73,18 +73,18 @@ ruleTester.run('restrict-dist-tags', rule, {
 
     {
       code: `{
-  "dependencies": {
-    "package-a": "canary"
-  },
-  "devDependencies": {
-    "package-b": "alpha"
-  }
-}`,
+      "dependencies": {
+        "package-a": "beta"
+      },
+      "devDependencies": {
+        "package-b": "alpha"
+      }
+    }`,
       errors: [
         {
           data: {
             dependencyType: 'dependencies',
-            tag: 'canary',
+            tag: 'beta',
           },
           messageId: 'disallowedDistTag',
         },
@@ -96,8 +96,8 @@ ruleTester.run('restrict-dist-tags', rule, {
           messageId: 'disallowedDistTag',
         },
       ],
-      name: 'empty allowedFor rejects tags everywhere',
-      options: [{ allowedFor: [] }],
+      name: 'empty allowedFor applies allowed tags to every dependency type',
+      options: [{ allowed: ['rc'], allowedFor: [] }],
     },
 
     {
@@ -118,7 +118,7 @@ ruleTester.run('restrict-dist-tags', rule, {
           messageId: 'disallowedDistTag',
         },
       ],
-      name: 'allowedFor and allowed combine',
+      name: 'allowedFor and allowed combination',
       options: [
         {
           allowed: ['rc'],
@@ -172,6 +172,25 @@ ruleTester.run('restrict-dist-tags', rule, {
   }
 }`,
       options: [{ allowed: ['rc'] }],
+    },
+
+    {
+      code: `{
+  "dependencies": {
+    "package-a": "rc"
+  },
+  "devDependencies": {
+    "package-b": "rc"
+  },
+  "optionalDependencies": {
+    "package-c": "rc"
+  },
+  "peerDependencies": {
+    "package-d": "rc"
+  }
+}`,
+      name: 'empty allowedFor allows tags in every dependency type',
+      options: [{ allowed: ['rc'], allowedFor: [] }],
     },
 
     {

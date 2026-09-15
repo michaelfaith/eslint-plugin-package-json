@@ -53,7 +53,7 @@ const rule = createRule({
   create(context) {
     const options = context.options[0] ?? {};
     const allowedTags = options.allowed ?? DEFAULT_ALLOWED_TAGS;
-    const allowedForDependencies = options.allowedFor ?? DEPENDENCY_TYPES;
+    const allowedForDependencies = options.allowedFor ?? [];
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]'(
@@ -83,7 +83,8 @@ const rule = createRule({
           }
 
           if (
-            allowedForDependencies.includes(dependencyType as Dependency) &&
+            (allowedForDependencies.length === 0 ||
+              allowedForDependencies.includes(dependencyType as Dependency)) &&
             allowedTags.includes(tag)
           ) {
             continue;
@@ -106,7 +107,7 @@ const rule = createRule({
     defaultOptions: [
       {
         allowed: DEFAULT_ALLOWED_TAGS,
-        allowedFor: [...DEPENDENCY_TYPES],
+        allowedFor: [],
       },
     ],
     docs: {
