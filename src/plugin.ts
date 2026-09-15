@@ -16,6 +16,7 @@ import { rule as repositoryShorthand } from './rules/repository-shorthand.ts';
 import { rule as requireAttribution } from './rules/require-attribution.ts';
 import { rules as requireRules } from './rules/require-properties.ts';
 import { rule as restrictDependencyRanges } from './rules/restrict-dependency-ranges.ts';
+import { rule as restrictDistTags } from './rules/restrict-dist-tags.ts';
 import { rule as restrictPrivateProperties } from './rules/restrict-private-properties.ts';
 import { rule as restrictTopLevelProperties } from './rules/restrict-top-level-properties.ts';
 import { rule as scriptsNameCasing } from './rules/scripts-name-casing.ts';
@@ -42,6 +43,7 @@ const rules: Record<string, PackageJsonRuleModule> = {
   ...requireRules,
   'repository-shorthand': repositoryShorthand,
   'restrict-dependency-ranges': restrictDependencyRanges,
+  'restrict-dist-tags': restrictDistTags,
   'restrict-private-properties': restrictPrivateProperties,
   'restrict-top-level-properties': restrictTopLevelProperties,
   'scripts-name-casing': scriptsNameCasing,
