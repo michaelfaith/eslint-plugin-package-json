@@ -9,9 +9,7 @@ const DEPENDENCY_TYPES = [
   'devDependencies',
   'optionalDependencies',
   'peerDependencies',
-] as const;
-
-type Dependency = (typeof DEPENDENCY_TYPES)[number];
+];
 
 const DEFAULT_ALLOWED_TAGS = [
   'latest',
@@ -23,37 +21,15 @@ const DEFAULT_ALLOWED_TAGS = [
   'rc',
 ];
 
+const distTagPattern = /^[A-Z0-9][\w.-]*$/i;
 function isDistTag(value: string): boolean {
-  return !semver.validRange(value) && /^[A-Z0-9][\w.-]*$/i.test(value);
+  return !semver.validRange(value) && distTagPattern.test(value);
 }
-
-const schema = {
-  type: 'object',
-  properties: {
-    allowed: {
-      description: 'Dist-tags allowed in dependency specifications.',
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-    },
-    allowedFor: {
-      description:
-        'Dependency sections where the allowed dist-tags may be used.',
-      type: 'array',
-      items: {
-        enum: DEPENDENCY_TYPES,
-      },
-    },
-  },
-  additionalProperties: false,
-} as const;
 
 const rule = createRule({
   create(context) {
-    const options = context.options[0] ?? {};
-    const allowedTags = options.allowed ?? DEFAULT_ALLOWED_TAGS;
-    const allowedForDependencies = options.allowedFor ?? [];
+    const { allowed = DEFAULT_ALLOWED_TAGS, allowedFor } =
+      context.options[0] ?? {};
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]'(
@@ -64,7 +40,7 @@ const rule = createRule({
       ) {
         const dependencyType = node.key.value;
 
-        if (!DEPENDENCY_TYPES.includes(dependencyType as Dependency)) {
+        if (!DEPENDENCY_TYPES.includes(dependencyType)) {
           return;
         }
 
@@ -76,16 +52,15 @@ const rule = createRule({
             continue;
           }
 
-          const tag = property.value.value;
+          const spec = property.value.value;
 
-          if (!isDistTag(tag)) {
+          if (!isDistTag(spec)) {
             continue;
           }
 
           if (
-            (allowedForDependencies.length === 0 ||
-              allowedForDependencies.includes(dependencyType as Dependency)) &&
-            allowedTags.includes(tag)
+            (allowedFor === undefined || allowedFor.includes(dependencyType)) &&
+            allowed.includes(spec)
           ) {
             continue;
           }
@@ -93,7 +68,7 @@ const rule = createRule({
           context.report({
             data: {
               dependencyType,
-              tag,
+              tag: spec,
             },
             messageId: 'disallowedDistTag',
             node: property.value,
@@ -107,7 +82,6 @@ const rule = createRule({
     defaultOptions: [
       {
         allowed: DEFAULT_ALLOWED_TAGS,
-        allowedFor: [],
       },
     ],
     docs: {
@@ -118,7 +92,29 @@ const rule = createRule({
       disallowedDistTag:
         'The "{{ tag }}" dist-tag is not allowed for {{ dependencyType }}.',
     },
-    schema: [schema],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allowed: {
+            description: 'Dist-tags allowed in dependency specifications.',
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+          allowedFor: {
+            description:
+              'Dependency sections where the allowed dist-tags may be used.',
+            type: 'array',
+            items: {
+              enum: DEPENDENCY_TYPES,
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     type: 'problem',
   },
 

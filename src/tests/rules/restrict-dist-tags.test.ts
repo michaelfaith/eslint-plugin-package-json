@@ -73,13 +73,13 @@ ruleTester.run('restrict-dist-tags', rule, {
 
     {
       code: `{
-      "dependencies": {
-        "package-a": "beta"
-      },
-      "devDependencies": {
-        "package-b": "alpha"
-      }
-    }`,
+  "dependencies": {
+    "package-a": "beta"
+  },
+  "devDependencies": {
+    "package-b": "rc"
+  }
+}`,
       errors: [
         {
           data: {
@@ -91,12 +91,12 @@ ruleTester.run('restrict-dist-tags', rule, {
         {
           data: {
             dependencyType: 'devDependencies',
-            tag: 'alpha',
+            tag: 'rc',
           },
           messageId: 'disallowedDistTag',
         },
       ],
-      name: 'empty allowedFor applies allowed tags to every dependency type',
+      name: 'empty allowedFor disallows dist-tags in every dependency type',
       options: [{ allowed: ['rc'], allowedFor: [] }],
     },
 
@@ -151,6 +151,15 @@ ruleTester.run('restrict-dist-tags', rule, {
     '{}',
     '{ "dependencies": {} }',
 
+    {
+      code: `{
+  "overrides": {
+    "package-a": "stable"
+  }
+}`,
+      name: 'ignores non-dependency types',
+    },
+
     ...DEPENDENCY_TYPES.map(
       (dependencyType) => `{
   "${dependencyType}": {
@@ -169,15 +178,6 @@ ruleTester.run('restrict-dist-tags', rule, {
       code: `{
   "dependencies": {
     "package-a": "rc"
-  }
-}`,
-      options: [{ allowed: ['rc'] }],
-    },
-
-    {
-      code: `{
-  "dependencies": {
-    "package-a": "rc"
   },
   "devDependencies": {
     "package-b": "rc"
@@ -189,8 +189,8 @@ ruleTester.run('restrict-dist-tags', rule, {
     "package-d": "rc"
   }
 }`,
-      name: 'empty allowedFor allows tags in every dependency type',
-      options: [{ allowed: ['rc'], allowedFor: [] }],
+      name: 'omitted allowedFor allows tags in every dependency type',
+      options: [{ allowed: ['rc'] }],
     },
 
     {

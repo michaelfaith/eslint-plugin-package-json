@@ -5,7 +5,7 @@ description: 'Restricts dependency dist-tags to an allowed list and selected dep
 
 {/* end auto-generated rule header */}
 
-import { TabItem, Tabs } from '@astrojs/starlight/components';
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
 
 This rule restricts npm dist-tags used in dependency declarations.
 
@@ -19,14 +19,42 @@ By default, it allows these commonly-used tags:
 - `canary`
 - `rc`
 
-And other dist-tags are reported.
+Any dist-tags not included in the `allowed` list are reported.
+
+<Aside type="note">
+  This rule only checks bare dist-tag values. It ignores semver versions and
+  ranges, workspace specifications, local paths, Git specifications, URLs, npm
+  aliases, catalog specifications, and non-string dependency values.
+</Aside>
+
+<Tabs>
+  <TabItem label="❌ Incorrect">
+    ```json
+    {
+      "dependencies": {
+        "package-a": "stable"
+      }
+    }
+    ```
+  </TabItem>
+
+  <TabItem label="✅ Correct">
+    ```json
+    {
+      "dependencies": {
+        "package-a": "latest"
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
 
 ## Options
 
-| Name         | Type                                                                                      | Default                     |
-| ------------ | ----------------------------------------------------------------------------------------- | --------------------------- |
-| `allowed`    | `string[]`                                                                                | Common npm dist-tags        |
-| `allowedFor` | `('dependencies' \| 'devDependencies' \| 'optionalDependencies' \| 'peerDependencies')[]` | `[]` (all dependency types) |
+| Name         | Type                                                                                      | Default                        |
+| ------------ | ----------------------------------------------------------------------------------------- | ------------------------------ |
+| `allowed`    | `string[]`                                                                                | Common npm dist-tags           |
+| `allowedFor` | `('dependencies' \| 'devDependencies' \| 'optionalDependencies' \| 'peerDependencies')[]` | omitted (all dependency types) |
 
 ### `allowed`
 
@@ -49,8 +77,8 @@ With this configuration, only `rc` is allowed (for all dependency types).
 
 ### `allowedFor`
 
-Limit the allowed dist-tags to specific dependency types. When omitted or set to
-an empty array, allowed dist-tags apply to all dependency types.
+Limit the allowed dist-tags to specific dependency types. When omitted, allowed
+dist-tags apply to all dependency types. **Use an empty array to disallow all dist-tags in every dependency type.**
 
 ```js
 export default [
@@ -65,7 +93,9 @@ export default [
 ];
 ```
 
-With this configuration, all common npm dist-tags are allowed in `devDependencies`, but any dist-tag is reported in `dependencies`, `optionalDependencies`, and `peerDependencies`.
+With this configuration, all common npm dist-tags are allowed in
+`devDependencies`, but any dist-tag is reported in `dependencies`,
+`optionalDependencies`, and `peerDependencies`.
 
 You can also select multiple dependency types:
 
@@ -82,9 +112,8 @@ export default [
 ];
 ```
 
-When `allowedFor` contains dependency types, the rule only allows the specified
-dist-tags for those types. When `allowedFor` is omitted or empty, the specified
-dist-tags are allowed for every dependency type.
+When `allowedFor` contains dependency types, the specified dist-tags are allowed
+only for those types.
 
 ## Examples
 
@@ -131,8 +160,6 @@ export default [
     ```
   </TabItem>
 </Tabs>
-
-This rule only checks bare dist-tag values. It ignores semver versions and ranges, workspace specifications, local paths, Git specifications, URLs, npm aliases, catalog specifications, and non-string dependency values.
 
 ## Related Rules
 
