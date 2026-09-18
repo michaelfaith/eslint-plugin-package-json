@@ -5,12 +5,11 @@ on:
     types:
       - review_requested
 
-permissions:
-  pull-requests: write
-
 jobs:
   pr_review_requested:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1
         with:
