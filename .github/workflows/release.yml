@@ -15,7 +15,7 @@ jobs:
     if: github.event.repository.fork != true
     runs-on: ubuntu-latest
     outputs:
-      release_pr_number: ${{ fromJSON(steps.release.outputs.pr).number }}
+      release_pr_number: ${{ fromJSON(steps.release.outputs.pr || '{}').number }}
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
