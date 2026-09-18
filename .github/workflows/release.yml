@@ -103,7 +103,7 @@ jobs:
   update_pr_label:
     name: Update PR Label
     if: ${{ needs.release_please.outputs.release_pr_number != '' }}
-    needs: [release_please, publish]
+    needs: [publish, release_please]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
