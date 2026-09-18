@@ -15,6 +15,7 @@ jobs:
     if: github.event.repository.fork != true
     runs-on: ubuntu-latest
     outputs:
+      release_pr_number: ${{ fromJSON(steps.release.outputs.pr).number }}
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
@@ -74,8 +75,8 @@ jobs:
           echo "Publishing to npm with dist-tag '${{ steps.determine_dist_tag.outputs.dist_tag }}'"
           pnpm publish --publish-branch ${{ github.ref_name }} --tag ${{ steps.determine_dist_tag.outputs.dist_tag }}
 
-  post_release:
-    name: Post Release Comments
+  release_comments:
+    name: Make Release Comments
     needs: publish
     runs-on: ubuntu-latest
     permissions:
@@ -98,3 +99,25 @@ jobs:
             * [npm package (@${{ needs.publish.outputs.dist_tag }} dist-tag)](https://www.npmjs.com/package/eslint-plugin-package-json/v/${{ env.npm_version }})
 
             Cheers! 📦🚀
+
+  update_pr_label:
+    name: Update PR Label
+    if: ${{ needs.release_please.outputs.release_pr_number != '' }}
+    needs: [publish, release_please]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions-ecosystem/action-add-labels@bd52874380e3909a1ac983768df6976535ece7f8 # v1
+        with:
+          labels: 'autorelease: published'
+          number: ${{ needs.release_please.outputs.release_pr_number }}
+      - uses: actions-ecosystem/action-remove-labels@2ce5d41b4b6aa8503e285553f75ed56e0a40bae0 # v1
+        if: always()
+        with:
+          labels: 'autorelease: tagged'
+          number: ${{ needs.release_please.outputs.release_pr_number }}
+      - if: failure()
+        run: |
+          echo "Don't worry if the previous steps failed."
+          echo "The labels may already be up to date"
