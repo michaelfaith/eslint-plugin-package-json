@@ -51,9 +51,9 @@ Any dist-tags not included in the `allowed` list are reported.
 
 ## Options
 
-| Name         | Type                                                                                      | Default                        |
-| ------------ | ----------------------------------------------------------------------------------------- | ------------------------------ |
-| `allowed`    | `string[]`                                                                                | Common npm dist-tags           |
+| Name         | Type                                                                                      | Default                            |
+| ------------ | ----------------------------------------------------------------------------------------- | ---------------------------------- |
+| `allowed`    | `string[]`                                                                                | Common npm dist-tags               |
 | `allowedFor` | `('dependencies' \| 'devDependencies' \| 'optionalDependencies' \| 'peerDependencies')[]` | `undefined` (all dependency types) |
 
 ### `allowed`
@@ -77,8 +77,8 @@ With this configuration, only `rc` is allowed (for all dependency types).
 
 ### `allowedFor`
 
-Limit the allowed dist-tags to specific dependency types. When omitted, allowed
-dist-tags apply to all dependency types. **Use an empty array to disallow all dist-tags in every dependency type.**
+Limit the allowed dist-tags to specific dependency types. When omitted, allowed dist-tags apply to all dependency types.
+**Use an empty array to disallow all dist-tags in every dependency type.**
 
 ```js
 export default [
@@ -93,9 +93,7 @@ export default [
 ];
 ```
 
-With this configuration, all common npm dist-tags are allowed in
-`devDependencies`, but any dist-tag is reported in `dependencies`,
-`optionalDependencies`, and `peerDependencies`.
+With this configuration, all common npm dist-tags are allowed in `devDependencies`, but any dist-tag is reported in `dependencies`, `optionalDependencies`, and `peerDependencies`.
 
 You can also select multiple dependency types:
 
@@ -112,8 +110,7 @@ export default [
 ];
 ```
 
-When `allowedFor` contains dependency types, the specified dist-tags are allowed
-only for those types.
+When `allowedFor` contains dependency types, the specified dist-tags are allowed only for those types.
 
 ## Examples
 
