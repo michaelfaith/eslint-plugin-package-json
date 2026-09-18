@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.8.1...v1.9.0) (2026-09-18)
+
+
+### 🚀 Features
+
+* add `restrict-dist-tags` rule ([#2189](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2189)) ([f4df744](https://github.com/michaelfaith/eslint-plugin-package-json/commit/f4df7449cdd1d7d96825085368b864a230fb660e))
+
 ## [1.8.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.8.0...v1.8.1) (2026-09-12)
 
 
