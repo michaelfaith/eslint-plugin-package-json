@@ -86,7 +86,7 @@
     "@vitest/coverage-v8": "5.0.1",
     "@vitest/eslint-plugin": "1.6.27",
     "astro": "7.3.2",
-    "astro-og-canvas": "0.13.1",
+    "astro-og-canvas": "0.13.2",
     "canvaskit-wasm": "0.42.0",
     "console-fail-test": "0.6.1",
     "eslint": "10.10.0",
