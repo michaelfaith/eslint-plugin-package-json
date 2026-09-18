@@ -83,7 +83,7 @@
     "@types/node": "24.13.4",
     "@types/semver": "7.8.0",
     "@typescript/native": "npm:typescript@7.0.2",
-    "@vitest/coverage-v8": "5.0.0",
+    "@vitest/coverage-v8": "5.0.1",
     "@vitest/eslint-plugin": "1.6.27",
     "astro": "7.3.2",
     "astro-og-canvas": "0.13.1",
@@ -115,7 +115,7 @@
     "tsdown": "0.23.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.70.0",
-    "vitest": "5.0.0"
+    "vitest": "5.0.1"
   },
   "peerDependencies": {
     "@eslint/json": ">=1.0.0",
