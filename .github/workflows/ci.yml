@@ -69,6 +69,7 @@ jobs:
     steps:
       - uses: $/.github/actions/setup
         with:
+          cache: false
           install-flags: --prod --engine-strict --ignore-scripts
           node-version: ${{ matrix.node-version }}
 

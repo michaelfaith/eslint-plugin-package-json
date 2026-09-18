@@ -28,13 +28,11 @@ runs:
   steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       if: ${{ inputs.skip-checkout == 'false' }}
-
     - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
       with:
         cache: ${{ inputs.cache }}
         install: ${{ inputs.install-flags == '' && inputs.working-directory == '.' }}
         runtime: node@${{ inputs.node-version }}
-
     - run: pnpm install ${{ inputs.install-flags }}
       if: ${{ inputs.install-flags != '' || inputs.working-directory != '.' }}
       shell: bash
