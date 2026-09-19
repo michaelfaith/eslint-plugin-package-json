@@ -36,7 +36,8 @@
     "./experimental": {
       "types": "./dist/experimental/index.d.mts",
       "default": "./dist/experimental/index.mjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/index.mjs",
   "files": [
@@ -48,6 +49,7 @@
     "format": "prettier .",
     "lint": "eslint . --max-warnings 0",
     "lint:knip": "knip",
+    "prepare": "simple-git-hooks",
     "site:build": "astro build",
     "site:check": "astro check --root site",
     "site:dev": "astro dev",
