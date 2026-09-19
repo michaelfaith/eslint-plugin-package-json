@@ -3,8 +3,9 @@ dist/
 lib/
 dist-site/
 
-# generated types
+# generated files
 .astro/
+.husky/
 
 # dependencies
 node_modules/
