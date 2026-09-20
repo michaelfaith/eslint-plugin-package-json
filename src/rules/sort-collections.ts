@@ -94,11 +94,7 @@ export const rule = createRule({
           const ai = rank(aKey);
           const bi = rank(bKey);
 
-          if (ai !== bi) {
-            return ai - bi;
-          }
-
-          return naturalCompare(aKey, bKey);
+          return ai === bi ? naturalCompare(aKey, bKey) : ai - bi;
         });
 
         if (currentOrder.some((property, i) => desiredOrder[i] !== property)) {

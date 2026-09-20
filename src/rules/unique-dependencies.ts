@@ -86,15 +86,17 @@ export const rule = createRule({
         if (nodeValueType === 'JSONArrayExpression') {
           check(node.value.elements, (element) => element);
         }
-        if (nodeValueType === 'JSONObjectExpression') {
-          check(
-            node.value.properties.map((property) => property.key),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (property) => property.parent!,
-          );
-          if (trackForCrossGroupUniqueness.includes(node.key.value)) {
-            dependenciesCache[node.key.value] = node.value.properties;
-          }
+        if (nodeValueType !== 'JSONObjectExpression') {
+          return;
+        }
+
+        check(
+          node.value.properties.map((property) => property.key),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          (property) => property.parent!,
+        );
+        if (trackForCrossGroupUniqueness.includes(node.key.value)) {
+          dependenciesCache[node.key.value] = node.value.properties;
         }
       },
       'Program:exit'() {

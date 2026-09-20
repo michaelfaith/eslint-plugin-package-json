@@ -98,27 +98,25 @@ export const rule = createRule({
       JSONArrayExpression(node) {
         const topLevelProperty = getTopLevelProperty(node);
         // If this is the root object, we shouldn't proceed
-        if (!topLevelProperty) {
+        if (!topLevelProperty || node.elements.length) {
           return;
         }
-        if (!node.elements.length) {
-          const topLevelPropertyName = topLevelProperty.value;
-          if (!ignoreProperties.has(topLevelPropertyName)) {
-            report(context, getNode(node));
-          }
+
+        const topLevelPropertyName = topLevelProperty.value;
+        if (!ignoreProperties.has(topLevelPropertyName)) {
+          report(context, getNode(node));
         }
       },
       JSONObjectExpression(node) {
         const topLevelProperty = getTopLevelProperty(node);
         // If this is the root object, we shouldn't proceed
-        if (!topLevelProperty) {
+        if (!topLevelProperty || node.properties.length) {
           return;
         }
-        if (!node.properties.length) {
-          const topLevelPropertyName = topLevelProperty.value;
-          if (!ignoreProperties.has(topLevelPropertyName)) {
-            report(context, getNode(node));
-          }
+
+        const topLevelPropertyName = topLevelProperty.value;
+        if (!ignoreProperties.has(topLevelPropertyName)) {
+          report(context, getNode(node));
         }
       },
     };

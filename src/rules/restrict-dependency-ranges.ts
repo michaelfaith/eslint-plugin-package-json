@@ -87,10 +87,9 @@ const normalizeRangeType = (
 
 /** @returns `undefined` if workspace versions are not supported for the specified {@link rangeType} */
 const getWorkspaceVersionForRange = (rangeType: RangeType) => {
-  if ('workspaceSymbol' in rangeType) {
-    return `workspace:${rangeType.workspaceSymbol}`;
-  }
-  return undefined;
+  return 'workspaceSymbol' in rangeType
+    ? `workspace:${rangeType.workspaceSymbol}`
+    : undefined;
 };
 
 /** For displaying a range type in a user-facing way (ie. an error message). */

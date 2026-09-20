@@ -84,11 +84,7 @@ export function createRule<
   const ruleGroup = rule.meta.docs?.ruleGroup;
   return {
     create(context) {
-      if (!isPackageJson(context.filename)) {
-        return {};
-      }
-
-      return rule.create(context);
+      return isPackageJson(context.filename) ? rule.create(context) : {};
     },
     meta: {
       ...rule.meta,
