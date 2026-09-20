@@ -58,24 +58,20 @@ export const rule = createRule({
       if (isJSONStringLiteral(node.value)) {
         context.report({
           fix(fixer) {
-            if (
-              !isJSONStringLiteral(node.value) ||
+            return !isJSONStringLiteral(node.value) ||
               node.value.value.split('/').filter(Boolean).length !== 2
-            ) {
-              return null;
-            }
-
-            return fixer.replaceText(
-              node.value,
-              JSON.stringify(
-                {
-                  type: 'git',
-                  url: createUrl(node.value.value),
-                },
-                null,
-                2,
-              ),
-            );
+              ? null
+              : fixer.replaceText(
+                  node.value,
+                  JSON.stringify(
+                    {
+                      type: 'git',
+                      url: createUrl(node.value.value),
+                    },
+                    null,
+                    2,
+                  ),
+                );
           },
           messageId: 'preferObject',
           node: node.value,

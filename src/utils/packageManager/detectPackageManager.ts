@@ -46,11 +46,9 @@ function* lookup(cwd: string = process.cwd()): Generator<string> {
 }
 
 function parsePackageJson(filepath: string): DetectResult | null {
-  if (!filepath || !fs.existsSync(filepath)) {
-    return null;
-  }
-
-  return handlePackageManager(filepath);
+  return !filepath || !fs.existsSync(filepath)
+    ? null
+    : handlePackageManager(filepath);
 }
 
 /**
@@ -121,13 +119,12 @@ function getNameAndVersion(pkg: PackageJson) {
     const [name, version] = pkg.packageManager.replace(/^\^/, '').split('@', 2);
     return { name, version: normalizeVersion(version) };
   }
-  if (typeof pkg.devEngines?.packageManager?.name === 'string') {
-    return {
-      name: pkg.devEngines.packageManager.name,
-      version: normalizeVersion(pkg.devEngines.packageManager.version),
-    };
-  }
-  return;
+  return typeof pkg.devEngines?.packageManager?.name === 'string'
+    ? {
+        name: pkg.devEngines.packageManager.name,
+        version: normalizeVersion(pkg.devEngines.packageManager.version),
+      }
+    : undefined;
 }
 
 function handlePackageManager(filepath: string): DetectResult | null {

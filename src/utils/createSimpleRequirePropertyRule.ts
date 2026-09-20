@@ -70,35 +70,35 @@ export const createSimpleRequirePropertyRule = (
           }
 
           if (
-            node.properties.every(
+            node.properties.some(
               (property) =>
-                !(
-                  isJSONStringLiteral(property.key) &&
-                  property.key.value === propertyName
-                ),
+                isJSONStringLiteral(property.key) &&
+                property.key.value === propertyName,
             )
           ) {
-            const resolvedValue: unknown =
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-              typeof fixValue === 'function' ? fixValue() : fixValue;
-            context.report({
-              data: { property: propertyName },
-              fix:
-                resolvedValue === undefined
-                  ? undefined
-                  : function* (fixer) {
-                      yield fixer.insertTextAfterRange(
-                        [0, 1],
-                        `\n  "${propertyName}": ${JSON.stringify(resolvedValue, null, 2).split('\n').join('\n  ')}`,
-                      );
-                      yield node.properties.length > 0
-                        ? fixer.insertTextAfterRange([0, 1], ',')
-                        : fixer.insertTextAfterRange([0, 1], '\n');
-                    },
-              loc: { column: 0, line: 1 },
-              messageId: 'missing',
-            });
+            return;
           }
+
+          const resolvedValue: unknown =
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+            typeof fixValue === 'function' ? fixValue() : fixValue;
+          context.report({
+            data: { property: propertyName },
+            fix:
+              resolvedValue === undefined
+                ? undefined
+                : function* (fixer) {
+                    yield fixer.insertTextAfterRange(
+                      [0, 1],
+                      `\n  "${propertyName}": ${JSON.stringify(resolvedValue, null, 2).split('\n').join('\n  ')}`,
+                    );
+                    yield node.properties.length > 0
+                      ? fixer.insertTextAfterRange([0, 1], ',')
+                      : fixer.insertTextAfterRange([0, 1], '\n');
+                  },
+            loc: { column: 0, line: 1 },
+            messageId: 'missing',
+          });
         },
       };
     },

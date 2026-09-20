@@ -9,16 +9,15 @@ import {
 function isImplicitFormat(
   node: AST.JSONLiteral | AST.JSONObjectExpression,
 ): boolean {
-  if (node.type === 'JSONLiteral') {
-    return true;
-  }
-
   // Implicit format = no subpath keys (keys starting with ".")
   // All keys are conditions: import, require, node, default, types, browser
-  return node.properties.every(
-    (property) =>
-      !isJSONStringLiteral(property.key) || !property.key.value.startsWith('.'),
-  );
+  return node.type === 'JSONLiteral'
+    ? true
+    : node.properties.every(
+        (property) =>
+          !isJSONStringLiteral(property.key) ||
+          !property.key.value.startsWith('.'),
+      );
 }
 
 export const rule = createRule({
