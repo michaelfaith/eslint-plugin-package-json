@@ -232,7 +232,8 @@
         "bug",
         "tool",
         "doc",
-        "projectManagement"
+        "projectManagement",
+        "test"
       ]
     },
     {
