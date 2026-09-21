@@ -450,6 +450,15 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "thernstig",
+      "name": "Tobias Hernstig",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30827238?v=4",
+      "profile": "https://github.com/thernstig",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsSortAlphabetically": true,
