@@ -1,0 +1,92 @@
+---
+title: 'require-package-json-export'
+description: 'Ensures that if a package specifies `exports` (or `publishConfig.exports`), an explicit `package.json` export is included.'
+---
+
+💡 This rule is manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+{/* end auto-generated rule header */}
+
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+
+This rule requires that if a `package.json` includes `exports` (or `publishConfig.exports`) that an explicit `./package.json` export is included.
+
+## More Details
+
+When a package declares `exports`, that represents the entire API surface for that package.
+By including an explicit export for the `package.json`, external tools can more easily consume it (via direct `import`/`require`).
+If the package does not export the `package.json`, it makes it harder for tools to load / inspect it.
+
+<Aside type="note">
+  If both `exports` and `publishConfig.exports` are declared,
+  `publishConfig.exports` is the property that's tested, since it represents the
+  set of exports that are shipped externally (when present).
+</Aside>
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "exports": "./index.mjs"
+}
+```
+
+```json
+{
+  "exports": {
+    ".": "./index.mjs"
+  }
+}
+```
+
+```json
+{
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.cjs"
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  }
+}
+```
+
+```json
+{
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    },
+    "./package.json": "./package.json"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## When Not to Use It
+
+If you're not concerned about providing easier access to your package's `package.json`, then you can safely exclude this rule.
+
+## Related Rules
+
+- [`require-exports`](/rules/require-properties/require-exports) - Enforces that the `exports` property is present.
+- [`valid-exports`](/rules/valid-properties/valid-exports) - Enforces that the `exports` property is valid.
+
+## Further Reading
+
+- [Node.js: Packages > Package Entry Points](https://nodejs.org/api/packages.html#package-entry-points)
