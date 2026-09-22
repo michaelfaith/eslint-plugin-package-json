@@ -181,6 +181,37 @@ ruleTester.run('require-package-json-export', rule, {
         },
       ],
     },
+    {
+      code: `{
+\t"publishConfig": {
+\t\t"exports": {
+\t\t\t".": "./index.mjs"
+\t\t}
+\t}
+}
+`,
+      errors: [
+        {
+          column: 14,
+          line: 3,
+          messageId: 'missing',
+          suggestions: [
+            {
+              messageId: 'addExport',
+              output: `{
+\t"publishConfig": {
+\t\t"exports": {
+\t\t\t".": "./index.mjs",
+\t\t\t"./package.json": "./package.json"
+\t\t}
+\t}
+}
+`,
+            },
+          ],
+        },
+      ],
+    },
   ],
   valid: [
     '{}',
