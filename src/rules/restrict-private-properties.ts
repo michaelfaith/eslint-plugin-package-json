@@ -10,13 +10,10 @@ const defaultBlockedProperties = ['files', 'publishConfig'];
 export const rule = createRule({
   create(context) {
     // codecov:ignore-next-line - V8 instrumentation creates unreachable null branch for optional chaining
-    const blockedProperties =
-      context.options[0]?.blockedProperties ?? defaultBlockedProperties;
+    const blockedProperties = context.options[0]?.blockedProperties ?? defaultBlockedProperties;
 
     return {
-      'Program > JSONExpressionStatement > JSONObjectExpression'(
-        node: AST.JSONObjectExpression,
-      ) {
+      'Program > JSONExpressionStatement > JSONObjectExpression'(node: AST.JSONObjectExpression) {
         // Check if this is a private package
         if (
           node.properties.every(
@@ -34,10 +31,7 @@ export const rule = createRule({
 
         // Check for blocked properties
         for (const property of node.properties) {
-          if (
-            isJSONStringLiteral(property.key) &&
-            blockedProperties.includes(property.key.value)
-          ) {
+          if (isJSONStringLiteral(property.key) && blockedProperties.includes(property.key.value)) {
             const isEmpty =
               (property.value.type === 'JSONArrayExpression' &&
                 property.value.elements.length === 0) ||
@@ -52,10 +46,7 @@ export const rule = createRule({
               node: property,
               ...(isEmpty
                 ? {
-                    fix: fixRemoveObjectProperty(
-                      context,
-                      property as unknown as ESTree.Property,
-                    ),
+                    fix: fixRemoveObjectProperty(context, property as unknown as ESTree.Property),
                   }
                 : {
                     suggest: [
@@ -96,8 +87,7 @@ export const rule = createRule({
         additionalProperties: false,
         properties: {
           blockedProperties: {
-            description:
-              'Array of property names to disallow in private packages.',
+            description: 'Array of property names to disallow in private packages.',
             items: {
               type: 'string',
             },

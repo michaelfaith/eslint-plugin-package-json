@@ -7,8 +7,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": null }`,
       errors: [
         {
-          message:
-            'Invalid description: the value is `null`, but should be a `string`',
+          message: 'Invalid description: the value is `null`, but should be a `string`',
         },
       ],
       filename: 'package.json',
@@ -17,8 +16,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": 123 }`,
       errors: [
         {
-          message:
-            'Invalid description: the type should be a `string`, not `number`',
+          message: 'Invalid description: the type should be a `string`, not `number`',
         },
       ],
       filename: 'package.json',
@@ -27,8 +25,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": true }`,
       errors: [
         {
-          message:
-            'Invalid description: the type should be a `string`, not `boolean`',
+          message: 'Invalid description: the type should be a `string`, not `boolean`',
         },
       ],
       filename: 'package.json',
@@ -37,8 +34,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": [] }`,
       errors: [
         {
-          message:
-            'Invalid description: the type should be a `string`, not `Array`',
+          message: 'Invalid description: the type should be a `string`, not `Array`',
         },
       ],
       filename: 'package.json',
@@ -47,8 +43,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": "" }`,
       errors: [
         {
-          message:
-            'Invalid description: the value is empty, but should be a description',
+          message: 'Invalid description: the value is empty, but should be a description',
         },
       ],
       filename: 'package.json',
@@ -57,8 +52,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": "   " }`,
       errors: [
         {
-          message:
-            'Invalid description: the value is empty, but should be a description',
+          message: 'Invalid description: the value is empty, but should be a description',
         },
       ],
       filename: 'package.json',
@@ -67,8 +61,7 @@ ruleTester.run('valid-description', rules['valid-description'], {
       code: `{ "description": {} }`,
       errors: [
         {
-          message:
-            'Invalid description: the type should be a `string`, not `object`',
+          message: 'Invalid description: the type should be a `string`, not `object`',
         },
       ],
       filename: 'package.json',

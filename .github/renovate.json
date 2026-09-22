@@ -1,11 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
-  "extends": [
-    ":preserveSemverRanges",
-    "config:best-practices",
-    "replacements:all"
-  ],
+  "extends": [":preserveSemverRanges", "config:best-practices", "replacements:all"],
   "labels": ["dependencies"],
   "minimumReleaseAge": "7 days",
   "postUpdateOptions": ["pnpmDedupe"],

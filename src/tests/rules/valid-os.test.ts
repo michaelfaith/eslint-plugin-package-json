@@ -86,8 +86,7 @@ ruleTester.run('valid-os', rules['valid-os'], {
         },
         {
           data: {
-            error:
-              'item at index 1 is empty, but should be the name of an operating system',
+            error: 'item at index 1 is empty, but should be the name of an operating system',
           },
           line: 4,
           messageId: 'validationError',

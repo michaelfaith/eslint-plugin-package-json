@@ -17,40 +17,25 @@ export const rule = createRule({
         return undefined;
       }
       let mergedAuthor = author;
-      const originalValue: unknown = JSON.parse(
-        context.sourceCode.getText(node),
-      );
-      if (
-        originalValue &&
-        typeof originalValue === 'object' &&
-        !Array.isArray(originalValue)
-      ) {
+      const originalValue: unknown = JSON.parse(context.sourceCode.getText(node));
+      if (originalValue && typeof originalValue === 'object' && !Array.isArray(originalValue)) {
         mergedAuthor = { name: author.name, ...originalValue };
       }
 
       switch (propertyName) {
         case 'author':
           return (fixer) =>
-            fixer.replaceText(
-              node,
-              JSON.stringify(mergedAuthor, null, 2).split('\n').join('\n  '),
-            );
+            fixer.replaceText(node, JSON.stringify(mergedAuthor, null, 2).split('\n').join('\n  '));
         case 'email':
-          return (fixer) =>
-            fixer.replaceText(node, JSON.stringify(author.email));
+          return (fixer) => fixer.replaceText(node, JSON.stringify(author.email));
         case 'name':
-          return (fixer) =>
-            fixer.replaceText(node, JSON.stringify(author.name));
+          return (fixer) => fixer.replaceText(node, JSON.stringify(author.name));
         default:
           return undefined;
       }
     };
 
-    const reportIssues = (
-      result: Result,
-      node: AST.JSONExpression,
-      propertyName?: string,
-    ) => {
+    const reportIssues = (result: Result, node: AST.JSONExpression, propertyName?: string) => {
       // Early return if there are no errors
       if (result.errorMessages.length === 0) {
         return;
@@ -62,10 +47,7 @@ export const rule = createRule({
             data: {
               error: issue.message,
             },
-            fix:
-              propertyName === undefined
-                ? undefined
-                : createFixer(propertyName, node),
+            fix: propertyName === undefined ? undefined : createFixer(propertyName, node),
             messageId: 'validationError',
             node,
           });
@@ -83,9 +65,7 @@ export const rule = createRule({
           reportIssues(
             childResult,
             childNode.value,
-            isJSONStringLiteral(childPropertyName)
-              ? childPropertyName.value
-              : undefined,
+            isJSONStringLiteral(childPropertyName) ? childPropertyName.value : undefined,
           );
         }
       }
@@ -96,9 +76,7 @@ export const rule = createRule({
         node: AST.JSONProperty,
       ) {
         const valueNode = node.value;
-        const value: unknown = JSON.parse(
-          context.sourceCode.getText(valueNode),
-        );
+        const value: unknown = JSON.parse(context.sourceCode.getText(valueNode));
 
         const result = validateAuthor(value);
         reportIssues(result, valueNode, 'author');

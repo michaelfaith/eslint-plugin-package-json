@@ -26,10 +26,7 @@ export const rule = createRule({
         }
 
         for (const property of node.value.properties) {
-          if (
-            isJSONStringLiteral(property.key) &&
-            property.key.value === 'access'
-          ) {
+          if (isJSONStringLiteral(property.key) && property.key.value === 'access') {
             publishConfigAccessProperty = property;
             break;
           }
@@ -63,8 +60,7 @@ export const rule = createRule({
   meta: {
     docs: {
       category: 'Best Practices',
-      description:
-        'Warns when publishConfig.access is used in unscoped packages.',
+      description: 'Warns when publishConfig.access is used in unscoped packages.',
       recommended: true,
     },
     hasSuggestions: true,

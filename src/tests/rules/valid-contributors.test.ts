@@ -81,40 +81,35 @@ ruleTester.run('valid-contributors', rules['valid-contributors'], {
       errors: [
         {
           data: {
-            error:
-              'item 0 is invalid; it should be a person object with at least a `name`',
+            error: 'item 0 is invalid; it should be a person object with at least a `name`',
           },
           line: 3,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item 1 is invalid; it should be a person object with at least a `name`',
+            error: 'item 1 is invalid; it should be a person object with at least a `name`',
           },
           line: 4,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item 2 is invalid; it should be a person object with at least a `name`',
+            error: 'item 2 is invalid; it should be a person object with at least a `name`',
           },
           line: 5,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item 3 is invalid; it should be a person object with at least a `name`',
+            error: 'item 3 is invalid; it should be a person object with at least a `name`',
           },
           line: 6,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item 4 is invalid; it should be a person object with at least a `name`',
+            error: 'item 4 is invalid; it should be a person object with at least a `name`',
           },
           line: 7,
           messageId: 'validationError',

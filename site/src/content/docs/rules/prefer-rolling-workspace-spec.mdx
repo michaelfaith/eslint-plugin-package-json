@@ -44,9 +44,7 @@ This rule enforces that all use of `workspace:` protocol should use "rolling" no
 There are valid cases for both, and so this isn't a recommendation one way or the other.
 But in case your project standards are to have all packages published together, with each referencing the latest version of the others, this rule could be used to enforce that.
 
-<Aside type="note">
-  The rule applies to both `dependencies` and `devDependencies`.
-</Aside>
+<Aside type="note">The rule applies to both `dependencies` and `devDependencies`.</Aside>
 
 ## Examples
 
@@ -103,10 +101,7 @@ Define an array of specific dependency names that should be ignored by this rule
   "prefer-rolling-workspace-spec": [
     "error",
     {
-      "ignoreDependencies": [
-        "@typescript-eslint/types",
-        "@typescript-eslint/utils"
-      ]
+      "ignoreDependencies": ["@typescript-eslint/types", "@typescript-eslint/utils"]
     }
   ]
 }

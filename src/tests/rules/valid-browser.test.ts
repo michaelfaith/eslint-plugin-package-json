@@ -65,9 +65,5 @@ ruleTester.run('valid-browser', rules['valid-browser'], {
       ],
     },
   ],
-  valid: [
-    '{}',
-    `{ "browser": "./index.umd.js" }`,
-    `{ "browser": "index.umd.js" }`,
-  ],
+  valid: ['{}', `{ "browser": "./index.umd.js" }`, `{ "browser": "index.umd.js" }`],
 });

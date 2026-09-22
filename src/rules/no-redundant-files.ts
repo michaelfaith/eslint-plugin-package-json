@@ -3,10 +3,7 @@ import type * as ESTree from 'estree';
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import {
-  isJSONStringLiteral,
-  isNotNullish,
-} from '../utils/predicates/index.ts';
+import { isJSONStringLiteral, isNotNullish } from '../utils/predicates/index.ts';
 
 const defaultFiles = [
   /* cspell:disable-next-line */
@@ -46,11 +43,7 @@ export const rule = createRule({
       main?: string;
     } = { bin: [], files: [] };
 
-    const report = (
-      elements: (AST.JSONExpression | null)[],
-      index: number,
-      messageId: string,
-    ) => {
+    const report = (elements: (AST.JSONExpression | null)[], index: number, messageId: string) => {
       const element = elements[index];
 
       if (isNotNullish(element) && isJSONStringLiteral(element)) {

@@ -75,8 +75,7 @@ ruleTester.run('valid-scripts', rules['valid-scripts'], {
       errors: [
         {
           data: {
-            error:
-              'the value of property "invalid" is empty, but should be a script command',
+            error: 'the value of property "invalid" is empty, but should be a script command',
           },
           line: 3,
           messageId: 'validationError',

@@ -10,7 +10,6 @@ export default defineConfig({
     '/CHANGELOG.md',
   ],
   overrides: [{ files: ['.nvmrc'], options: { parser: 'yaml' } }],
-  printWidth: 80,
   singleQuote: true,
   sortImports: true,
   sortPackageJson: false,

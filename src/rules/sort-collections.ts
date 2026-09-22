@@ -29,10 +29,7 @@ export const rule = createRule({
       'JSONProperty:exit'(node) {
         const { key: nodeKey, value: collection } = node;
 
-        if (
-          nodeKey.type !== 'JSONLiteral' ||
-          collection.type !== 'JSONObjectExpression'
-        ) {
+        if (nodeKey.type !== 'JSONLiteral' || collection.type !== 'JSONObjectExpression') {
           return;
         }
 
@@ -43,10 +40,7 @@ export const rule = createRule({
           currNode;
           currNode = currNode.parent
         ) {
-          if (
-            currNode.type === 'JSONProperty' &&
-            currNode.key.type === 'JSONLiteral'
-          ) {
+          if (currNode.type === 'JSONProperty' && currNode.key.type === 'JSONLiteral') {
             keyPartsReversed.push(currNode.key.value);
           } else if (currNode.type === 'JSONArrayExpression') {
             return;
@@ -74,11 +68,8 @@ export const rule = createRule({
             scripts: Record<string, unknown>;
           };
           const { scripts: sortedScripts } = sortPackageJson(minimalJson);
-          const lifecycleIndex = new Map(
-            Object.keys(sortedScripts).map((k, i) => [k, i]),
-          );
-          naturalCompare = (a, b) =>
-            (lifecycleIndex.get(a) ?? 0) - (lifecycleIndex.get(b) ?? 0);
+          const lifecycleIndex = new Map(Object.keys(sortedScripts).map((k, i) => [k, i]));
+          naturalCompare = (a, b) => (lifecycleIndex.get(a) ?? 0) - (lifecycleIndex.get(b) ?? 0);
         } else {
           naturalCompare = (a, b) => (a > b ? 1 : -1);
         }
@@ -109,14 +100,12 @@ export const rule = createRule({
               const indentUnit = type === 'tab' ? '\t' : indent || '  ';
 
               const replacementJson = JSON.stringify(
-                desiredOrder.reduce<Record<string, unknown>>(
-                  (out, property) => {
-                    out[(property.key as AST.JSONStringLiteral).value] =
-                      JSON.parse(context.sourceCode.getText(property.value));
-                    return out;
-                  },
-                  {},
-                ),
+                desiredOrder.reduce<Record<string, unknown>>((out, property) => {
+                  out[(property.key as AST.JSONStringLiteral).value] = JSON.parse(
+                    context.sourceCode.getText(property.value),
+                  );
+                  return out;
+                }, {}),
                 null,
                 indentUnit,
               );
@@ -124,12 +113,9 @@ export const rule = createRule({
               const jsonLines = replacementJson.split('\n');
 
               const collectionStartLine = collection.loc.start.line;
-              const lineText =
-                context.sourceCode.lines[collectionStartLine - 1];
+              const lineText = context.sourceCode.lines[collectionStartLine - 1];
               const leadingWhitespaceMatch = /^\s*/.exec(lineText);
-              const leadingWhitespace = leadingWhitespaceMatch
-                ? leadingWhitespaceMatch[0]
-                : '';
+              const leadingWhitespace = leadingWhitespaceMatch ? leadingWhitespaceMatch[0] : '';
 
               const result = jsonLines
                 .map((l, i) => (i === 0 ? l : leadingWhitespace + l))

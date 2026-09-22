@@ -37,9 +37,7 @@ export const rule = createRule({
       },
       'Program:exit'() {
         // Check that every peer dependency name is accounted for in the devDependencies
-        for (const [peerDependencyName, peerDependencyNode] of Object.entries(
-          peerDependencyMap,
-        )) {
+        for (const [peerDependencyName, peerDependencyNode] of Object.entries(peerDependencyMap)) {
           if (!devDependencyNames.has(peerDependencyName)) {
             // If not, report on the peer dependency node, and suggest that it be added to devDependencies
             const peerDependencyValue = peerDependencyNode.value;
@@ -50,8 +48,7 @@ export const rule = createRule({
               messageId: 'devDependencyNotDefined',
               node: peerDependencyNode,
               suggest:
-                devDependenciesObjectNode &&
-                isJSONStringLiteral(peerDependencyValue)
+                devDependenciesObjectNode && isJSONStringLiteral(peerDependencyValue)
                   ? [
                       {
                         data: {
@@ -59,9 +56,7 @@ export const rule = createRule({
                         },
                         fix: (fixer) => {
                           const currentDevDependencies = JSON.parse(
-                            context.sourceCode.getText(
-                              devDependenciesObjectNode,
-                            ),
+                            context.sourceCode.getText(devDependenciesObjectNode),
                           ) as Record<string, string>;
                           const updatedDevDependencies = {
                             ...currentDevDependencies,
@@ -75,9 +70,7 @@ export const rule = createRule({
                           );
                           return fixer.replaceText(
                             devDependenciesObjectNode,
-                            JSON.stringify(sortedDevDependencies, null, 2)
-                              .split('\n')
-                              .join('\n  '), // nest indents,
+                            JSON.stringify(sortedDevDependencies, null, 2).split('\n').join('\n  '), // nest indents,
                           );
                         },
                         messageId: 'addToDevDependencies',
@@ -92,8 +85,7 @@ export const rule = createRule({
   },
   meta: {
     docs: {
-      description:
-        'Requires that all peer dependencies are also declared as dev dependencies',
+      description: 'Requires that all peer dependencies are also declared as dev dependencies',
       recommended: true,
     },
     hasSuggestions: true,

@@ -11,8 +11,7 @@ ruleTester.run('valid-devDependencies', rules['valid-devDependencies'], {
       errors: [
         {
           data: {
-            error:
-              'the value is `null`, but should be a record of dependencies',
+            error: 'the value is `null`, but should be a record of dependencies',
           },
           line: 2,
           messageId: 'validationError',
@@ -87,8 +86,7 @@ ruleTester.run('valid-devDependencies', rules['valid-devDependencies'], {
         {
           column: 24,
           data: {
-            error:
-              'dependency version for `the-fragile` should be a string: null',
+            error: 'dependency version for `the-fragile` should be a string: null',
           },
           line: 5,
           messageId: 'validationError',
@@ -96,8 +94,7 @@ ruleTester.run('valid-devDependencies', rules['valid-devDependencies'], {
         {
           column: 23,
           data: {
-            error:
-              'dependency version for `pink-floyd` should be a string: [object Object]',
+            error: 'dependency version for `pink-floyd` should be a string: [object Object]',
           },
           line: 6,
           messageId: 'validationError',

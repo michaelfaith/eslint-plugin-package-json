@@ -2,20 +2,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
-import {
-  AGENTS,
-  LOCK_FILES,
-  type AgentName,
-  type DetectResult,
-} from './constants.ts';
+import { AGENTS, LOCK_FILES, type AgentName, type DetectResult } from './constants.ts';
 
 let packageManagerCache: DetectResult | undefined;
 
 const userAgentRegex = /^(.+?)\/(\S+)?/;
 
 function getPackageManagerFromUserAgent(): DetectResult | null {
-  const userAgentMatch =
-    process.env.npm_config_user_agent?.match(userAgentRegex);
+  const userAgentMatch = process.env.npm_config_user_agent?.match(userAgentRegex);
 
   if (userAgentMatch) {
     const name = userAgentMatch[1] as AgentName;
@@ -46,9 +40,7 @@ function* lookup(cwd: string = process.cwd()): Generator<string> {
 }
 
 function parsePackageJson(filepath: string): DetectResult | null {
-  return !filepath || !fs.existsSync(filepath)
-    ? null
-    : handlePackageManager(filepath);
+  return !filepath || !fs.existsSync(filepath) ? null : handlePackageManager(filepath);
 }
 
 /**
@@ -77,9 +69,7 @@ export function detectPackageManager(): DetectResult | null {
           for (const lock of Object.keys(LOCK_FILES)) {
             if (fs.existsSync(path.join(directory, lock))) {
               const name = LOCK_FILES[lock];
-              const result = parsePackageJson(
-                path.join(directory, 'package.json'),
-              );
+              const result = parsePackageJson(path.join(directory, 'package.json'));
               return setPackageManagerCache(result ?? { name });
             }
           }

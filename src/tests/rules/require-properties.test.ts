@@ -7,9 +7,7 @@ const ruleNames = Object.keys(rules);
 for (const ruleName of ruleNames) {
   const propertyName = ruleName.replace('require-', '');
 
-  const propertyOptions = propertyConfig.find(
-    ([name]) => name === propertyName,
-  )?.[1];
+  const propertyOptions = propertyConfig.find(([name]) => name === propertyName)?.[1];
   const rawFixValue = propertyOptions?.fixValue;
 
   const fixValue =

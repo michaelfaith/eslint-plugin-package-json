@@ -16,8 +16,7 @@ export const rule = createRule({
     const ignoreRegexes = ignorePatterns.map((pattern) => new RegExp(pattern));
 
     const isIgnored = (name: string) =>
-      ignoreNames.includes(name) ||
-      ignoreRegexes.some((regex) => regex.test(name));
+      ignoreNames.includes(name) || ignoreRegexes.some((regex) => regex.test(name));
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=scripts]'(
@@ -51,11 +50,7 @@ export const rule = createRule({
                     fix: (fixer) => {
                       return fixer.replaceText(
                         keyNode,
-                        JSON.stringify(
-                          key.startsWith('.')
-                            ? `.${kebabCaseKey}`
-                            : kebabCaseKey,
-                        ),
+                        JSON.stringify(key.startsWith('.') ? `.${kebabCaseKey}` : kebabCaseKey),
                       );
                     },
                     messageId: 'convertToKebabCase',

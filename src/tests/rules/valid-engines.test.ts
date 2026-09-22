@@ -90,8 +90,7 @@ ruleTester.run('valid-engines', rules['valid-engines'], {
       errors: [
         {
           data: {
-            error:
-              'the value of property "invalid-bin" is empty, but should be a semver range',
+            error: 'the value of property "invalid-bin" is empty, but should be a semver range',
           },
           line: 3,
           messageId: 'validationError',
@@ -109,16 +108,14 @@ ruleTester.run('valid-engines', rules['valid-engines'], {
       errors: [
         {
           data: {
-            error:
-              'property 0 has an empty key, but should be a runtime or package manager',
+            error: 'property 0 has an empty key, but should be a runtime or package manager',
           },
           line: 3,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'property 1 has an empty key, but should be a runtime or package manager',
+            error: 'property 1 has an empty key, but should be a runtime or package manager',
           },
           line: 4,
           messageId: 'validationError',

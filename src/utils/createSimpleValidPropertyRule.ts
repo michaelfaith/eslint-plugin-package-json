@@ -54,10 +54,7 @@ export const createSimpleValidPropertyRule = (
           }
         }
         // If the value is an array, and has child results with issues, then report those too
-        else if (
-          node.type === 'JSONArrayExpression' &&
-          childrenWithIssues.length
-        ) {
+        else if (node.type === 'JSONArrayExpression' && childrenWithIssues.length) {
           for (const childResult of childrenWithIssues) {
             const childNode = node.elements[childResult.index];
             if (childNode) {
@@ -67,16 +64,12 @@ export const createSimpleValidPropertyRule = (
         }
       };
 
-      return propertyNames.reduce<
-        Record<string, (node: AST.JSONProperty) => void>
-      >((acc, name) => {
+      return propertyNames.reduce<Record<string, (node: AST.JSONProperty) => void>>((acc, name) => {
         acc[
           `Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=${name}]`
         ] = (node: AST.JSONProperty) => {
           const valueNode = node.value;
-          const value: unknown = JSON.parse(
-            context.sourceCode.getText(valueNode),
-          );
+          const value: unknown = JSON.parse(context.sourceCode.getText(valueNode));
 
           const result = validationFunction(value);
           reportIssues(result, valueNode);

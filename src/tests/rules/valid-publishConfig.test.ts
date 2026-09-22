@@ -82,48 +82,42 @@ ruleTester.run('valid-publishConfig', rules['valid-publishConfig'], {
         },
         {
           data: {
-            error:
-              'item at index 0 is empty, but should be the name of a CPU architecture',
+            error: 'item at index 0 is empty, but should be the name of a CPU architecture',
           },
           line: 5,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item at index 1 is empty, but should be the name of a CPU architecture',
+            error: 'item at index 1 is empty, but should be the name of a CPU architecture',
           },
           line: 5,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'the value is empty, but should be the path to a subdirectory',
+            error: 'the value is empty, but should be the path to a subdirectory',
           },
           line: 6,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'property 0 has an empty key, but should be an export condition',
+            error: 'property 0 has an empty key, but should be an export condition',
           },
           line: 8,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'the value of "./secondary" is empty, but should be an entry point path',
+            error: 'the value of "./secondary" is empty, but should be an entry point path',
           },
           line: 9,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              "the value is empty, but should be the path to the package's main module",
+            error: "the value is empty, but should be the path to the package's main module",
           },
           line: 11,
           messageId: 'validationError',
@@ -200,8 +194,7 @@ ruleTester.run('valid-publishConfig', rules['valid-publishConfig'], {
         },
         {
           data: {
-            error:
-              'property 0 has an empty key, but should be an export condition',
+            error: 'property 0 has an empty key, but should be an export condition',
           },
           line: 8,
           messageId: 'validationError',

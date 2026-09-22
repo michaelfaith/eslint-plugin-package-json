@@ -77,8 +77,7 @@ ruleTester.run('valid-cpu', rules['valid-cpu'], {
       errors: [
         {
           data: {
-            error:
-              'item at index 0 is empty, but should be the name of a CPU architecture',
+            error: 'item at index 0 is empty, but should be the name of a CPU architecture',
           },
           line: 3,
           messageId: 'validationError',

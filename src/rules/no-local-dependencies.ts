@@ -1,10 +1,7 @@
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import {
-  isJSONStringLiteral,
-  isNotNullish,
-} from '../utils/predicates/index.ts';
+import { isJSONStringLiteral, isNotNullish } from '../utils/predicates/index.ts';
 
 const isLocalDependency = (value: string) =>
   value.startsWith('file:') ||
@@ -14,15 +11,11 @@ const isLocalDependency = (value: string) =>
   value.startsWith('.\\') ||
   value.startsWith('..\\');
 
-const getBundledDependencyNames = (
-  value: AST.JSONProperty['value'] | undefined,
-) => {
+const getBundledDependencyNames = (value: AST.JSONProperty['value'] | undefined) => {
   const names = new Set<string>();
 
   if (value?.type === 'JSONArrayExpression') {
-    for (const element of value.elements
-      .filter(isNotNullish)
-      .filter(isJSONStringLiteral)) {
+    for (const element of value.elements.filter(isNotNullish).filter(isJSONStringLiteral)) {
       names.add(element.value);
     }
   }
@@ -70,8 +63,7 @@ export const rule = createRule({
           return;
         }
 
-        let bundleDependenciesValue =
-          bundleDependencyValues.get('bundleDependencies');
+        let bundleDependenciesValue = bundleDependencyValues.get('bundleDependencies');
         // npm only falls back to the `bundledDependencies` spelling when
         // `bundleDependencies` is absent or falsy, so the two never combine:
         // https://github.com/npm/normalize-package-data/blob/34c98503c4e828a166aa3bb78a4cb0525af3c8f5/lib/fixer.js#L113
@@ -82,9 +74,7 @@ export const rule = createRule({
               Boolean(bundleDependenciesValue.value))
           )
         ) {
-          bundleDependenciesValue = bundleDependencyValues.get(
-            'bundledDependencies',
-          );
+          bundleDependenciesValue = bundleDependencyValues.get('bundledDependencies');
         }
 
         if (
@@ -94,9 +84,7 @@ export const rule = createRule({
           return;
         }
 
-        const bundledDependencyNames = getBundledDependencyNames(
-          bundleDependenciesValue,
-        );
+        const bundledDependencyNames = getBundledDependencyNames(bundleDependenciesValue);
 
         for (const dependencyPropertyNode of dependencyNodes) {
           const dependencyKey = dependencyPropertyNode.key;
@@ -108,10 +96,7 @@ export const rule = createRule({
           }
 
           const dependencyValue = dependencyPropertyNode.value;
-          if (
-            isJSONStringLiteral(dependencyValue) &&
-            isLocalDependency(dependencyValue.value)
-          ) {
+          if (isJSONStringLiteral(dependencyValue) && isLocalDependency(dependencyValue.value)) {
             context.report({
               data: {
                 name: dependencyValue.value,

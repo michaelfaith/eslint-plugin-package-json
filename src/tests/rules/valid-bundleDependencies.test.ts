@@ -11,8 +11,7 @@ ruleTester.run('valid-bundleDependencies', rules['valid-bundleDependencies'], {
       errors: [
         {
           data: {
-            error:
-              'the value is `null`, but should be an `Array` or a `boolean`',
+            error: 'the value is `null`, but should be an `Array` or a `boolean`',
           },
           line: 2,
           messageId: 'validationError',

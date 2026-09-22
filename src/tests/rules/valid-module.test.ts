@@ -56,8 +56,7 @@ ruleTester.run('valid-module', rules['valid-module'], {
       errors: [
         {
           data: {
-            error:
-              "the value is empty, but should be the path to the package's main module",
+            error: "the value is empty, but should be the path to the package's main module",
           },
           line: 2,
           messageId: 'validationError',

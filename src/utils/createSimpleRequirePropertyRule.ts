@@ -48,14 +48,10 @@ export const createSimpleRequirePropertyRule = (
 
       const ignorePrivate =
         context.options[0]?.ignorePrivate ??
-        (typeof enforceForPrivate === 'boolean'
-          ? !enforceForPrivate
-          : ignorePrivateDefault);
+        (typeof enforceForPrivate === 'boolean' ? !enforceForPrivate : ignorePrivateDefault);
 
       return {
-        'Program > JSONExpressionStatement > JSONObjectExpression'(
-          node: AST.JSONObjectExpression,
-        ) {
+        'Program > JSONExpressionStatement > JSONObjectExpression'(node: AST.JSONObjectExpression) {
           if (
             ignorePrivate &&
             node.properties.some(
@@ -72,8 +68,7 @@ export const createSimpleRequirePropertyRule = (
           if (
             node.properties.some(
               (property) =>
-                isJSONStringLiteral(property.key) &&
-                property.key.value === propertyName,
+                isJSONStringLiteral(property.key) && property.key.value === propertyName,
             )
           ) {
             return;

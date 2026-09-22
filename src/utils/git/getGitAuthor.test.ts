@@ -15,9 +15,7 @@ describe('getGitAuthor', () => {
   });
 
   it('should return author name and email from git config output', async () => {
-    execFileSync
-      .mockReturnValueOnce(' Jane Doe \n')
-      .mockReturnValueOnce(' jane@example.com \n');
+    execFileSync.mockReturnValueOnce(' Jane Doe \n').mockReturnValueOnce(' jane@example.com \n');
 
     const { getGitAuthor } = await importGetGitAuthor();
 
@@ -26,24 +24,16 @@ describe('getGitAuthor', () => {
       name: 'Jane Doe',
     });
     expect(execFileSync).toHaveBeenCalledTimes(2);
-    expect(execFileSync).toHaveBeenNthCalledWith(
-      1,
-      'git',
-      ['config', '--get', 'user.name'],
-      { encoding: 'utf8' },
-    );
-    expect(execFileSync).toHaveBeenNthCalledWith(
-      2,
-      'git',
-      ['config', '--get', 'user.email'],
-      { encoding: 'utf8' },
-    );
+    expect(execFileSync).toHaveBeenNthCalledWith(1, 'git', ['config', '--get', 'user.name'], {
+      encoding: 'utf8',
+    });
+    expect(execFileSync).toHaveBeenNthCalledWith(2, 'git', ['config', '--get', 'user.email'], {
+      encoding: 'utf8',
+    });
   });
 
   it('should cache the resolved author and does not call git again on subsequent calls', async () => {
-    execFileSync
-      .mockReturnValueOnce(' Jane Doe \n')
-      .mockReturnValueOnce(' jane@example.com \n');
+    execFileSync.mockReturnValueOnce(' Jane Doe \n').mockReturnValueOnce(' jane@example.com \n');
 
     const { getGitAuthor } = await importGetGitAuthor();
 

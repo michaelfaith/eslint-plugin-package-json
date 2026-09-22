@@ -9,16 +9,12 @@ export const rule = createRule({
     const banList = Object.fromEntries(
       /* v8 ignore next - not possible to cover due to presence of `defaultOptions` */
       (context.options[0]?.ban ?? []).map((entry) =>
-        typeof entry === 'string'
-          ? [entry, '']
-          : [entry.property, entry.message ?? ''],
+        typeof entry === 'string' ? [entry, ''] : [entry.property, entry.message ?? ''],
       ),
     );
 
     return {
-      'Program > JSONExpressionStatement > JSONObjectExpression'(
-        node: AST.JSONObjectExpression,
-      ) {
+      'Program > JSONExpressionStatement > JSONObjectExpression'(node: AST.JSONObjectExpression) {
         for (const property of node.properties) {
           if (!isJSONStringLiteral(property.key)) {
             continue;
@@ -38,10 +34,7 @@ export const rule = createRule({
               node: property.key,
               suggest: [
                 {
-                  fix: fixRemoveObjectProperty(
-                    context,
-                    property as unknown as ObjectProperty,
-                  ),
+                  fix: fixRemoveObjectProperty(context, property as unknown as ObjectProperty),
                   messageId: 'removePropertySuggestion',
                 },
               ],
@@ -60,8 +53,7 @@ export const rule = createRule({
     },
     hasSuggestions: true,
     messages: {
-      bannedProperty:
-        'The `{{ property }}` property is not allowed{{ customMessage }}',
+      bannedProperty: 'The `{{ property }}` property is not allowed{{ customMessage }}',
       removePropertySuggestion: 'Remove the property.',
     },
     schema: [
@@ -80,8 +72,7 @@ export const rule = createRule({
                   additionalProperties: false,
                   properties: {
                     message: {
-                      description:
-                        'Custom message to append to the error report.',
+                      description: 'Custom message to append to the error report.',
                       type: 'string',
                     },
                     property: {

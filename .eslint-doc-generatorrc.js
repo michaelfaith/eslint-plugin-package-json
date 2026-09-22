@@ -7,14 +7,10 @@ import oxfmtConfig from './oxfmt.config.ts';
 
 const ruleEntries = Object.entries(rules);
 const requireRules = Object.fromEntries(
-  ruleEntries.filter(
-    ([, rule]) => rule.meta.docs.ruleGroup === 'require-properties',
-  ),
+  ruleEntries.filter(([, rule]) => rule.meta.docs.ruleGroup === 'require-properties'),
 );
 const validRules = Object.fromEntries(
-  ruleEntries.filter(
-    ([, rule]) => rule.meta.docs.ruleGroup === 'valid-properties',
-  ),
+  ruleEntries.filter(([, rule]) => rule.meta.docs.ruleGroup === 'valid-properties'),
 );
 
 const requireRuleNames = Object.keys(requireRules);
@@ -42,20 +38,14 @@ const config = {
     const result = await format(basename(path), content, oxfmtConfig);
     return result.code;
   },
-  ruleDocNotices: [
-    'configs',
-    'deprecated',
-    'fixableAndHasSuggestions',
-    'requiresTypeChecking',
-  ],
+  ruleDocNotices: ['configs', 'deprecated', 'fixableAndHasSuggestions', 'requiresTypeChecking'],
   ruleDocTitleFormat: 'name',
   ruleListSplit(rules) {
     return [
       {
         // No header for this list.
         rules: rules.filter(
-          ([name]) =>
-            !requireRuleNames.includes(name) && !validRuleNames.includes(name),
+          ([name]) => !requireRuleNames.includes(name) && !validRuleNames.includes(name),
         ),
       },
       {
