@@ -2,7 +2,7 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "oxc.oxc-vscode",
     "streetsidesoftware.code-spell-checker",
     "vitest.explorer"
   ]
