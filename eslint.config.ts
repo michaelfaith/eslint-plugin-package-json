@@ -65,7 +65,7 @@ export default defineConfig(
       '@typescript-eslint/no-shadow': 'error',
       'n/no-missing-import': 'off',
 
-      // Stylistic concerns that don't interfere with Prettier
+      // Stylistic concerns that don't interfere with formatter
       'logical-assignment-operators': [
         'error',
         'always',
