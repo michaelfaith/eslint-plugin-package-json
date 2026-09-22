@@ -75,11 +75,13 @@ export const rule = createRule({
         // npm only falls back to the `bundledDependencies` spelling when
         // `bundleDependencies` is absent or falsy, so the two never combine:
         // https://github.com/npm/normalize-package-data/blob/34c98503c4e828a166aa3bb78a4cb0525af3c8f5/lib/fixer.js#L113
-        if (!(
-          bundleDependenciesValue &&
-          (bundleDependenciesValue.type !== 'JSONLiteral' ||
-            Boolean(bundleDependenciesValue.value))
-        )) {
+        if (
+          !(
+            bundleDependenciesValue &&
+            (bundleDependenciesValue.type !== 'JSONLiteral' ||
+              Boolean(bundleDependenciesValue.value))
+          )
+        ) {
           bundleDependenciesValue = bundleDependencyValues.get(
             'bundledDependencies',
           );

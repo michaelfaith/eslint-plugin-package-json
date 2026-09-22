@@ -44,13 +44,19 @@ pnpm docs:generate
 
 ## Formatting
 
-[Prettier](https://prettier.io) is used to format code.
+[Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) is used to format code.
 It should be applied automatically when you save files in VS Code or make a Git commit.
+
+<Aside type="note">
+  Be sure to install the [Oxc
+  Extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
+  for your IDE.
+</Aside>
 
 To manually reformat all files, you can run:
 
 ```shell
-pnpm format --write
+pnpm format
 ```
 
 ## Linting

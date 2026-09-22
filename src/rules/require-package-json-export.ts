@@ -17,9 +17,13 @@ function isImplicitFormat(node: AST.JSONObjectExpression): boolean {
 export const rule = createRule({
   create(context) {
     let publishConfigExportsValueNode:
-      AST.JSONObjectExpression | AST.JSONStringLiteral | undefined;
+      | AST.JSONObjectExpression
+      | AST.JSONStringLiteral
+      | undefined;
     let exportsValueNode:
-      AST.JSONObjectExpression | AST.JSONStringLiteral | undefined;
+      | AST.JSONObjectExpression
+      | AST.JSONStringLiteral
+      | undefined;
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=exports]'(

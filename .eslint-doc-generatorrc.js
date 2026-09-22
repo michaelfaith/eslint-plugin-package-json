@@ -1,6 +1,9 @@
-import prettier from 'prettier';
+import { basename } from 'node:path';
+
+import { format } from 'oxfmt';
 
 import { rules } from './dist/index.mjs';
+import oxfmtConfig from './oxfmt.config.ts';
 
 const ruleEntries = Object.entries(rules);
 const requireRules = Object.fromEntries(
@@ -36,11 +39,8 @@ const config = {
   },
   pathRuleList: ['README.md', 'site/src/content/docs/rule-list.md'],
   postprocess: async (content, path) => {
-    const parser = path.endsWith('.mdx') ? 'mdx' : 'markdown';
-    return prettier.format(content, {
-      ...(await prettier.resolveConfig(path)),
-      parser,
-    });
+    const result = await format(basename(path), content, oxfmtConfig);
+    return result.code;
   },
   ruleDocNotices: [
     'configs',
