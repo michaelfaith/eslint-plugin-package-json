@@ -11,8 +11,7 @@ ruleTester.run('valid-man', rules['valid-man'], {
       errors: [
         {
           data: {
-            error:
-              'the value is `null`, but should be an `Array` or a `string`',
+            error: 'the value is `null`, but should be an `Array` or a `string`',
           },
           line: 2,
           messageId: 'validationError',
@@ -83,40 +82,35 @@ ruleTester.run('valid-man', rules['valid-man'], {
       errors: [
         {
           data: {
-            error:
-              'item at index 0 is not valid; it should be the path to a man file',
+            error: 'item at index 0 is not valid; it should be the path to a man file',
           },
           line: 3,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item at index 1 is not valid; it should be the path to a man file',
+            error: 'item at index 1 is not valid; it should be the path to a man file',
           },
           line: 4,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item at index 2 is not valid; it should be the path to a man file',
+            error: 'item at index 2 is not valid; it should be the path to a man file',
           },
           line: 5,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item at index 3 is not valid; it should be the path to a man file',
+            error: 'item at index 3 is not valid; it should be the path to a man file',
           },
           line: 6,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'item at index 4 is empty, but should be the path to a man file',
+            error: 'item at index 4 is empty, but should be the path to a man file',
           },
           line: 7,
           messageId: 'validationError',
@@ -145,9 +139,5 @@ ruleTester.run('valid-man', rules['valid-man'], {
       ],
     },
   ],
-  valid: [
-    '{}',
-    `{ "man": [] }`,
-    `{ "man": ["./man/doc.1", "./man/doc.2.gz"] }`,
-  ],
+  valid: ['{}', `{ "man": [] }`, `{ "man": ["./man/doc.1", "./man/doc.2.gz"] }`],
 });

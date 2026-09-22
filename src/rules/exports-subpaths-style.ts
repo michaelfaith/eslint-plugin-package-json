@@ -1,22 +1,15 @@
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import {
-  isJSONNullLiteral,
-  isJSONStringLiteral,
-} from '../utils/predicates/index.ts';
+import { isJSONNullLiteral, isJSONStringLiteral } from '../utils/predicates/index.ts';
 
-function isImplicitFormat(
-  node: AST.JSONLiteral | AST.JSONObjectExpression,
-): boolean {
+function isImplicitFormat(node: AST.JSONLiteral | AST.JSONObjectExpression): boolean {
   // Implicit format = no subpath keys (keys starting with ".")
   // All keys are conditions: import, require, node, default, types, browser
   return node.type === 'JSONLiteral'
     ? true
     : node.properties.every(
-        (property) =>
-          !isJSONStringLiteral(property.key) ||
-          !property.key.value.startsWith('.'),
+        (property) => !isJSONStringLiteral(property.key) || !property.key.value.startsWith('.'),
       );
 }
 
@@ -35,8 +28,7 @@ export const rule = createRule({
       }
 
       if (
-        (value.type !== 'JSONLiteral' &&
-          value.type !== 'JSONObjectExpression') ||
+        (value.type !== 'JSONLiteral' && value.type !== 'JSONObjectExpression') ||
         !isImplicitFormat(value)
       ) {
         return;
@@ -120,10 +112,8 @@ export const rule = createRule({
     },
     fixable: 'code',
     messages: {
-      preferExplicit:
-        'Prefer explicit subpaths format with "." key for single root export.',
-      preferImplicit:
-        'Prefer implicit format without "." key for single root export.',
+      preferExplicit: 'Prefer explicit subpaths format with "." key for single root export.',
+      preferImplicit: 'Prefer implicit format without "." key for single root export.',
     },
     schema: [
       {

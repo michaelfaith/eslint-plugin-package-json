@@ -368,9 +368,7 @@ ruleTester.run('order-properties', rule, {
       ],
       filename: 'package.json',
       options: [{ order: ['name', 'version'] }],
-      output: ['{', '	"name": "foo",', '	"version": "1.0.0"', '}'].join(
-        '\r\n',
-      ),
+      output: ['{', '	"name": "foo",', '	"version": "1.0.0"', '}'].join('\r\n'),
     },
   ],
   valid: [

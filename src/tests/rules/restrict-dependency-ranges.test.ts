@@ -4,13 +4,9 @@ import { ruleTester } from './ruleTester.ts';
 ruleTester.run('restrict-dependency-ranges', rule, {
   invalid: [
     // rangeType: 'caret'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -23,20 +19,20 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-      errors: [
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 4,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
-              },
-              output: `{
+        errors: [
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 4,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "^1.2.3",
@@ -49,22 +45,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 5,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 5,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -77,22 +73,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 6,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 6,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -105,22 +101,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 8,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 8,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -133,22 +129,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 9,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 9,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -161,29 +157,29 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": ">1.2.3"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 10,
-          messageId: 'wrongRangeType',
-        },
-        {
-          data: {
-            rangeTypes: '^',
-          },
-          line: 11,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '^',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 10,
+            messageId: 'wrongRangeType',
+          },
+          {
+            data: {
+              rangeTypes: '^',
+            },
+            line: 11,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '^',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -196,23 +192,20 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "yza": "^1.2.3"
     }
 }`,
-            },
-          ],
-        },
-      ],
-      filename: 'package.json',
-      name: `rangeType: 'caret'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'caret' }],
-    })),
+              },
+            ],
+          },
+        ],
+        filename: 'package.json',
+        name: `rangeType: 'caret'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'caret' }],
+      }),
+    ),
 
     // rangeType: 'pin'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -223,17 +216,17 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-      errors: [
-        {
-          data: {
-            rangeTypes: 'pin',
-          },
-          line: 3,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeToPin',
-              output: `{
+        errors: [
+          {
+            data: {
+              rangeTypes: 'pin',
+            },
+            line: 3,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeToPin',
+                output: `{
     "${dependencyType}": {
         "abc": "1.2.3",
         "def": "1.2.3",
@@ -244,19 +237,19 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: 'pin',
+              },
+            ],
           },
-          line: 5,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeToPin',
-              output: `{
+          {
+            data: {
+              rangeTypes: 'pin',
+            },
+            line: 5,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeToPin',
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -267,19 +260,19 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: 'pin',
+              },
+            ],
           },
-          line: 7,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeToPin',
-              output: `{
+          {
+            data: {
+              rangeTypes: 'pin',
+            },
+            line: 7,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeToPin',
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -290,19 +283,19 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: 'pin',
+              },
+            ],
           },
-          line: 8,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeToPin',
-              output: `{
+          {
+            data: {
+              rangeTypes: 'pin',
+            },
+            line: 8,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeToPin',
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -313,30 +306,27 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: 'pin',
+              },
+            ],
           },
-          line: 9,
-          messageId: 'wrongRangeType',
-        },
-      ],
-      filename: 'package.json',
-      name: `rangeType: 'pin'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'pin' }],
-    })),
+          {
+            data: {
+              rangeTypes: 'pin',
+            },
+            line: 9,
+            messageId: 'wrongRangeType',
+          },
+        ],
+        filename: 'package.json',
+        name: `rangeType: 'pin'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'pin' }],
+      }),
+    ),
 
     // rangeType: 'tilde'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -347,20 +337,20 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-      errors: [
-        {
-          data: {
-            rangeTypes: '~',
-          },
-          line: 3,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '~',
-              },
-              output: `{
+        errors: [
+          {
+            data: {
+              rangeTypes: '~',
+            },
+            line: 3,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '~',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "~1.2.3",
         "def": "1.2.3",
@@ -371,22 +361,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '~',
-          },
-          line: 4,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '~',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '~',
+            },
+            line: 4,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '~',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "~1.2.3",
@@ -397,22 +387,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '~',
-          },
-          line: 6,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '~',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '~',
+            },
+            line: 6,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '~',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -423,22 +413,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '~',
-          },
-          line: 7,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '~',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '~',
+            },
+            line: 7,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '~',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -449,30 +439,27 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '~',
+              },
+            ],
           },
-          line: 9,
-          messageId: 'wrongRangeType',
-        },
-      ],
-      filename: 'package.json',
-      name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'tilde' }],
-    })),
+          {
+            data: {
+              rangeTypes: '~',
+            },
+            line: 9,
+            messageId: 'wrongRangeType',
+          },
+        ],
+        filename: 'package.json',
+        name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'tilde' }],
+      }),
+    ),
 
     // rangeType: '>='
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -483,20 +470,20 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-      errors: [
-        {
-          data: {
-            rangeTypes: '>=',
-          },
-          line: 3,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '>=',
-              },
-              output: `{
+        errors: [
+          {
+            data: {
+              rangeTypes: '>=',
+            },
+            line: 3,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '>=',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": ">=1.2.3",
         "def": "1.2.3",
@@ -507,22 +494,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '>=',
-          },
-          line: 4,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '>=',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '>=',
+            },
+            line: 4,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '>=',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": ">=1.2.3",
@@ -533,22 +520,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '>=',
-          },
-          line: 5,
-          messageId: 'wrongRangeType',
-          suggestions: [
-            {
-              messageId: 'changeTo',
-              data: {
-                rangeType: '>=',
               },
-              output: `{
+            ],
+          },
+          {
+            data: {
+              rangeTypes: '>=',
+            },
+            line: 5,
+            messageId: 'wrongRangeType',
+            suggestions: [
+              {
+                messageId: 'changeTo',
+                data: {
+                  rangeType: '>=',
+                },
+                output: `{
     "${dependencyType}": {
         "abc": "^1.2.3",
         "def": "1.2.3",
@@ -559,21 +546,22 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "stu": "*"
     }
 }`,
-            },
-          ],
-        },
-        {
-          data: {
-            rangeTypes: '>=',
+              },
+            ],
           },
-          line: 9,
-          messageId: 'wrongRangeType',
-        },
-      ],
-      filename: 'package.json',
-      name: `rangeType: '>='; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: '>=' }],
-    })),
+          {
+            data: {
+              rangeTypes: '>=',
+            },
+            line: 9,
+            messageId: 'wrongRangeType',
+          },
+        ],
+        filename: 'package.json',
+        name: `rangeType: '>='; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: '>=' }],
+      }),
+    ),
 
     // multiple options (last wins)
     {
@@ -695,149 +683,118 @@ ruleTester.run('restrict-dependency-ranges', rule, {
     },
 
     // rangeType: 'caret'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {}
 }`,
-      name: `rangeType: 'caret'; dependencyType: '${dependencyType}'; no deps`,
-      options: [{ rangeType: 'caret' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'caret'; dependencyType: '${dependencyType}'; no deps`,
+        options: [{ rangeType: 'caret' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "^1.2.3",
         "def": "workspace:^1.2.3",
         "ghi": "workspace:^"
 	}
 }`,
-      name: `rangeType: 'caret'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'caret' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'caret'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'caret' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "^1.2.3",
         "def": "workspace:^1.2.3",
         "ghi": "workspace:^"
 	}
 }`,
-      name: `rangeType: ['caret']; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: ['caret'] }]],
-    })),
+        name: `rangeType: ['caret']; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: ['caret'] }]],
+      }),
+    ),
 
     // rangeType: 'pin'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {}
 }`,
-      name: `rangeType: 'pin'; dependencyType: '${dependencyType}'; no deps`,
-      options: [{ rangeType: 'pin' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'pin'; dependencyType: '${dependencyType}'; no deps`,
+        options: [{ rangeType: 'pin' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "1.2.3",
         "def": "workspace:*"
 	}
 }`,
-      name: `rangeType: 'pin'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'pin' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'pin'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'pin' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "1.2.3",
         "def": "workspace:*"
 	}
 }`,
-      name: `rangeType: ['pin']; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: ['pin'] }]],
-    })),
+        name: `rangeType: ['pin']; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: ['pin'] }]],
+      }),
+    ),
 
     // rangeType: 'tilde'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {}
 }`,
-      name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'; no deps`,
-      options: [{ rangeType: 'tilde' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'; no deps`,
+        options: [{ rangeType: 'tilde' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "~1.2.3",
         "def": "workspace:~1.2.3",
         "ghi": "workspace:~"
 	}
 }`,
-      name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'`,
-      options: [{ rangeType: 'tilde' }],
-    })),
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+        name: `rangeType: 'tilde'; dependencyType: '${dependencyType}'`,
+        options: [{ rangeType: 'tilde' }],
+      }),
+    ),
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "~1.2.3",
         "def": "workspace:~1.2.3",
         "ghi": "workspace:~"
 	}
 }`,
-      name: `rangeType: ['tilde']; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: ['tilde'] }]],
-    })),
+        name: `rangeType: ['tilde']; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: ['tilde'] }]],
+      }),
+    ),
 
     // rangeType: 'pin' and 'tilde'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "~1.2.3",
         "def": "workspace:~1.2.3",
@@ -846,18 +803,15 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "mno": "workspace:*"
 	}
 }`,
-      name: `rangeType: ['pin', 'tilde']; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: ['pin', 'tilde'] }]],
-    })),
+        name: `rangeType: ['pin', 'tilde']; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: ['pin', 'tilde'] }]],
+      }),
+    ),
 
     // rangeType: '^' and 'tilde'
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "~1.2.3",
         "def": "workspace:~1.2.3",
@@ -866,9 +820,10 @@ ruleTester.run('restrict-dependency-ranges', rule, {
         "mno": "workspace:^"
 	}
 }`,
-      name: `rangeType: ['^', 'tilde']; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: ['^', 'tilde'] }]],
-    })),
+        name: `rangeType: ['^', 'tilde']; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: ['^', 'tilde'] }]],
+      }),
+    ),
 
     // forDependencyTypes: devDependencies
     {
@@ -885,9 +840,7 @@ ruleTester.run('restrict-dependency-ranges', rule, {
 	}
 }`,
       name: "forDependencyTypes: 'devDependencies'",
-      options: [
-        { forDependencyTypes: ['devDependencies'], rangeType: 'caret' },
-      ],
+      options: [{ forDependencyTypes: ['devDependencies'], rangeType: 'caret' }],
     },
 
     // forPackages: abc
@@ -945,21 +898,18 @@ ruleTester.run('restrict-dependency-ranges', rule, {
     },
 
     // multiple options (last one wins)
-    ...[
-      'dependencies',
-      'devDependencies',
-      'peerDependencies',
-      'optionalDependencies',
-    ].map((dependencyType) => ({
-      code: `{
+    ...['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'].map(
+      (dependencyType) => ({
+        code: `{
 	"${dependencyType}": {
 		"abc": "~1.2.3",
         "def": "workspace:~1.2.3",
         "ghi": "workspace:~",
 	}
 }`,
-      name: `[{ rangeType: "pin" }, { rangeType: "tilde" }]; dependencyType: '${dependencyType}'`,
-      options: [[{ rangeType: 'pin' }, { rangeType: 'tilde' }]],
-    })),
+        name: `[{ rangeType: "pin" }, { rangeType: "tilde" }]; dependencyType: '${dependencyType}'`,
+        options: [[{ rangeType: 'pin' }, { rangeType: 'tilde' }]],
+      }),
+    ),
   ],
 });

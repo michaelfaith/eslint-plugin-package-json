@@ -66,11 +66,7 @@ export default defineConfig(
       'n/no-missing-import': 'off',
 
       // Stylistic concerns that don't interfere with formatter
-      'logical-assignment-operators': [
-        'error',
-        'always',
-        { enforceForIfStatements: true },
-      ],
+      'logical-assignment-operators': ['error', 'always', { enforceForIfStatements: true }],
       'no-useless-rename': 'error',
       'object-shorthand': 'error',
       'operator-assignment': 'error',
@@ -134,20 +130,14 @@ export default defineConfig(
     files: ['**/*.{yml,yaml}'],
     rules: {
       'yml/file-extension': ['error', { extension: 'yml' }],
-      'yml/sort-sequence-values': [
-        'error',
-        { order: { type: 'asc' }, pathPattern: '^.*$' },
-      ],
+      'yml/sort-sequence-values': ['error', { order: { type: 'asc' }, pathPattern: '^.*$' }],
     },
   },
   {
     files: ['pnpm-workspace.yaml'],
     rules: {
       'yml/file-extension': 'off',
-      'yml/sort-keys': [
-        'error',
-        { order: { type: 'asc' }, pathPattern: '^.*$' },
-      ],
+      'yml/sort-keys': ['error', { order: { type: 'asc' }, pathPattern: '^.*$' }],
     },
   },
   {

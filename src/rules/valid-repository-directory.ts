@@ -41,10 +41,7 @@ export const rule = createRule({
           value: AST.JSONObjectExpression;
         },
       ) {
-        const directoryProperty = findPropertyWithKeyValue(
-          node.value.properties,
-          'directory',
-        );
+        const directoryProperty = findPropertyWithKeyValue(node.value.properties, 'directory');
         if (
           directoryProperty?.value.type !== 'JSONLiteral' ||
           typeof directoryProperty.value.value !== 'string'
@@ -91,10 +88,7 @@ export const rule = createRule({
                 {
                   data: { expected },
                   fix(fixer) {
-                    return fixer.replaceText(
-                      directoryProperty.value,
-                      `"${expected}"`,
-                    );
+                    return fixer.replaceText(directoryProperty.value, `"${expected}"`);
                   },
                   messageId: 'replace',
                 },

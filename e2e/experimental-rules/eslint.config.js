@@ -13,10 +13,7 @@ export default defineConfig([
     files: ['package.json'],
     language: 'json/json',
     rules: {
-      'package-json/require-attribution': [
-        'error',
-        { preferContributorsOnly: true },
-      ],
+      'package-json/require-attribution': ['error', { preferContributorsOnly: true }],
     },
   },
 ]);

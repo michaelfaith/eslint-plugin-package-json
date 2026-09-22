@@ -11,8 +11,7 @@ ruleTester.run('valid-sideEffects', rules['valid-sideEffects'], {
       errors: [
         {
           data: {
-            error:
-              'the value is `null`, but should be a `boolean` or an `Array`',
+            error: 'the value is `null`, but should be a `boolean` or an `Array`',
           },
           line: 2,
           messageId: 'validationError',

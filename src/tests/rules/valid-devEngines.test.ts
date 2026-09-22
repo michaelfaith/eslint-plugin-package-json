@@ -159,8 +159,7 @@ ruleTester.run('valid-devEngines', rules['valid-devEngines'], {
         },
         {
           data: {
-            error:
-              'the `version` property should be a string, but got `number`',
+            error: 'the `version` property should be a string, but got `number`',
           },
           line: 8,
           messageId: 'validationError',

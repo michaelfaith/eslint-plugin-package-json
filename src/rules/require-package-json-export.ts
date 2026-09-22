@@ -9,40 +9,27 @@ function isImplicitFormat(node: AST.JSONObjectExpression): boolean {
   // Implicit format = no subpath keys (keys starting with ".")
   // All keys are conditions: import, require, node, default, types, browser
   return node.properties.every(
-    (property) =>
-      !isJSONStringLiteral(property.key) || !property.key.value.startsWith('.'),
+    (property) => !isJSONStringLiteral(property.key) || !property.key.value.startsWith('.'),
   );
 }
 
 export const rule = createRule({
   create(context) {
-    let publishConfigExportsValueNode:
-      | AST.JSONObjectExpression
-      | AST.JSONStringLiteral
-      | undefined;
-    let exportsValueNode:
-      | AST.JSONObjectExpression
-      | AST.JSONStringLiteral
-      | undefined;
+    let publishConfigExportsValueNode: AST.JSONObjectExpression | AST.JSONStringLiteral | undefined;
+    let exportsValueNode: AST.JSONObjectExpression | AST.JSONStringLiteral | undefined;
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=exports]'(
         node: AST.JSONProperty,
       ) {
-        if (
-          node.value.type === 'JSONObjectExpression' ||
-          isJSONStringLiteral(node.value)
-        ) {
+        if (node.value.type === 'JSONObjectExpression' || isJSONStringLiteral(node.value)) {
           exportsValueNode = node.value;
         }
       },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=publishConfig] > JSONObjectExpression > JSONProperty[key.value=exports]'(
         node: AST.JSONProperty,
       ) {
-        if (
-          node.value.type === 'JSONObjectExpression' ||
-          isJSONStringLiteral(node.value)
-        ) {
+        if (node.value.type === 'JSONObjectExpression' || isJSONStringLiteral(node.value)) {
           publishConfigExportsValueNode = node.value;
         }
       },
@@ -59,9 +46,7 @@ export const rule = createRule({
         const { text } = context.sourceCode;
         const { indent, type } = detectIndent(text);
         const indentUnit = type === 'tab' ? '\t' : indent || '  ';
-        const extraIndent = isPublishConfig
-          ? `${indentUnit}${indentUnit}`
-          : indentUnit;
+        const extraIndent = isPublishConfig ? `${indentUnit}${indentUnit}` : indentUnit;
 
         // If exports is not a collection of subpaths, then we know we don't have a package.json export
         if (isJSONStringLiteral(exportsNode) || isImplicitFormat(exportsNode)) {
@@ -96,8 +81,7 @@ export const rule = createRule({
         // Exports is an object, so we need to check for the existence of a `./package.json` subpath
         const isPackageJsonExported = exportsNode.properties.some(
           (property) =>
-            isJSONStringLiteral(property.key) &&
-            property.key.value === './package.json',
+            isJSONStringLiteral(property.key) && property.key.value === './package.json',
         );
         if (isPackageJsonExported) {
           return;
@@ -111,10 +95,7 @@ export const rule = createRule({
               messageId: 'addExport',
               fix(fixer) {
                 const valueText = context.sourceCode.getText(exportsNode);
-                const existingExports = JSON.parse(valueText) as Record<
-                  string,
-                  unknown
-                >;
+                const existingExports = JSON.parse(valueText) as Record<string, unknown>;
 
                 const fixedValue = increaseIndent(
                   JSON.stringify(

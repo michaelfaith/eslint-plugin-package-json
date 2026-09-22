@@ -63,17 +63,13 @@ When provided, the rule won't report violations for the specified properties.
 This can be useful if you're using tools that take configuration from package.json and accept an empty array or object as valid non-default configuration.
 
 <Aside>
-  `files` is included by default since an empty array value is meaningfully
-  different than not including it at all. See
-  [`no-redundant-files`](/rules/no-redundant-files) for more.
+  `files` is included by default since an empty array value is meaningfully different than not
+  including it at all. See [`no-redundant-files`](/rules/no-redundant-files) for more.
 </Aside>
 
 ```json
 {
-  "package-json/no-empty-fields": [
-    "error",
-    { "ignoreProperties": ["browserslist"] }
-  ]
+  "package-json/no-empty-fields": ["error", { "ignoreProperties": ["browserslist"] }]
 }
 ```
 

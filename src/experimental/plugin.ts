@@ -6,10 +6,7 @@ import { plugin as originalPlugin } from '../plugin.ts';
 const language = 'json/json';
 
 const rules = Object.fromEntries(
-  Object.entries(originalPlugin.rules).map(([name, rule]) => [
-    name,
-    toCompatRule(rule),
-  ]),
+  Object.entries(originalPlugin.rules).map(([name, rule]) => [name, toCompatRule(rule)]),
 );
 
 // Add `meta.languages` to enforce use of the json/json language.

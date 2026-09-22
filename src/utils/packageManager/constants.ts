@@ -1,12 +1,4 @@
-export const AGENTS = [
-  'npm',
-  'yarn',
-  'pnpm',
-  'bun',
-  'deno',
-  'nub',
-  'aube',
-] as const;
+export const AGENTS = ['npm', 'yarn', 'pnpm', 'bun', 'deno', 'nub', 'aube'] as const;
 export type AgentName = (typeof AGENTS)[number];
 
 export interface DetectResult {

@@ -57,8 +57,7 @@ ruleTester.run('valid-packageManager', rules['valid-packageManager'], {
       errors: [
         {
           data: {
-            error:
-              'the value should be in the form "name@version" (e.g. "pnpm@10.3.0")',
+            error: 'the value should be in the form "name@version" (e.g. "pnpm@10.3.0")',
           },
           line: 2,
           messageId: 'validationError',

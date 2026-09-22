@@ -108,16 +108,14 @@ ruleTester.run('valid-funding', rules['valid-funding'], {
         },
         {
           data: {
-            error:
-              'the value should be an object with `type` and `url` or a string URL',
+            error: 'the value should be an object with `type` and `url` or a string URL',
           },
           line: 4,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'the value should be an object with `type` and `url` or a string URL',
+            error: 'the value should be an object with `type` and `url` or a string URL',
           },
           line: 5,
           messageId: 'validationError',
@@ -138,8 +136,7 @@ ruleTester.run('valid-funding', rules['valid-funding'], {
         },
         {
           data: {
-            error:
-              'the value should be an object with `type` and `url` or a string URL',
+            error: 'the value should be an object with `type` and `url` or a string URL',
           },
           line: 7,
           messageId: 'validationError',

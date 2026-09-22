@@ -19,14 +19,9 @@ export const rule = createRule({
         const json = JSON.parse(text) as Record<string, unknown>;
 
         const allKeys = Object.keys(json);
-        const orderedNonStandardKeys = allKeys
-          .filter((key) => !requiredOrder.includes(key))
-          .sort();
+        const orderedNonStandardKeys = allKeys.filter((key) => !requiredOrder.includes(key)).sort();
 
-        const orderedSource = sortObjectKeys(json, [
-          ...requiredOrder,
-          ...orderedNonStandardKeys,
-        ]);
+        const orderedSource = sortObjectKeys(json, [...requiredOrder, ...orderedNonStandardKeys]);
         const orderedKeys = Object.keys(orderedSource);
 
         const { properties } = ast.body[0].expression;
@@ -48,11 +43,7 @@ export const rule = createRule({
               const endCharacters = text.endsWith('\n') ? '\n' : '';
               const newline = detectNewlineGraceful(text);
               let result =
-                JSON.stringify(
-                  orderedSource,
-                  null,
-                  type === 'tab' ? '\t' : indent,
-                ) + endCharacters;
+                JSON.stringify(orderedSource, null, type === 'tab' ? '\t' : indent) + endCharacters;
               if (newline === '\r\n') {
                 result = result.replace(/\n/g, newline);
               }
@@ -74,13 +65,11 @@ export const rule = createRule({
     ],
     docs: {
       category: 'Stylistic',
-      description:
-        'Enforces that package properties are declared in a consistent order.',
+      description: 'Enforces that package properties are declared in a consistent order.',
     },
     fixable: 'code',
     messages: {
-      incorrectOrder:
-        'Top-level property `{{property}}` is not ordered in the standard way.',
+      incorrectOrder: 'Top-level property `{{property}}` is not ordered in the standard way.',
     },
     schema: [
       {

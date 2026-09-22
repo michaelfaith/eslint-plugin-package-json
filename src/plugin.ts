@@ -54,8 +54,7 @@ const rules: Record<string, PackageJsonRuleModule> = {
   'unique-dependencies': uniqueDependencies,
   'valid-author': validAuthor,
   ...basicValidRules,
-  'valid-peerDependenciesMeta-relationship':
-    validPeerDependenciesMetaRelationship,
+  'valid-peerDependenciesMeta-relationship': validPeerDependenciesMetaRelationship,
   'valid-repository-directory': validRepositoryDirectory,
 };
 

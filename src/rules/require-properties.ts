@@ -4,10 +4,7 @@ import {
 } from '../utils/createSimpleRequirePropertyRule.ts';
 import { getGitAuthor } from '../utils/git/getGitAuthor.ts';
 
-export const propertyConfig: [
-  name: string,
-  options?: CreateRequirePropertyRuleOptions,
-][] = [
+export const propertyConfig: [name: string, options?: CreateRequirePropertyRuleOptions][] = [
   [
     'author',
     {
@@ -56,10 +53,7 @@ export const propertyConfig: [
 
 export const rules = Object.fromEntries(
   propertyConfig.map(([propertyName, options]) => {
-    const { rule, ruleName } = createSimpleRequirePropertyRule(
-      propertyName,
-      options,
-    );
+    const { rule, ruleName } = createSimpleRequirePropertyRule(propertyName, options);
     return [ruleName, rule];
   }),
 );

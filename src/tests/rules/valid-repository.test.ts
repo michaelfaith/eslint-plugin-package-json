@@ -11,8 +11,7 @@ ruleTester.run('valid-repository', rules['valid-repository'], {
       errors: [
         {
           data: {
-            error:
-              'the value is `null`, but should be an `object` or a `string`',
+            error: 'the value is `null`, but should be an `object` or a `string`',
           },
           line: 2,
           messageId: 'validationError',
@@ -42,8 +41,7 @@ ruleTester.run('valid-repository', rules['valid-repository'], {
       errors: [
         {
           data: {
-            error:
-              'the value is empty, but should be repository shorthand string',
+            error: 'the value is empty, but should be repository shorthand string',
           },
           line: 2,
           messageId: 'validationError',

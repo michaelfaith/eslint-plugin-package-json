@@ -26,8 +26,7 @@ vi.mock('node:process', () => ({
   ...processMock,
 }));
 
-const importDetectPackageManager = async () =>
-  await import('./detectPackageManager.ts');
+const importDetectPackageManager = async () => await import('./detectPackageManager.ts');
 
 describe('detectPackageManager', () => {
   beforeEach(() => {
@@ -52,9 +51,7 @@ describe('detectPackageManager', () => {
     const lockfilePath = path.join(cwd, 'pnpm-lock.yaml');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === lockfilePath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === lockfilePath);
 
     const { detectPackageManager } = await importDetectPackageManager();
 
@@ -81,9 +78,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({ packageManager: 'pnpm@9.1.0' });
@@ -102,9 +97,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({
@@ -130,9 +123,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({
@@ -154,9 +145,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({
@@ -175,18 +164,13 @@ describe('detectPackageManager', () => {
   it('looks upward for package.json values in parent directories', async () => {
     const cwd = path.resolve('/workspace/project/packages/app');
     const currentPackageJsonPath = path.join(cwd, 'package.json');
-    const parentPackageJsonPath = path.join(
-      path.dirname(cwd),
-      '..',
-      'package.json',
-    );
+    const parentPackageJsonPath = path.join(path.dirname(cwd), '..', 'package.json');
     const resolvedParentPackageJsonPath = path.resolve(parentPackageJsonPath);
 
     cwdMock.mockReturnValue(cwd);
     existsSyncMock.mockImplementation(
       (filepath: string) =>
-        filepath === currentPackageJsonPath ||
-        filepath === resolvedParentPackageJsonPath,
+        filepath === currentPackageJsonPath || filepath === resolvedParentPackageJsonPath,
     );
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === resolvedParentPackageJsonPath) {
@@ -228,9 +212,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({ name: 'my-package' });
@@ -249,9 +231,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         throw new Error('Invalid JSON');
@@ -270,9 +250,7 @@ describe('detectPackageManager', () => {
     const packageJsonPath = path.join(cwd, 'package.json');
 
     cwdMock.mockReturnValue(cwd);
-    existsSyncMock.mockImplementation(
-      (filepath: string) => filepath === packageJsonPath,
-    );
+    existsSyncMock.mockImplementation((filepath: string) => filepath === packageJsonPath);
     readFileSyncMock.mockImplementation((filepath: string) => {
       if (filepath === packageJsonPath) {
         return JSON.stringify({ packageManager: 'npm@10.2.0' });

@@ -11,15 +11,7 @@ const DEPENDENCY_TYPES = [
   'peerDependencies',
 ];
 
-const DEFAULT_ALLOWED_TAGS = [
-  'latest',
-  'dev',
-  'next',
-  'alpha',
-  'beta',
-  'canary',
-  'rc',
-];
+const DEFAULT_ALLOWED_TAGS = ['latest', 'dev', 'next', 'alpha', 'beta', 'canary', 'rc'];
 
 const distTagPattern = /^[A-Z0-9][\w.-]*$/i;
 function isDistTag(value: string): boolean {
@@ -28,8 +20,7 @@ function isDistTag(value: string): boolean {
 
 const rule = createRule({
   create(context) {
-    const { allowed = DEFAULT_ALLOWED_TAGS, allowedFor } =
-      context.options[0] ?? {};
+    const { allowed = DEFAULT_ALLOWED_TAGS, allowedFor } = context.options[0] ?? {};
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression]'(
@@ -45,10 +36,7 @@ const rule = createRule({
         }
 
         for (const property of node.value.properties) {
-          if (
-            !isJSONStringLiteral(property.key) ||
-            !isJSONStringLiteral(property.value)
-          ) {
+          if (!isJSONStringLiteral(property.key) || !isJSONStringLiteral(property.value)) {
             continue;
           }
 
@@ -89,8 +77,7 @@ const rule = createRule({
         'Restricts dependency dist-tags to an allowed list and selected dependency types.',
     },
     messages: {
-      disallowedDistTag:
-        'The "{{ tag }}" dist-tag is not allowed for {{ dependencyType }}.',
+      disallowedDistTag: 'The "{{ tag }}" dist-tag is not allowed for {{ dependencyType }}.',
     },
     schema: [
       {
@@ -104,8 +91,7 @@ const rule = createRule({
             },
           },
           allowedFor: {
-            description:
-              'Dependency sections where the allowed dist-tags may be used.',
+            description: 'Dependency sections where the allowed dist-tags may be used.',
             type: 'array',
             items: {
               enum: DEPENDENCY_TYPES,

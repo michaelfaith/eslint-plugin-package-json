@@ -75,9 +75,7 @@ const schemaOptions = {
   type: 'object',
 } as const;
 
-const normalizeRangeType = (
-  rangeTypeOrSymbol: RangeName | RangeSymbol,
-): RangeType =>
+const normalizeRangeType = (rangeTypeOrSymbol: RangeName | RangeSymbol): RangeType =>
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- validated by JSON schema
   RANGE_TYPES.find(
     (rangeType) =>
@@ -87,9 +85,7 @@ const normalizeRangeType = (
 
 /** @returns `undefined` if workspace versions are not supported for the specified {@link rangeType} */
 const getWorkspaceVersionForRange = (rangeType: RangeType) => {
-  return 'workspaceSymbol' in rangeType
-    ? `workspace:${rangeType.workspaceSymbol}`
-    : undefined;
+  return 'workspaceSymbol' in rangeType ? `workspace:${rangeType.workspaceSymbol}` : undefined;
 };
 
 /** For displaying a range type in a user-facing way (ie. an error message). */
@@ -98,8 +94,7 @@ const displayRangeType = (rangeType: RangeType) =>
 
 const ROLLING_WORKSPACE_REGEX = /^workspace:[~^*]$/;
 
-const isRollingWorkspaceSpec = (version: string) =>
-  ROLLING_WORKSPACE_REGEX.test(version);
+const isRollingWorkspaceSpec = (version: string) => ROLLING_WORKSPACE_REGEX.test(version);
 
 const CHANGE_VERSION_RANGE_REGEX = /^(workspace:)?(\^|~|<=?|>=?)?/;
 
@@ -150,9 +145,7 @@ export const rule = createRule({
     const optionsArray = optionsProvided.map((option) => ({
       ...option,
       forPackages: option.forPackages?.map((pattern) => new RegExp(pattern)),
-      rangeTypes: Array.isArray(option.rangeType)
-        ? option.rangeType
-        : [option.rangeType],
+      rangeTypes: Array.isArray(option.rangeType) ? option.rangeType : [option.rangeType],
     }));
 
     return {
@@ -172,10 +165,7 @@ export const rule = createRule({
         // Loop through all dependencies in the group
         for (const property of node.value.properties) {
           // If either the key or value aren't strings, this isn't a valid dependency, so move on.
-          if (
-            !isJSONStringLiteral(property.key) ||
-            !isJSONStringLiteral(property.value)
-          ) {
+          if (!isJSONStringLiteral(property.key) || !isJSONStringLiteral(property.value)) {
             continue;
           }
 
@@ -193,19 +183,14 @@ export const rule = createRule({
             }
             if (
               rangeType.alias === 'pin' &&
-              (!!semver.parse(version) ||
-                version === 'workspace:*' ||
-                version === 'workspace:')
+              (!!semver.parse(version) || version === 'workspace:*' || version === 'workspace:')
             ) {
               return true;
             }
             if (version.startsWith('workspace:')) {
               // if workspace versions are unsupported for this range type, we treat it as matching
               const workspaceVersion = getWorkspaceVersionForRange(rangeType);
-              return (
-                workspaceVersion === undefined ||
-                version.startsWith(workspaceVersion)
-              );
+              return workspaceVersion === undefined || version.startsWith(workspaceVersion);
             }
             return false;
           };
@@ -279,8 +264,7 @@ export const rule = createRule({
                       `"${changeVersionRange(version, rangeType)}"`,
                     );
                   },
-                  messageId:
-                    rangeType.alias === 'pin' ? 'changeToPin' : 'changeTo',
+                  messageId: rangeType.alias === 'pin' ? 'changeToPin' : 'changeTo',
                   data:
                     rangeType.alias === 'pin'
                       ? undefined
@@ -318,8 +302,7 @@ export const rule = createRule({
         oneOf: [
           schemaOptions,
           {
-            description:
-              'Array of configuration options, specifying range requirements.',
+            description: 'Array of configuration options, specifying range requirements.',
             items: schemaOptions,
             type: 'array',
           },

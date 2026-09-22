@@ -76,16 +76,14 @@ ruleTester.run('valid-bugs', rules['valid-bugs'], {
       errors: [
         {
           data: {
-            error:
-              'the object should have at least one of these properties: email, url',
+            error: 'the object should have at least one of these properties: email, url',
           },
           line: 2,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'unexpected property "invalid". Only "email" and "url" are allowed',
+            error: 'unexpected property "invalid". Only "email" and "url" are allowed',
           },
           line: 3,
           messageId: 'validationError',

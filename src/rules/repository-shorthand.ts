@@ -5,8 +5,7 @@ import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
 import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 const providerRegexes = {
-  bitbucket:
-    /^(?:git\+)?(?:ssh:\/\/git@|http?s:\/\/)?(?:www\.)?bitbucket\.org\//,
+  bitbucket: /^(?:git\+)?(?:ssh:\/\/git@|http?s:\/\/)?(?:www\.)?bitbucket\.org\//,
   gist: /^(?:git\+)?(?:ssh:\/\/git@|http?s:\/\/)?(?:www\.)?gist\.github\.com\//,
   github: /^(?:git\+)?(?:ssh:\/\/git@|http?s:\/\/)?(?:www\.)?github\.com\//,
   gitlab: /^(?:git\+)?(?:ssh:\/\/git@|http?s:\/\/)?(?:www\.)?gitlab\.com\//,
@@ -22,8 +21,7 @@ const providerUrls = {
 
 const providers = Object.keys(providerRegexes) as Provider[];
 
-const isProvider = (value: string): value is Provider =>
-  value in providerRegexes;
+const isProvider = (value: string): value is Provider => value in providerRegexes;
 
 const cleanUrl = (url: string, provider: Provider): string =>
   url.replace(providerRegexes[provider], '').replace(/\.git$/, '');
@@ -110,10 +108,7 @@ export const rule = createRule({
       }
 
       const typeProperty = findPropertyWithKeyValue(properties, 'type');
-      if (
-        typeProperty?.value.type !== 'JSONLiteral' ||
-        typeProperty.value.value !== 'git'
-      ) {
+      if (typeProperty?.value.type !== 'JSONLiteral' || typeProperty.value.value !== 'git') {
         return;
       }
 
@@ -131,10 +126,7 @@ export const rule = createRule({
       if (provider) {
         context.report({
           fix(fixer) {
-            return fixer.replaceText(
-              node.value,
-              JSON.stringify(createShorthand(url, provider)),
-            );
+            return fixer.replaceText(node.value, JSON.stringify(createShorthand(url, provider)));
           },
           messageId: 'preferShorthand',
           node: node.value,
@@ -164,15 +156,13 @@ export const rule = createRule({
     defaultOptions: [{ form: 'object' }],
     docs: {
       category: 'Best Practices',
-      description:
-        'Enforce either object or shorthand declaration for repository.',
+      description: 'Enforce either object or shorthand declaration for repository.',
       recommended: true,
     },
     fixable: 'code',
     messages: {
       preferObject: 'Prefer an object locator for a repository.',
-      preferShorthand:
-        'Prefer a shorthand locator for a supported repository provider.',
+      preferShorthand: 'Prefer a shorthand locator for a supported repository provider.',
     },
     schema: [
       {

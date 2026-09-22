@@ -475,9 +475,7 @@ ruleTester.run('sort-collections', rule, {
 }`,
       filename: 'package.json',
       name: 'mixed array: string entries and object entries coexist',
-      options: [
-        ['devDependencies', { key: 'nx', order: ['npmScope', 'affected'] }],
-      ],
+      options: [['devDependencies', { key: 'nx', order: ['npmScope', 'affected'] }]],
     },
     // custom order on `scripts`: listed key first, unlisted keys already in
     // lifecycle-aware order

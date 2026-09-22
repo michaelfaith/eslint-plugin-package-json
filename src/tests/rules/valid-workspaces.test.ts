@@ -77,8 +77,7 @@ ruleTester.run('valid-workspaces', rules['valid-workspaces'], {
       errors: [
         {
           data: {
-            error:
-              'item at index 1 is empty, but should be a file path or glob pattern',
+            error: 'item at index 1 is empty, but should be a file path or glob pattern',
           },
           line: 4,
           messageId: 'validationError',
@@ -107,9 +106,5 @@ ruleTester.run('valid-workspaces', rules['valid-workspaces'], {
       ],
     },
   ],
-  valid: [
-    '{}',
-    `{ "workspaces": [] }`,
-    `{ "workspaces": ["./app", "./packages/*"] }`,
-  ],
+  valid: ['{}', `{ "workspaces": [] }`, `{ "workspaces": ["./app", "./packages/*"] }`],
 });

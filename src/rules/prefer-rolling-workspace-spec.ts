@@ -9,13 +9,11 @@ const convertibleSpecRegex = /^(workspace:[~^])/;
 
 export const rule = createRule({
   create(context) {
-    const { ignoreDependencies = [], ignorePatterns = [] } =
-      context.options[0] ?? {};
+    const { ignoreDependencies = [], ignorePatterns = [] } = context.options[0] ?? {};
     const ignoreRegexes = ignorePatterns.map((pattern) => new RegExp(pattern));
 
     const isIgnored = (name: string) =>
-      ignoreDependencies.includes(name) ||
-      ignoreRegexes.some((regex) => regex.test(name));
+      ignoreDependencies.includes(name) || ignoreRegexes.some((regex) => regex.test(name));
 
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral]:matches([key.value=dependencies], [key.value=devDependencies])'(
@@ -30,10 +28,7 @@ export const rule = createRule({
             }
 
             const valueNode = property.value;
-            if (
-              !isJSONStringLiteral(valueNode) ||
-              !valueNode.value.startsWith('workspace:')
-            ) {
+            if (!isJSONStringLiteral(valueNode) || !valueNode.value.startsWith('workspace:')) {
               continue;
             }
 
@@ -41,8 +36,7 @@ export const rule = createRule({
 
             if (!rollingWorkspaceSpecRegex.test(dependencySpec)) {
               let conversion;
-              const convertibleMatch =
-                convertibleSpecRegex.exec(dependencySpec);
+              const convertibleMatch = convertibleSpecRegex.exec(dependencySpec);
               const rawVersion = dependencySpec.replace('workspace:', '');
 
               if (convertibleMatch) {
@@ -60,10 +54,7 @@ export const rule = createRule({
                   ? [
                       {
                         fix: (fixer) => {
-                          return fixer.replaceText(
-                            valueNode,
-                            JSON.stringify(conversion),
-                          );
+                          return fixer.replaceText(valueNode, JSON.stringify(conversion));
                         },
                         messageId: 'convertToRolling',
                       },

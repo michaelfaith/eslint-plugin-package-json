@@ -26,10 +26,7 @@ export const rule = createRule({
                       property: key.value,
                     },
                     fix: (fixer) => {
-                      return fixer.replaceText(
-                        key,
-                        JSON.stringify(kebabCaseKey),
-                      );
+                      return fixer.replaceText(key, JSON.stringify(kebabCaseKey));
                     },
                     messageId: 'convertToKebabCase',
                   },

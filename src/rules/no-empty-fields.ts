@@ -1,7 +1,4 @@
-import {
-  fixRemoveArrayElement,
-  fixRemoveObjectProperty,
-} from 'eslint-fix-utils';
+import { fixRemoveArrayElement, fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
 import type { AST } from 'jsonc-eslint-parser';
 
@@ -51,10 +48,7 @@ const report = (
       {
         fix:
           node.type === 'JSONProperty'
-            ? fixRemoveObjectProperty(
-                context,
-                node as unknown as ESTree.Property,
-              )
+            ? fixRemoveObjectProperty(context, node as unknown as ESTree.Property)
             : fixRemoveArrayElement(
                 context,
                 node as unknown as ESTree.Expression,
@@ -74,15 +68,10 @@ const getTopLevelProperty = (
   node: AST.JSONArrayExpression | AST.JSONObjectExpression,
 ): AST.JSONStringLiteral | undefined => {
   let n: AST.JSONNode = node;
-  while (
-    n.parent.parent?.parent?.type !== undefined &&
-    n.parent.parent.parent.type !== 'Program'
-  ) {
+  while (n.parent.parent?.parent?.type !== undefined && n.parent.parent.parent.type !== 'Program') {
     n = n.parent;
   }
-  return n.type === 'JSONProperty'
-    ? (n.key as AST.JSONStringLiteral)
-    : undefined;
+  return n.type === 'JSONProperty' ? (n.key as AST.JSONStringLiteral) : undefined;
 };
 
 // `files` can be empty since its contents can be inferred by `npm pack`
@@ -130,8 +119,7 @@ export const rule = createRule({
     },
     hasSuggestions: true,
     messages: {
-      emptyExpression:
-        'This {{ expressionType }} does nothing and can be removed.',
+      emptyExpression: 'This {{ expressionType }} does nothing and can be removed.',
       emptyFields: "The field '{{ field }}' does nothing and can be removed.",
       remove: 'Remove this empty field.',
     },

@@ -83,9 +83,7 @@ function createIssue(name: string): number {
   const match = /\/issues\/(\d+)$/.exec(output);
 
   if (!match) {
-    throw new Error(
-      `Could not determine the issue number from gh output: ${output}`,
-    );
+    throw new Error(`Could not determine the issue number from gh output: ${output}`);
   }
 
   return Number(match[1]);
@@ -129,9 +127,7 @@ const main = () => {
   }
 
   if (!shouldCreate) {
-    console.log(
-      'Dry run only. Re-run with --create to create and link these issues.',
-    );
+    console.log('Dry run only. Re-run with --create to create and link these issues.');
   }
 };
 

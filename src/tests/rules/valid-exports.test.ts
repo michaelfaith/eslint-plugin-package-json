@@ -76,8 +76,7 @@ ruleTester.run('valid-exports', rules['valid-exports'], {
       errors: [
         {
           data: {
-            error:
-              'the value of "./invalid" is empty, but should be an entry point path',
+            error: 'the value of "./invalid" is empty, but should be an entry point path',
           },
           line: 3,
           messageId: 'validationError',
@@ -94,8 +93,7 @@ ruleTester.run('valid-exports', rules['valid-exports'], {
       errors: [
         {
           data: {
-            error:
-              'property 0 has an empty key, but should be an export condition',
+            error: 'property 0 has an empty key, but should be an export condition',
           },
           line: 3,
           messageId: 'validationError',
@@ -113,16 +111,14 @@ ruleTester.run('valid-exports', rules['valid-exports'], {
       errors: [
         {
           data: {
-            error:
-              'property 0 has an empty key, but should be an export condition',
+            error: 'property 0 has an empty key, but should be an export condition',
           },
           line: 3,
           messageId: 'validationError',
         },
         {
           data: {
-            error:
-              'property 1 has an empty key, but should be an export condition',
+            error: 'property 1 has an empty key, but should be an export condition',
           },
           line: 4,
           messageId: 'validationError',

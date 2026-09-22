@@ -42,10 +42,7 @@ export const rule = createRule({
               node: propertyNode,
               suggest: [
                 {
-                  fix: fixRemoveObjectProperty(
-                    context,
-                    propertyNode as unknown as ESTree.Property,
-                  ),
+                  fix: fixRemoveObjectProperty(context, propertyNode as unknown as ESTree.Property),
                   messageId: 'removePeerDependencyMeta',
                 },
               ],

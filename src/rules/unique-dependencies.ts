@@ -1,15 +1,9 @@
-import {
-  fixRemoveArrayElement,
-  fixRemoveObjectProperty,
-} from 'eslint-fix-utils';
+import { fixRemoveArrayElement, fixRemoveObjectProperty } from 'eslint-fix-utils';
 import type * as ESTree from 'estree';
 import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
-import {
-  isJSONStringLiteral,
-  isNotNullish,
-} from '../utils/predicates/index.ts';
+import { isJSONStringLiteral, isNotNullish } from '../utils/predicates/index.ts';
 
 const dependencyPropertyNames = new Set([
   'bundledDependencies',
@@ -36,10 +30,7 @@ export const rule = createRule({
     ) {
       const seen = new Set();
 
-      for (const element of elements
-        .filter(isNotNullish)
-        .filter(isJSONStringLiteral)
-        .reverse()) {
+      for (const element of elements.filter(isNotNullish).filter(isJSONStringLiteral).reverse()) {
         if (seen.has(element.value)) {
           report(element);
         } else {
@@ -56,10 +47,7 @@ export const rule = createRule({
             {
               fix:
                 removal.type === 'JSONProperty'
-                  ? fixRemoveObjectProperty(
-                      context,
-                      removal as unknown as ESTree.Property,
-                    )
+                  ? fixRemoveObjectProperty(context, removal as unknown as ESTree.Property)
                   : fixRemoveArrayElement(
                       context,
                       removal as unknown as ESTree.Expression,
@@ -148,8 +136,7 @@ export const rule = createRule({
     },
     hasSuggestions: true,
     messages: {
-      crossGroupDuplicate:
-        'Dependency is also declared in "dependencies" and is redundant',
+      crossGroupDuplicate: 'Dependency is also declared in "dependencies" and is redundant',
       overridden: 'Dependency is overridden by a duplicate entry later on',
       remove: 'Remove this redundant dependency',
     },

@@ -6,8 +6,7 @@ import { createRule } from '../createRule.ts';
 
 export const rule = createRule({
   create(context) {
-    const preferContributorsOnly =
-      context.options[0]?.preferContributorsOnly ?? false;
+    const preferContributorsOnly = context.options[0]?.preferContributorsOnly ?? false;
     const ignorePrivate = context.options[0]?.ignorePrivate ?? true;
     let authorPropertyNode: AST.JSONProperty | undefined;
     let contributorsPropertyNode: AST.JSONProperty | undefined;
@@ -91,12 +90,10 @@ export const rule = createRule({
     },
     hasSuggestions: true,
     messages: {
-      contributorsOnly:
-        'Only `contributors` should be defined for attribution.',
+      contributorsOnly: 'Only `contributors` should be defined for attribution.',
       missing:
         'Property attribution is required. Either `author` or `contributors` should be defined.',
-      missingContributor:
-        'Property attribution is required. `contributors` should be defined.',
+      missingContributor: 'Property attribution is required. `contributors` should be defined.',
       noContributors: 'At least one contributor should be defined.',
       removeAuthor: 'Remove `author`.',
     },
@@ -105,8 +102,7 @@ export const rule = createRule({
         additionalProperties: false,
         properties: {
           ignorePrivate: {
-            description:
-              'Skip attribution requirements for packages with `"private": true`.',
+            description: 'Skip attribution requirements for packages with `"private": true`.',
             type: 'boolean',
           },
           preferContributorsOnly: {

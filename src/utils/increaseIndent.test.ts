@@ -8,9 +8,7 @@ describe(increaseIndent, () => {
   });
 
   it('should add the additional indentation to every line after the first', () => {
-    expect(increaseIndent('first\nsecond\nthird', '  ')).toBe(
-      'first\n  second\n  third',
-    );
+    expect(increaseIndent('first\nsecond\nthird', '  ')).toBe('first\n  second\n  third');
   });
 
   it('should preserve empty lines while indenting them', () => {
@@ -26,15 +24,11 @@ describe(increaseIndent, () => {
   });
 
   it('should handle an empty additional string without changing the content', () => {
-    expect(increaseIndent('first\nsecond\nthird', '')).toBe(
-      'first\nsecond\nthird',
-    );
+    expect(increaseIndent('first\nsecond\nthird', '')).toBe('first\nsecond\nthird');
   });
 
   it('should preserve leading and trailing whitespace in each line', () => {
-    expect(increaseIndent('  first  \n\tsecond\t', '-> ')).toBe(
-      '  first  \n-> \tsecond\t',
-    );
+    expect(increaseIndent('  first  \n\tsecond\t', '-> ')).toBe('  first  \n-> \tsecond\t');
   });
 
   it('should support multi-character indentation', () => {
@@ -42,8 +36,6 @@ describe(increaseIndent, () => {
   });
 
   it('should preserve carriage returns in CRLF input', () => {
-    expect(increaseIndent('first\r\nsecond\r\nthird', '  ')).toBe(
-      'first\r\n  second\r\n  third',
-    );
+    expect(increaseIndent('first\r\nsecond\r\nthird', '  ')).toBe('first\r\n  second\r\n  third');
   });
 });
