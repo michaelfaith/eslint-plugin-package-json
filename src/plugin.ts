@@ -14,6 +14,7 @@ import { rule as orderProperties } from './rules/order-properties.ts';
 import { rule as preferRollingWorkspaceSpec } from './rules/prefer-rolling-workspace-spec.ts';
 import { rule as repositoryShorthand } from './rules/repository-shorthand.ts';
 import { rule as requireAttribution } from './rules/require-attribution.ts';
+import { rule as requirePackageJsonExport } from './rules/require-package-json-export.ts';
 import { rules as requireRules } from './rules/require-properties.ts';
 import { rule as restrictDependencyRanges } from './rules/restrict-dependency-ranges.ts';
 import { rule as restrictDistTags } from './rules/restrict-dist-tags.ts';
@@ -40,6 +41,7 @@ const rules: Record<string, PackageJsonRuleModule> = {
   'order-properties': orderProperties,
   'prefer-rolling-workspace-spec': preferRollingWorkspaceSpec,
   'require-attribution': requireAttribution,
+  'require-package-json-export': requirePackageJsonExport,
   ...requireRules,
   'repository-shorthand': repositoryShorthand,
   'restrict-dependency-ranges': restrictDependencyRanges,
