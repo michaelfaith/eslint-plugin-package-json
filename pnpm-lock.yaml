@@ -300,7 +300,7 @@ importers:
         specifier: 6.37.0
         version: 6.37.0
       oxfmt:
-        specifier: ^0.70.0
+        specifier: 0.70.0
         version: 0.70.0
       pkg-pr-new:
         specifier: 0.0.88
