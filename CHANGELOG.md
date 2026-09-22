@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.10.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.9.0...v1.10.0) (2026-09-22)
+
+
+### 🚀 Features
+
+* add `require-package-json-export` rule ([#2232](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2232)) ([6dd9c0a](https://github.com/michaelfaith/eslint-plugin-package-json/commit/6dd9c0a86ad485a3d0b477d3195441f94ca1a20d))
+
+
+### 🩹 Bug Fixes
+
+* export `package.json` ([#2211](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2211)) ([d9feb05](https://github.com/michaelfaith/eslint-plugin-package-json/commit/d9feb05b1ee872e123c0e9eef0acb351de4c3934))
+
 ## [1.9.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.8.1...v1.9.0) (2026-09-18)
 
 
