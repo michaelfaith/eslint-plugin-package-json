@@ -1,6 +1,6 @@
 import {
-  createSimpleRequirePropertyRule,
   type CreateRequirePropertyRuleOptions,
+  createSimpleRequirePropertyRule,
 } from '../utils/createSimpleRequirePropertyRule.ts';
 import { getGitAuthor } from '../utils/git/getGitAuthor.ts';
 

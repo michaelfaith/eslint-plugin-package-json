@@ -3,7 +3,6 @@ import { defineConfig } from 'oxfmt';
 export default defineConfig({
   ignorePatterns: [
     '/.all-contributorsrc',
-    '/.husky',
     '/coverage',
     '/dist',
     '**/pnpm-lock.yaml',

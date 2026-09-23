@@ -72,6 +72,8 @@ export default defineConfig(
       'operator-assignment': 'error',
 
       'perfectionist/sort-exports': 'error',
+      'perfectionist/sort-named-exports': 'error',
+      'perfectionist/sort-named-imports': 'error',
 
       // conflicts with typescript's noImplicitReturns
       'unicorn/no-useless-undefined': 'off',
