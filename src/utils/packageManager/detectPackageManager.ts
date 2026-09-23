@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
-import { AGENTS, LOCK_FILES, type AgentName, type DetectResult } from './constants.ts';
+import { type AgentName, AGENTS, type DetectResult, LOCK_FILES } from './constants.ts';
 
 let packageManagerCache: DetectResult | undefined;
 

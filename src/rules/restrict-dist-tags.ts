@@ -107,4 +107,4 @@ const rule = createRule({
   name: 'restrict-dist-tags',
 });
 
-export { rule, DEPENDENCY_TYPES };
+export { DEPENDENCY_TYPES, rule };

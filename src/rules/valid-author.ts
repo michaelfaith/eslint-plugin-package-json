@@ -1,6 +1,6 @@
 import type { Rule } from 'eslint';
 import type { AST } from 'jsonc-eslint-parser';
-import { validateAuthor, type Result } from 'package-json-validator';
+import { type Result, validateAuthor } from 'package-json-validator';
 
 import { createRule } from '../createRule.ts';
 import { getGitAuthor } from '../utils/git/index.ts';
