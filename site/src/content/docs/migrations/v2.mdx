@@ -1,0 +1,50 @@
+---
+title: Migrating v1 to v2
+description: 'How to migrate usage of v1 to v2.'
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This guide should include everything you need to know in order to upgrade `eslint-plugin-package-json` from v1 to v2.
+
+<Aside type="note">Psst, it's not a lot...</Aside>
+
+## `jsonc-eslint-parser` to `@eslint/json`
+
+The biggest change in v2, and the one that this guide was originally intended to help you through is the shift from using `jsonc-eslint-parser` as a parser, to using the official `json` language provided by `@eslint/json`.
+The steps are broken down by type of usage.
+
+- If your primary usage of the plugin is through one or more of its configs, then check out the first section.
+- If you don't use any our configs, and you set up the parser and directly enable some set of our rules, then the second section is for you.
+
+### Config Usage
+
+If you're using any of our configs, and aren't setting up the `parser` manually, then there's genuinely nothing for you to do, other than upgrade this package.
+We've installed `@eslint/json` and set up the language in the config.
+Congrats for being cool 😎.
+
+### No-config Usage
+
+If you previously set up the plugin and `parser` manually to enable some subset of our rules, then you'll have a little more to do.
+You just need to remove the `parser` configuration, and add the `language`.
+
+```diff
+{
+  files: ['**/package.json'],
+- languageOptions: {
+-   parser: parserJsonc,
+- },
++ language: 'json/json',
+  plugins: {
+    'package-json': packageJson,
+  },
+  rules: {
+    'package-json/order-properties': 'error',
+  },
+},
+```
+
+<Aside type="tip">
+  If you're no longer using `jsonc-eslint-parser` for some other purpose, you can safely uninstall
+  it.
+</Aside>
