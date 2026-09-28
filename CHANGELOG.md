@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.10.0...v1.10.1) (2026-09-28)
+
+
+### 🩹 Bug Fixes
+
+* **order-properties:** only report on the first mis-ordered property ([#2263](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2263)) ([22ada3f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/22ada3fc29e48c9d6f910a9e3242a6ef2da1b67b))
+
 ## [1.10.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.9.0...v1.10.0) (2026-09-22)
 
 
