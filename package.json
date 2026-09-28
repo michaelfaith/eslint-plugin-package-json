@@ -58,6 +58,9 @@
     "test": "vitest",
     "typecheck": "tsc"
   },
+  "lint-staged": {
+    "*": "oxfmt --no-error-on-unmatched-pattern"
+  },
   "dependencies": {
     "@altano/repository-tools": "^2.0.1",
     "@types/estree": "^1.0.0",
@@ -104,6 +107,7 @@
     "jiti": "2.7.0",
     "json-schema-to-ts": "3.1.1",
     "knip": "6.38.0",
+    "lint-staged": "^17.6.0",
     "oxfmt": "0.70.0",
     "pkg-pr-new": "0.0.88",
     "sharp": "0.35.4",
