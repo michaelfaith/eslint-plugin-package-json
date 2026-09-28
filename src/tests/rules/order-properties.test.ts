@@ -17,23 +17,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'homepage' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -64,15 +50,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 3,
           messageId: 'incorrectOrder',
         },
       ],
@@ -103,23 +83,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'homepage' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -150,23 +116,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 3,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'homepage' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -197,23 +149,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'homepage' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -245,23 +183,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'main' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'homepage' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'repository' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -290,23 +214,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'b' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'cpu' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'a' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -332,15 +242,9 @@ ruleTester.run('order-properties', rule, {
 `,
       errors: [
         {
+          column: 2,
           data: { property: 'custom-z' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'version' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],
@@ -358,11 +262,9 @@ ruleTester.run('order-properties', rule, {
       code: ['{', '	"version": "1.0.0",', '	"name": "foo"', '}'].join('\r\n'),
       errors: [
         {
+          column: 2,
           data: { property: 'version' },
-          messageId: 'incorrectOrder',
-        },
-        {
-          data: { property: 'name' },
+          line: 2,
           messageId: 'incorrectOrder',
         },
       ],

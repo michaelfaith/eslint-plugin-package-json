@@ -53,6 +53,8 @@ export const rule = createRule({
             loc: properties[i].loc,
             messageId: 'incorrectOrder',
           });
+          // Only report on the first mis-ordered property
+          return;
         }
       },
     };
