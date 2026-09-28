@@ -1,3 +1,3 @@
 export default {
-  'pre-commit': 'pnpm oxfmt',
+  'pre-commit': 'pnpm lint-staged',
 };
