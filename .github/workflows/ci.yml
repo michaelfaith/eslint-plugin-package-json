@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
-      - run: pnpm build
+      - run: pnpm build --attw
       - run: node dist/index.mjs
       - run: node dist/experimental/index.mjs
       - name: Upload Build Assets
