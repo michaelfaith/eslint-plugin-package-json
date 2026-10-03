@@ -1,6 +1,6 @@
-import { defineConfig } from 'oxfmt';
+import { defineConfig, type OxfmtConfig } from 'oxfmt';
 
-export default defineConfig({
+const config: OxfmtConfig = defineConfig({
   ignorePatterns: [
     '/.all-contributorsrc',
     '/coverage',
@@ -13,3 +13,5 @@ export default defineConfig({
   sortImports: true,
   sortPackageJson: false,
 });
+
+export default config;
