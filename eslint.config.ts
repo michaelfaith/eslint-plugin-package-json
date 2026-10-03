@@ -11,7 +11,7 @@ import perfectionist from 'eslint-plugin-perfectionist';
 import * as regexp from 'eslint-plugin-regexp';
 import unicorn from 'eslint-plugin-unicorn';
 import yml from 'eslint-plugin-yml';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { type ConfigObject, defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 import packageJson from './src/index.ts';
@@ -20,7 +20,7 @@ const JS_FILES = ['**/*.js'];
 const TS_FILES = ['**/*.ts'];
 const JS_TS_FILES = [...JS_FILES, ...TS_FILES];
 
-export default defineConfig(
+const config: ConfigObject[] = defineConfig(
   globalIgnores([
     '**/*.snap',
     'site/.astro',
@@ -50,7 +50,7 @@ export default defineConfig(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ['astro.config.ts', '.simple-git-hooks.js'],
+          allowDefaultProject: ['*.config.*s', '.simple-git-hooks.js'],
         },
         tsconfigRootDir: import.meta.dirname,
       },
@@ -149,3 +149,5 @@ export default defineConfig(
     },
   },
 );
+
+export default config;
