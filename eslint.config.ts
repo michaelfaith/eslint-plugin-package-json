@@ -50,7 +50,7 @@ const config: ConfigObject[] = defineConfig(
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ['astro.config.ts', '.simple-git-hooks.js'],
+          allowDefaultProject: ['*.config.*s', '.simple-git-hooks.js'],
         },
         tsconfigRootDir: import.meta.dirname,
       },
