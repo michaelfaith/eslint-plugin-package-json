@@ -35,6 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
+      # for testing (begin)
+      - run: pnpm install --lockfile-only
+      - run: git diff pnpm-lock.yaml
+      # for testing (end)
       - run: pnpm dedupe --check --prefer-offline
 
   e2e:
