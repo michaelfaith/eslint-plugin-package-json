@@ -10,8 +10,8 @@
     "strict": true,
     "target": "ES2024",
     "rewriteRelativeImportExtensions": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "types": ["node"]
   },
-  "include": ["src", "scripts", "*.config.ts"],
-  "exclude": ["astro.config.ts"]
+  "include": ["src", "scripts"]
 }
