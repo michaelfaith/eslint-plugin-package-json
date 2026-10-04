@@ -79,7 +79,7 @@
     "@arethetypeswrong/core": "0.18.5",
     "@astrojs/check": "0.9.10",
     "@astrojs/markdown-satteri": "0.4.2",
-    "@astrojs/starlight": "0.42.4",
+    "@astrojs/starlight": "0.42.5",
     "@catppuccin/starlight": "2.1.0",
     "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
     "@eslint/js": "10.0.1",
