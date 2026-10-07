@@ -45,7 +45,7 @@ export const rule = createRule({
 
         const { text } = context.sourceCode;
         const { indent, type } = detectIndent(text);
-        const indentUnit = type === 'tab' ? '\t' : indent || '  ';
+        const indentUnit = type === 'tab' ? '\t' : indent;
         const extraIndent = isPublishConfig ? `${indentUnit}${indentUnit}` : indentUnit;
 
         // If exports is not a collection of subpaths, then we know we don't have a package.json export

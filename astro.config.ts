@@ -1,12 +1,13 @@
 import { satteri } from '@astrojs/markdown-satteri';
 import starlight from '@astrojs/starlight';
 import starlightCatppuccin from '@catppuccin/starlight';
+import type { AstroUserConfig } from 'astro';
 import { defineConfig } from 'astro/config';
 import starlightAutoSidebar from 'starlight-auto-sidebar';
 
 const site = 'https://eslint-plugin-package-json.dev';
 
-export default defineConfig({
+const config: AstroUserConfig = defineConfig({
   experimental: {
     clientPrerender: true,
   },
@@ -66,3 +67,5 @@ export default defineConfig({
   site,
   srcDir: './site/src',
 });
+
+export default config;

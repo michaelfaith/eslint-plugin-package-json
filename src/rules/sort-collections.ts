@@ -97,7 +97,7 @@ export const rule = createRule({
               const { text } = context.sourceCode;
               const { indent, type } = detectIndent(text);
               const newline = detectNewlineGraceful(text);
-              const indentUnit = type === 'tab' ? '\t' : indent || '  ';
+              const indentUnit = type === 'tab' ? '\t' : indent;
 
               const replacementJson = JSON.stringify(
                 desiredOrder.reduce<Record<string, unknown>>((out, property) => {
