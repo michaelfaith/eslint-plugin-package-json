@@ -128,7 +128,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@12.9.1",
+  "packageManager": "pnpm@12.10.0",
   "engines": {
     "node": "^22.22.2 || >=24.15.0"
   }
