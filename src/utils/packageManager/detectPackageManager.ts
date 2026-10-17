@@ -40,7 +40,7 @@ function* lookup(cwd: string = process.cwd()): Generator<string> {
 }
 
 function parsePackageJson(filepath: string): DetectResult | null {
-  return !filepath || !fs.existsSync(filepath) ? null : handlePackageManager(filepath);
+  return filepath && fs.existsSync(filepath) ? handlePackageManager(filepath) : null;
 }
 
 /**

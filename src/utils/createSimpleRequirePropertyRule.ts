@@ -87,9 +87,10 @@ export const createSimpleRequirePropertyRule = (
                       [0, 1],
                       `\n  "${propertyName}": ${JSON.stringify(resolvedValue, null, 2).split('\n').join('\n  ')}`,
                     );
-                    yield node.properties.length > 0
-                      ? fixer.insertTextAfterRange([0, 1], ',')
-                      : fixer.insertTextAfterRange([0, 1], '\n');
+                    yield fixer.insertTextAfterRange(
+                      [0, 1],
+                      node.properties.length > 0 ? ',' : '\n',
+                    );
                   },
             loc: { column: 0, line: 1 },
             messageId: 'missing',
