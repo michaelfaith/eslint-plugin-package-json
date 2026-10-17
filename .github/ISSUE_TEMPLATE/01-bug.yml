@@ -4,6 +4,7 @@ description: Report a bug trying to run the code
 title: '🐛 Bug: <short description of the bug>'
 
 labels:
+  - 'status: in discussion'
   - 'type: bug'
 
 body:

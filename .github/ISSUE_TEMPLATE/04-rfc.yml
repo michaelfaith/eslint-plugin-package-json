@@ -4,6 +4,7 @@ description: Request feedback from the community on a significant change to the 
 title: '💬 RFC: <short description of the proposal>'
 
 labels:
+  - 'status: in discussion'
   - 'type: rfc'
 
 body:
