@@ -56,10 +56,9 @@ export const rule = createRule({
       if (isJSONStringLiteral(node.value)) {
         context.report({
           fix(fixer) {
-            return !isJSONStringLiteral(node.value) ||
-              node.value.value.split('/').filter(Boolean).length !== 2
-              ? null
-              : fixer.replaceText(
+            return isJSONStringLiteral(node.value) &&
+              node.value.value.split('/').filter(Boolean).length === 2
+              ? fixer.replaceText(
                   node.value,
                   JSON.stringify(
                     {
@@ -69,7 +68,8 @@ export const rule = createRule({
                     null,
                     2,
                   ),
-                );
+                )
+              : null;
           },
           messageId: 'preferObject',
           node: node.value,
