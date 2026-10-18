@@ -1,3 +1,4 @@
+import { PROPERTY_ALIASES } from '../constants.ts';
 import {
   type CreateRequirePropertyRuleOptions,
   createSimpleRequirePropertyRule,
@@ -14,7 +15,7 @@ export const propertyConfig: [name: string, options?: CreateRequirePropertyRuleO
   ['bin'],
   ['browser'],
   ['bugs', { ignorePrivateDefault: true }],
-  ['bundleDependencies'],
+  ['bundleDependencies', { aliases: [PROPERTY_ALIASES.bundleDependencies] }],
   ['config'],
   ['contributors'],
   ['cpu'],
@@ -31,7 +32,10 @@ export const propertyConfig: [name: string, options?: CreateRequirePropertyRuleO
   ['homepage', { ignorePrivateDefault: true }],
   ['keywords', { ignorePrivateDefault: true }],
   ['libc'],
-  ['license', { ignorePrivateDefault: true, isRecommended: true }],
+  [
+    'license',
+    { aliases: [PROPERTY_ALIASES.license], ignorePrivateDefault: true, isRecommended: true },
+  ],
   ['main'],
   ['man'],
   ['module'],

@@ -1,6 +1,6 @@
 ---
 title: 'require-license'
-description: 'Requires the `license` property to be present.'
+description: 'Requires the `license` property (or its alias `licence`) to be present.'
 ---
 
 💼 This rule is enabled in the ✅ `recommended` config.
@@ -9,7 +9,7 @@ description: 'Requires the `license` property to be present.'
 
 import { TabItem, Tabs } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `license` property and reports a violation if it doesn't exist.
+This rule checks for the existence of the `license` property (or its alias `licence`), and reports a violation if neither exists.
 
 ## Examples
 

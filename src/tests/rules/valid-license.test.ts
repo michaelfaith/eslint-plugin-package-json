@@ -2,10 +2,10 @@ import { rules } from '../../rules/valid-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('valid-license', rules['valid-license'], {
-  invalid: [
+  invalid: ['license', 'licence'].flatMap((property) => [
     {
       code: `{
-	"license": null
+	"${property}": null
 }
 `,
       errors: [
@@ -20,7 +20,7 @@ ruleTester.run('valid-license', rules['valid-license'], {
     },
     {
       code: `{
-	"license": 123
+	"${property}": 123
 }
 `,
       errors: [
@@ -35,7 +35,7 @@ ruleTester.run('valid-license', rules['valid-license'], {
     },
     {
       code: `{
-	"license": ""
+	"${property}": ""
 }
 `,
       errors: [
@@ -50,7 +50,7 @@ ruleTester.run('valid-license', rules['valid-license'], {
     },
     {
       code: `{
-	"license": "not-a-license"
+	"${property}": "not-a-license"
 }
 `,
       errors: [
@@ -64,11 +64,13 @@ ruleTester.run('valid-license', rules['valid-license'], {
         },
       ],
     },
-  ],
+  ]),
   valid: [
     '{}',
-    `{ "license": "MIT" }`,
-    `{ "license": "UNLICENSED" }`,
-    `{ "license": "SEE LICENSE IN LICENSE.md" }`,
+    ...['license', 'licence'].flatMap((property) => [
+      `{ "${property}": "MIT" }`,
+      `{ "${property}": "UNLICENSED" }`,
+      `{ "${property}": "SEE LICENSE IN LICENSE.md" }`,
+    ]),
   ],
 });

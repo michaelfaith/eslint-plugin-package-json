@@ -1,6 +1,6 @@
 ---
 title: 'valid-license'
-description: 'Enforce that the `license` property is valid.'
+description: 'Enforce that the `license` property (or its alias `licence`) is valid.'
 ---
 
 💼 This rule is enabled in the ✅ `recommended` config.
@@ -9,7 +9,7 @@ description: 'Enforce that the `license` property is valid.'
 
 import { TabItem, Tabs } from '@astrojs/starlight/components';
 
-This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `license` property, if present, against the following criteria:
+This rule uses [`package-json-validator`](https://github.com/michaelfaith/package-json-validator) to validate the `license` property (as well as its alias `licence`), if present, against the following criteria:
 
 - It must be a `string`
 - The value should be a valid SPDX license, "UNLICENSED", or a note referencing a license file (e.g. "SEE LICENSE IN LICENSE.md")

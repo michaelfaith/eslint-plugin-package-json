@@ -4,6 +4,9 @@ import { createRule, type PackageJsonRuleModule } from '../createRule.ts';
 import { isJSONStringLiteral } from './predicates/index.ts';
 
 export interface CreateRequirePropertyRuleOptions {
+  /** Alternative spellings of the property that also satisfy the requirement */
+  aliases?: string[];
+
   /**
    * The category for this rule.
    */
@@ -32,6 +35,7 @@ export interface CreateRequirePropertyRuleOptions {
 export const createSimpleRequirePropertyRule = (
   propertyName: string,
   {
+    aliases = [],
     category,
     fixValue,
     ignorePrivateDefault = false,
@@ -42,6 +46,7 @@ export const createSimpleRequirePropertyRule = (
   ruleName: string;
 } => {
   const ruleName = `require-${propertyName}`;
+  const propertyNames = new Set([propertyName, ...aliases]);
   const rule = createRule({
     create(context) {
       const enforceForPrivate = context.settings.packageJson?.enforceForPrivate;
@@ -68,7 +73,7 @@ export const createSimpleRequirePropertyRule = (
           if (
             node.properties.some(
               (property) =>
-                isJSONStringLiteral(property.key) && property.key.value === propertyName,
+                isJSONStringLiteral(property.key) && propertyNames.has(property.key.value),
             )
           ) {
             return;
@@ -101,7 +106,7 @@ export const createSimpleRequirePropertyRule = (
     meta: {
       docs: {
         category,
-        description: `Requires the \`${propertyName}\` property to be present.`,
+        description: `Requires the \`${propertyName}\` property${aliases.length ? ` (or its alias ${aliases.map((alias) => `\`${alias}\``).join(', ')})` : ''} to be present.`,
         recommended: isRecommended,
         ruleGroup: 'require-properties',
       },

@@ -1,13 +1,13 @@
 ---
 title: 'require-bundleDependencies'
-description: 'Requires the `bundleDependencies` property to be present.'
+description: 'Requires the `bundleDependencies` property (or its alias `bundledDependencies`) to be present.'
 ---
 
 {/* end auto-generated rule header */}
 
 import { TabItem, Tabs } from '@astrojs/starlight/components';
 
-This rule checks for the existence of the `bundleDependencies` property in a `package.json`, and reports a violation if it doesn't exist.
+This rule checks for the existence of the `bundleDependencies` property (or its alias `bundledDependencies`) in a `package.json`, and reports a violation if neither exists.
 
 ## Examples
 
