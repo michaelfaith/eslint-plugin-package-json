@@ -20,14 +20,14 @@ jobs:
     steps:
       - name: Create Token
         id: create_token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@v3.2.0
         with:
           client-id: ${{ vars.FAITHBOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.FAITHBOT_APP_PRIVATE_KEY }}
 
       - name: Release Please
         id: release
-        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        uses: googleapis/release-please-action@v5.0.0
         with:
           config-file: .github/release-please/release-please-config.${{ github.ref_name }}.json
           manifest-file: .github/release-please/release-please-manifest.${{ github.ref_name }}.json
@@ -82,11 +82,11 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - run: echo "npm_version=$(npm pkg get version | tr -d '"')" >> "$GITHUB_ENV"
-      - uses: apexskier/github-release-commenter@e7813a9625eabd79a875b4bc4046cfcae377ab34 # v1
+      - uses: apexskier/github-release-commenter@v1.4.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           comment-template: |

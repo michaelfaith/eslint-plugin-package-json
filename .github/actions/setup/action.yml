@@ -26,9 +26,9 @@ inputs:
 
 runs:
   steps:
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+    - uses: actions/checkout@v7.0.1
       if: ${{ inputs.skip-checkout == 'false' }}
-    - uses: pnpm/setup@a0881977cd8ea73b1ed212236c99ca10dcc80cf4 # v3.1.1
+    - uses: pnpm/setup@v3.1.1
       with:
         cache: ${{ inputs.cache }}
         install: ${{ inputs.install-flags == '' && inputs.working-directory == '.' }}

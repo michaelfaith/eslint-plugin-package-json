@@ -38,7 +38,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: JoshuaKGoldberg/octoguide@eb010e70cf0630b514ae390ecbdc74716e43ab87 # 0.26.6
+      - uses: octoguide/bot@0.26.6
         with:
           config: strict
           github-token: ${{ secrets.GITHUB_TOKEN }}
