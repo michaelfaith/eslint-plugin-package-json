@@ -7,7 +7,9 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "licence": "MIT" }`,
       errors: [
         {
+          column: 3,
           data: { preferred: 'license', present: 'licence' },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
@@ -17,10 +19,12 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "bundledDependencies": ["abc"] }`,
       errors: [
         {
+          column: 3,
           data: {
             preferred: 'bundleDependencies',
             present: 'bundledDependencies',
           },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
@@ -30,10 +34,13 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "license": "MIT" }`,
       errors: [
         {
+          column: 3,
           data: { preferred: 'licence', present: 'license' },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
+      name: 'license > prefer.license: licence',
       options: [{ prefer: { license: 'licence' } }],
       output: `{ "licence": "MIT" }`,
     },
@@ -41,13 +48,16 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "bundleDependencies": ["abc"] }`,
       errors: [
         {
+          column: 3,
           data: {
             preferred: 'bundledDependencies',
             present: 'bundleDependencies',
           },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
+      name: 'bundleDependencies > prefer.bundleDependencies: bundledDependencies',
       options: [{ prefer: { bundleDependencies: 'bundledDependencies' } }],
       output: `{ "bundledDependencies": ["abc"] }`,
     },
@@ -57,13 +67,16 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "bundledDependencies": ["abc"] }`,
       errors: [
         {
+          column: 3,
           data: {
             preferred: 'bundleDependencies',
             present: 'bundledDependencies',
           },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
+      name: 'bundledDependencies > prefer.license: licence',
       options: [{ prefer: { license: 'licence' } }],
       output: `{ "bundleDependencies": ["abc"] }`,
     },
@@ -90,17 +103,42 @@ ruleTester.run('consistent-property-aliases', rule, {
     },
     // Both spellings present: reported on the non-preferred one, never auto-fixed
     {
-      code: `{ "license": "MIT", "licence": "MIT" }`,
+      code: `{
+  "license": "MIT",
+  "licence": "MIT"
+}`,
       errors: [
         {
-          column: 21,
+          column: 3,
           data: { other: 'license', present: 'licence' },
+          line: 3,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT"  }`,
+              output: `{
+  "license": "MIT"
+}`,
+            },
+          ],
+        },
+      ],
+      output: null,
+    },
+    {
+      code: `{ "license": "MIT", "licence": "MIT" }`,
+      errors: [
+        {
+          column: 21,
+          data: { other: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'bothAliasesPresent',
+          suggestions: [
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "license": "MIT" }`,
             },
           ],
         },
@@ -113,16 +151,18 @@ ruleTester.run('consistent-property-aliases', rule, {
         {
           column: 3,
           data: { other: 'licence', present: 'license' },
+          line: 1,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'license' },
               messageId: 'removeProperty',
-              output: `{  "licence": "MIT" }`,
+              output: `{ "licence": "MIT" }`,
             },
           ],
         },
       ],
+      name: 'license and licence > prefer.license: licence',
       options: [{ prefer: { license: 'licence' } }],
       output: null,
     },
@@ -133,21 +173,23 @@ ruleTester.run('consistent-property-aliases', rule, {
         {
           column: 21,
           data: { other: 'license', present: 'licence' },
+          line: 1,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'license' },
               messageId: 'removeProperty',
-              output: `{  "licence": "Apache-2.0" }`,
+              output: `{ "licence": "Apache-2.0" }`,
             },
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT"  }`,
+              output: `{ "license": "MIT" }`,
             },
           ],
         },
       ],
+      name: 'license and licence > prefer.license: false',
       options: [{ prefer: { license: false } }],
       output: null,
     },
@@ -160,47 +202,73 @@ ruleTester.run('consistent-property-aliases', rule, {
             other: 'bundleDependencies',
             present: 'bundledDependencies',
           },
+          line: 1,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'bundleDependencies' },
               messageId: 'removeProperty',
-              output: `{ "bundledDependencies": ["abc"]  }`,
+              output: `{ "bundledDependencies": ["abc"] }`,
             },
             {
               data: { property: 'bundledDependencies' },
               messageId: 'removeProperty',
-              output: `{  "bundleDependencies": ["abc"] }`,
+              output: `{ "bundleDependencies": ["abc"] }`,
             },
           ],
         },
       ],
+      name: 'bundledDependencies and bundleDependencies > prefer.bundleDependencies: false',
       options: [{ prefer: { bundleDependencies: false } }],
       output: null,
     },
-    // A repeated alias is reported once, on its first occurrence, without a fix:
-    // renaming every occurrence would produce duplicate keys
+    // Each occurrence of a repeated spelling is reported and fixed on its own
     {
       code: `{ "licence": "MIT", "licence": "Apache-2.0" }`,
       errors: [
         {
           column: 3,
           data: { preferred: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'preferAlias',
+        },
+        {
+          column: 21,
+          data: { preferred: 'license', present: 'licence' },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
-      output: null,
+      output: `{ "license": "MIT", "license": "Apache-2.0" }`,
     },
-    // Likewise, a repeated spelling gets no removal suggestion when both spellings
-    // are present: removing one occurrence would leave the spelling in place
     {
       code: `{ "licence": "MIT", "licence": "Apache-2.0", "license": "ISC" }`,
       errors: [
         {
           column: 3,
           data: { other: 'license', present: 'licence' },
+          line: 1,
           messageId: 'bothAliasesPresent',
-          suggestions: [],
+          suggestions: [
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "licence": "Apache-2.0", "license": "ISC" }`,
+            },
+          ],
+        },
+        {
+          column: 21,
+          data: { other: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'bothAliasesPresent',
+          suggestions: [
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "licence": "MIT", "license": "ISC" }`,
+            },
+          ],
         },
       ],
       output: null,
@@ -211,16 +279,94 @@ ruleTester.run('consistent-property-aliases', rule, {
         {
           column: 21,
           data: { other: 'license', present: 'licence' },
+          line: 1,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'license' },
               messageId: 'removeProperty',
-              output: `{  "licence": "MIT", "licence": "Apache-2.0" }`,
+              output: `{ "licence": "MIT", "licence": "Apache-2.0" }`,
+            },
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "license": "ISC", "licence": "Apache-2.0" }`,
+            },
+          ],
+        },
+        {
+          column: 39,
+          data: { other: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'bothAliasesPresent',
+          suggestions: [
+            {
+              data: { property: 'license' },
+              messageId: 'removeProperty',
+              output: `{ "licence": "MIT", "licence": "Apache-2.0" }`,
+            },
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "license": "ISC", "licence": "MIT" }`,
             },
           ],
         },
       ],
+      name: 'license and repeated licence > prefer.license: false',
+      options: [{ prefer: { license: false } }],
+      output: null,
+    },
+    // Removing a repeated spelling removes every copy of it at once
+    {
+      code: `{ "license": "ISC", "license": "MIT", "licence": "Apache-2.0" }`,
+      errors: [
+        {
+          column: 39,
+          data: { other: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'bothAliasesPresent',
+          suggestions: [
+            {
+              data: { count: 2, property: 'license' },
+              messageId: 'removeAllProperties',
+              output: `{ "licence": "Apache-2.0" }`,
+            },
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "license": "ISC", "license": "MIT" }`,
+            },
+          ],
+        },
+      ],
+      name: 'repeated license and licence > prefer.license: false',
+      options: [{ prefer: { license: false } }],
+      output: null,
+    },
+    {
+      code: `{ "licence": "Apache-2.0", "license": "ISC", "license": "MIT" }`,
+      errors: [
+        {
+          column: 3,
+          data: { other: 'license', present: 'licence' },
+          line: 1,
+          messageId: 'bothAliasesPresent',
+          suggestions: [
+            {
+              data: { count: 2, property: 'license' },
+              messageId: 'removeAllProperties',
+              output: `{ "licence": "Apache-2.0" }`,
+            },
+            {
+              data: { property: 'licence' },
+              messageId: 'removeProperty',
+              output: `{ "license": "ISC", "license": "MIT" }`,
+            },
+          ],
+        },
+      ],
+      name: 'licence and repeated license at the end > prefer.license: false',
       options: [{ prefer: { license: false } }],
       output: null,
     },
@@ -230,6 +376,7 @@ ruleTester.run('consistent-property-aliases', rule, {
         {
           column: 3,
           data: { preferred: 'license', present: 'licence' },
+          line: 1,
           messageId: 'preferAlias',
         },
         {
@@ -238,6 +385,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             preferred: 'bundleDependencies',
             present: 'bundledDependencies',
           },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
@@ -248,10 +396,13 @@ ruleTester.run('consistent-property-aliases', rule, {
       code: `{ "licence": "MIT" }`,
       errors: [
         {
+          column: 3,
           data: { preferred: 'license', present: 'licence' },
+          line: 1,
           messageId: 'preferAlias',
         },
       ],
+      name: 'licence > prefer.license: true',
       options: [{ prefer: { license: true } }],
       output: `{ "license": "MIT" }`,
     },
@@ -261,16 +412,18 @@ ruleTester.run('consistent-property-aliases', rule, {
         {
           column: 21,
           data: { other: 'license', present: 'licence' },
+          line: 1,
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT"  }`,
+              output: `{ "license": "MIT" }`,
             },
           ],
         },
       ],
+      name: 'license and licence > prefer.license: true',
       options: [{ prefer: { license: true } }],
       output: null,
     },
@@ -281,18 +434,22 @@ ruleTester.run('consistent-property-aliases', rule, {
     `{ "bundleDependencies": ["abc"] }`,
     {
       code: `{ "licence": "MIT" }`,
+      name: 'licence > prefer.license: licence',
       options: [{ prefer: { license: 'licence' } }],
     },
     {
       code: `{ "bundledDependencies": ["abc"] }`,
+      name: 'bundledDependencies > prefer.bundleDependencies: bundledDependencies',
       options: [{ prefer: { bundleDependencies: 'bundledDependencies' } }],
     },
     {
       code: `{ "licence": "MIT" }`,
+      name: 'licence > prefer.license: false',
       options: [{ prefer: { license: false } }],
     },
     {
       code: `{ "bundledDependencies": ["abc"] }`,
+      name: 'bundledDependencies > prefer.bundleDependencies: false',
       options: [{ prefer: { bundleDependencies: false } }],
     },
     // Only top-level properties are checked
@@ -303,6 +460,7 @@ ruleTester.run('consistent-property-aliases', rule, {
     // `true` enforces the canonical spelling, the same as leaving the property unset
     {
       code: `{ "bundleDependencies": ["abc"] }`,
+      name: 'bundleDependencies > prefer.bundleDependencies: true',
       options: [{ prefer: { bundleDependencies: true } }],
     },
   ],

@@ -311,6 +311,7 @@ ruleTester.run('order-properties', rule, {
 	"licence": "MIT",
 	"version": "1.0.0"
 }`,
+      name: 'licence > custom order with license',
       options: [{ order: ['name', 'license', 'version'] }],
     },
     {
@@ -319,6 +320,7 @@ ruleTester.run('order-properties', rule, {
 	"name": "foo",
 	"license": "MIT"
 }`,
+      name: 'licence > custom order with licence',
       options: [{ order: ['licence', 'name', 'license'] }],
     },
     `{
