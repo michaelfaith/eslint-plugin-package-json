@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Create Token
         id: create_token
-        uses: actions/create-github-app-token@v3.2.0
+        uses: actions/create-github-app-token@v3.3.0
         with:
           client-id: ${{ vars.FAITHBOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.FAITHBOT_APP_PRIVATE_KEY }}
