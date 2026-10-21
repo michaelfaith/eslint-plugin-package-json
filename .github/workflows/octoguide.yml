@@ -38,7 +38,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: octoguide/bot@0.26.6
+      - uses: octoguide/bot@0.27.0
         with:
           config: strict
           github-token: ${{ secrets.GITHUB_TOKEN }}
