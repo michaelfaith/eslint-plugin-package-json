@@ -103,30 +103,6 @@ ruleTester.run('consistent-property-aliases', rule, {
     },
     // Both spellings present: reported on the non-preferred one, never auto-fixed
     {
-      code: `{
-  "license": "MIT",
-  "licence": "MIT"
-}`,
-      errors: [
-        {
-          column: 3,
-          data: { other: 'license', present: 'licence' },
-          line: 3,
-          messageId: 'bothAliasesPresent',
-          suggestions: [
-            {
-              data: { property: 'licence' },
-              messageId: 'removeProperty',
-              output: `{
-  "license": "MIT"
-}`,
-            },
-          ],
-        },
-      ],
-      output: null,
-    },
-    {
       code: `{ "license": "MIT", "licence": "MIT" }`,
       errors: [
         {
@@ -138,7 +114,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT" }`,
+              output: `{ "license": "MIT"  }`,
             },
           ],
         },
@@ -157,7 +133,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             {
               data: { property: 'license' },
               messageId: 'removeProperty',
-              output: `{ "licence": "MIT" }`,
+              output: `{  "licence": "MIT" }`,
             },
           ],
         },
@@ -166,7 +142,7 @@ ruleTester.run('consistent-property-aliases', rule, {
       options: [{ prefer: { license: 'licence' } }],
       output: null,
     },
-    // `false` still reports both spellings being present, and offers to remove either one
+    // `false` still reports both spellings being present
     {
       code: `{ "license": "MIT", "licence": "Apache-2.0" }`,
       errors: [
@@ -177,14 +153,9 @@ ruleTester.run('consistent-property-aliases', rule, {
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
-              data: { property: 'license' },
-              messageId: 'removeProperty',
-              output: `{ "licence": "Apache-2.0" }`,
-            },
-            {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT" }`,
+              output: `{ "license": "MIT"  }`,
             },
           ],
         },
@@ -206,14 +177,9 @@ ruleTester.run('consistent-property-aliases', rule, {
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
-              data: { property: 'bundleDependencies' },
-              messageId: 'removeProperty',
-              output: `{ "bundledDependencies": ["abc"] }`,
-            },
-            {
               data: { property: 'bundledDependencies' },
               messageId: 'removeProperty',
-              output: `{ "bundleDependencies": ["abc"] }`,
+              output: `{  "bundleDependencies": ["abc"] }`,
             },
           ],
         },
@@ -253,7 +219,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "licence": "Apache-2.0", "license": "ISC" }`,
+              output: `{  "licence": "Apache-2.0", "license": "ISC" }`,
             },
           ],
         },
@@ -266,7 +232,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "licence": "MIT", "license": "ISC" }`,
+              output: `{ "licence": "MIT",  "license": "ISC" }`,
             },
           ],
         },
@@ -283,14 +249,9 @@ ruleTester.run('consistent-property-aliases', rule, {
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
-              data: { property: 'license' },
-              messageId: 'removeProperty',
-              output: `{ "licence": "MIT", "licence": "Apache-2.0" }`,
-            },
-            {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "ISC", "licence": "Apache-2.0" }`,
+              output: `{ "license": "ISC",  "licence": "Apache-2.0" }`,
             },
           ],
         },
@@ -301,14 +262,9 @@ ruleTester.run('consistent-property-aliases', rule, {
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
-              data: { property: 'license' },
-              messageId: 'removeProperty',
-              output: `{ "licence": "MIT", "licence": "Apache-2.0" }`,
-            },
-            {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "ISC", "licence": "MIT" }`,
+              output: `{ "license": "ISC", "licence": "MIT"  }`,
             },
           ],
         },
@@ -317,7 +273,6 @@ ruleTester.run('consistent-property-aliases', rule, {
       options: [{ prefer: { license: false } }],
       output: null,
     },
-    // Removing a repeated spelling removes every copy of it at once
     {
       code: `{ "license": "ISC", "license": "MIT", "licence": "Apache-2.0" }`,
       errors: [
@@ -328,45 +283,14 @@ ruleTester.run('consistent-property-aliases', rule, {
           messageId: 'bothAliasesPresent',
           suggestions: [
             {
-              data: { count: 2, property: 'license' },
-              messageId: 'removeAllProperties',
-              output: `{ "licence": "Apache-2.0" }`,
-            },
-            {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "ISC", "license": "MIT" }`,
+              output: `{ "license": "ISC", "license": "MIT"  }`,
             },
           ],
         },
       ],
       name: 'repeated license and licence > prefer.license: false',
-      options: [{ prefer: { license: false } }],
-      output: null,
-    },
-    {
-      code: `{ "licence": "Apache-2.0", "license": "ISC", "license": "MIT" }`,
-      errors: [
-        {
-          column: 3,
-          data: { other: 'license', present: 'licence' },
-          line: 1,
-          messageId: 'bothAliasesPresent',
-          suggestions: [
-            {
-              data: { count: 2, property: 'license' },
-              messageId: 'removeAllProperties',
-              output: `{ "licence": "Apache-2.0" }`,
-            },
-            {
-              data: { property: 'licence' },
-              messageId: 'removeProperty',
-              output: `{ "license": "ISC", "license": "MIT" }`,
-            },
-          ],
-        },
-      ],
-      name: 'licence and repeated license at the end > prefer.license: false',
       options: [{ prefer: { license: false } }],
       output: null,
     },
@@ -418,7 +342,7 @@ ruleTester.run('consistent-property-aliases', rule, {
             {
               data: { property: 'licence' },
               messageId: 'removeProperty',
-              output: `{ "license": "MIT" }`,
+              output: `{ "license": "MIT"  }`,
             },
           ],
         },

@@ -1,40 +1,9 @@
-import type { Rule } from 'eslint';
+import { fixRemoveObjectProperty, type ObjectProperty } from 'eslint-fix-utils';
 import type { AST } from 'jsonc-eslint-parser';
 
 import { PROPERTY_ALIASES } from '../constants.ts';
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates/index.ts';
-
-// Unlike `fixRemoveObjectProperty` from `eslint-fix-utils`, removes each run of neighboring
-// properties with one comma, so the fixes never overlap
-const removeProperties = (fixer: Rule.RuleFixer, properties: readonly AST.JSONProperty[]) => {
-  const siblings = properties[0].parent.properties;
-  const toRemove = new Set(properties);
-
-  return siblings.flatMap((property, index) => {
-    const isRunStart = toRemove.has(property) && !(index > 0 && toRemove.has(siblings[index - 1]));
-    if (!isRunStart) {
-      return [];
-    }
-
-    const nextIndex = siblings.findIndex(
-      (sibling, siblingIndex) => siblingIndex > index && !toRemove.has(sibling),
-    );
-    const runEnd = siblings[(nextIndex === -1 ? siblings.length : nextIndex) - 1];
-
-    return fixer.removeRange(
-      nextIndex === -1
-        ? [siblings[index - 1].range[1], runEnd.range[1]]
-        : [property.range[0], siblings[nextIndex].range[0]],
-    );
-  });
-};
-
-const removalSuggestion = (name: string, properties: readonly AST.JSONProperty[]) => ({
-  data: { count: properties.length, property: name },
-  fix: (fixer: Rule.RuleFixer) => removeProperties(fixer, properties),
-  messageId: properties.length === 1 ? 'removeProperty' : 'removeAllProperties',
-});
 
 export const rule = createRule({
   create(context) {
@@ -72,9 +41,12 @@ export const rule = createRule({
                 messageId: 'bothAliasesPresent',
                 node: property.key,
                 suggest: [
-                  preferred === false ? removalSuggestion(other.name, other.occurrences) : null,
-                  removalSuggestion(reported.name, [property]),
-                ].filter((v) => v != null),
+                  {
+                    data: { property: reported.name },
+                    fix: fixRemoveObjectProperty(context, property as unknown as ObjectProperty),
+                    messageId: 'removeProperty',
+                  },
+                ],
               });
             }
 
@@ -115,7 +87,6 @@ export const rule = createRule({
     messages: {
       bothAliasesPresent: '`{{present}}` is an alias of `{{other}}`; declaring both is redundant.',
       preferAlias: 'Prefer `{{preferred}}` over `{{present}}`.',
-      removeAllProperties: 'Remove all {{count}} `{{property}}` properties.',
       removeProperty: 'Remove `{{property}}`.',
     },
     schema: [
