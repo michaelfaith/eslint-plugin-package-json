@@ -1,0 +1,206 @@
+---
+title: 'consistent-package-manager-declaration'
+description: 'Enforce that the package manager is declared in either `packageManager` or `devEngines.packageManager`.'
+---
+
+🔧💡 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) and manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+{/* end auto-generated rule header */}
+
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+
+This rule enforces where a package's package manager is declared: in the top-level `packageManager` field, or in `devEngines.packageManager`.
+
+## More Details
+
+The package manager can be declared in two places in a `package.json`:
+
+**The `packageManager` field**, read by Node.js' [Corepack](https://github.com/nodejs/corepack) and supported by essentially every package manager:
+
+```json
+{
+  "packageManager": "pnpm@12.14.0"
+}
+```
+
+**`devEngines.packageManager`**, read by pnpm and recent versions of npm (and by Corepack as a fallback):
+
+```json
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0"
+    }
+  }
+}
+```
+
+`devEngines` is the more versatile of the two, and keeps the package manager next to the other development environment requirements, such as `devEngines.runtime`.
+Using one form consistently makes it clear which one tools should read.
+
+<Aside type="note">
+  This rule only checks where the package manager is declared, not whether it is: a `package.json`
+  that declares it in neither place isn't reported. To require the top-level field, use
+  [`require-packageManager`](/rules/require-properties/require-packagemanager).
+</Aside>
+
+<Aside type="caution">
+  Yarn and Bun don't support `devEngines` yet (see
+  [yarnpkg/berry#6744](https://github.com/yarnpkg/berry/issues/6744) and
+  [oven-sh/bun#26512](https://github.com/oven-sh/bun/issues/26512)). If your project uses either of
+  them, use `prefer: "packageManager"`.
+</Aside>
+
+## Examples
+
+### With Default Options (prefer: "devEngines")
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "packageManager": "pnpm@12.14.0"
+}
+```
+
+```json
+{
+  "packageManager": "pnpm@12.14.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0"
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0"
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### With prefer: "packageManager"
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0"
+    }
+  }
+}
+```
+
+```json
+{
+  "packageManager": "pnpm@12.14.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.14.0"
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "packageManager": "pnpm@12.14.0"
+}
+```
+
+```json
+{
+  "packageManager": "pnpm@12.14.0",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=24"
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name     | Description                                             | Type   | Choices                        | Default      |
+| :------- | :------------------------------------------------------ | :----- | :----------------------------- | :----------- |
+| `prefer` | Specifies where the package manager should be declared. | String | `devEngines`, `packageManager` | `devEngines` |
+
+{/* end auto-generated rule options list */}
+
+### `prefer`
+
+The `prefer` option specifies where the package manager should be declared:
+
+- `"devEngines"` _(default)_: Disallows the `packageManager` field in favor of `devEngines.packageManager`
+- `"packageManager"`: Disallows `devEngines.packageManager` in favor of the `packageManager` field
+
+```json
+{
+  "package-json/consistent-package-manager-declaration": [
+    "error",
+    {
+      "prefer": "packageManager"
+    }
+  ]
+}
+```
+
+## Fixing
+
+When the declaration can be moved to the preferred place without losing anything, the rule fixes it automatically.
+If both places already declare the same package manager and version, the non-preferred one is removed.
+
+Otherwise, the fix is offered as an [editor suggestion](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions) so you can review it first.
+This happens when:
+
+- the `packageManager` field includes a Corepack integrity hash (e.g. `pnpm@12.14.0+sha512.<hash>`), which `devEngines` doesn't support;
+- `devEngines.packageManager` includes `onFail`, which in turn the `packageManager` field doesn't support;
+- both places declare a package manager, but they don't match.
+
+The rule reports without a fix when the declaration can't be converted, such as when `devEngines.packageManager` is an array, or specifies a version range rather than an exact version, which the `packageManager` field doesn't allow.
+
+## When Not to Use It
+
+If you intentionally declare the package manager in both places (for example, to support tools that only read one of them), you can disable this rule.
+
+## Related Rules
+
+- [`require-devEngines`](/rules/require-properties/require-devengines) - Enforces that the `devEngines` property is present.
+- [`require-packageManager`](/rules/require-properties/require-packagemanager) - Enforces that the `packageManager` property is present.
+- [`valid-devEngines`](/rules/valid-properties/valid-devengines) - Enforces that the `devEngines` property is valid.
+- [`valid-packageManager`](/rules/valid-properties/valid-packagemanager) - Enforces that the `packageManager` property is valid.
+
+## Further Reading
+
+- [Node.js: corepack > When Authoring Packages](https://github.com/nodejs/corepack#when-authoring-packages)
+- [npm: package.json > devEngines](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#devengines)
+- [pnpm: package.json > devEngines.packageManager](https://pnpm.io/package_json#devenginespackagemanager)
