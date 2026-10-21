@@ -1,0 +1,148 @@
+---
+title: 'consistent-property-aliases'
+description: 'Enforce a consistent spelling for properties that have a well-known alias.'
+---
+
+🔧💡 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix) and manually fixable by [editor suggestions](https://eslint.org/docs/latest/use/core-concepts#rule-suggestions).
+
+{/* end auto-generated rule header */}
+
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
+
+The following `package.json` properties are recognized under two spellings:
+
+| Canonical spelling   | Alternative spelling  |
+| :------------------- | :-------------------- |
+| `bundleDependencies` | `bundledDependencies` |
+| `license`            | `licence`             |
+
+Both spellings work, so a project can easily end up with a mix of them.
+Also, tools that read `package.json` directly, without npm's normalization, usually only look for one spelling.
+This rule enforces a single spelling for each property, and reports a `package.json` that declares both.
+
+## More Details
+
+npm resolves each pair in favor of the canonical spelling.
+`normalize-package-data` [reads the license](https://github.com/npm/normalize-package-data/blob/34c98503c4e828a166aa3bb78a4cb0525af3c8f5/lib/fixer.js#L324) as `data.license || data.licence`, and [only copies `bundledDependencies` into `bundleDependencies`](https://github.com/npm/normalize-package-data/blob/34c98503c4e828a166aa3bb78a4cb0525af3c8f5/lib/fixer.js#L114-L119) when the latter is missing.
+So when both are present, the alternative spelling is ignored.
+
+## Examples
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "licence": "MIT"
+}
+```
+
+```json
+{
+  "bundledDependencies": ["foo"]
+}
+```
+
+```json
+{
+  "license": "MIT",
+  "licence": "MIT"
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "license": "MIT"
+}
+```
+
+```json
+{
+  "bundleDependencies": ["foo"]
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Options
+
+{/* begin auto-generated rule options list */}
+
+| Name                 | Description                                                                                                                                                    | Type   |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- |
+| `bundleDependencies` | The spelling to enforce (`bundleDependencies` or `bundledDependencies`), `true` for the canonical one, or `false` to only report using both spellings at once. |        |
+| `license`            | The spelling to enforce (`license` or `licence`), `true` for the canonical one, or `false` to only report using both spellings at once.                        |        |
+| `prefer`             | Specifies the spelling to enforce for each aliased property. Properties left unspecified keep their default, which is the canonical spelling.                  | Object |
+
+{/* end auto-generated rule options list */}
+
+### `prefer`
+
+Each key of `prefer` is an aliased property, and its value is the spelling to enforce for it.
+Properties you leave out keep their default, which is always the canonical spelling.
+So configuring one property does not turn off the others.
+Setting a property to `true` also selects the canonical spelling, so you can pass a `boolean` value from your own configuration.
+
+```json
+{
+  "package-json/consistent-property-aliases": [
+    "error",
+    {
+      "prefer": {
+        "license": "licence"
+      }
+    }
+  ]
+}
+```
+
+Setting a property to `false` turns off the spelling preference, but declaring both spellings at once is still reported:
+
+```json
+{
+  "package-json/consistent-property-aliases": [
+    "error",
+    {
+      "prefer": {
+        "bundleDependencies": false
+      }
+    }
+  ]
+}
+```
+
+## Fixes and Suggestions
+
+The rule can only fix the spelling automatically when just the non-preferred property is present: the fix renames the key and keeps the value as is.
+
+When both spellings are present, there is no autofix, because the two values may differ, and picking one for you would change what the package declares.
+Instead, the rule suggests removing the non-preferred property.
+If the property is set to `true`, which is the default, or to `false`, it suggests removing the non-canonical one, like `licence`.
+
+If a key appears more than once in the file, each occurrence is reported and can be fixed on its own.
+
+<Aside>
+  The deprecated `licenses` and `licences` fields are arrays in a different format, so this rule
+  does not cover them.
+</Aside>
+
+## When Not to Use It
+
+If you need to keep both spellings of a property (for example, for a tool that only reads the alternative one), disable this rule.
+
+## Related Rules
+
+- [`valid-bundleDependencies`](/rules/valid-properties/valid-bundleDependencies) - Enforces that the `bundleDependencies` property is valid, under either spelling.
+- [`valid-license`](/rules/valid-properties/valid-license) - Enforces that the `license` property is valid, under either spelling.
+- [`require-bundleDependencies`](/rules/require-properties/require-bundleDependencies) - Requires the `bundleDependencies` property to be present, under either spelling.
+- [`require-license`](/rules/require-properties/require-license) - Requires the `license` property to be present, under either spelling.
+- [`order-properties`](/rules/order-properties) - Enforces a consistent ordering of top-level properties.
+
+## Further Reading
+
+- [npm: package.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-json)
+- [`normalize-package-data`](https://github.com/npm/normalize-package-data)

@@ -4,7 +4,21 @@ import type { AST } from 'jsonc-eslint-parser';
 import sortObjectKeys from 'sort-object-keys';
 import { sortOrder } from 'sort-package-json';
 
+import { PROPERTY_ALIASES } from '../constants.ts';
 import { createRule } from '../createRule.ts';
+
+const ALIASES_BY_CANONICAL: ReadonlyMap<string, string> = new Map(Object.entries(PROPERTY_ALIASES));
+
+// Keep each alias next to its canonical property, since `sort-package-json` doesn't list all of them
+const withAliases = (order: readonly string[]) => {
+  const keys = new Set(order);
+  return order.flatMap((key) => {
+    const alternative = ALIASES_BY_CANONICAL.get(key);
+    return alternative === undefined || keys.has(alternative) ? key : [key, alternative];
+  });
+};
+
+const SORT_PACKAGE_JSON_ORDER: readonly string[] = withAliases(sortOrder);
 
 export const rule = createRule({
   create(context) {
@@ -14,7 +28,8 @@ export const rule = createRule({
 
         const { order = 'sort-package-json' } = context.options[0] ?? {};
 
-        const requiredOrder = order === 'sort-package-json' ? sortOrder : order;
+        const requiredOrder =
+          order === 'sort-package-json' ? SORT_PACKAGE_JSON_ORDER : withAliases(order);
 
         const json = JSON.parse(text) as Record<string, unknown>;
 

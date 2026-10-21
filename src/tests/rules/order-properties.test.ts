@@ -272,8 +272,57 @@ ruleTester.run('order-properties', rule, {
       options: [{ order: ['name', 'version'] }],
       output: ['{', '	"name": "foo",', '	"version": "1.0.0"', '}'].join('\r\n'),
     },
+    // An alias is placed right after its canonical property
+    {
+      code: `{
+	"name": "foo",
+	"main": "index.js",
+	"licence": "MIT"
+}
+`,
+      errors: [
+        {
+          column: 2,
+          data: { property: 'main' },
+          line: 3,
+          messageId: 'incorrectOrder',
+        },
+      ],
+      filename: 'package.json',
+      output: `{
+	"name": "foo",
+	"licence": "MIT",
+	"main": "index.js"
+}
+`,
+    },
   ],
   valid: [
+    // An alias is placed right after its canonical property, unless the order lists it explicitly
+    `{
+	"name": "foo",
+	"license": "MIT",
+	"licence": "MIT",
+	"main": "index.js"
+}`,
+    {
+      code: `{
+	"name": "foo",
+	"licence": "MIT",
+	"version": "1.0.0"
+}`,
+      name: 'licence > custom order with license',
+      options: [{ order: ['name', 'license', 'version'] }],
+    },
+    {
+      code: `{
+	"licence": "MIT",
+	"name": "foo",
+	"license": "MIT"
+}`,
+      name: 'licence > custom order with licence',
+      options: [{ order: ['licence', 'name', 'license'] }],
+    },
     `{
 	"name": "treat-yo-self",
 	"version": "1.1.1",

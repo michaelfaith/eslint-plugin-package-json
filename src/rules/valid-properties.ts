@@ -36,6 +36,7 @@ import {
 } from 'package-json-validator';
 import semver from 'semver';
 
+import { PROPERTY_ALIASES } from '../constants.ts';
 import {
   createSimpleValidPropertyRule,
   type ValidationFunction,
@@ -79,7 +80,7 @@ const properties = [
   [
     'bundleDependencies',
     {
-      aliases: ['bundledDependencies'],
+      aliases: [PROPERTY_ALIASES.bundleDependencies],
       validator: validateBundleDependencies,
     },
   ],
@@ -99,7 +100,13 @@ const properties = [
   ['homepage', validateHomepage],
   ['keywords', validateKeywords],
   ['libc', validateLibc],
-  ['license', validateLicense],
+  [
+    'license',
+    {
+      aliases: [PROPERTY_ALIASES.license],
+      validator: validateLicense,
+    },
+  ],
   ['main', validateMain],
   ['man', validateMan],
   ['module', validateMain], // Reuse `validateMain` for `module`

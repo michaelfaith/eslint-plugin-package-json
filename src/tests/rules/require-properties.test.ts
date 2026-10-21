@@ -370,6 +370,7 @@ for (const ruleName of ruleNames) {
       `{ "${propertyName}": "Jessica Moss" }`,
       `{ "${propertyName}": 123 }`,
       `{ "${propertyName}": { "name": "Jessica Moss" } }`,
+      ...(propertyOptions?.aliases ?? []).map((alias) => `{ "${alias}": "Jessica Moss" }`),
       ...(propertyName === 'private'
         ? []
         : [

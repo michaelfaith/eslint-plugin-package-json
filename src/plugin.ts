@@ -5,6 +5,7 @@ import * as parserJsonc from 'jsonc-eslint-parser';
 
 import type { PackageJsonRuleModule } from './createRule.ts';
 import { rule as binNameCasing } from './rules/bin-name-casing.ts';
+import { rule as consistentPropertyAliases } from './rules/consistent-property-aliases.ts';
 import { rule as exportsSubpathsStyle } from './rules/exports-subpaths-style.ts';
 import { rule as noEmptyFields } from './rules/no-empty-fields.ts';
 import { rule as noLocalDependencies } from './rules/no-local-dependencies.ts';
@@ -33,6 +34,7 @@ const require = createRequire(import.meta.url);
 
 const rules: Record<string, PackageJsonRuleModule> = {
   'bin-name-casing': binNameCasing,
+  'consistent-property-aliases': consistentPropertyAliases,
   'exports-subpaths-style': exportsSubpathsStyle,
   'no-empty-fields': noEmptyFields,
   'no-local-dependencies': noLocalDependencies,
