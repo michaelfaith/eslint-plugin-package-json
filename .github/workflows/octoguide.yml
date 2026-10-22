@@ -1,29 +1,6 @@
 name: OctoGuide
 
 on:
-  discussion:
-    types:
-      - created
-      - edited
-  discussion_comment:
-    types:
-      - created
-      - deleted
-      - edited
-  issue_comment:
-    types:
-      - created
-      - deleted
-      - edited
-  issues:
-    types:
-      - edited
-      - opened
-  pull_request_review_comment:
-    types:
-      - created
-      - deleted
-      - edited
   pull_request_target:
     types:
       - edited
@@ -34,15 +11,12 @@ jobs:
     if: ${{ !endsWith(github.actor, '[bot]') && !contains(github.event.pull_request.labels.*.name, 'autorelease') }}
     runs-on: ubuntu-latest
     permissions:
-      discussions: write
-      issues: write
       pull-requests: write
     steps:
       - uses: octoguide/bot@0.27.0
         with:
-          config: strict
           github-token: ${{ secrets.GITHUB_TOKEN }}
           rules: |
             {
-              "pr-branch-non-default": false
+              "pr-title-conventional": true
             }
