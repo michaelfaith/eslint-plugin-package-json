@@ -77,7 +77,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.5",
-    "@astrojs/check": "0.9.10",
+    "@astrojs/check": "0.9.11",
     "@astrojs/markdown-satteri": "0.4.4",
     "@astrojs/starlight": "0.42.6",
     "@catppuccin/starlight": "2.1.0",
@@ -90,7 +90,7 @@
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "5.0.5",
     "@vitest/eslint-plugin": "1.6.27",
-    "astro": "7.4.0",
+    "astro": "7.4.1",
     "astro-og-canvas": "0.13.2",
     "canvaskit-wasm": "0.42.0",
     "console-fail-test": "0.10.0",
