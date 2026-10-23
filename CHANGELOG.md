@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.11.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.10.1...v1.11.0) (2026-10-23)
+
+
+### 🚀 Features
+
+* add `consistent-package-manager-declaration` rule ([#2356](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2356)) ([968fc5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/968fc5f21ac8b121b18b9acd842e54853b9404aa))
+* add `consistent-property-aliases` rule ([#2342](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2342)) ([2615a5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2615a5f8103191c030ae94a1e1562e042312bf79))
+
+
+### 🩹 Bug Fixes
+
+* **order-properties:** sort `bundleDependencies` and `license` aliases properly ([#2342](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2342)) ([2615a5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2615a5f8103191c030ae94a1e1562e042312bf79))
+* **require-bundleDependencies:** allow the `bundledDependencies` alias to satisfy the rule ([#2342](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2342)) ([2615a5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2615a5f8103191c030ae94a1e1562e042312bf79))
+* **require-license:** allow the `licence` alias to satisfy the rule ([#2342](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2342)) ([2615a5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2615a5f8103191c030ae94a1e1562e042312bf79))
+* **valid-license:** also validate the `licence` alias ([#2342](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2342)) ([2615a5f](https://github.com/michaelfaith/eslint-plugin-package-json/commit/2615a5f8103191c030ae94a1e1562e042312bf79))
+
 ## [1.10.1](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.10.0...v1.10.1) (2026-09-28)
 
 
