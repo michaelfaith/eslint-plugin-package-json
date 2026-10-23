@@ -15,7 +15,7 @@ This rule enforces where a package's package manager is declared: in the top-lev
 
 The package manager can be declared in two places in a `package.json`:
 
-**The `packageManager` field**, read by Node.js' [Corepack](https://github.com/nodejs/corepack) and supported by essentially every package manager:
+**`packageManager`**: read by Node.js' [Corepack](https://github.com/nodejs/corepack) and supported by essentially every package manager:
 
 ```json
 {
@@ -23,7 +23,7 @@ The package manager can be declared in two places in a `package.json`:
 }
 ```
 
-**`devEngines.packageManager`**, read by pnpm and recent versions of npm (and by Corepack as a fallback):
+**`devEngines.packageManager`**: read by pnpm, Corepack, and recent versions of npm:
 
 ```json
 {
@@ -39,17 +39,17 @@ The package manager can be declared in two places in a `package.json`:
 `devEngines` is the more versatile of the two, and keeps the package manager next to the other development environment requirements, such as `devEngines.runtime`.
 Using one form consistently makes it clear which one tools should read.
 
-<Aside type="note">
-  This rule only checks where the package manager is declared, not whether it is: a `package.json`
-  that declares it in neither place isn't reported. To require the top-level field, use
-  [`require-packageManager`](/rules/require-properties/require-packagemanager).
-</Aside>
-
 <Aside type="caution">
   Yarn and Bun don't support `devEngines` yet (see
   [yarnpkg/berry#6744](https://github.com/yarnpkg/berry/issues/6744) and
   [oven-sh/bun#26512](https://github.com/oven-sh/bun/issues/26512)). If your project uses either of
   them, use `prefer: "packageManager"`.
+</Aside>
+
+<Aside type="note">
+  This rule only checks which method is used to declare the package manager, not whether it is
+  declared at all. A `package.json` that doesn't declare either is not reported. To require the
+  top-level field, use [`require-packageManager`](/rules/require-properties/require-packagemanager).
 </Aside>
 
 ## Examples

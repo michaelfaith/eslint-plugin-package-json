@@ -8,6 +8,9 @@ import { createRule } from '../createRule.ts';
 import { findPropertyWithKeyValue } from '../utils/findPropertyWithKeyValue.ts';
 import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
+const PREFER_VALUES = ['devEngines', 'packageManager'] as const;
+type PreferValue = (typeof PREFER_VALUES)[number];
+
 interface PackageManagerSpec {
   name: string;
   version: string;
@@ -20,7 +23,7 @@ interface PackageManagerSpec {
 const PACKAGE_MANAGER_FIELD_REGEX = /^(?<name>[^@\s]+)@(?<version>[^+\s]+)(?<hash>\+\S+)?$/;
 
 /**
- * Same as the `name` group from `PACKAGE_MANAGER_NAME_REGEX`, so that the result can be read back
+ * Same as the `name` group from `PACKAGE_MANAGER_FIELD_REGEX`, so that the result can be read back
  */
 const PACKAGE_MANAGER_NAME_REGEX = /^[^@\s]+$/;
 
@@ -86,7 +89,6 @@ const removeProperty = (fixer: Rule.RuleFixer, property: AST.JSONProperty) => {
 
 export const rule = createRule({
   create(context) {
-    type PreferValue = [(typeof context.options)[0] & {}][0]['prefer'] & {};
     const prefer: PreferValue = context.options[0]?.prefer ?? 'devEngines';
 
     const { sourceCode } = context;
@@ -263,8 +265,8 @@ export const rule = createRule({
     fixable: 'code',
     hasSuggestions: true,
     messages: {
-      moveToDevEngines: 'Move the package manager declaration to "devEngines.packageManager".',
-      moveToPackageManager: 'Move the package manager declaration to "packageManager".',
+      moveToDevEngines: 'Move the package manager declaration to `devEngines.packageManager`.',
+      moveToPackageManager: 'Move the package manager declaration to `packageManager`.',
       preferDevEngines:
         'Declare the package manager in `devEngines.packageManager` instead of `packageManager`.',
       preferPackageManager:
@@ -280,7 +282,7 @@ export const rule = createRule({
         properties: {
           prefer: {
             description: 'Specifies where the package manager should be declared.',
-            enum: ['devEngines', 'packageManager'],
+            enum: PREFER_VALUES,
             type: 'string',
           },
         },
