@@ -3,7 +3,7 @@ title: Migrating v1 to v2
 description: 'How to migrate usage of v1 to v2.'
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, TabItem, Tabs } from '@astrojs/starlight/components';
 
 This guide should include everything you need to know in order to upgrade `eslint-plugin-package-json` from v1 to v2.
 
@@ -31,10 +31,10 @@ You just need to remove the `parser` configuration, and add the `language`.
 ```diff
 {
   files: ['**/package.json'],
-- languageOptions: {
--   parser: parserJsonc,
-- },
-+ language: 'json/json',
+-  languageOptions: {
+-    parser: parserJsonc,
+-  },
++  language: 'json/json',
   plugins: {
     'package-json': packageJson,
   },
@@ -48,3 +48,136 @@ You just need to remove the `parser` configuration, and add the `language`.
   If you're no longer using `jsonc-eslint-parser` for some other purpose, you can safely uninstall
   it.
 </Aside>
+
+## Updated ESLint and Node Support
+
+v2 of the plugin now requires a version of Node.js in the following range `^24.15.0 || >= 26.12.0"`.
+We've also updated the minimum supported version of ESLint to `9.15.0`.
+You'll need to update your environment accordingly, if you're using versions outside of this range.
+
+## Updates to Configs
+
+### New Recommended Rules
+
+The following rules have been added to the `recommended` config.
+
+- `consistent-property-aliases` ([Docs](https://eslint-plugin-package-json.dev/rules/consistent-property-aliases/))
+- `no-local-dependencies` ([Docs](https://eslint-plugin-package-json.dev/rules/no-local-dependencies/))
+- `require-package-json-export` ([Docs](https://eslint-plugin-package-json.dev/rules/require-package-json-export/))
+
+### `recommended-publishable` Removed
+
+The deprecated `recommended-publishable` config has been removed.
+It was identical to the `recommended` config, and so you can safely switch to using that instead.
+
+```diff
+{
+-  extends: [packageJson.configs['recommended-publishable']],
++  extends: [packageJson.configs.recommended],
+  files: ['**/package.json'],
+},
+```
+
+### Rule Removals
+
+- `sort-collections` was removed from the `recommended` config
+- `order-properties` was removed from the `stylistic` config
+
+If you'd like to continue using these rules, you can enable them manually in your configuration.
+
+```diff
+{
+  extends: [packageJson.configs.recommended, packageJson.configs.stylistic],
+  files: ['**/package.json'],
++  rules: {
++    'order-properties': 'error',
++    'sort-collections': 'error',
++  },
+},
+```
+
+## Updates to Rules
+
+### `exports-subpaths-style`
+
+The `exports-subpaths-style` rule now applies to `publishConfig.exports` as well as the top-level `exports` property.
+
+<Tabs>
+<TabItem label="❌ Incorrect">
+
+```json
+{
+  "exports": "./index.ts",
+  "publishConfig": {
+    "exports": "./index.js"
+  }
+}
+```
+
+```json
+{
+  "exports": {
+    "import": "./index.mts",
+    "require": "./index.cts"
+  },
+  "publishConfig": {
+    "exports": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    }
+  }
+}
+```
+
+</TabItem>
+<TabItem label="✅ Correct">
+
+```json
+{
+  "exports": {
+    ".": "./index.ts"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": "./index.js"
+    }
+  }
+}
+```
+
+```json
+{
+  "exports": {
+    ".": {
+      "import": "./index.mts",
+      "require": "./index.cts"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./index.mjs",
+        "require": "./index.cjs"
+      }
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+See the [rule docs](https://eslint-plugin-package-json.dev/rules/exports-subpaths-style/) for more information.
+
+### `sort-collections`
+
+In addition to sorting object properties, `sort-collections` now also sorts arrays.
+
+```diff
+{
+-  "keywords": ["zebra", "apple", "banana"]
++  "keywords": ["apple", "banana", "zebra"]
+}
+```
+
+See the [rule docs](https://eslint-plugin-package-json.dev/rules/sort-collections/) for more information.
