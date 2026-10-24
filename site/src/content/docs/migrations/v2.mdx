@@ -31,10 +31,10 @@ You just need to remove the `parser` configuration, and add the `language`.
 ```diff
 {
   files: ['**/package.json'],
-- languageOptions: {
--   parser: parserJsonc,
-- },
-+ language: 'json/json',
+-  languageOptions: {
+-    parser: parserJsonc,
+-  },
++  language: 'json/json',
   plugins: {
     'package-json': packageJson,
   },
@@ -72,8 +72,8 @@ It was identical to the `recommended` config, and so you can safely switch to us
 
 ```diff
 {
-- extends: [packageJson.configs['recommended-publishable']],
-+ extends: [packageJson.configs.recommended],
+-  extends: [packageJson.configs['recommended-publishable']],
++  extends: [packageJson.configs.recommended],
   files: ['**/package.json'],
 },
 ```
@@ -89,10 +89,10 @@ If you'd like to continue using these rules, you can enable them manually in you
 {
   extends: [packageJson.configs.recommended, packageJson.configs.stylistic],
   files: ['**/package.json'],
-+ rules: {
-+   'order-properties': 'error',
-+   'sort-collections': 'error',
-+ },
++  rules: {
++    'order-properties': 'error',
++    'sort-collections': 'error',
++  },
 },
 ```
 
@@ -175,8 +175,8 @@ In addition to sorting object properties, `sort-collections` now also sorts arra
 
 ```diff
 {
-- "keywords": ["zebra", "apple", "banana"]
-+ "keywords": ["apple", "banana", "zebra"]
+-  "keywords": ["zebra", "apple", "banana"]
++  "keywords": ["apple", "banana", "zebra"]
 }
 ```
 
