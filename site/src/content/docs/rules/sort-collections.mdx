@@ -154,6 +154,9 @@ Pass an array of package properties to require sorting on those collections.
 To specify a nested property, use dot notation.
 All of their values must be objects.
 
+To sort the keys of each object inside an array (e.g. `contributors`), add `.*` to the end of the array's key (e.g. `contributors.*`).
+The wildcard can only be used as the last segment of the key, and it only applies to objects that are direct elements of that array.
+
 Each entry is either:
 
 - A string: the collection to sort the default way (lexicographically, or lifecycle-aware for `scripts`)
@@ -174,6 +177,17 @@ Example of enforcing a custom order for `nx` while still sorting `dependencies` 
   "package-json/sort-collections": [
     "error",
     ["dependencies", { "key": "nx", "order": ["npmScope", "affected"] }]
+  ]
+}
+```
+
+Example of only sorting the keys of each object in `contributors`, using a custom order:
+
+```json
+{
+  "package-json/sort-collections": [
+    "error",
+    [{ "key": "contributors.*", "order": ["name", "email", "url"] }]
   ]
 }
 ```
