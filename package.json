@@ -77,9 +77,9 @@
   },
   "devDependencies": {
     "@arethetypeswrong/core": "0.18.5",
-    "@astrojs/check": "0.9.11",
-    "@astrojs/markdown-satteri": "0.4.4",
-    "@astrojs/starlight": "0.42.6",
+    "@astrojs/check": "0.9.12",
+    "@astrojs/markdown-satteri": "0.4.5",
+    "@astrojs/starlight": "0.42.7",
     "@catppuccin/starlight": "2.1.0",
     "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
     "@eslint/js": "10.0.1",
@@ -89,15 +89,15 @@
     "@types/semver": "7.8.0",
     "@typescript/native": "npm:typescript@7.0.2",
     "@vitest/coverage-v8": "5.0.5",
-    "@vitest/eslint-plugin": "1.6.27",
-    "astro": "7.4.1",
+    "@vitest/eslint-plugin": "1.6.28",
+    "astro": "7.4.2",
     "astro-og-canvas": "0.13.2",
     "canvaskit-wasm": "0.42.0",
     "console-fail-test": "0.10.0",
     "eslint": "10.13.0",
     "eslint-doc-generator": "3.7.1",
     "eslint-plugin-eslint-plugin": "7.6.2",
-    "eslint-plugin-jsdoc": "65.4.0",
+    "eslint-plugin-jsdoc": "65.4.2",
     "eslint-plugin-jsonc": "3.4.2",
     "eslint-plugin-n": "18.5.0",
     "eslint-plugin-node-dependencies": "2.3.0",
@@ -114,7 +114,7 @@
     "sharp": "0.35.5",
     "simple-git-hooks": "2.14.0",
     "starlight-auto-sidebar": "0.4.1",
-    "tsdown": "0.23.1",
+    "tsdown": "0.23.2",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.72.0",
     "vitest": "5.0.5"
@@ -128,7 +128,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@12.14.0",
+  "packageManager": "pnpm@12.15.0",
   "engines": {
     "node": "^22.22.2 || >=24.15.0"
   }
