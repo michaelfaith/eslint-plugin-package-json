@@ -6,16 +6,28 @@ import { createRule, type PackageJsonRuleModule } from '../createRule.ts';
 // TODO: move this type upstream to `package-json-validator`
 export type ValidationFunction = (value: unknown) => Result;
 
+export interface CreateValidPropertyRuleOptions {
+  /** Alternative spellings of the property that should also be validated */
+  aliases?: string[];
+
+  /**
+   * Whether the rule should be included in the recommended config.
+   * Defaults to `true`.  Set this to `false` for rules added in a minor release,
+   * since adding a rule to the recommended config is a breaking change.
+   */
+  isRecommended?: boolean;
+}
+
 /**
  * Given a top-level property name, and a validation function, create a rule that validates the property using the validation function.
- * These rules will always be included in the recommended config.
+ * These rules are included in the recommended config, unless `isRecommended` is `false`.
  * Note: this will only create a basic validation rule, with no options.  If you need
  * to create a more complex rule, create it in its own file.
  */
 export const createSimpleValidPropertyRule = (
   propertyName: string,
   validationFunction: ValidationFunction,
-  aliases: string[] = [],
+  { aliases = [], isRecommended = true }: CreateValidPropertyRuleOptions = {},
 ): {
   rule: PackageJsonRuleModule;
   ruleName: string;
@@ -81,7 +93,7 @@ export const createSimpleValidPropertyRule = (
       docs: {
         category: 'Best Practices',
         description: `Enforce that the \`${propertyName}\` property${aliases.length ? ` (or its alias ${aliases.map((alias) => `\`${alias}\``).join(', ')})` : ''} is valid.`,
-        recommended: true,
+        recommended: isRecommended,
         ruleGroup: 'valid-properties',
       },
       messages: {

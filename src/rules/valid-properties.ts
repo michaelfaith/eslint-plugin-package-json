@@ -39,12 +39,12 @@ import semver from 'semver';
 import { PROPERTY_ALIASES } from '../constants.ts';
 import {
   createSimpleValidPropertyRule,
+  type CreateValidPropertyRuleOptions,
   type ValidationFunction,
 } from '../utils/createSimpleValidPropertyRule.ts';
 import { detectPackageManager } from '../utils/packageManager/detectPackageManager.ts';
 
-interface ValidPropertyOptions {
-  aliases: string[];
+interface ValidPropertyOptions extends CreateValidPropertyRuleOptions {
   validator: ValidationFunction;
 }
 
@@ -130,17 +130,16 @@ const properties = [
 export const rules = Object.fromEntries(
   properties.map(([propertyName, validationFunctionOrOptions]) => {
     let validationFunction: ValidationFunction;
-    let aliases: string[] = [];
+    let options: CreateValidPropertyRuleOptions = {};
     if (typeof validationFunctionOrOptions === 'object') {
-      validationFunction = validationFunctionOrOptions.validator;
-      aliases = validationFunctionOrOptions.aliases;
+      ({ validator: validationFunction, ...options } = validationFunctionOrOptions);
     } else {
       validationFunction = validationFunctionOrOptions;
     }
     const { rule, ruleName } = createSimpleValidPropertyRule(
       propertyName,
       validationFunction,
-      aliases,
+      options,
     );
     return [ruleName, rule];
   }),
