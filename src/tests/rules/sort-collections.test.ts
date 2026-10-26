@@ -340,6 +340,49 @@ ruleTester.run('sort-collections', rule, {
       code: `{
   "contributors": [
     {
+      "url": "https://example.com/bob",
+      "name": "Bob",
+      "email": "bob@example.com"
+    },
+    {
+      "email": "alice@example.com",
+      "name": "Alice"
+    }
+  ]
+}`,
+      errors: [
+        {
+          data: { key: 'contributors.*' },
+          line: 3,
+          messageId: 'unsortedOrder',
+        },
+        {
+          data: { key: 'contributors.*' },
+          line: 8,
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: unlisted keys appended in lexicographical order',
+      options: [[{ key: 'contributors.*', order: ['name', 'url'] }]],
+      output: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "url": "https://example.com/bob",
+      "email": "bob@example.com"
+    },
+    {
+      "name": "Alice",
+      "email": "alice@example.com"
+    }
+  ]
+}`,
+    },
+    {
+      code: `{
+  "contributors": [
+    {
       "name": "Bob",
       "email": "bob@example.com"
     }
