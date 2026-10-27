@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.11.0...v1.12.0) (2026-10-27)
+
+
+### 🚀 Features
+
+* **sort-collections:** sort objects inside arrays with `<key>.*` ([#2383](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2383)) ([013a92c](https://github.com/michaelfaith/eslint-plugin-package-json/commit/013a92c90015481f59edd8e7d884b83f37b5c175))
+
 ## [1.11.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.10.1...v1.11.0) (2026-10-23)
 
 
