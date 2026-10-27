@@ -26,14 +26,17 @@ export const rule = createRule({
     );
 
     return {
-      'JSONProperty:exit'(node) {
-        const { key: nodeKey, value: collection } = node;
+      'JSONObjectExpression:exit'(collection) {
+        // A collection is either the value of a property, or an object directly
+        // inside an array that is the value of a property (matched by `<key>.*`).
+        const isArrayElement = collection.parent.type === 'JSONArrayExpression';
+        const node = isArrayElement ? collection.parent.parent : collection.parent;
 
-        if (nodeKey.type !== 'JSONLiteral' || collection.type !== 'JSONObjectExpression') {
+        if (node.type !== 'JSONProperty' || node.key.type !== 'JSONLiteral') {
           return;
         }
 
-        const keyPartsReversed = [nodeKey.value];
+        const keyPartsReversed = isArrayElement ? ['*', node.key.value] : [node.key.value];
         for (
           let currNode: AST.JSONNode | null | undefined = node.parent;
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

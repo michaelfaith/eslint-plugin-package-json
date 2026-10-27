@@ -293,6 +293,187 @@ ruleTester.run('sort-collections', rule, {
 	}
 }`,
     },
+    {
+      code: `{
+  "contributors": [
+    {
+      "url": "https://example.com/bob",
+      "name": "Bob",
+      "email": "bob@example.com"
+    },
+    {
+      "email": "alice@example.com",
+      "name": "Alice"
+    }
+  ]
+}`,
+      errors: [
+        {
+          data: { key: 'contributors.*' },
+          line: 3,
+          messageId: 'unsortedOrder',
+        },
+        {
+          data: { key: 'contributors.*' },
+          line: 8,
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: custom order applies to each object in the array',
+      options: [[{ key: 'contributors.*', order: ['name', 'email', 'url'] }]],
+      output: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "email": "bob@example.com",
+      "url": "https://example.com/bob"
+    },
+    {
+      "name": "Alice",
+      "email": "alice@example.com"
+    }
+  ]
+}`,
+    },
+    {
+      code: `{
+  "contributors": [
+    {
+      "url": "https://example.com/bob",
+      "name": "Bob",
+      "email": "bob@example.com"
+    },
+    {
+      "email": "alice@example.com",
+      "name": "Alice"
+    }
+  ]
+}`,
+      errors: [
+        {
+          data: { key: 'contributors.*' },
+          line: 3,
+          messageId: 'unsortedOrder',
+        },
+        {
+          data: { key: 'contributors.*' },
+          line: 8,
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: unlisted keys appended in lexicographical order',
+      options: [[{ key: 'contributors.*', order: ['name', 'url'] }]],
+      output: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "url": "https://example.com/bob",
+      "email": "bob@example.com"
+    },
+    {
+      "name": "Alice",
+      "email": "alice@example.com"
+    }
+  ]
+}`,
+    },
+    {
+      code: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "email": "bob@example.com"
+    }
+  ]
+}`,
+      errors: [
+        {
+          data: { key: 'contributors.*' },
+          messageId: 'unsortedKeys',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: string entry sorts each object in the array lexicographically',
+      options: [['contributors.*']],
+      output: `{
+  "contributors": [
+    {
+      "email": "bob@example.com",
+      "name": "Bob"
+    }
+  ]
+}`,
+    },
+    {
+      code: `{
+	"funding": [
+		"https://example.com/donate",
+		{
+			"url": "https://github.com/sponsors/bob",
+			"type": "github"
+		}
+	]
+}`,
+      errors: [
+        {
+          data: { key: 'funding.*' },
+          messageId: 'unsortedKeys',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: non-object elements are ignored',
+      options: [['funding.*']],
+      output: `{
+	"funding": [
+		"https://example.com/donate",
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/bob"
+		}
+	]
+}`,
+    },
+    {
+      code: `{
+  "devEngines": {
+    "runtime": [
+      {
+        "version": ">=24",
+        "name": "node"
+      },
+      {
+        "name": "bun",
+        "version": ">=1"
+      }
+    ]
+  }
+}`,
+      errors: [
+        {
+          data: { key: 'devEngines.runtime.*' },
+          messageId: 'unsortedOrder',
+        },
+      ],
+      filename: 'package.json',
+      name: 'wildcard: works with a nested array key',
+      options: [[{ key: 'devEngines.runtime.*', order: ['name', 'version', 'onFail'] }]],
+      output: `{
+  "devEngines": {
+    "runtime": [
+      {
+        "name": "node",
+        "version": ">=24"
+      },
+      {
+        "name": "bun",
+        "version": ">=1"
+      }
+    ]
+  }
+}`,
+    },
   ],
 
   valid: [
@@ -436,6 +617,20 @@ ruleTester.run('sort-collections', rule, {
 }`,
       options: [['foo.0.bar']],
     },
+    {
+      code: `{
+  "foo": [
+    {
+      "bar": {
+        "b": 2,
+        "a": 1
+      }
+    }
+  ]
+}`,
+      name: 'wildcard: only supported as the last segment',
+      options: [['foo.*.bar']],
+    },
     // custom order: already in the specified order
     {
       code: `{
@@ -491,6 +686,58 @@ ruleTester.run('sort-collections', rule, {
       filename: 'package.json',
       name: 'custom order on scripts with unlisted keys already lifecycle-sorted',
       options: [[{ key: 'scripts', order: ['watch'] }]],
+    },
+    {
+      code: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "email": "bob@example.com",
+      "url": "https://example.com/bob"
+    },
+    "Alice <alice@example.com>"
+  ]
+}`,
+      name: 'wildcard: objects in the array already in the specified order',
+      options: [[{ key: 'contributors.*', order: ['name', 'email', 'url'] }]],
+    },
+    {
+      code: `{
+  "contributors": [
+    {
+      "name": "Bob",
+      "email": "bob@example.com"
+    }
+  ]
+}`,
+      name: 'wildcard: objects in the array are not sorted without it',
+      options: [['contributors']],
+    },
+    {
+      code: `{
+  "nx": {
+    "affected": {
+      "b": 2,
+      "a": 1
+    }
+  }
+}`,
+      name: 'wildcard: does not match the properties of an object',
+      options: [['nx.*']],
+    },
+    {
+      code: `{
+  "foo": [
+    [
+      {
+        "b": 2,
+        "a": 1
+      }
+    ]
+  ]
+}`,
+      name: 'wildcard: only matches objects directly inside the array',
+      options: [['foo.*']],
     },
   ],
 });
