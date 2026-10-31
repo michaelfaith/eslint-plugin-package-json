@@ -14,7 +14,7 @@ workflows:
         - 'joshuakgoldberg/all-contributors-auto-action@v0.7.0'
         - 'pnpm/setup@v3.1.1'
     '.github/workflows/octoguide.yml':
-        - 'octoguide/bot@0.29.2'
+        - 'octoguide/bot@0.29.3'
     '.github/workflows/pr-review-requested.yml':
         - 'actions-ecosystem/action-remove-labels@v1.3.0'
     '.github/workflows/publish-preview.yml':
@@ -86,9 +86,9 @@ dependencies:
         commit: 'sha1-c578423db9b2c14d3cee9c72f6c2aed31c128030'
         owner_id: 3335181
         repo_id: 634940144
-    'octoguide/bot@0.29.2':
-        ref: '0.29.2'
-        commit: 'sha1-add13d645618e42f25d8e02e2d032ef41b843e6a'
+    'octoguide/bot@0.29.3':
+        ref: '0.29.3'
+        commit: 'sha1-14bbfdb68a28fb3b1bc55ff490c86096ccc9e7a3'
         owner_id: 231299902
         repo_id: 964218711
     'pnpm/setup@v3.1.1':
