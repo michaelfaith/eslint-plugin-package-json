@@ -14,11 +14,13 @@ It does **not** guarantee an override is safe: always test the resulting depende
 Enable the rule explicitly:
 
 ```js
-export default [{
-  rules: {
-    'package-json/require-override-restrictions': 'error',
+export default [
+  {
+    rules: {
+      'package-json/require-override-restrictions': 'error',
+    },
   },
-}];
+];
 ```
 
 ### ❌ Incorrect

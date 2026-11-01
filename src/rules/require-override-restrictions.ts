@@ -47,7 +47,8 @@ export const rule = createRule({
   meta: {
     docs: {
       category: 'Best Practices',
-      description: 'Reports unrestricted npm override selectors that can affect multiple dependency versions.',
+      description:
+        'Reports unrestricted npm override selectors that can affect multiple dependency versions.',
       recommended: false,
     },
     messages: {
