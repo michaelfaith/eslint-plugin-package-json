@@ -136,7 +136,7 @@ const config: ConfigObject[] = defineConfig(
     },
   },
   {
-    files: ['.github/workflows/*.yaml'],
+    files: ['.github/workflows/*.{yml,yaml}'],
     rules: {
       'yml/file-extension': ['error', { extension: 'yaml' }],
     },
