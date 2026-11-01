@@ -5,46 +5,122 @@ ruleTester.run('require-override-restrictions', rule, {
   invalid: [
     {
       code: '{"overrides":{"path-to-regexp":"0.1.13"}}',
-      errors: [{ data: { selector: 'path-to-regexp' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: 'path-to-regexp' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"@example/library":"1.2.3"}}',
-      errors: [{ data: { selector: '@example/library' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: '@example/library' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"ws@*":"6.2.3"}}',
-      errors: [{ data: { selector: 'ws@*' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: 'ws@*' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"@example/library@*":"1.2.3"}}',
-      errors: [{ data: { selector: '@example/library@*' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: '@example/library@*' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"ws@latest":"6.2.3"}}',
-      errors: [{ data: { selector: 'ws@latest' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: 'ws@latest' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"@scope":"1.0.0"}}',
-      errors: [{ data: { selector: '@scope' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: '@scope' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"@scope/package@not-a-semver-range":"1.0.0"}}',
       errors: [
         {
+          column: 15,
           data: { selector: '@scope/package@not-a-semver-range' },
+          line: 1,
           messageId: 'unrestrictedOverride',
         },
       ],
     },
     {
       code: '{"overrides":{"ws":{"version":"6.2.3"}}}',
-      errors: [{ data: { selector: 'ws' }, messageId: 'unrestrictedOverride' }],
+      errors: [
+        {
+          column: 15,
+          data: { selector: 'ws' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
     },
     {
       code: '{"overrides":{"foo":"2.0.0","@scope/bar":"3.0.0"}}',
       errors: [
-        { data: { selector: 'foo' }, messageId: 'unrestrictedOverride' },
-        { data: { selector: '@scope/bar' }, messageId: 'unrestrictedOverride' },
+        {
+          column: 15,
+          data: { selector: 'foo' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+        {
+          column: 29,
+          data: { selector: '@scope/bar' },
+          line: 1,
+          messageId: 'unrestrictedOverride',
+        },
+      ],
+    },
+    {
+      code: `{
+  "overrides": {
+    "debug": "4.0.0"
+  }
+}`,
+      errors: [
+        {
+          column: 5,
+          data: { selector: 'debug' },
+          line: 3,
+          messageId: 'unrestrictedOverride',
+        },
       ],
     },
   ],
@@ -63,5 +139,6 @@ ruleTester.run('require-override-restrictions', rule, {
     '{"overrides":{"ws@1.0.0":{".":"1.0.1","debug":"4.0.0"}}}',
     '{"overrides":[]}',
     '{"pnpm":{"overrides":{"ws":"6.2.3"}}}',
+    '{ "overrides": { 1: "0.0.1" } }',
   ],
 });

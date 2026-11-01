@@ -5,6 +5,8 @@ description: 'Reports unrestricted npm override selectors that can affect multip
 
 {/* end auto-generated rule header */}
 
+import { TabItem, Tabs } from '@astrojs/starlight/components';
+
 This experimental, opt-in rule reports npm `overrides` entries without a dependency version restriction.
 It aims to prevent a root-level override from unintentionally replacing multiple major versions of a transitive dependency.
 It does **not** guarantee an override is safe: always test the resulting dependency tree.
@@ -23,7 +25,8 @@ export default [
 ];
 ```
 
-### ❌ Incorrect
+<Tabs>
+<TabItem label="❌ Incorrect">
 
 ```json
 {
@@ -35,7 +38,8 @@ export default [
 }
 ```
 
-### ✅ Correct
+</TabItem>
+<TabItem label="✅ Correct">
 
 ```json
 {
@@ -49,9 +53,12 @@ export default [
 }
 ```
 
+</TabItem>
+</Tabs>
+
 Nested override keys are scoped by the version-restricted parent key and are not reported.
 Only the root npm `overrides` property is checked; `pnpm.overrides` is not affected.
 
 ## Further Reading
 
-- [npm package.json overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)
+- [npm: package.json > overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)

@@ -53,7 +53,7 @@ export const rule = createRule({
     },
     messages: {
       unrestrictedOverride:
-        'Override selector "{{ selector }}" must include a non-universal version range.',
+        'Override selector "{{ selector }}" must include a version range (besides `*`).',
     },
     schema: [],
     type: 'suggestion',
