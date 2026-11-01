@@ -28,7 +28,7 @@ runs:
   steps:
     - uses: actions/checkout@v7.0.1
       if: ${{ inputs.skip-checkout == 'false' }}
-    - uses: pnpm/setup@v3.1.1
+    - uses: pnpm/setup@v3.1.2
       with:
         cache: ${{ inputs.cache }}
         install: ${{ inputs.install-flags == '' && inputs.working-directory == '.' }}
