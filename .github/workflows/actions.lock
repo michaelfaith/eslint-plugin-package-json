@@ -3,30 +3,30 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
-    '.github/workflows/ci.yml':
+    '.github/workflows/ci.yaml':
         - 'actions/checkout@v7.0.1'
         - 'actions/download-artifact@v8.0.2'
         - 'actions/upload-artifact@v7.0.2'
         - 'codecov/codecov-action@v7.1.1'
         - 'pnpm/setup@v3.1.2'
-    '.github/workflows/contributors.yml':
+    '.github/workflows/contributors.yaml':
         - 'actions/checkout@v7.0.1'
         - 'joshuakgoldberg/all-contributors-auto-action@v0.7.0'
         - 'pnpm/setup@v3.1.2'
-    '.github/workflows/octoguide.yml':
+    '.github/workflows/octoguide.yaml':
         - 'octoguide/bot@0.32.0'
-    '.github/workflows/pr-review-requested.yml':
+    '.github/workflows/pr-review-requested.yaml':
         - 'actions-ecosystem/action-remove-labels@v1.3.0'
-    '.github/workflows/publish-preview.yml':
+    '.github/workflows/publish-preview.yaml':
         - 'actions/checkout@v7.0.1'
         - 'pnpm/setup@v3.1.2'
-    '.github/workflows/release.yml':
+    '.github/workflows/release.yaml':
         - 'actions/checkout@v7.0.1'
         - 'actions/create-github-app-token@v3.3.0'
         - 'apexskier/github-release-commenter@v1.4.1'
         - 'googleapis/release-please-action@v5.0.0'
         - 'pnpm/setup@v3.1.2'
-    '.github/workflows/stale-check.yml':
+    '.github/workflows/stale-check.yaml':
         - 'actions/stale@v11.0.0'
 dependencies:
     'actions-ecosystem/action-remove-labels@v1.3.0':
