@@ -13,6 +13,7 @@ import { rule as noLocalDependencies } from './rules/no-local-dependencies.ts';
 import { rule as noRedundantFiles } from './rules/no-redundant-files.ts';
 import { rule as noRedundantPublishConfig } from './rules/no-redundant-publishConfig.ts';
 import { rule as orderProperties } from './rules/order-properties.ts';
+import { rule as preferScopedName } from './rules/prefer-scoped-name.ts';
 import { rule as preferRollingWorkspaceSpec } from './rules/prefer-rolling-workspace-spec.ts';
 import { rule as repositoryShorthand } from './rules/repository-shorthand.ts';
 import { rule as requireAttribution } from './rules/require-attribution.ts';
@@ -44,6 +45,7 @@ const rules: Record<string, PackageJsonRuleModule> = {
   'no-redundant-files': noRedundantFiles,
   'no-redundant-publishConfig': noRedundantPublishConfig,
   'order-properties': orderProperties,
+  'prefer-scoped-name': preferScopedName,
   'prefer-rolling-workspace-spec': preferRollingWorkspaceSpec,
   'require-attribution': requireAttribution,
   'require-override-restrictions': requireOverrideRestrictions,
