@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.12.0...v1.13.0) (2026-11-01)
+
+
+### 🚀 Features
+
+* add `require-override-restrictions` rule ([#2411](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2411)) ([27da213](https://github.com/michaelfaith/eslint-plugin-package-json/commit/27da21344bda4cfbfb892d7251fdc24acab56236)), closes [#1702](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1702)
+
 ## [1.12.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.11.0...v1.12.0) (2026-10-27)
 
 
