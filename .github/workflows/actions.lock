@@ -8,24 +8,24 @@ workflows:
         - 'actions/download-artifact@v8.0.2'
         - 'actions/upload-artifact@v7.0.2'
         - 'codecov/codecov-action@v7.1.1'
-        - 'pnpm/setup@v3.1.1'
+        - 'pnpm/setup@v3.1.2'
     '.github/workflows/contributors.yml':
         - 'actions/checkout@v7.0.1'
         - 'joshuakgoldberg/all-contributors-auto-action@v0.7.0'
-        - 'pnpm/setup@v3.1.1'
+        - 'pnpm/setup@v3.1.2'
     '.github/workflows/octoguide.yml':
         - 'octoguide/bot@0.32.0'
     '.github/workflows/pr-review-requested.yml':
         - 'actions-ecosystem/action-remove-labels@v1.3.0'
     '.github/workflows/publish-preview.yml':
         - 'actions/checkout@v7.0.1'
-        - 'pnpm/setup@v3.1.1'
+        - 'pnpm/setup@v3.1.2'
     '.github/workflows/release.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/create-github-app-token@v3.3.0'
         - 'apexskier/github-release-commenter@v1.4.1'
         - 'googleapis/release-please-action@v5.0.0'
-        - 'pnpm/setup@v3.1.1'
+        - 'pnpm/setup@v3.1.2'
     '.github/workflows/stale-check.yml':
         - 'actions/stale@v11.0.0'
 dependencies:
@@ -91,8 +91,8 @@ dependencies:
         commit: 'sha1-566236613d04a933e6f1a0d8c85039027a200ab2'
         owner_id: 231299902
         repo_id: 964218711
-    'pnpm/setup@v3.1.1':
-        ref: 'v3.1.1'
-        commit: 'sha1-a0881977cd8ea73b1ed212236c99ca10dcc80cf4'
+    'pnpm/setup@v3.1.2':
+        ref: 'v3.1.2'
+        commit: 'sha1-fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e'
         owner_id: 21320719
         repo_id: 1235693694
