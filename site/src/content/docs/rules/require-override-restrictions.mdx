@@ -1,0 +1,55 @@
+---
+title: 'require-override-restrictions'
+description: 'Reports unrestricted npm override selectors that can affect multiple dependency versions.'
+---
+
+{/* end auto-generated rule header */}
+
+This experimental, opt-in rule reports npm `overrides` entries without a dependency version restriction.
+It aims to prevent a root-level override from unintentionally replacing multiple major versions of a transitive dependency.
+It does **not** guarantee an override is safe: always test the resulting dependency tree.
+
+## Examples
+
+Enable the rule explicitly:
+
+```js
+export default [{
+  rules: {
+    'package-json/require-override-restrictions': 'error',
+  },
+}];
+```
+
+### ❌ Incorrect
+
+```json
+{
+  "overrides": {
+    "ws": "6.2.3",
+    "@example/library": "1.2.3",
+    "ws@*": "6.2.3"
+  }
+}
+```
+
+### ✅ Correct
+
+```json
+{
+  "overrides": {
+    "ws@6.2.x": "~6.2.3",
+    "@example/library@^1.0.0": "1.2.3",
+    "my-library@1.4.0": {
+      "path-to-regexp": "8.4.0"
+    }
+  }
+}
+```
+
+Nested override keys are scoped by the version-restricted parent key and are not reported.
+Only the root npm `overrides` property is checked; `pnpm.overrides` is not affected.
+
+## Further Reading
+
+- [npm package.json overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)
