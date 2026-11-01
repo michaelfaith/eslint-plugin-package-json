@@ -16,6 +16,10 @@ ruleTester.run('require-override-restrictions', rule, {
       errors: [{ data: { selector: 'ws@*' }, messageId: 'unrestrictedOverride' }],
     },
     {
+      code: '{"overrides":{"@example/library@*":"1.2.3"}}',
+      errors: [{ data: { selector: '@example/library@*' }, messageId: 'unrestrictedOverride' }],
+    },
+    {
       code: '{"overrides":{"ws@latest":"6.2.3"}}',
       errors: [{ data: { selector: 'ws@latest' }, messageId: 'unrestrictedOverride' }],
     },
