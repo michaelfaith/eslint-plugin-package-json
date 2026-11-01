@@ -24,6 +24,19 @@ ruleTester.run('require-override-restrictions', rule, {
       errors: [{ data: { selector: 'ws@latest' }, messageId: 'unrestrictedOverride' }],
     },
     {
+      code: '{"overrides":{"@scope":"1.0.0"}}',
+      errors: [{ data: { selector: '@scope' }, messageId: 'unrestrictedOverride' }],
+    },
+    {
+      code: '{"overrides":{"@scope/package@not-a-semver-range":"1.0.0"}}',
+      errors: [
+        {
+          data: { selector: '@scope/package@not-a-semver-range' },
+          messageId: 'unrestrictedOverride',
+        },
+      ],
+    },
+    {
       code: '{"overrides":{"ws":{"version":"6.2.3"}}}',
       errors: [{ data: { selector: 'ws' }, messageId: 'unrestrictedOverride' }],
     },
@@ -39,6 +52,11 @@ ruleTester.run('require-override-restrictions', rule, {
     '{}',
     '{"overrides":{}}',
     '{"overrides":{"ws@6.2.x":"~6.2.3"}}',
+    '{"overrides":{"ws@6.2.x < 6.2.3":"~6.2.3"}}',
+    '{"overrides":{"ws@6.2.5":"6.2.3"}}',
+    '{"overrides":{"@scope/library@>=2.0.0 <3.0.0":"2.4.0"}}',
+    '{"overrides":null}',
+    '{"overrides":true}',
     '{"overrides":{"@example/library@^1.0.0":"1.2.3"}}',
     '{"overrides":{"path-to-regexp@~0.1.12":"0.1.13"}}',
     '{"overrides":{"my-library@1.4.0":{"path-to-regexp":"8.4.0"}}}',
