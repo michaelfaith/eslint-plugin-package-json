@@ -42,9 +42,7 @@ export const rule = createRule({
           return;
         }
 
-        const isPrivate =
-          node.parent.type === 'JSONObjectExpression' &&
-          node.parent.properties.some(
+        const isPrivate = node.parent.properties.some(
             (property) =>
               isJSONStringLiteral(property.key) &&
               property.key.value === 'private' &&
@@ -91,9 +89,11 @@ export const rule = createRule({
     fixable: 'code',
     hasSuggestions: true,
     messages: {
-      missingPreferredScope: 'Use the preferred scope "{{preferred}}" in package name; found "{{name}}".',
+      missingPreferredScope:
+        'Use the preferred scope "{{preferred}}" in package name; found "{{name}}".',
       useAllowedScope: 'Use an allowed scope; found "{{scope}}".',
-      usePreferredScope: 'Use the preferred scope "{{preferred}}"; found "{{scope}}".',
+      usePreferredScope:
+        'Use the preferred scope "{{preferred}}"; found "{{scope}}".',
       usePreferredScopeSuggestion: 'Change to the preferred scope.',
     },
     schema: [
