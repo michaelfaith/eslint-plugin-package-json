@@ -43,12 +43,12 @@ export const rule = createRule({
         }
 
         const isPrivate = node.parent.properties.some(
-            (property) =>
-              isJSONStringLiteral(property.key) &&
-              property.key.value === 'private' &&
-              property.value.type === 'JSONLiteral' &&
-              property.value.value === true,
-          );
+          (property) =>
+            isJSONStringLiteral(property.key) &&
+            property.key.value === 'private' &&
+            property.value.type === 'JSONLiteral' &&
+            property.value.value === true,
+        );
 
         const messageId = actualScope
           ? preferred
@@ -92,8 +92,7 @@ export const rule = createRule({
       missingPreferredScope:
         'Use the preferred scope "{{preferred}}" in package name; found "{{name}}".',
       useAllowedScope: 'Use an allowed scope; found "{{scope}}".',
-      usePreferredScope:
-        'Use the preferred scope "{{preferred}}"; found "{{scope}}".',
+      usePreferredScope: 'Use the preferred scope "{{preferred}}"; found "{{scope}}".',
       usePreferredScopeSuggestion: 'Change to the preferred scope.',
     },
     schema: [

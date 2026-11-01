@@ -207,11 +207,11 @@ ruleTester.run('prefer-scoped-name', rule, {
     },
     {
       code: '{ "name": "@other/pkg" }',
-      options: [{  }],
+      options: [{}],
     },
     {
       code: '{ "name": "pkg" }',
-      options: [{  }],
+      options: [{}],
     },
     {
       code: '{ "name": "pkg" }',
