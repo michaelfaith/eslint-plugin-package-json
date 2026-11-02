@@ -1,4 +1,4 @@
-import { rule } from '../../rules/valid-peerDependenciesMeta-relationship.ts';
+import rule from '../../rules/valid-peerDependenciesMeta-relationship.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('valid-peerDependenciesMeta-relationship', rule, {

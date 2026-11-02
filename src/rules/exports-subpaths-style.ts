@@ -14,7 +14,7 @@ function isImplicitFormat(node: AST.JSONLiteral | AST.JSONObjectExpression): boo
   );
 }
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const [{ prefer = 'explicit' } = {}] = context.options;
 
@@ -133,3 +133,5 @@ export const rule = createRule({
   },
   name: 'exports-subpaths-style',
 });
+
+export default rule;

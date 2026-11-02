@@ -6,7 +6,7 @@ import { createRule } from '../createRule.ts';
 import { getGitAuthor } from '../utils/git/index.ts';
 import { isJSONStringLiteral } from '../utils/predicates/isJSONStringLiteral.ts';
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const createFixer = (
       propertyName: string,
@@ -99,3 +99,5 @@ export const rule = createRule({
   },
   name: 'valid-author',
 });
+
+export default rule;

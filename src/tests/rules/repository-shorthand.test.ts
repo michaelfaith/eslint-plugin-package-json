@@ -1,4 +1,4 @@
-import { rule } from '../../rules/repository-shorthand.ts';
+import rule from '../../rules/repository-shorthand.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('repository-shorthand', rule, {

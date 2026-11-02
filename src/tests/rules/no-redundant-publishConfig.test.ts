@@ -1,4 +1,4 @@
-import { rule } from '../../rules/no-redundant-publishConfig.ts';
+import rule from '../../rules/no-redundant-publishConfig.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('no-redundant-publishConfig', rule, {
@@ -63,7 +63,7 @@ ruleTester.run('no-redundant-publishConfig', rule, {
               output: `{
 	"name": "my-package",
 	"publishConfig": {
-		
+\t\t
 		"registry": "https://example.com"
 	}
 }`,
@@ -91,7 +91,7 @@ ruleTester.run('no-redundant-publishConfig', rule, {
 	"name": "test",
 	"version": "1.0.0",
 	"publishConfig": {
-		
+\t\t
 	}
 }`,
             },

@@ -1,4 +1,4 @@
-import { rule } from '../../rules/restrict-private-properties.ts';
+import rule from '../../rules/restrict-private-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('restrict-private-properties', rule, {

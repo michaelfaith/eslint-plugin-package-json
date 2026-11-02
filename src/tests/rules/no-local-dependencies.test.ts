@@ -1,4 +1,4 @@
-import { rule } from '../../rules/no-local-dependencies.ts';
+import rule from '../../rules/no-local-dependencies.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('no-local-dependencies', rule, {

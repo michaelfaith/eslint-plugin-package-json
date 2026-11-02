@@ -17,7 +17,7 @@ const hasVersionRestriction = (selector: string): boolean => {
   return range !== null && range !== '*';
 };
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=overrides]'(
@@ -60,3 +60,5 @@ export const rule = createRule({
   },
   name: 'require-override-restrictions',
 });
+
+export default rule;

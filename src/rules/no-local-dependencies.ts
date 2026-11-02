@@ -23,7 +23,7 @@ const getBundledDependencyNames = (value: AST.JSONProperty['value'] | undefined)
   return names;
 };
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const ignorePrivate = context.options[0]?.ignorePrivate ?? true;
     let isPrivate = false;
@@ -135,3 +135,5 @@ export const rule = createRule({
   },
   name: 'no-local-dependencies',
 });
+
+export default rule;

@@ -5,7 +5,7 @@ import { PROPERTY_ALIASES } from '../constants.ts';
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const prefer = context.options[0]?.prefer ?? {};
 
@@ -122,3 +122,5 @@ export const rule = createRule({
   },
   name: 'consistent-property-aliases',
 });
+
+export default rule;

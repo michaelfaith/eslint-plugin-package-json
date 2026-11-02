@@ -1,4 +1,4 @@
-import { rule } from '../../rules/order-properties.ts';
+import rule from '../../rules/order-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('order-properties', rule, {

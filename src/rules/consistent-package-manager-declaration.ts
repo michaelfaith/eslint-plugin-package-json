@@ -87,7 +87,7 @@ const removeProperty = (fixer: Rule.RuleFixer, property: AST.JSONProperty) => {
   );
 };
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const prefer: PreferValue = context.options[0]?.prefer ?? 'devEngines';
 
@@ -293,3 +293,5 @@ export const rule = createRule({
   },
   name: 'consistent-package-manager-declaration',
 });
+
+export default rule;

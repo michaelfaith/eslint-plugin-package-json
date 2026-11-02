@@ -77,7 +77,7 @@ const getTopLevelProperty = (
 // `files` can be empty since its contents can be inferred by `npm pack`
 const defaultIgnoreProperties = ['files'];
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const ignoreProperties = new Set(
       context.options[0]?.ignoreProperties ?? defaultIgnoreProperties,
@@ -142,3 +142,5 @@ export const rule = createRule({
   },
   name: 'no-empty-fields',
 });
+
+export default rule;

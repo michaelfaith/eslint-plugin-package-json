@@ -7,7 +7,7 @@ import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 const defaultBlockedProperties = ['files', 'publishConfig'];
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     // codecov:ignore-next-line - V8 instrumentation creates unreachable null branch for optional chaining
     const blockedProperties = context.options[0]?.blockedProperties ?? defaultBlockedProperties;
@@ -101,3 +101,5 @@ export const rule = createRule({
   },
   name: 'restrict-private-properties',
 });
+
+export default rule;

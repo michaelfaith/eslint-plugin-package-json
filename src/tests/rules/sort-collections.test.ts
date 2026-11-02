@@ -1,4 +1,4 @@
-import { rule } from '../../rules/sort-collections.ts';
+import rule from '../../rules/sort-collections.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('sort-collections', rule, {

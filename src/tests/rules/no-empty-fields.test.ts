@@ -1,4 +1,4 @@
-import { rule } from '../../rules/no-empty-fields.ts';
+import rule from '../../rules/no-empty-fields.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('no-empty-fields', rule, {

@@ -1,4 +1,4 @@
-import { rule } from '../../rules/exports-subpaths-style.ts';
+import rule from '../../rules/exports-subpaths-style.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('exports-subpaths-style', rule, {

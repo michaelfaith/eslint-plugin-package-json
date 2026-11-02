@@ -1,4 +1,4 @@
-import { rule } from '../../rules/prefer-scoped-name.ts';
+import rule from '../../rules/prefer-scoped-name.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('prefer-scoped-name', rule, {

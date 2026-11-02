@@ -1,4 +1,4 @@
-import { rule } from '../../rules/require-override-restrictions.ts';
+import rule from '../../rules/require-override-restrictions.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('require-override-restrictions', rule, {

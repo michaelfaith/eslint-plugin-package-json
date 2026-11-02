@@ -1,4 +1,4 @@
-import { DEPENDENCY_TYPES, rule } from '../../rules/restrict-dist-tags.ts';
+import rule, { DEPENDENCY_TYPES } from '../../rules/restrict-dist-tags.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('restrict-dist-tags', rule, {

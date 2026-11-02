@@ -1,4 +1,4 @@
-import { rule } from '../../rules/consistent-package-manager-declaration.ts';
+import rule from '../../rules/consistent-package-manager-declaration.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('consistent-package-manager-declaration', rule, {

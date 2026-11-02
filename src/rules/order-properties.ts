@@ -20,7 +20,7 @@ const withAliases = (order: readonly string[]) => {
 
 const SORT_PACKAGE_JSON_ORDER: readonly string[] = withAliases(sortOrder);
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     return {
       'Program:exit'() {
@@ -115,3 +115,5 @@ export const rule = createRule({
   },
   name: 'order-properties',
 });
+
+export default rule;

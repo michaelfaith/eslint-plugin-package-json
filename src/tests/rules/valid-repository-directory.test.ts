@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { rule } from '../../rules/valid-repository-directory.ts';
+import rule from '../../rules/valid-repository-directory.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('valid-repository-directory (no repository)', rule, {

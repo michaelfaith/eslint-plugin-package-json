@@ -33,7 +33,7 @@ const pathEndsWith = (parent: string, child: string): boolean => {
 
 let repoRootCache: null | string = null;
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=repository][value.type=JSONObjectExpression]'(
@@ -137,3 +137,5 @@ export const rule = createRule({
   },
   name: 'valid-repository-directory',
 });
+
+export default rule;

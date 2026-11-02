@@ -1,4 +1,4 @@
-import { rules } from '../../rules/valid-properties.ts';
+import rules from '../../rules/valid-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('valid-bin', rules['valid-bin'], {

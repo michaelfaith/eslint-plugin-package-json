@@ -1,4 +1,4 @@
-import { rule } from '../../rules/specify-peers-locally.ts';
+import rule from '../../rules/specify-peers-locally.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('specify-peers-locally', rule, {

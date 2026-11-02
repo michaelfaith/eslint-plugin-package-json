@@ -1,4 +1,4 @@
-import { rule } from '../../rules/bin-name-casing.ts';
+import rule from '../../rules/bin-name-casing.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('bin-name-casing', rule, {

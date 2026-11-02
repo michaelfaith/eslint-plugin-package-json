@@ -130,7 +130,7 @@ const isVersionSupported = (version: string): boolean => {
 
 const POSSIBLE_WORKSPACE_SPEC_REGEX = /(?:workspace:)?[^~]?/;
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     // Bail early if no options were provided
     if (!context.options[0]) {
@@ -313,3 +313,5 @@ export const rule = createRule({
   },
   name: 'restrict-dependency-ranges',
 });
+
+export default rule;

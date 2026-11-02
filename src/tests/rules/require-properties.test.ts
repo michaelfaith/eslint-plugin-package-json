@@ -1,5 +1,5 @@
 import type { PackageJsonPluginSettings } from '../../createRule.ts';
-import { propertyConfig, rules } from '../../rules/require-properties.ts';
+import rules, { propertyConfig } from '../../rules/require-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 const ruleNames = Object.keys(rules);

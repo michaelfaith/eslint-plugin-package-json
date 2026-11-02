@@ -127,7 +127,7 @@ const properties = [
 ] satisfies [string, ValidationFunction | ValidPropertyOptions][];
 
 /** All basic valid- flavor rules */
-export const rules = Object.fromEntries(
+const rules = Object.fromEntries(
   properties.map(([propertyName, validationFunctionOrOptions]) => {
     let validationFunction: ValidationFunction;
     let options: CreateValidPropertyRuleOptions = {};
@@ -144,3 +144,5 @@ export const rules = Object.fromEntries(
     return [ruleName, rule];
   }),
 );
+
+export default rules;
