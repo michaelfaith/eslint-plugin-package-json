@@ -7,7 +7,9 @@ import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 export const rule = createRule({
   create(context) {
     // ESLint supplies the default options object from meta.defaultOptions.
-    const { preferred, allowed = [] } = context.options[0] as NonNullable<(typeof context.options)[0]>;
+    const { preferred, allowed = [] } = context.options[0] as NonNullable<
+      (typeof context.options)[0]
+    >;
 
     // No policy is applied unless a preference or allow-list is configured.
     if (!preferred && allowed.length === 0) {
