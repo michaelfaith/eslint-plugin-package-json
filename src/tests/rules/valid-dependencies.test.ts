@@ -1,7 +1,7 @@
 import type { RuleTester } from 'eslint';
 import { describe, vi } from 'vitest';
 
-import { rules } from '../../rules/valid-properties.ts';
+import rules from '../../rules/valid-properties.ts';
 import { detectPackageManager } from '../../utils/packageManager/detectPackageManager.ts';
 import { ruleTester } from './ruleTester.ts';
 

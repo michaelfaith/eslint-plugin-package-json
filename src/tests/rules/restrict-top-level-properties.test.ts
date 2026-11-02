@@ -1,4 +1,4 @@
-import { rule } from '../../rules/restrict-top-level-properties.ts';
+import rule from '../../rules/restrict-top-level-properties.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('restrict-top-level-properties', rule, {

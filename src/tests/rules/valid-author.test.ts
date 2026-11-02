@@ -1,6 +1,6 @@
 import { beforeEach, describe, vi } from 'vitest';
 
-import { rule } from '../../rules/valid-author.ts';
+import rule from '../../rules/valid-author.ts';
 import { getGitAuthor } from '../../utils/git/index.ts';
 import { ruleTester } from './ruleTester.ts';
 

@@ -1,4 +1,4 @@
-import { rule } from '../../rules/scripts-name-casing.ts';
+import rule from '../../rules/scripts-name-casing.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('scripts-name-casing', rule, {

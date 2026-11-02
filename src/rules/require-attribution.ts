@@ -4,7 +4,7 @@ import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const preferContributorsOnly = context.options[0]?.preferContributorsOnly ?? false;
     const ignorePrivate = context.options[0]?.ignorePrivate ?? true;
@@ -118,3 +118,5 @@ export const rule = createRule({
   },
   name: 'require-attribution',
 });
+
+export default rule;

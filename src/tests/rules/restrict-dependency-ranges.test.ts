@@ -1,4 +1,4 @@
-import { rule } from '../../rules/restrict-dependency-ranges.ts';
+import rule from '../../rules/restrict-dependency-ranges.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('restrict-dependency-ranges', rule, {

@@ -1,4 +1,4 @@
-import { rule } from '../../rules/unique-dependencies.ts';
+import rule from '../../rules/unique-dependencies.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('unique-dependencies', rule, {

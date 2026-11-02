@@ -4,7 +4,7 @@ import semver from 'semver';
 import { createRule } from '../createRule.ts';
 import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
-const DEPENDENCY_TYPES = [
+export const DEPENDENCY_TYPES = [
   'dependencies',
   'devDependencies',
   'optionalDependencies',
@@ -107,4 +107,4 @@ const rule = createRule({
   name: 'restrict-dist-tags',
 });
 
-export { DEPENDENCY_TYPES, rule };
+export default rule;

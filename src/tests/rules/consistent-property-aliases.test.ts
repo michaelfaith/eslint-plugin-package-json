@@ -1,4 +1,4 @@
-import { rule } from '../../rules/consistent-property-aliases.ts';
+import rule from '../../rules/consistent-property-aliases.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('consistent-property-aliases', rule, {

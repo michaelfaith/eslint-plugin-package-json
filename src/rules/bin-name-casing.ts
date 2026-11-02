@@ -3,7 +3,7 @@ import type { AST } from 'jsonc-eslint-parser';
 
 import { createRule } from '../createRule.ts';
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     return {
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.value=bin]'(
@@ -53,3 +53,5 @@ export const rule = createRule({
   },
   name: 'bin-name-casing',
 });
+
+export default rule;

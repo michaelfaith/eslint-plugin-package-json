@@ -48,7 +48,7 @@ const createUrl = (shorthand: string): string => {
   return `${providerUrls.github}${shorthand}`;
 };
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const [{ form = 'object' } = {}] = context.options;
 
@@ -181,3 +181,5 @@ export const rule = createRule({
   },
   name: 'repository-shorthand',
 });
+
+export default rule;

@@ -55,9 +55,11 @@ export const propertyConfig: [name: string, options?: CreateRequirePropertyRuleO
   ['version', { ignorePrivateDefault: true, isRecommended: true }],
 ];
 
-export const rules = Object.fromEntries(
+const rules = Object.fromEntries(
   propertyConfig.map(([propertyName, options]) => {
     const { rule, ruleName } = createSimpleRequirePropertyRule(propertyName, options);
     return [ruleName, rule];
   }),
 );
+
+export default rules;

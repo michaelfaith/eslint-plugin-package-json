@@ -15,7 +15,7 @@ const dependencyPropertyNames = new Set([
   'peerDependencies',
 ]);
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const dependenciesCache: Record<string, AST.JSONProperty[]> = {
       dependencies: [],
@@ -145,3 +145,5 @@ export const rule = createRule({
   },
   name: 'unique-dependencies',
 });
+
+export default rule;

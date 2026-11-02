@@ -10,7 +10,7 @@ const BUILT_IN_SCRIPTS_IN_CAMEL_CASE = new Set([
   'pnpm:devPreinstall',
 ]);
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const { ignoreNames = [], ignorePatterns = [] } = context.options[0] ?? {};
     const ignoreRegexes = ignorePatterns.map((pattern) => new RegExp(pattern));
@@ -101,3 +101,5 @@ export const rule = createRule({
   },
   name: 'scripts-name-casing',
 });
+
+export default rule;

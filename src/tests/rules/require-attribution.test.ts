@@ -1,4 +1,4 @@
-import { rule } from '../../rules/require-attribution.ts';
+import rule from '../../rules/require-attribution.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('require-attribution', rule, {

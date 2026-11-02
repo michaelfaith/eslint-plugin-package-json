@@ -17,7 +17,7 @@ const defaultCollections = new Set([
   'scripts',
 ]);
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const toSort = new Map<string, null | string[]>(
       (context.options[0] ?? Array.from(defaultCollections)).map((entry) =>
@@ -191,3 +191,5 @@ export const rule = createRule({
   },
   name: 'sort-collections',
 });
+
+export default rule;

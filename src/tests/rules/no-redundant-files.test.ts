@@ -1,4 +1,4 @@
-import { rule } from '../../rules/no-redundant-files.ts';
+import rule from '../../rules/no-redundant-files.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('no-redundant-files', rule, {

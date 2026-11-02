@@ -33,7 +33,7 @@ const getCachedLocalFileRegex = (filename: string) => {
   }
 };
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     // We need to cache these as we find them, since we need to know some of
     // the other values to ensure that files doesn't contain duplicates.
@@ -181,3 +181,5 @@ export const rule = createRule({
   },
   name: 'no-redundant-files',
 });
+
+export default rule;

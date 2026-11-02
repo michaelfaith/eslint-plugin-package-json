@@ -1,4 +1,4 @@
-import { rule } from '../../rules/prefer-rolling-workspace-spec.ts';
+import rule from '../../rules/prefer-rolling-workspace-spec.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('prefer-rolling-workspace-spec', rule, {

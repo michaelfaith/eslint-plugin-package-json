@@ -1,4 +1,4 @@
-import { rule } from '../../rules/require-package-json-export.ts';
+import rule from '../../rules/require-package-json-export.ts';
 import { ruleTester } from './ruleTester.ts';
 
 ruleTester.run('require-package-json-export', rule, {

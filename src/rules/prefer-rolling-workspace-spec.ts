@@ -7,7 +7,7 @@ import { isJSONStringLiteral } from '../utils/predicates/isJSONStringLiteral.ts'
 const rollingWorkspaceSpecRegex = /^workspace:[*^~]?$/;
 const convertibleSpecRegex = /^(workspace:[~^])/;
 
-export const rule = createRule({
+const rule = createRule({
   create(context) {
     const { ignoreDependencies = [], ignorePatterns = [] } = context.options[0] ?? {};
     const ignoreRegexes = ignorePatterns.map((pattern) => new RegExp(pattern));
@@ -106,3 +106,5 @@ export const rule = createRule({
   },
   name: 'prefer-rolling-workspace-spec',
 });
+
+export default rule;
