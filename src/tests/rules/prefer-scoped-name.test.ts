@@ -163,6 +163,45 @@ ruleTester.run('prefer-scoped-name', rule, {
       ],
       output: '{\n  "name": "@team/pkg",\n  "private": true\n}',
     },
+    // A non-boolean private property must not enable automatic renaming.
+    {
+      code: '{ "name": "@other/pkg", "private": [] }',
+      options: [{ preferred: '@team' }],
+      errors: [
+        {
+          column: 11,
+          data: { preferred: '@team', scope: '@other' },
+          line: 1,
+          messageId: 'usePreferredScope',
+          suggestions: [
+            {
+              messageId: 'usePreferredScopeSuggestion',
+              output: '{ "name": "@team/pkg", "private": [] }',
+            },
+          ],
+        },
+      ],
+      output: null,
+    },
+    {
+      code: '{ "name": "@other/pkg", "private": {} }',
+      options: [{ preferred: '@team' }],
+      errors: [
+        {
+          column: 11,
+          data: { preferred: '@team', scope: '@other' },
+          line: 1,
+          messageId: 'usePreferredScope',
+          suggestions: [
+            {
+              messageId: 'usePreferredScopeSuggestion',
+              output: '{ "name": "@team/pkg", "private": {} }',
+            },
+          ],
+        },
+      ],
+      output: null,
+    },
   ],
   valid: [
     {
