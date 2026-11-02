@@ -9,12 +9,29 @@ description: 'Enforce that package names use a specific scope or set of scopes.'
 
 import { TabItem, Tabs } from '@astrojs/starlight/components';
 
-This rule enforces an npm package scope policy on the top-level `name` field in `package.json`.
+This rule enforces that package names use a specific scope or one from a set of allowed scopes.
 It is opt-in and does not belong to the recommended configuration.
 
-Provide a `preferred` scope, an `allowed` list, or both. With no options, the rule does nothing.
+Provide a `preferred` scope, an `allowed` list, or both.
+With no options, the rule does nothing.
 
 ## Examples
+
+Given the following configuration:
+
+```js
+// eslint.config.js
+export default [
+  {
+    rules: {
+      'package-json/prefer-scoped-name': [
+        'error',
+        { preferred: '@company', allowed: ['@partner'] },
+      ],
+    },
+  },
+];
+```
 
 <Tabs>
 <TabItem label="❌ Incorrect">
@@ -48,28 +65,17 @@ Provide a `preferred` scope, an `allowed` list, or both. With no options, the ru
 
 {/* end auto-generated rule options list */}
 
-```js
-// eslint.config.js
-export default [
-  {
-    rules: {
-      'package-json/prefer-scoped-name': [
-        'error',
-        { preferred: '@company', allowed: ['@partner'] },
-      ],
-    },
-  },
-];
-```
-
 ### `preferred`
 
-When configured, packages without the preferred scope are reported. The new scope must start with `@`.
-For private packages (`"private": true`), `--fix` can rename the package. For public packages, an editor suggestion is offered instead because automatically renaming a published package can cause breaking changes.
+When configured, packages without the preferred scope are reported.
+Scopes defined here should always include a `@` prefix.
+For private packages (`"private": true`), `--fix` can rename the package.
+For public packages, an editor suggestion is offered instead, since automatically renaming a published package could result in a breaking change.
 
 ### `allowed`
 
 Other scopes that are accepted without a warning. When only `allowed` is configured, unscoped names are accepted, but unexpected scopes are reported without an automatic replacement.
+Scopes defined here should always include a `@` prefix.
 
 ## When Not to Use It
 

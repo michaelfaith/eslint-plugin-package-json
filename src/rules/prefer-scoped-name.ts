@@ -57,7 +57,9 @@ export const rule = createRule({
           : 'missingPreferredScope';
 
         const data = actualScope
-          ? { preferred: preferred ?? '', scope: actualScope }
+          ? preferred
+            ? { preferred, scope: actualScope }
+            : { scope: actualScope }
           : { name, preferred: String(preferred) };
 
         const replacement = preferred
@@ -90,9 +92,10 @@ export const rule = createRule({
     hasSuggestions: true,
     messages: {
       missingPreferredScope:
-        'Use the preferred scope "{{preferred}}" in package name; found "{{name}}".',
-      useAllowedScope: 'Use an allowed scope; found "{{scope}}".',
-      usePreferredScope: 'Use the preferred scope "{{preferred}}"; found "{{scope}}".',
+        'Package name doesn\'t use preferred scope "{{preferred}}"; found "{{name}}".',
+      useAllowedScope: 'Package name doesn\'t use an allowed scope; found "{{scope}}".',
+      usePreferredScope:
+        'Package name uses a different scope than the preferred one "{{preferred}}"; found "{{scope}}".',
       usePreferredScopeSuggestion: 'Change to the preferred scope.',
     },
     schema: [

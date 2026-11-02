@@ -73,7 +73,7 @@ ruleTester.run('prefer-scoped-name', rule, {
       errors: [
         {
           column: 11,
-          data: { preferred: '', scope: '@other' },
+          data: { scope: '@other' },
           line: 1,
           messageId: 'useAllowedScope',
         },
@@ -86,7 +86,7 @@ ruleTester.run('prefer-scoped-name', rule, {
       errors: [
         {
           column: 11,
-          data: { preferred: '', scope: '@other' },
+          data: { scope: '@other' },
           line: 1,
           messageId: 'useAllowedScope',
         },
