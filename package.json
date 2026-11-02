@@ -110,7 +110,7 @@
     "knip": "6.44.0",
     "lint-staged": "17.6.0",
     "oxfmt": "0.75.0",
-    "pkg-pr-new": "0.0.92",
+    "pkg-pr-new": "0.0.93",
     "sharp": "0.35.5",
     "simple-git-hooks": "2.14.0",
     "starlight-auto-sidebar": "0.4.1",
