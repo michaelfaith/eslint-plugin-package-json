@@ -6,7 +6,8 @@ import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 export const rule = createRule({
   create(context) {
-    const { preferred, allowed = [] } = context.options[0] ?? {};
+    // ESLint supplies the default options object from meta.defaultOptions.
+    const { preferred, allowed = [] } = context.options[0] as NonNullable<(typeof context.options)[0]>;
 
     // No policy is applied unless a preference or allow-list is configured.
     if (!preferred && allowed.length === 0) {
@@ -58,7 +59,7 @@ export const rule = createRule({
 
         const data = actualScope
           ? { preferred: preferred ?? '', scope: actualScope }
-          : { name, preferred: preferred ?? '' };
+          : { name, preferred: String(preferred) };
 
         const replacement = preferred
           ? preferred + '/' + (actualScope ? name.slice(slashIndex + 1) : name)
