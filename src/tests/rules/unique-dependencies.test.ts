@@ -312,6 +312,32 @@ ruleTester.run('unique-dependencies', rule, {
 	}
 }`,
     `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	}
+}`,
+    `{
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"dependencies": {
+		"abc": "1.2.3"
+	}
+}`,
+    `{
 	"optionalDependencies": {}
 }`,
     `{

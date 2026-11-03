@@ -23,6 +23,23 @@ const rule = createRule({
       peerDependencies: [],
     };
     const trackForCrossGroupUniqueness = Object.keys(dependenciesCache);
+    let peerDependenciesMetaCache: AST.JSONProperty[] = [];
+
+    function isOptionalPeerDependency(name: string) {
+      const meta = peerDependenciesMetaCache.find(
+        (property) => isJSONStringLiteral(property.key) && property.key.value === name,
+      );
+      return (
+        meta?.value.type === 'JSONObjectExpression' &&
+        meta.value.properties.some(
+          (property) =>
+            isJSONStringLiteral(property.key) &&
+            property.key.value === 'optional' &&
+            property.value.type === 'JSONLiteral' &&
+            property.value.value === true,
+        )
+      );
+    }
 
     function check(
       elements: (AST.JSONNode | null)[],
@@ -66,6 +83,12 @@ const rule = createRule({
           key: AST.JSONStringLiteral;
         },
       ) {
+        if (
+          node.key.value === 'peerDependenciesMeta' &&
+          node.value.type === 'JSONObjectExpression'
+        ) {
+          peerDependenciesMetaCache = node.value.properties;
+        }
         if (!dependencyPropertyNames.has(node.key.value)) {
           return;
         }
@@ -108,6 +131,14 @@ const rule = createRule({
               isJSONStringLiteral(otherDependencyKey) &&
               dependencyNames.has(otherDependencyKey.value)
             ) {
+              // Optional peers are allowed to fall back on a regular dependency
+              if (
+                dependencyType === 'peerDependencies' &&
+                isOptionalPeerDependency(otherDependencyKey.value)
+              ) {
+                continue;
+              }
+
               context.report({
                 messageId: 'crossGroupDuplicate',
                 node: otherDependencyNode,
