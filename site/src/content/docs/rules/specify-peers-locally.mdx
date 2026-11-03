@@ -21,6 +21,9 @@ Since you also need to use that package locally as part of development, it's gen
 
 This rule requires that all dependencies declared in a package's `peerDependencies` are also declared in the package's `devDependencies`.
 
+If a peer dependency is marked as optional, it is also allowed for it to be declared in `dependencies` rather than `devDependencies`.
+This is the "peers with defaults" pattern, where the package uses the consumer's copy, when available, and falls back to its own when not available.
+
 ## Examples
 
 <Tabs>
@@ -44,6 +47,22 @@ This rule requires that all dependencies declared in a package's `peerDependenci
   },
   "devDependencies": {
     "eslint": "10.4.0"
+  }
+}
+```
+
+```json
+{
+  "dependencies": {
+    "eslint": "^10.4.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    }
   }
 }
 ```
