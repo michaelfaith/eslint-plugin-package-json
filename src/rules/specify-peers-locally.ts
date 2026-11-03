@@ -5,11 +5,25 @@ import { isJSONStringLiteral } from '../utils/predicates/index.ts';
 
 const rule = createRule({
   create(context) {
+    const dependencyNames = new Set<string>();
     const devDependencyNames = new Set<string>();
+    const optionalPeerDependencyNames = new Set<string>();
     let devDependenciesObjectNode: AST.JSONObjectExpression | undefined;
     const peerDependencyMap: Record<string, AST.JSONProperty> = {};
 
     return {
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=dependencies]'(
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
+        },
+      ) {
+        for (const dependencyPropertyNode of node.value.properties) {
+          const dependencyKey = dependencyPropertyNode.key;
+          if (isJSONStringLiteral(dependencyKey)) {
+            dependencyNames.add(dependencyKey.value);
+          }
+        }
+      },
       'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=devDependencies]'(
         node: AST.JSONProperty & {
           value: AST.JSONObjectExpression;
@@ -35,50 +49,86 @@ const rule = createRule({
           }
         }
       },
-      'Program:exit'() {
-        // Check that every peer dependency name is accounted for in the devDependencies
-        for (const [peerDependencyName, peerDependencyNode] of Object.entries(peerDependencyMap)) {
-          if (!devDependencyNames.has(peerDependencyName)) {
-            // If not, report on the peer dependency node, and suggest that it be added to devDependencies
-            const peerDependencyValue = peerDependencyNode.value;
-            context.report({
-              data: {
-                name: peerDependencyName,
-              },
-              messageId: 'devDependencyNotDefined',
-              node: peerDependencyNode,
-              suggest:
-                devDependenciesObjectNode && isJSONStringLiteral(peerDependencyValue)
-                  ? [
-                      {
-                        data: {
-                          name: peerDependencyName,
-                        },
-                        fix: (fixer) => {
-                          const currentDevDependencies = JSON.parse(
-                            context.sourceCode.getText(devDependenciesObjectNode),
-                          ) as Record<string, string>;
-                          const updatedDevDependencies = {
-                            ...currentDevDependencies,
-                            [peerDependencyName]: peerDependencyValue.value,
-                          };
-                          const sortedDevDependencies = Object.fromEntries(
-                            Object.entries(updatedDevDependencies).sort(
-                              // eslint-disable-next-line unicorn/prefer-simple-sort-comparator
-                              (a, b) => (a[0] > b[0] ? 1 : -1),
-                            ),
-                          );
-                          return fixer.replaceText(
-                            devDependenciesObjectNode,
-                            JSON.stringify(sortedDevDependencies, null, 2).split('\n').join('\n  '), // nest indents,
-                          );
-                        },
-                        messageId: 'addToDevDependencies',
-                      },
-                    ]
-                  : [],
-            });
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=peerDependenciesMeta]'(
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
+        },
+      ) {
+        for (const peerDependencyMetaNode of node.value.properties) {
+          const peerDependencyKey = peerDependencyMetaNode.key;
+          const peerDependencyMeta = peerDependencyMetaNode.value;
+          if (
+            !isJSONStringLiteral(peerDependencyKey) ||
+            peerDependencyMeta.type !== 'JSONObjectExpression'
+          ) {
+            continue;
           }
+
+          if (
+            peerDependencyMeta.properties.some(
+              (property) =>
+                isJSONStringLiteral(property.key) &&
+                property.key.value === 'optional' &&
+                property.value.type === 'JSONLiteral' &&
+                property.value.value === true,
+            )
+          ) {
+            optionalPeerDependencyNames.add(peerDependencyKey.value);
+          }
+        }
+      },
+      'Program:exit'() {
+        for (const [peerDependencyName, peerDependencyNode] of Object.entries(peerDependencyMap)) {
+          // Check that every peer dependency name is accounted for in the devDependencies
+          // If the peer dependency is optional, also check against the dependencies,
+          // since optional peer dependencies can be satisfied by either a dependency or a devDependency.
+          if (
+            devDependencyNames.has(peerDependencyName) ||
+            (optionalPeerDependencyNames.has(peerDependencyName) &&
+              dependencyNames.has(peerDependencyName))
+          ) {
+            continue;
+          }
+
+          // If not, report on the peer dependency node, and suggest that it be added to devDependencies
+          const peerDependencyValue = peerDependencyNode.value;
+          context.report({
+            data: {
+              name: peerDependencyName,
+            },
+            messageId: 'devDependencyNotDefined',
+            node: peerDependencyNode,
+            suggest:
+              devDependenciesObjectNode && isJSONStringLiteral(peerDependencyValue)
+                ? [
+                    {
+                      data: {
+                        name: peerDependencyName,
+                      },
+                      fix: (fixer) => {
+                        const currentDevDependencies = JSON.parse(
+                          context.sourceCode.getText(devDependenciesObjectNode),
+                        ) as Record<string, string>;
+                        const updatedDevDependencies = {
+                          ...currentDevDependencies,
+                          [peerDependencyName]: peerDependencyValue.value,
+                        };
+                        const sortedDevDependencies = Object.fromEntries(
+                          Object.entries(updatedDevDependencies).sort(
+                            // eslint-disable-next-line unicorn/prefer-simple-sort-comparator
+                            (a, b) => (a[0] > b[0] ? 1 : -1),
+                          ),
+                        );
+                        return fixer.replaceText(
+                          devDependenciesObjectNode,
+                          JSON.stringify(sortedDevDependencies, null, 2).split('\n').join('\n  '), // nest indents,
+                        );
+                      },
+                      messageId: 'addToDevDependencies',
+                    },
+                  ]
+                : [],
+          });
         }
       },
     };
