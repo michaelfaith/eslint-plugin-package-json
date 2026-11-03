@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.14.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.13.0...v1.14.0) (2026-11-03)
+
+
+### 🚀 Features
+
+* add `prefer-scoped-name` rule ([#2415](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2415)) ([304ba67](https://github.com/michaelfaith/eslint-plugin-package-json/commit/304ba67cdd13f0e1413419fbdfff263353e0d737)), closes [#1875](https://github.com/michaelfaith/eslint-plugin-package-json/issues/1875)
+
+
+### 🩹 Bug Fixes
+
+* **specify-peers-locally:** allow `dependencies` to satisfy local install if peer is optional ([#2427](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2427)) ([99f9b53](https://github.com/michaelfaith/eslint-plugin-package-json/commit/99f9b532d1fd571a523af0304d1c23aacb7661d5))
+* **unique-dependencies:** allow optional peers with a dependencies fallback ([#2426](https://github.com/michaelfaith/eslint-plugin-package-json/issues/2426)) ([68c2168](https://github.com/michaelfaith/eslint-plugin-package-json/commit/68c2168de32a0843b611d7e0a681f713501368f6))
+
 ## [1.13.0](https://github.com/michaelfaith/eslint-plugin-package-json/compare/v1.12.0...v1.13.0) (2026-11-01)
 
 
