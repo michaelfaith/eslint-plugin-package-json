@@ -14,6 +14,8 @@ import { TabItem, Tabs } from '@astrojs/starlight/components';
 This rule checks that every dependency is just added once to a `package.json` key specifying dependencies (e.g. `dependencies`, `devDependencies`, `peerDependencies`, `optionalDependencies`).
 It also checks that any dependencies declared in the `dependencies` group, are not also present in `peerDependencies` or `devDependencies`.
 
+An optional peer dependency that is also declared in `dependencies` is allowed. This is the "peers with defaults" pattern, where the package uses the consumer's copy when available and falls back to its own.
+
 ## Examples
 
 <Tabs>
@@ -47,6 +49,22 @@ It also checks that any dependencies declared in the `dependencies` group, are n
 {
   "dependencies": {
     "foo": "1.0.0"
+  }
+}
+```
+
+```json
+{
+  "dependencies": {
+    "foo": "1.0.0"
+  },
+  "peerDependencies": {
+    "foo": "^1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "foo": {
+      "optional": true
+    }
   }
 }
 ```
