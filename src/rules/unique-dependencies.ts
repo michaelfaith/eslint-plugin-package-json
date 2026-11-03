@@ -23,6 +23,7 @@ const rule = createRule({
       peerDependencies: [],
     };
     const trackForCrossGroupUniqueness = Object.keys(dependenciesCache);
+    const optionalPeerDependencyNames = new Set<string>();
 
     function check(
       elements: (AST.JSONNode | null)[],
@@ -87,9 +88,34 @@ const rule = createRule({
           dependenciesCache[node.key.value] = node.value.properties;
         }
       },
+      'Program > JSONExpressionStatement > JSONObjectExpression > JSONProperty[key.type=JSONLiteral][value.type=JSONObjectExpression][key.value=peerDependenciesMeta]'(
+        node: AST.JSONProperty & {
+          value: AST.JSONObjectExpression;
+        },
+      ) {
+        for (const peerDependencyMeta of node.value.properties) {
+          if (!isJSONStringLiteral(peerDependencyMeta.key)) {
+            continue;
+          }
+
+          const metaValue = peerDependencyMeta.value;
+          if (metaValue.type !== 'JSONObjectExpression') {
+            continue;
+          }
+
+          const optionalMeta = metaValue.properties.find(
+            (property) => isJSONStringLiteral(property.key) && property.key.value === 'optional',
+          );
+          if (optionalMeta?.value.type === 'JSONLiteral' && optionalMeta.value.value === true) {
+            optionalPeerDependencyNames.add(peerDependencyMeta.key.value);
+          }
+        }
+      },
       'Program:exit'() {
         // Check our cached elements from `dependencies`, `devDependencies` and `peerDependencies`
-        // If any dependencies listed as dev or peer deps, are also in `dependencies`, then those should be flagged as redundant
+        // If any dependencies listed as dev or peer deps, are also in `dependencies`, then those should be flagged as redundant.
+        // Optional peer dependencies are exempt: declaring one alongside a `dependencies` fallback is
+        // the "peers with defaults" pattern, where both entries are intentional.
         const dependencyNames = new Set(
           dependenciesCache.dependencies
             .map((node) => node.key)
@@ -106,7 +132,11 @@ const rule = createRule({
             const otherDependencyKey = otherDependencyNode.key;
             if (
               isJSONStringLiteral(otherDependencyKey) &&
-              dependencyNames.has(otherDependencyKey.value)
+              dependencyNames.has(otherDependencyKey.value) &&
+              !(
+                dependencyType === 'peerDependencies' &&
+                optionalPeerDependencyNames.has(otherDependencyKey.value)
+              )
             ) {
               context.report({
                 messageId: 'crossGroupDuplicate',

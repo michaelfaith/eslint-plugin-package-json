@@ -257,6 +257,168 @@ ruleTester.run('unique-dependencies', rule, {
       ],
       filename: 'package.json',
     })),
+    {
+      code: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": false
+		}
+	}
+}`,
+      errors: [
+        {
+          line: 6,
+          messageId: 'crossGroupDuplicate',
+          suggestions: [
+            {
+              messageId: 'remove',
+              output: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+\t\t
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": false
+		}
+	}
+}`,
+            },
+          ],
+        },
+      ],
+      filename: 'package.json',
+    },
+    {
+      code: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		123: {
+			"optional": true
+		}
+	}
+}`,
+      errors: [
+        {
+          line: 6,
+          messageId: 'crossGroupDuplicate',
+          suggestions: [
+            {
+              messageId: 'remove',
+              output: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+\t\t
+	},
+	"peerDependenciesMeta": {
+		123: {
+			"optional": true
+		}
+	}
+}`,
+            },
+          ],
+        },
+      ],
+      filename: 'package.json',
+    },
+    {
+      code: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": []
+	}
+}`,
+      errors: [
+        {
+          line: 6,
+          messageId: 'crossGroupDuplicate',
+          suggestions: [
+            {
+              messageId: 'remove',
+              output: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+\t\t
+	},
+	"peerDependenciesMeta": {
+		"abc": []
+	}
+}`,
+            },
+          ],
+        },
+      ],
+      filename: 'package.json',
+    },
+    {
+      code: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"devDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	}
+}`,
+      errors: [
+        {
+          line: 6,
+          messageId: 'crossGroupDuplicate',
+          suggestions: [
+            {
+              messageId: 'remove',
+              output: `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"devDependencies": {
+\t\t
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	}
+}`,
+            },
+          ],
+        },
+      ],
+      filename: 'package.json',
+    },
   ],
 
   valid: [
@@ -345,6 +507,32 @@ ruleTester.run('unique-dependencies', rule, {
     `{
 	"unrelated": {
 		"abc": "1.2.3",
+		"abc": "1.2.3"
+	}
+}`,
+    `{
+	"dependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	}
+}`,
+    `{
+	"peerDependenciesMeta": {
+		"abc": {
+			"optional": true
+		}
+	},
+	"peerDependencies": {
+		"abc": "1.2.3"
+	},
+	"dependencies": {
 		"abc": "1.2.3"
 	}
 }`,
