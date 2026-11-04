@@ -48,7 +48,6 @@
     "docs:generate": "pnpm build --no-dts && eslint-doc-generator --ignore-config recommended-publishable",
     "format": "oxfmt",
     "lint": "eslint . --max-warnings 0",
-    "lint:knip": "knip",
     "prepare": "simple-git-hooks",
     "site:build": "astro build",
     "site:check": "astro check --root site",
