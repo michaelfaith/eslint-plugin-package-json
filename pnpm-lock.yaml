@@ -216,11 +216,11 @@ importers:
         specifier: 0.4.6
         version: 0.4.6
       '@astrojs/starlight':
-        specifier: 0.42.8
-        version: 0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
+        specifier: 0.42.9
+        version: 0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
       '@catppuccin/starlight':
         specifier: 2.1.0
-        version: 2.1.0(@astrojs/starlight@0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
+        version: 2.1.0(@astrojs/starlight@0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: 4.8.1
         version: 4.8.1(eslint@10.14.0(jiti@2.7.0)(supports-color@7.2.0))
@@ -319,7 +319,7 @@ importers:
         version: 2.14.0
       starlight-auto-sidebar:
         specifier: 0.4.1
-        version: 0.4.1(@astrojs/starlight@0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))
+        version: 0.4.1(@astrojs/starlight@0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))
       tsdown:
         specifier: 0.23.5
         version: 0.23.5(@arethetypeswrong/core@0.18.5)(@typescript/typescript6@6.0.2)(@volar/typescript@2.4.30(@typescript/typescript6@6.0.2))(oxc-resolver@11.24.2)
@@ -462,8 +462,8 @@ packages:
   '@astrojs/sitemap@3.7.4':
     resolution: {integrity: sha512-LbKNC24bdUWcQf/pThB6qLlSqHojxGjZDURIzFocY8rlWnAn2t74nnhnK6S5x0NHriHoAduLEpVjRykmeGiVvA==}
 
-  '@astrojs/starlight@0.42.8':
-    resolution: {integrity: sha512-BGP8bmTbdky4OFCV9BNWZedLuzONyUtz754q+hie+li/2TQ5XJ6nvfO8fhRhIMcCpUEsA5Ynf4qTTFf/ft/3Pg==}
+  '@astrojs/starlight@0.42.9':
+    resolution: {integrity: sha512-kMqDdFDWBClBNY9fc3pWAlR+eFh6JhOd7lIr4RczNDXUVk9EzzxVQvYizRuxlx0aVbSk8Gb1rVHiJlxgybwc/g==}
     peerDependencies:
       '@astrojs/markdown-remark': ^7.3.0
       astro: ^7.2.10
@@ -1543,9 +1543,6 @@ packages:
 
   '@types/hast@3.0.5':
     resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
-
-  '@types/js-yaml@4.0.9':
-    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -4409,14 +4406,13 @@ snapshots:
       sitemap: 9.0.1
       zod: 4.6.7
 
-  '@astrojs/starlight@0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)':
+  '@astrojs/starlight@0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)':
     dependencies:
       '@astrojs/markdown-satteri': 0.4.6
       '@astrojs/mdx': 8.1.2(@astrojs/markdown-satteri@0.4.6)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
       '@astrojs/sitemap': 3.7.4
       '@pagefind/default-ui': 1.5.2
       '@types/hast': 3.0.5
-      '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
       astro: 7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
       astro-expressive-code: 0.44.3(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
@@ -4427,7 +4423,6 @@ snapshots:
       hast-util-to-string: 3.0.1
       hastscript: 9.0.3
       i18next: 26.6.0(@typescript/typescript6@6.0.2)
-      js-yaml: 4.3.2
       klona: 2.0.6
       magic-string: 1.4.5
       mdast-util-directive: 3.2.0(supports-color@7.2.0)
@@ -4440,6 +4435,7 @@ snapshots:
       unified: 11.0.5
       unist-util-visit: 5.2.0
       vfile: 6.0.3
+      yaml: 2.9.1
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4527,9 +4523,9 @@ snapshots:
     dependencies:
       fontkitten: 1.0.3
 
-  '@catppuccin/starlight@2.1.0(@astrojs/starlight@0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))':
+  '@catppuccin/starlight@2.1.0(@astrojs/starlight@0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
-      '@astrojs/starlight': 0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
+      '@astrojs/starlight': 0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
       astro: 7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
 
   '@clack/core@1.5.1':
@@ -5259,8 +5255,6 @@ snapshots:
   '@types/hast@3.0.5':
     dependencies:
       '@types/unist': 3.0.3
-
-  '@types/js-yaml@4.0.9': {}
 
   '@types/json-schema@7.0.15': {}
 
@@ -7694,9 +7688,9 @@ snapshots:
 
   spdx-license-ids@3.0.24: {}
 
-  starlight-auto-sidebar@0.4.1(@astrojs/starlight@0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)):
+  starlight-auto-sidebar@0.4.1(@astrojs/starlight@0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)):
     dependencies:
-      '@astrojs/starlight': 0.42.8(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
+      '@astrojs/starlight': 0.42.9(@typescript/typescript6@6.0.2)(astro@7.4.5(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
       github-slugger: 2.0.0
 
   std-env@4.3.0: {}
