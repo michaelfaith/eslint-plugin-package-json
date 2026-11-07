@@ -486,6 +486,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "saivrach",
+      "name": "saivrach",
+      "avatar_url": "https://avatars.githubusercontent.com/u/343160297?v=4",
+      "profile": "https://github.com/saivrach",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsSortAlphabetically": true,
