@@ -87,7 +87,7 @@ export function createRule<
       ...rule.meta,
       docs: {
         ...rule.meta.docs,
-        url: `https://eslint-plugin-package-json.dev/rules/${ruleGroup ? `${ruleGroup}/` : ''}${rule.name}`,
+        url: `https://eslint-plugin-package-json.dev/rules/${ruleGroup ? `${ruleGroup}/` : ''}${rule.name}/`,
       },
     },
   };
