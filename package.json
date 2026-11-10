@@ -113,7 +113,7 @@
     "sharp": "0.35.5",
     "simple-git-hooks": "2.14.0",
     "starlight-auto-sidebar": "0.4.1",
-    "tsdown": "0.23.5",
+    "tsdown": "0.23.7",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.72.1",
     "vitest": "5.1.0"
