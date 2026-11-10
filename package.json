@@ -108,7 +108,7 @@
     "json-schema-to-ts": "3.1.1",
     "knip": "6.44.1",
     "lint-staged": "17.6.0",
-    "oxfmt": "0.76.0",
+    "oxfmt": "0.77.0",
     "pkg-pr-new": "0.0.93",
     "sharp": "0.35.5",
     "simple-git-hooks": "2.14.0",
