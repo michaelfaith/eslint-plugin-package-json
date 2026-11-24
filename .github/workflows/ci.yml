@@ -1,14 +1,30 @@
 name: CI
 
 on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+  pull_request: ~
   push:
     branches:
       - beta
       - main
 
 jobs:
+  actions_security:
+    name: GitHub Actions Security
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Verify workflow lockfile
+        run: |
+          gh extension install github/gh-actions-lock
+          gh actions-lock --verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+
   build:
     name: Build
     runs-on: ubuntu-latest
