@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - uses: $/.github/actions/setup
         with:
           skip-checkout: true
