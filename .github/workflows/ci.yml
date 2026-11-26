@@ -14,12 +14,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
       - parallel:
-          - name: Verify workflow lockfile
+          - name: Verify Workflow Lockfile
             run: |
               gh extension install github/gh-actions-lock
               gh actions-lock --verify
