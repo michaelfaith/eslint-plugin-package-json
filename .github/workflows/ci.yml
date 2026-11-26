@@ -9,7 +9,7 @@ on:
 
 jobs:
   actions_security:
-    name: GitHub Actions Security
+    name: GitHub Actions Security Check
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,12 +18,18 @@ jobs:
         uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
-      - name: Verify workflow lockfile
-        run: |
-          gh extension install github/gh-actions-lock
-          gh actions-lock --verify
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - parallel:
+          - name: Verify workflow lockfile
+            run: |
+              gh extension install github/gh-actions-lock
+              gh actions-lock --verify
+            env:
+              GH_TOKEN: ${{ github.token }}
+          - name: Run Zizmor
+            uses: zizmorcore/zizmor-action@v0.8.1
+            with:
+              advanced-security: 'false'
+              annotations: 'true'
 
   build:
     name: Build
