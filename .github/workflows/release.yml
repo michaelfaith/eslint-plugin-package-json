@@ -9,11 +9,15 @@ on:
 concurrency:
   group: ${{ github.workflow }}
 
+permissions: {}
+
 jobs:
   release_please:
     name: Manage Release PR
     if: github.event.repository.fork != true
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
@@ -23,6 +27,8 @@ jobs:
         uses: actions/create-github-app-token@v3.4.0
         with:
           client-id: ${{ vars.FAITHBOT_APP_CLIENT_ID }}
+          permission-contents: write
+          permission-pull-requests: write
           private-key: ${{ secrets.FAITHBOT_APP_PRIVATE_KEY }}
 
       - name: Release Please
@@ -50,7 +56,6 @@ jobs:
       - name: Determine dist-tag
         id: determine_dist_tag
         run: |
-          TAG_NAME="${{ needs.release_please.outputs.tag_name }}"
           echo "Release tag: $TAG_NAME"
 
           if [[ "$TAG_NAME" == *"-alpha."* ]]; then
@@ -66,13 +71,18 @@ jobs:
           fi
 
           echo "dist_tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+        env:
+          TAG_NAME: ${{ needs.release_please.outputs.tag_name }}
 
       - name: Build and Publish
         run: |
           pnpm build
 
-          echo "Publishing to npm with dist-tag '${{ steps.determine_dist_tag.outputs.dist_tag }}'"
-          pnpm publish --publish-branch ${{ github.ref_name }} --tag ${{ steps.determine_dist_tag.outputs.dist_tag }}
+          echo "Publishing to npm with dist-tag '$DIST_TAG'"
+          pnpm publish --publish-branch $BRANCH_NAME --tag $DIST_TAG
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          TAG_NAME: ${{ steps.determine_dist_tag.outputs.dist_tag }}
 
   release_comments:
     name: Make Release Comments
@@ -85,6 +95,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
       - run: echo "npm_version=$(npm pkg get version | tr -d '"')" >> "$GITHUB_ENV"
       - uses: apexskier/github-release-commenter@v1.4.1
         with:
