@@ -1,0 +1,42 @@
+name: AgentScan
+
+on:
+  issues:
+    types:
+      - opened
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
+    types:
+      - opened
+      - reopened
+
+jobs:
+  agentscan:
+    if: ${{ !endsWith(github.actor, '[bot]') }}
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache AgentScan analysis
+        uses: actions/cache@v5.0.5
+        with:
+          path: .agentscan-cache
+          key: agentscan-cache-${{ github.actor }}
+          restore-keys: agentscan-cache-
+      - uses: MatteoGabriele/agentscan-action@v2.8.0
+        with:
+          auto-close: true
+          cache-path: '.agentscan-cache'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          message-automation: This account's recent GitHub activity looks automated, so this has been closed automatically. If that's a mistake, please comment with more context and a maintainer will take a look.
+          message-community-flagged: This account has been flagged by the community as likely automated. If that's a mistake, please comment with more context and a maintainer will take a look.
+          message-mixed: This account's recent GitHub activity shows some signs of automation. A maintainer will take a look.
+          scan-issues: true
+          trusted-author-associations: collaborator,member,owner
+      - uses: JoshuaKGoldberg/slop-issue-unlink-action@v0.3.0
+        with:
+          labels: |-
+            agentscan:automated-account
+            agentscan:community-flagged
+            agentscan:mixed-signals
