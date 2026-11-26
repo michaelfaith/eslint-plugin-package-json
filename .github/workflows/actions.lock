@@ -4,7 +4,7 @@
 version: 'v0.0.3'
 workflows:
     '.github/workflows/agentscan.yml':
-        - 'actions/cache@v5.0.5'
+        - 'actions/cache@v5.1.0'
         - 'joshuakgoldberg/slop-issue-unlink-action@v0.3.0'
         - 'matteogabriele/agentscan-action@v2.8.0'
     '.github/workflows/anti-slop.yml':
@@ -41,9 +41,9 @@ dependencies:
         commit: 'sha1-2ce5d41b4b6aa8503e285553f75ed56e0a40bae0'
         owner_id: 56633079
         repo_id: 260787457
-    'actions/cache@v5.0.5':
-        ref: 'v5.0.5'
-        commit: 'sha1-27d5ce7f107fe9357f9df03efb73ab90386fccae'
+    'actions/cache@v5.1.0':
+        ref: 'v5.1.0'
+        commit: 'sha1-caa296126883cff596d87d8935842f9db880ef25'
         owner_id: 44036562
         repo_id: 215566462
     'actions/checkout@v7.0.1':
