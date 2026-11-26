@@ -1,13 +1,14 @@
 ---
-import type { StarlightRouteData } from "@astrojs/starlight/route-data";
-import DefaultHead from "@astrojs/starlight/components/Head.astro";
-import { getOpenGraphImageUrl } from "~/openGraph/getOpenGraphImageUrl.ts";
+import DefaultHead from '@astrojs/starlight/components/Head.astro';
+import type { StarlightRouteData } from '@astrojs/starlight/route-data';
+
+import { getOpenGraphImageUrl } from '~/openGraph/getOpenGraphImageUrl.ts';
 
 export type Props = StarlightRouteData;
 
 const data = Astro.props.entry?.data ?? {
-	description: "Rules for consistent, readable, and valid package.json files.",
-	title: "ESLint Plugin: Package JSON",
+  description: 'Rules for consistent, readable, and valid package.json files.',
+  title: 'ESLint Plugin: Package JSON',
 };
 
 const currentPath = Astro.url.pathname;
@@ -15,7 +16,9 @@ const ogImageUrl = getOpenGraphImageUrl(currentPath);
 const ogImage = new URL(ogImageUrl, Astro.site).toString();
 ---
 
-<DefaultHead {...Astro.props}><slot /></DefaultHead>
+<DefaultHead {...Astro.props}>
+  <slot />
+</DefaultHead>
 
 <meta property="og:image" content={ogImage} />
 <meta name="twitter:title" content={data.title} />

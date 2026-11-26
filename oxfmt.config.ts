@@ -1,6 +1,7 @@
 import { defineConfig, type OxfmtConfig } from 'oxfmt';
 
 const config: OxfmtConfig = defineConfig({
+  astro: true,
   ignorePatterns: [
     '/.all-contributorsrc',
     '/coverage',
