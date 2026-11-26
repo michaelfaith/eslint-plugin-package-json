@@ -3,6 +3,13 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
+    '.github/workflows/agentscan.yml':
+        - 'actions/cache@v5.0.5'
+        - 'joshuakgoldberg/slop-issue-unlink-action@v0.3.0'
+        - 'matteogabriele/agentscan-action@v2.8.0'
+    '.github/workflows/anti-slop.yml':
+        - 'joshuakgoldberg/slop-issue-unlink-action@v0.3.0'
+        - 'peakoss/anti-slop@v0.3.0'
     '.github/workflows/ci.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/download-artifact@v8.0.2'
@@ -34,6 +41,11 @@ dependencies:
         commit: 'sha1-2ce5d41b4b6aa8503e285553f75ed56e0a40bae0'
         owner_id: 56633079
         repo_id: 260787457
+    'actions/cache@v5.0.5':
+        ref: 'v5.0.5'
+        commit: 'sha1-27d5ce7f107fe9357f9df03efb73ab90386fccae'
+        owner_id: 44036562
+        repo_id: 215566462
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
         commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
@@ -86,11 +98,26 @@ dependencies:
         commit: 'sha1-c578423db9b2c14d3cee9c72f6c2aed31c128030'
         owner_id: 3335181
         repo_id: 634940144
+    'joshuakgoldberg/slop-issue-unlink-action@v0.3.0':
+        ref: 'v0.3.0'
+        commit: 'sha1-346a2ebcee0728154050e233fd908ea2550bb93c'
+        owner_id: 3335181
+        repo_id: 1463625964
+    'matteogabriele/agentscan-action@v2.8.0':
+        ref: 'v2.8.0'
+        commit: 'sha1-7ad606f1e21df2119da8be99b763f282a670a1c5'
+        owner_id: 5337152
+        repo_id: 1183120486
     'octoguide/bot@0.33.1':
         ref: '0.33.1'
         commit: 'sha1-8d29abce6793b35c6bfab51d4db6bfa62634b871'
         owner_id: 231299902
         repo_id: 964218711
+    'peakoss/anti-slop@v0.3.0':
+        ref: 'v0.3.0'
+        commit: 'sha1-57858eead489d08b255fab2af45a506c2ca6eab2'
+        owner_id: 227272980
+        repo_id: 1153153658
     'pnpm/setup@v3.2.0':
         ref: 'v3.2.0'
         commit: 'sha1-731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1'
