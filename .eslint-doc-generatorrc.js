@@ -64,12 +64,12 @@ const config = {
   },
   urlRuleDoc(name, page) {
     // Group the simple require-* and valid-* rules into their own sections.
-    let rulePath = `rules/${name}`;
+    let rulePath = `rules/${name.toLowerCase()}`;
     if (requireRuleNames.includes(name)) {
-      rulePath = `rules/require-properties/${name}`;
+      rulePath = `rules/require-properties/${name.toLowerCase()}`;
     }
     if (validRuleNames.includes(name)) {
-      rulePath = `rules/valid-properties/${name}`;
+      rulePath = `rules/valid-properties/${name.toLowerCase()}`;
     }
 
     if (page === 'README.md') {

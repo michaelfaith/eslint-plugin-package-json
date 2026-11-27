@@ -4,6 +4,7 @@ import starlightCatppuccin from '@catppuccin/starlight';
 import type { AstroUserConfig } from 'astro';
 import { defineConfig } from 'astro/config';
 import starlightAutoSidebar from 'starlight-auto-sidebar';
+import starlightLinksValidator from 'starlight-links-validator';
 
 const site = 'https://eslint-plugin-package-json.dev';
 
@@ -21,7 +22,7 @@ const config: AstroUserConfig = defineConfig({
         dark: './src/assets/logo/logo-dark.svg',
         light: './src/assets/logo/logo-light.svg',
       },
-      plugins: [starlightAutoSidebar(), starlightCatppuccin()],
+      plugins: [starlightAutoSidebar(), starlightCatppuccin(), starlightLinksValidator()],
       sidebar: [
         { label: 'Getting Started', slug: 'getting-started' },
         { label: 'Rule List', slug: 'rule-list' },
