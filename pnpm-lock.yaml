@@ -340,7 +340,7 @@ importers:
         specifier: 0.4.1
         version: 0.4.1(@astrojs/starlight@0.43.1(@typescript/typescript6@6.0.2)(astro@7.4.13(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))
       starlight-links-validator:
-        specifier: ^0.27.1
+        specifier: 0.27.1
         version: 0.27.1(@astrojs/starlight@0.43.1(@typescript/typescript6@6.0.2)(astro@7.4.13(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0))(astro@7.4.13(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))(supports-color@7.2.0)
       tsdown:
         specifier: 0.23.7
