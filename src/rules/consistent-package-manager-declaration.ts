@@ -18,7 +18,6 @@ interface PackageManagerSpec {
   isLossy: boolean;
 }
 
-// eslint-disable-next-line jsdoc/text-escaping
 /** `name@version`, optionally followed by a Corepack integrity hash (e.g. `+sha512.<hex>`) */
 const PACKAGE_MANAGER_FIELD_REGEX = /^(?<name>[^@\s]+)@(?<version>[^+\s]+)(?<hash>\+\S+)?$/;
 
