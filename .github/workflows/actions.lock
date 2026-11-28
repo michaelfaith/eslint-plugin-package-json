@@ -24,7 +24,7 @@ workflows:
         - 'joshuakgoldberg/all-contributors-auto-action@v0.7.0'
         - 'pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1'
     '.github/workflows/octoguide.yml':
-        - 'octoguide/bot@0.33.1'
+        - 'octoguide/bot@0.33.2'
     '.github/workflows/pr-review-requested.yml': []
     '.github/workflows/publish-preview.yml':
         - 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1'
@@ -116,9 +116,9 @@ dependencies:
         commit: 'sha1-7ad606f1e21df2119da8be99b763f282a670a1c5'
         owner_id: 5337152
         repo_id: 1183120486
-    'octoguide/bot@0.33.1':
-        ref: '0.33.1'
-        commit: 'sha1-8d29abce6793b35c6bfab51d4db6bfa62634b871'
+    'octoguide/bot@0.33.2':
+        ref: '0.33.2'
+        commit: 'sha1-d53d94360c3733a79a8c19933410df5c2a0c6011'
         owner_id: 231299902
         repo_id: 964218711
     'peakoss/anti-slop@v0.3.0':
